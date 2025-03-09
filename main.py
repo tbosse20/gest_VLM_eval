@@ -2,6 +2,7 @@ import cv2
 from process_frame import caption_frame
 import dev_utils
 import os
+import platform
 
 def process_folder(folder_path):
     """ Process the images in the input folder """
@@ -9,7 +10,7 @@ def process_folder(folder_path):
     
     for video_path in video_paths:
         process_video(video_path)
-        
+
 def process_video(video_path):
     """ Process the input video """
     
@@ -26,29 +27,34 @@ def process_video(video_path):
     out = cv2.VideoWriter('data/sanity/output.mp4', fourcc, fps, (width, height))
     
     prev_time = 0  # For fps calculation
-    prev_frame = None  # For optical flow
+    frame_counter = 0
 
     while cap.isOpened():
         ret, frame = cap.read()
         
         # Break the loop if the video is over
         if not ret: break
-        
+
         # Process the frame
-        complete_caption = caption_frame(frame, prev_frame)
+        complete_caption = caption_frame(frame)
+        print("Complete caption:", complete_caption)
         
         # Add current frame rate to the frame shown
         frame, prev_time = dev_utils.display_fps(frame, prev_time)
-        prev_frame = frame.copy()
+        frame_counter += 1
                 
         # Write the frame to the output video
         out.write(frame)
+
         # Display the frame
-        frame = cv2.resize(frame, (1280, 720))
-        cv2.imshow('Processed Video', frame)
+        if platform.system() != "Linux":
+            frame = cv2.resize(frame, (1280, 720))
+            cv2.imshow('Processed Video', frame)
         
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
+        if frame_counter > 5: break
     
     # Release the VideoCapture and VideoWriter objects
     cap.release()
