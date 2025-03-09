@@ -11,6 +11,27 @@ disable_torch_init()
 model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F'
 model, processor, tokenizer = model_init(model_path)
 
+import cv2
+import numpy as np
+import torch
+from moviepy.editor import ImageSequenceClip
+
+# Function to create a video from images
+def create_video(frames, output_video_path = "output_video.mp4", fps=1):
+
+    # Get frame size
+    height, width, layers = frames[0].shape
+    size = (width, height)
+
+    # Create video writer
+    out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, size)
+
+    for img in frames:
+        out.write(img)
+
+    out.release()
+    print(f"Video saved at {output_video_path}")
+
 def classify_driver_action(frames):
     """
     Analyzes three consecutive frames to understand the ego driver's actions.
@@ -19,13 +40,13 @@ def classify_driver_action(frames):
         image_paths: A list of three image file paths representing consecutive frames.
     """
 
-    modal = 'image'
+    OUTPUT_PATH = "output_video.mp4"
 
     # MAKE ERROR
     if len(frames) < 3 or 3 < len(frames):
         return None
     
-    frames = [Image.fromarray(frame) for frame in frames]
+    create_video(frames, OUTPUT_PATH, fps=1)
 
     # Analyze Driver Actions
     instruct_driver_action = """
@@ -34,9 +55,9 @@ def classify_driver_action(frames):
         turning, or maintaining a constant speed and direction? Is
         the driver changing lanes, or is the driver doing something else?
     """
-    processed_images_driver = [processor[modal](img) for img in frames]
-    output_driver_action = mm_infer(processed_images_driver, instruct_driver_action, model=model, tokenizer=tokenizer, do_sample=False, modal=modal)
-    print("Driver Action Analysis:\n", output_driver_action)
+    
+    output = mm_infer(processor["video"](OUTPUT_PATH), instruct_driver_action, model=model, tokenizer=tokenizer, do_sample=False, modal=modal)
+    print("Driver Action Analysis:\n", output)
 
 if __name__ == "__main__":
     # Run video and action recognition
