@@ -2,6 +2,8 @@ from ultralytics import YOLO
 import torch
 import cv2
 import logging
+import platform
+import vllama2, prompts
 
 # Suppress YOLOv8 logging
 logging.getLogger("ultralytics").setLevel(logging.ERROR)
@@ -17,6 +19,7 @@ yolo.to(device).eval()
 def inference(frame):
     """ Detect objects in the input frame """
     
+    print(frame.shape)
     with torch.no_grad():
         results = yolo(frame)
         
@@ -30,7 +33,7 @@ def get_crop(frame, box):
     x1, y1, x2, y2 = map(int, box[:4])
     return frame[y1:y2, x1:x2]
 
-def get_crops(frame, results, exclude_classes=[]):
+def get_crops(frame, results, exclude_pedestrians):
     """ Get the cropped region of interests """
     boxes = (
         results.boxes.data.cpu().numpy()
@@ -40,23 +43,47 @@ def get_crops(frame, results, exclude_classes=[]):
     crops = [
         get_crop(frame, box)
         for box in boxes
-        if int(box[5]) not in exclude_classes
+        if int(box[5]) != 0 and exclude_pedestrians
     ]
     
     return crops
+
+
+def caption_crops(object_crops):
+    # Analyze each cropped object
+    return [
+        f"{i}. {vllama2.inference(object_crop, prompts.object, 'image')}"
+        # f"{i}. FAKE OBJECT CROP OUTPUT"
+        for i, object_crop in enumerate(object_crops)
+    ]
+
+def main(frame, exclude_pedestrians=True):
+
+    # Detect objects in the frame
+    object_result = inference(frame)
+    # Plot the detected objects
+    frame = object_result.plot()
+    # Get the cropped region of interest
+    object_crops = get_crops(frame, object_result, exclude_pedestrians)
+    # Caption each object
+    caption = caption_crops(object_crops)
+
+    return caption
 
 if __name__ == "__main__":
     
     # Load an image
     frame = cv2.imread("data/sanity/video_0153.png")
     
-    # Detect objects
-    result = inference(frame)
-    
-    # Plot the detected objects
-    frame = result.plot()
-    
+    # Detect pedestrians
+    captions = main(frame, exclude_pedestrians=True)
+
+    # Print captions
+    for i, caption in enumerate(captions):
+        print(f'{caption}')
+
     # Display the result
+    if platform.system() == "Linux": exit()
     frame = cv2.resize(frame, (1280, 720))
     cv2.imshow("Object Detection", frame)
     cv2.waitKey(0)
