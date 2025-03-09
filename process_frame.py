@@ -1,6 +1,8 @@
 import object_detect, pose
-# import vlm, prompts
 import cv2
+import platform
+if platform.system() == "Linux":
+    import vlm, prompts
 
 def caption_frame(frame, prev_frame):
     """ Process the input frame """
@@ -37,8 +39,7 @@ def caption_frame(frame, prev_frame):
     
     ### Visual Language Model ###
     # Analyze the frame
-    # output = vlm.inference(frame, prompts.frame, vlm.Modal.IMAGE)
-    frame_output = "FAKE FRAME OUTPUT"
+    frame_output = vlm.inference(frame, prompts.frame, vlm.Modal.IMAGE)
     
     # Analyze each cropped pedestrian w/wo pose
     pose_outputs = [
