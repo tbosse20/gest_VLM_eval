@@ -16,7 +16,7 @@ yolo_pose = YOLO("weights/yolov8n-pose.pt", verbose=False)  # Small model
 yolo_pose.to(device).eval()
 
 # Define pedestrian detection functions
-def detect_pedestrians(frame):
+def inference(frame):
     """ Draw bounding boxes around detected pedestrians """
 
     with torch.no_grad():
@@ -27,9 +27,22 @@ def detect_pedestrians(frame):
     
     return result
 
-def plot_pose(result):
-    """ Plot the detected poses on the input frame """
-    return result.plot()
+def get_crop(frame, box):
+    """ Get the cropped region of interest """
+    x1, y1, x2, y2 = map(int, box[:4])
+    return frame[y1:y2, x1:x2]
+
+def get_crops(frame, results):
+    """ Get the cropped regions of interest """
+    crops = []
+    # Check if boxes exist
+    for result in results:
+        if result.boxes is None: continue
+        for box in result.boxes.data:
+            x1, y1, x2, y2 = map(int, box[:4])
+            crop = frame[y1:y2, x1:x2]
+            crops.append(crop)
+    return crops
 
 if __name__ == "__main__":
     
@@ -37,10 +50,10 @@ if __name__ == "__main__":
     frame = cv2.imread("data/sanity/video_0153.png")
     
     # Detect pedestrians
-    result = detect_pedestrians(frame)
+    result = inference(frame)
     
     # Plot the detected poses
-    frame = plot_pose(result)
+    frame = result.plot()
     
     # Display the result
     cv2.imshow("Pedestrian Pose", frame)

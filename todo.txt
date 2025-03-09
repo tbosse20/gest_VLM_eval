@@ -1,0 +1,8 @@
+ToDo:
+- Full pipeline
+    - Add temporal to pose estimation -> signal estimation
+- Organize pilot dataset
+    - COOOL subset
+    - YouTube videos
+    - Amateur tests
+- Evaluation method

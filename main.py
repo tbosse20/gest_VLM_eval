@@ -1,7 +1,15 @@
 import cv2
-from process_frame import process_frame
+from process_frame import caption_frame
 import dev_utils
+import os
 
+def process_folder(folder_path):
+    """ Process the images in the input folder """
+    video_paths = os.listdir(folder_path)
+    
+    for video_path in video_paths:
+        process_video(video_path)
+        
 def process_video(video_path):
     """ Process the input video """
     
@@ -23,11 +31,11 @@ def process_video(video_path):
     while cap.isOpened():
         ret, frame = cap.read()
         
-        if not ret:
-            break
+        # Break the loop if the video is over
+        if not ret: break
         
         # Process the frame
-        frame = process_frame(frame, prev_frame)
+        complete_caption = caption_frame(frame, prev_frame)
         
         # Add current frame rate to the frame shown
         frame, prev_time = dev_utils.display_fps(frame, prev_time)
