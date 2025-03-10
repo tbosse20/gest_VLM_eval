@@ -26,11 +26,12 @@ def inference(prompt: str):
 
     outputs = model.generate(
         **inputs, 
+        max_length=2048,
         # max_length = 100,           # Define the maximum output length
-        num_beams = 5,              # Use beam search (optional, can help with quality)
-        no_repeat_ngram_size = 2,   # Avoid repetitions
-        temperature = 0.7,          # Adjust for diversity in the output
-        early_stopping=True,        # Stop early when the model generates a good output
+        # num_beams = 5,              # Use beam search (optional, can help with quality)
+        no_repeat_ngram_size = 3,   # Avoid repetitions
+        # temperature = 0.7,          # Adjust for diversity in the output
+        # early_stopping=True,        # Stop early when the model generates a good output
     )
 
     # Decode the generated portion

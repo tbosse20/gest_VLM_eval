@@ -53,12 +53,7 @@ def caption_frame(frame):
         - `"action"`: The selected action (one of the possible actions above).
         - `"reason"`: A short explanation for why this action is the most appropriate.
 
-        ### Output format:
-
-        {
-            "action": "<Selected action>",
-            "reason": "<Short explanation>"
-        }
+        The driver should: 
     """
 
     # Interpret the complete caption
