@@ -1,18 +1,33 @@
-import object_detect, pose
+# import object_detect
+import pose
 import cv2
 import llama2
-import platform
-import vllama2, prompts
+# import platform
+# import vllama2, prompts
+import torch
+import gc
+
+def print_gpu_memory():
+    """Prints the current GPU memory usage."""
+    if torch.cuda.is_available():
+        allocated_memory = torch.cuda.memory_allocated() / (1024 * 1024)  # Convert to MB
+        cached_memory = torch.cuda.memory_reserved() / (1024 * 1024) # Convert to MB
+        print(f"GPU Allocated Memory: {allocated_memory:.2f} MB")
+        print(f"GPU Reserved Memory: {cached_memory:.2f} MB")
+    else:
+        print("CUDA is not available.")
 
 def caption_frame(frame):
     """ Process the input frame """
+    print_gpu_memory()
     
     # Pipeline design flags
     PROJECT_POSE    = True
     CAPTION_OBJECTS = True
 
     # # Pose detection and caption
-    # pose_captions = pose.main(frame, project_pose=PROJECT_POSE)
+    pose_captions = pose.main(frame, project_pose=PROJECT_POSE)
+    pose_captions = None
     # # Implicit object detection, excluding people
     # object_captions = object_detect.main(frame)
     
@@ -27,6 +42,10 @@ def caption_frame(frame):
     # # Concatenate captions into a single string
     # complete_caption = " ".join([frame_output] + pose_captions)
     # print(complete_caption)
+    print_gpu_memory()
+    
+    torch.cuda.empty_cache()
+    print_gpu_memory()
 
     init_prompt = """
         You are given a description of a scene from a dash-cam perspective. Your task is to evaluate the situation and suggest the best course of action for the ego driver to take. The description includes details about pedestrians, vehicles, and street conditions. Based on this information, your goal is to choose one of the following actions and provide a clear explanation of why that action is the most appropriate.
@@ -56,6 +75,7 @@ def caption_frame(frame):
         The driver should: 
     """
 
+    print_gpu_memory()
     # Interpret the complete caption
     complete_prompt = "\n".join([init_prompt, complete_caption, task_prompt])
     action = llama2.inference(complete_prompt)

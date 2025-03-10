@@ -9,23 +9,35 @@ import platform
 # Suppress YOLOv8 logging
 logging.getLogger("ultralytics").setLevel(logging.ERROR)
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-dtype = torch.float16 if torch.cuda.is_available() else torch.float32
-# print(device, dtype, "GPUs:", torch.cuda.device_count(), torch.cuda.get_device_name(0))
+def load_model():
 
-# Load YOLOv8 model for person detection
-yolo_pose = YOLO("weights/yolov8n-pose.pt", verbose=False)  # Small model
-yolo_pose.to(device).eval()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+    # print(device, dtype, "GPUs:", torch.cuda.device_count(), torch.cuda.get_device_name(0))
+
+    # Load YOLOv8 model for person detection
+    yolo_pose = YOLO("weights/yolov8n-pose.pt", verbose=False)  # Small model
+    yolo_pose.to(device).eval()
+
+    return yolo_pose
+
+def unload_model(yolo_pose):
+    del yolo_pose
+    yolo_pose = None
 
 # Define pedestrian detection functions
-def inference(frame):
+def inference(frame, yolo_pose=None):
     """ Draw bounding boxes around detected pedestrians """
+
+    yolo_pose = load_model() or yolo_pose
 
     with torch.no_grad():
         results = yolo_pose(frame)
         
     # Extract the first result
     result = results[0]
+
+    unload_model(yolo_pose)
     
     return result
 
@@ -59,8 +71,9 @@ def get_crops(frame, results):
 
 def caption_crops(pose_crops):
     # Analyze each cropped pedestrian w/wo pose
+    vllama2_package = vllama2.load_model()
     return [
-        f"{i}. {vllama2.inference(pose_crop, prompts.pose, 'image')}"
+        f"{i}. {vllama2.inference(pose_crop, prompts.pose, 'image', vllama2_package)}"
         # f"{i}. FAKE POSE CROP OUTPUT"
         for i, pose_crop in enumerate(pose_crops)
     ]

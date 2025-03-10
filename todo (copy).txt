@@ -1,0 +1,7 @@
+s/generation/utils.py", line 1575, in _get_initial_cache_position
+    cache_position = torch.ones_like(input_ids[0, :], dtype=torch.int64).cumsum(0) - 1
+RuntimeError: CUDA error: device kernel image is invalid
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
