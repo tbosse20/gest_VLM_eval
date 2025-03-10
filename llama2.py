@@ -22,7 +22,7 @@ def load_model():
 
     return model, tokenizer, device
 
-def unload_model(device):
+def unload_model(model, tokenizer, device):
     del model
     model = None
     del tokenizer
@@ -53,7 +53,12 @@ def inference(prompt: str):
         generated_tokens = outputs[0][input_length:]
         decoded_output = tokenizer.decode(generated_tokens, skip_special_tokens=True)
         
-        unload_model(model, tokenizer, device)
+        del model
+        model = None
+        del tokenizer
+        tokenizer = None
+        del device
+        device = None
 
         return decoded_output
     

@@ -1,5 +1,5 @@
 # import object_detect
-import pose
+# import pose
 import cv2
 import llama2
 # import platform
@@ -17,7 +17,8 @@ def print_gpu_memory():
     else:
         print("CUDA is not available.")
 
-def caption_frame(frame):
+def generate_prompt(frame):
+
     """ Process the input frame """
     print_gpu_memory()
     
@@ -26,8 +27,8 @@ def caption_frame(frame):
     CAPTION_OBJECTS = True
 
     # # Pose detection and caption
-    pose_captions = pose.main(frame, project_pose=PROJECT_POSE)
-    pose_captions = None
+    # pose_captions = pose.main(frame, project_pose=PROJECT_POSE)
+    # pose_captions = None
     # # Implicit object detection, excluding people
     # object_captions = object_detect.main(frame)
     
@@ -42,11 +43,7 @@ def caption_frame(frame):
     # # Concatenate captions into a single string
     # complete_caption = " ".join([frame_output] + pose_captions)
     # print(complete_caption)
-    print_gpu_memory()
     
-    torch.cuda.empty_cache()
-    print_gpu_memory()
-
     init_prompt = """
         You are given a description of a scene from a dash-cam perspective. Your task is to evaluate the situation and suggest the best course of action for the ego driver to take. The description includes details about pedestrians, vehicles, and street conditions. Based on this information, your goal is to choose one of the following actions and provide a clear explanation of why that action is the most appropriate.
 
@@ -75,11 +72,23 @@ def caption_frame(frame):
         The driver should: 
     """
 
-    print_gpu_memory()
     # Interpret the complete caption
     complete_prompt = "\n".join([init_prompt, complete_caption, task_prompt])
+
+    gc.collect()
+    torch.cuda.empty_cache()
+    torch.cuda.ipc_collect()
+    print_gpu_memory()
+
+    return complete_prompt
+
+def decide_action(complete_prompt):
     action = llama2.inference(complete_prompt)
-    
+    return action
+
+def caption_frame(frame):
+    complete_prompt = generate_prompt(frame)
+    action = decide_action(complete_prompt)
     return action
 
 if __name__ == "__main__":
