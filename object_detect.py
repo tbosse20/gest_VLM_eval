@@ -19,7 +19,6 @@ yolo.to(device).eval()
 def inference(frame):
     """ Detect objects in the input frame """
     
-    print(frame.shape)
     with torch.no_grad():
         results = yolo(frame)
         
