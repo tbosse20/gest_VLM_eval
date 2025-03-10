@@ -1,7 +1,8 @@
 import object_detect, pose
-import vllama2, prompts
 import cv2
 import llama2
+import platform
+import vllama2, prompts
 
 def caption_frame(frame):
     """ Process the input frame """
