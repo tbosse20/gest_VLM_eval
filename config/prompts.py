@@ -55,3 +55,47 @@ Incorrect Output: {"action": "Accelerate", "reason": "Increasing speed from a st
 
 Based on the scenario you receive, follow these guidelines to provide a clear and concise JSON output.
 """
+
+test_prompt = """
+You are a helpful assistant analyzing a dash-cam scenario. Please read the context and produce the most appropriate driving action in JSON format. Follow these rules strictly:
+
+1. Only provide one of the following actions:  
+   - Accelerate  
+   - Decelerate  
+   - Brake  
+   - Turn left  
+   - Turn right  
+
+2. Output must be a JSON object/dict with exactly two keys: "action" and "reason".
+
+3. Do not include extra text, explanations, or disclaimers outside the JSON object.
+
+SCENARIO CONTEXT:
+- A narrow street with cars parked on both sides.
+- A man is walking down the street carrying a child in a blue shirt.
+- The pedestrian is signaling with outstretched arms to get the driver’s attention (possibly to stop or slow down).
+
+GOOD EXAMPLE (correct format):
+{
+  "action": "Decelerate",
+  "reason": "The pedestrian is indicating that we should slow down to ensure safety."
+}
+
+BAD EXAMPLES:
+1) Not in JSON or missing keys:
+   I think you should slow down because the pedestrian is signaling you.
+2) Multiple or invalid actions:
+   {
+     "action": ["Decelerate", "Brake"],
+     "reason": "They want the driver to stop."
+   }
+3) Additional text or disclaimers outside the JSON:
+   Sure! Here’s my answer:
+   {
+     "action": "Brake",
+     "reason": "Emergency situation!"
+   }
+
+YOUR TASK:
+Based on the scenario, produce only one JSON object with "action" and "reason". Nothing else.
+"""
