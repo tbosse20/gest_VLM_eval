@@ -1,12 +1,22 @@
 ToDo:
 - Full pipeline
-    - React upon complete prompt using LLaMA
+    - Fix OOM issue and clean
+    - Run and save in parts (VLM -> LLM)
 - Organize pilot dataset
     - COOOL subset
     - YouTube videos
     - Amateur tests
 - Evaluation method
+    - Class accuracy
+
+Write about:
+- Predict driver reaction upon complete prompt using LLaMA (install LLaMA)
+    - Llama 3 70B
+    - Llama 3 8b
+    - Llama 2 7b
+- VideoLLaMA2
+- Memory handling
 
 Future:
 - Full pipeline
-    - Add temporal to pose estimation -> signal estimation
+    - Add temporal to pose estimation -> signal estimation 

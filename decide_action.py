@@ -17,11 +17,11 @@ def decide_action_csv(csv_path):
     df = pd.read_csv(csv_path)
 
     # Make new csv file name
-    new_csv_path = csv_path.replace(".csv", "_action.csv")
+    new_csv_path = "pred_actions.csv"
 
     # Generate csv file if not exists
     if not os.path.exists(new_csv_path):
-        df = pd.DataFrame(columns=df.columns.tolist() + ["action"])
+        df = pd.DataFrame(columns=df.columns.tolist() + ["pred_action", "pred_action_id"])
         df = df.drop(columns=["caption"]) #drop caption column
         df.to_csv(new_csv_path, mode="w", index=False, header=True)
 
@@ -34,7 +34,12 @@ def decide_action_csv(csv_path):
         action = re.sub(r'[\n\r]+', ' ', action).strip()
         action = re.sub(r'\s+', ' ', action).strip()
 
-        row["action"] = action
+        # Extract action and action_id
+        split_action = action.split(". ")
+        row["pred_action"] = split_action[1]
+        row["pred_action_id"] = int(split_action[0])
+
+        # Drop caption column
         row = row.drop(labels="caption")
         row.to_frame().T.to_csv(new_csv_path, mode='a', index=False, header=False, encoding="utf-8")
 

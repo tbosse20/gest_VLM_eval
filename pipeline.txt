@@ -1,0 +1,17 @@
+Video
+└─ Frames
+   └─ Frame
+      ├─ Caption ────┐
+      ├─ Poses       │
+      │  └─ Captions ┤
+      └─ Objects     │
+         └─ Captions ┤
+                     Prompt
+                     └─ Action
+                        ├─ Constant
+                        ├─ Accelerate
+                        ├─ Decelerate
+                        ├─ Turn Left
+                        ├─ Turn Right
+                        └─ (Halted)
+
