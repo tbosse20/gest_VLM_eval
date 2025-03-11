@@ -32,8 +32,8 @@ def load_model():
 
     return model, tokenizer, device
 
-def unload(llama2_package):
-    model, tokenizer, device = llama2_package
+def unload(llama_package):
+    model, tokenizer, device = llama_package
 
     del model
     del tokenizer
@@ -42,9 +42,9 @@ def unload(llama2_package):
     gc.collect()
     torch.cuda.empty_cache()
 
-def inference(prompt: str, llama2_package=None):
+def inference(prompt: str, llama_package=None):
 
-    model, tokenizer, device = llama2_package or load_model()
+    model, tokenizer, device = llama_package or load_model()
 
     try:
         # Inference

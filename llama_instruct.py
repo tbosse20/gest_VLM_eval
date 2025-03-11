@@ -18,8 +18,8 @@ def load_model():
 
     return pipeline
 
-def unload(llama2_package):
-    pipeline = llama2_package
+def unload(llama_package):
+    pipeline = llama_package
 
     del pipeline
 

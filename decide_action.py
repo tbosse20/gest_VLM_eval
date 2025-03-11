@@ -27,7 +27,7 @@ def decide_action_csv(csv_path):
         df = df.drop(columns=["caption"]) #drop caption column
         df.to_csv(new_csv_path, mode="w", index=False, header=True)
 
-    llama2_package = llama_instruct.load_model()
+    llama_package = llama_instruct.load_model()
 
     for idx, row in df.iterrows():
         caption = row["caption"]
@@ -37,17 +37,18 @@ def decide_action_csv(csv_path):
             {"role": "system", "content": prompts.setting_prompt},
             {"role": "user", "content": prompts.task_prompt + caption + prompts.output_prompt},
         ]
-        json_data = llama_instruct.inference(messages, llama2_package)
+        json_data = llama_instruct.inference(messages, llama_package)
 
         # Extract action and action_id
         action = json_data['action']
         row["pred_action"] = action
+        row["pred_action_id"] = -1
 
         # Drop caption column
         row = row.drop(labels="caption")
         row.to_frame().T.to_csv(new_csv_path, mode='a', index=False, header=False, encoding="utf-8")
 
-    llama_instruct.unload(llama2_package)
+    llama_instruct.unload(llama_package)
 
 if __name__ == "__main__":
     video_path = "data/sanity/video_0153.mp4"
