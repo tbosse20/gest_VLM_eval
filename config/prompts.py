@@ -27,16 +27,31 @@ setting_prompt = """You are an AI assistant that evaluates driving situations fr
 task_prompt = """You are given a description of a scene from a dash-cam perspective. Your task is to evaluate the situation and suggest the best course of action for the ego driver to take. The description includes details about pedestrians, vehicles, and street conditions. Based on this information, your goal is to choose one of the following actions and provide a clear explanation of why that action is the most appropriate.\n\n
 The scene details are as follows:\n"""
 
-output_prompt = """\n\nPossible Actions:\n\n
-0. Constant speed  # Maintaining speed        \n
-1. Accelerate      # Increasing speed         \n
-2. Decelerate      # Slowing down             \n
-3. Hard Brake      # Abrupt stop              \n
-4. Turn left       # Changing direction left  \n
-5. Turn right      # Changing direction right \n\n
+output_prompt = prompt = """
+You are an AI driving assistant. Based on the scenario provided, choose the most appropriate driving action and output your response as a single JSON object with two keys: "action" and "reason".
 
-### Instructions:\n
-- **Choose only one action.** \n
-- **Provide only one response** in the form of a JSON object with two keys: `\"action\"` and `\"reason\"`. \n
-`\"action\"`: The selected action (one of the possible actions above). \n
-`\"reason\"`: A short explanation for why this action is the most appropriate."""
+Possible Actions:
+  0. Constant speed  # Maintaining speed
+  1. Accelerate      # Increasing speed
+  2. Decelerate      # Slowing down
+  3. Hard Brake      # Abrupt stop
+  4. Turn left       # Changing direction left
+  5. Turn right      # Changing direction right
+
+Instructions:
+- Choose only one action.
+- Provide exactly one JSON object with the keys "action" and "reason".
+- The "action" value must be one of the options above.
+- The "reason" should briefly explain why this action is most appropriate for the given scenario.
+
+Positive Example:
+Scenario: The vehicle is approaching a red light.
+Expected Output: {"action": "Decelerate", "reason": "Reducing speed to stop safely at the red light."}
+
+Negative Example:
+Scenario: The vehicle is stopped in a safe zone.
+Incorrect Output: {"action": "Accelerate", "reason": "Increasing speed from a standstill is unnecessary in a safe zone."}
+(Explanation: Accelerating is not appropriate because the vehicle is already stationary in a safe area.)
+
+Based on the scenario you receive, follow these guidelines to provide a clear and concise JSON output.
+"""
