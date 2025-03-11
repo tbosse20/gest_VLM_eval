@@ -1,7 +1,10 @@
 
 import pandas as pd
 import os
-import action
+
+import sys
+sys.path.append(".")
+import annotate.action as action
 
 def generate_action_csv(action_csv: str):
     """ Generate an empty action CSV file """
@@ -41,6 +44,6 @@ def annotate_video(video_path: str, action_csv: str):
 
 if __name__ == "__main__":
     folder_path = 'data/sanity'
-    action_csv = 'data/sanity/actions.csv'
+    action_csv = 'data/sanity/output/actions.csv'
     # annotate_folder(folder_path, action_csv)
-    annotate_video('data/sanity/video_0153.mp4', action_csv)
+    annotate_video('data/sanity/input/video_0153.mp4', action_csv)

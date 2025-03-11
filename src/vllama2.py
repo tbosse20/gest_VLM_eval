@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 import sys, os
 sys.path.append("../VideoLLaMA2")
+sys.path.append("../../VideoLLaMA2")
 from videollama2 import model_init, mm_infer
 from videollama2.utils import disable_torch_init
 
@@ -44,7 +45,7 @@ def sanity():
 
     # Video Inference
     modal = 'video'
-    modal_path = 'data/sanity/video_0153.mp4' 
+    modal_path = 'data/sanity/input/video_0153.mp4' 
     instruct = 'What is happening in this video?'
     output = inference(modal_path, instruct, modal)
     print("Video output:\n",output)
@@ -52,7 +53,7 @@ def sanity():
 	
     # Image Inference
     modal = 'image'
-    modal_path = 'data/sanity/video_0153.png' 
+    modal_path = 'data/sanity/input/video_0153.png' 
     instruct = 'What is happening in this image?'
     output = inference(modal_path, instruct, modal)
     print("Image output:\n", output)

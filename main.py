@@ -1,8 +1,9 @@
 import cv2
-from process_frame import caption_frame
-import dev_utils
 import os
 import platform
+
+import dev.dev_utils as dev_utils
+from scripts.process_frame import caption_frame
 
 def process_folder(folder_path):
     """ Process the images in the input folder """
@@ -24,7 +25,7 @@ def process_video(video_path):
     
     # Define the codec and create a VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    out = cv2.VideoWriter('data/sanity/output.mp4', fourcc, fps, (width, height))
+    out = cv2.VideoWriter('data/sanity/output/output.mp4', fourcc, fps, (width, height))
     
     prev_time = 0  # For fps calculation
     frame_counter = 0
@@ -62,5 +63,5 @@ def process_video(video_path):
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    video_path = 'data/sanity/video_0153.mp4'
+    video_path = 'data/sanity/input/video_0153.mp4'
     process_video(video_path)

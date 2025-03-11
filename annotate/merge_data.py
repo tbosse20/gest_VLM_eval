@@ -15,6 +15,6 @@ def merge(keypoints_csv: str, classes_csv: str, signal_csv: str, exp: bool = Fal
 if __name__ == "__main__":
     import sys
     sys.path.append(".")
-    import main.signal.config as config
+    # import main.signal.config as config
     
-    merge(config.keypoints_csv, config.classes_csv, config.signal_csv, config.sanity)
+    # merge(config.keypoints_csv, config.classes_csv, config.signal_csv, config.sanity)

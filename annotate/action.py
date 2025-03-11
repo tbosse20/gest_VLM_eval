@@ -1,6 +1,5 @@
 import cv2
-import sys, os
-sys.path.append("../../VideoLLaMA2")
+import os
 import gc
 import torch
 import logging
@@ -10,65 +9,68 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 action_categories = ["Constant Speed", "Accelerating", "Decelerating", "Turning Left", "Turning Right", "Halted"]
 
-# from videollama2 import model_init, mm_infer
-# from videollama2.utils import disable_torch_init
-# if torch.cuda.is_available():
-#     torch.cuda.empty_cache()
-# disable_torch_init()
+import sys
+sys.path.append("../../VideoLLaMA2")
+from videollama2 import model_init, mm_infer
+from videollama2.utils import disable_torch_init
 
-# Load the VideoLLaMA2 model
-# model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F'
-# model, processor, tokenizer = model_init(model_path)
+if torch.cuda.is_available():
+    torch.cuda.empty_cache()
+disable_torch_init()
 
-# # Function to create a video from images
-# def create_video(frames, output_video_path, fps):
+Load the VideoLLaMA2 model
+model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F'
+model, processor, tokenizer = model_init(model_path)
 
-#     # Get frame size
-#     height, width, layers = frames[0].shape
-#     size = (width, height)
+# Function to create a video from images
+def create_video(frames, output_video_path, fps):
 
-#     # Create video writer
-#     out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), fps=1, size=size)
+    # Get frame size
+    height, width, layers = frames[0].shape
+    size = (width, height)
 
-#     for img in frames:
-#         out.write(img)
+    # Create video writer
+    out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), fps=1, size=size)
 
-#     out.release()
+    for img in frames:
+        out.write(img)
 
-# def classify_driver_action(frames) -> str:
-#     """
-#     Analyzes three consecutive frames to understand the ego driver's actions.
+    out.release()
 
-#     Args:
-#         frames: ...
-#     """
+def classify_driver_action(frames) -> str:
+    """
+    Analyzes three consecutive frames to understand the ego driver's actions.
 
-#     OUTPUT_PATH = "tmp_output_video.mp4"
-#     MODAL = "video"
+    Args:
+        frames: ...
+    """
 
-#     # MAKE ERROR
-#     if len(frames) < 3 or 3 < len(frames):
-#         return None
+    OUTPUT_PATH = "tmp_output_video.mp4"
+    MODAL = "video"
+
+    # MAKE ERROR
+    if len(frames) < 3 or 3 < len(frames):
+        return None
     
-#     create_video(frames, OUTPUT_PATH, fps=1)
+    create_video(frames, OUTPUT_PATH, fps=1)
 
-#     # Analyze Driver's Current State (Focus on the last frame)
-#     instruct_driver_state = """
-#     Examine the following three consecutive video frames. Focus specifically on the ego vehicle's state in the *last* (third) frame. Based on the changes observed across all three frames, but with an emphasis on the third frame, select the most accurate description of the driver's *current* driving state:
+    # Analyze Driver's Current State (Focus on the last frame)
+    instruct_driver_state = """
+    Examine the following three consecutive video frames. Focus specifically on the ego vehicle's state in the *last* (third) frame. Based on the changes observed across all three frames, but with an emphasis on the third frame, select the most accurate description of the driver's *current* driving state:
 
-#     1. Constant Speed: The vehicle is maintaining a steady pace.
-#     2. Accelerating:   The vehicle is actively increasing its speed.
-#     3. Decelerating:   The vehicle is actively decreasing its speed.
-#     4. Turning Left:   The vehicle is in the process of turning left.
-#     5. Turning Right:  The vehicle is in the process of turning right.
-#     6. Halted:         The vehicle is completely stopped.
+    1. Constant Speed: The vehicle is maintaining a steady pace.
+    2. Accelerating:   The vehicle is actively increasing its speed.
+    3. Decelerating:   The vehicle is actively decreasing its speed.
+    4. Turning Left:   The vehicle is in the process of turning left.
+    5. Turning Right:  The vehicle is in the process of turning right.
+    6. Halted:         The vehicle is completely stopped.
 
-#     Provide your answer as the number and title corresponding to the best description of the driver's *current* state in the last frame. For example, answer '2. Accelerating' if the driver is accelerating in the last frame.
-#     """
+    Provide your answer as the number and title corresponding to the best description of the driver's *current* state in the last frame. For example, answer '2. Accelerating' if the driver is accelerating in the last frame.
+    """
     
-#     output = mm_infer(processor[MODAL](OUTPUT_PATH), instruct_driver_state, model=model, tokenizer=tokenizer, do_sample=False, modal=MODAL)
+    output = mm_infer(processor[MODAL](OUTPUT_PATH), instruct_driver_state, model=model, tokenizer=tokenizer, do_sample=False, modal=MODAL)
 
-#     return output
+    return output
 
 def extract_action_video(video_path, save=False, sanity=False):
 
@@ -102,8 +104,8 @@ def extract_action_video(video_path, save=False, sanity=False):
             
         # Classify the driver's action
         if len(prev_frames) == 3:
-            # result = classify_driver_action(prev_frames)
-            result = "Constant Speed" # Temporary
+            result = classify_driver_action(prev_frames)
+            # result = "Constant Speed" # Temporary
             
             # Append the result to the list
             actions.append(result)
@@ -141,6 +143,6 @@ def extract_action_video(video_path, save=False, sanity=False):
     
 
 if __name__ == "__main__":
-    video_path = 'data/sanity/video_0153.mp4'
+    video_path = 'data/sanity/input/video_0153.mp4'
     df = extract_action_video(video_path, save=True, sanity=True)
     print(df)

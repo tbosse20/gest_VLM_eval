@@ -1,13 +1,15 @@
-import llama_instruct
-import prompts
 import gc
 import os
 import pandas as pd
-import prompts
 import re
 import torch
 
-def decide_action_csv(csv_path):
+import sys
+sys.path.append(".")
+import config.prompts as prompts
+import src.llama_instruct as llama_instruct
+
+def decide_action_csv(csv_path, sanity=False):
     torch.cuda.memory_summary(device=None, abbreviated=False)
     gc.collect()
     torch.cuda.empty_cache()
@@ -23,7 +25,7 @@ def decide_action_csv(csv_path):
 
     # Generate csv file if not exists
     if not os.path.exists(new_csv_path):
-        df = pd.DataFrame(columns=df.columns.tolist() + ["pred_action", "pred_action_id"])
+        df = pd.DataFrame(columns=df.columns.tolist() + ["pred_action", "pred_action_id", "reason"])
         df = df.drop(columns=["caption"]) #drop caption column
         df.to_csv(new_csv_path, mode="w", index=False, header=True)
 
@@ -43,14 +45,19 @@ def decide_action_csv(csv_path):
         action = json_data['action']
         row["pred_action"] = action
         row["pred_action_id"] = -1
+        row['reason'] = json_data['reason']
 
         # Drop caption column
         row = row.drop(labels="caption")
         row.to_frame().T.to_csv(new_csv_path, mode='a', index=False, header=False, encoding="utf-8")
 
+        if sanity and idx > 5: break
+
     llama_instruct.unload(llama_package)
 
 if __name__ == "__main__":
-    video_path = "data/sanity/video_0153.mp4"
-    csv_path = "data/sanity/caption.csv"
-    decide_action_csv(csv_path)
+    video_path = "data/sanity/input/video_0153.mp4"
+    csv_path = "data/sanity/output/caption.csv"
+
+    # decide_action_csv(csv_path, sanity=True)
+    decide_action_csv(csv_path, sanity=False)

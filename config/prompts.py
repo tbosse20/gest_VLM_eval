@@ -22,8 +22,21 @@ frame = """
 #     Provide a concise description that best fits the scene based on these examples.
 # """
 
-setting_prompt = """You are an AI assistant that evaluates driving situations from a dash-cam perspective and suggests the best course of action for the ego driver."""
+setting_prompt = """You are an AI assistant that evaluates driving situations from a dash-cam perspective and suggests the best course of action for the ego driver. You are currently driving 10 km/h."""
 
-task_prompt = """You are given a description of a scene from a dash-cam perspective. Your task is to evaluate the situation and suggest the best course of action for the ego driver to take. The description includes details about pedestrians, vehicles, and street conditions. Based on this information, your goal is to choose one of the following actions and provide a clear explanation of why that action is the most appropriate.\n\nThe scene details are as follows:\n"""
+task_prompt = """You are given a description of a scene from a dash-cam perspective. Your task is to evaluate the situation and suggest the best course of action for the ego driver to take. The description includes details about pedestrians, vehicles, and street conditions. Based on this information, your goal is to choose one of the following actions and provide a clear explanation of why that action is the most appropriate.\n\n
+The scene details are as follows:\n"""
 
-output_prompt = """\n\nPossible Actions:\n\n1. Accelerate  \n2. Decelerate  \n3. Brake  \n4. Turn left  \n5. Turn right  \n\n### Instructions:\n- **Choose only one action.**  \n- **Provide only one response** in the form of a JSON object with two keys: `\"action\"` and `\"reason\"`.  \n- `\"action\"`: The selected action (one of the possible actions above).  \n- `\"reason\"`: A short explanation for why this action is the most appropriate."""
+output_prompt = """\n\nPossible Actions:\n\n
+0. Constant speed  # Maintaining speed        \n
+1. Accelerate      # Increasing speed         \n
+2. Decelerate      # Slowing down             \n
+3. Hard Brake      # Abrupt stop              \n
+4. Turn left       # Changing direction left  \n
+5. Turn right      # Changing direction right \n\n
+
+### Instructions:\n
+- **Choose only one action.** \n
+- **Provide only one response** in the form of a JSON object with two keys: `\"action\"` and `\"reason\"`. \n
+`\"action\"`: The selected action (one of the possible actions above). \n
+`\"reason\"`: A short explanation for why this action is the most appropriate."""

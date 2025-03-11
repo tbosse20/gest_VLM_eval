@@ -3,7 +3,11 @@ import torch
 import cv2
 import logging
 import platform
-import vllama2, prompts
+
+import sys
+sys.path.append(".")
+import src.vllama2 as vllama2
+import config.prompts as prompts
 
 # Suppress YOLOv8 logging
 logging.getLogger("ultralytics").setLevel(logging.ERROR)
@@ -72,7 +76,7 @@ def main(frame, exclude_pedestrians=True):
 if __name__ == "__main__":
     
     # Load an image
-    frame = cv2.imread("data/sanity/video_0153.png")
+    frame = cv2.imread("data/sanity/input/video_0153.png")
     
     # Detect pedestrians
     captions = main(frame, exclude_pedestrians=True)

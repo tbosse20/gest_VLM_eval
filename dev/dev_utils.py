@@ -1,7 +1,6 @@
 import time
 import cv2
 
-
 def display_fps(frame, prev_time):
     """ Display the FPS on the input frame """
 

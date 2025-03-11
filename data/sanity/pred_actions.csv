@@ -1,8 +1,0 @@
-video_name,frame_idx,pred_action,pred_action_id
-video_0153.mp4,0,None,-1
-video_0153.mp4,1,Decelerate,-1
-video_0153.mp4,2,Decelerate,-1
-video_0153.mp4,3,Decelerate,-1
-video_0153.mp4,4,Decelerate,-1
-video_0153.mp4,5,Decelerate,-1
-video_0153.mp4,6,Decelerate,-1

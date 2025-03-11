@@ -2,8 +2,8 @@ import pandas as pd
 
 def compare_csv():
     # Load the CSV files
-    df1 = pd.read_csv('data/sanity/actions.csv')
-    df2 = pd.read_csv('data/sanity/pred_actions.csv')
+    df1 = pd.read_csv('data/sanity/output/actions.csv')
+    df2 = pd.read_csv('data/sanity/output/pred_actions.csv')
 
     # Merge on 'video_name' and 'frame_idx'
     merged_df = pd.merge(df1, df2, on=["video_name", "frame_idx"])
