@@ -1,7 +1,5 @@
 ToDo:
-- Full pipeline
-    - Fix OOM issue and clean
-    - Run and save in parts (VLM -> LLM)
+- Run processing!! On test video
 - Organize pilot dataset
     - COOOL subset
     - YouTube videos
@@ -16,6 +14,10 @@ Write about:
     - Llama 2 7b
 - VideoLLaMA2
 - Memory handling
+    - Fix OOM issue and clean
+- Full pipeline
+    - Run and save in parts (VLM -> LLM)
+
 
 Future:
 - Full pipeline
