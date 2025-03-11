@@ -69,16 +69,16 @@ def get_crops(frame, results):
 
     return crops
 
-def caption_crops(pose_crops):
+def caption_crops(pose_crops, vllama2_package=None):
     # Analyze each cropped pedestrian w/wo pose
-    vllama2_package = vllama2.load_model()
+    vllama2_package = vllama2_package or vllama2.load_model()
     return [
         f"{i}. {vllama2.inference(pose_crop, prompts.pose, 'image', vllama2_package)}"
         # f"{i}. FAKE POSE CROP OUTPUT"
         for i, pose_crop in enumerate(pose_crops)
     ]
 
-def main(frame, project_pose=True):
+def main(frame, project_pose=True, vllama2_package=None):
 
     # Detect pedestrians
     pose_result = inference(frame)
@@ -87,7 +87,7 @@ def main(frame, project_pose=True):
     # Get the cropped region of interest
     pose_crops = get_crops(frame, pose_result)
     # Caption each pedestrian
-    caption = caption_crops(pose_crops)
+    caption = caption_crops(pose_crops, vllama2_package)
 
     return caption
 

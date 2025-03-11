@@ -21,3 +21,38 @@ frame = """
 
 #     Provide a concise description that best fits the scene based on these examples.
 # """
+
+init_prompt = """
+    You are given a description of a scene from a dash-cam perspective. Your task is to evaluate the situation and suggest the best course of action for the ego driver to take. The description includes details about pedestrians, vehicles, and street conditions. Based on this information, your goal is to choose one of the following actions and provide a clear explanation of why that action is the most appropriate.
+
+    The scene details are as follows:
+"""
+
+task_prompt = """
+### Possible Actions:
+1. Accelerate
+2. Decelerate
+3. Brake
+4. Turn left
+5. Turn right
+
+### Task:
+- Choose one action from the list above and respond **only with the number and action**, in this format: <number>. <action>
+- Do **not** add any extra text, markdown, or explanations.
+
+### Positive Examples (Correct Responses):
+- "2. Decelerate"
+- "3. Brake"
+- "1. Accelerate"
+- "4. Turn left"
+- "5. Turn right"
+
+### Negative Examples (Incorrect Responses):
+- "3. Brake ###"  # Incorrect, extra characters
+- "### 3. Brake"  # Incorrect, extra markdown
+- "The correct action is 3. Brake."  # Incorrect, extra text
+- "I would suggest 3. Brake."  # Incorrect, explanation
+- "Action 3: Brake"  # Incorrect, wrong format
+
+Action: 
+"""
