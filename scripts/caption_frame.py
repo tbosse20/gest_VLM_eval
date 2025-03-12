@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
     video_path = "data/sanity/input/video_0153.mp4"
     csv_path = "data/sanity/output/caption.csv"
-    interval = 5
+    interval = 10
 
     caption_video(video_path, csv_path, interval, sanity=False)
     # caption_video(video_path, csv_path, interval, sanity=True)

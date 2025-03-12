@@ -1,17 +1,18 @@
+# Frame caption
+frame = """
+    You are driving down the road. Describe what you are seeing and what you should consider.
+"""
+
 # Pose caption
 pose = """
-    Examine the given image of an individual pedestrian. Analyze their body posture, limb positioning, and gestures to infer their intended communication towards a vehicle. Based on their stance and movement cues, select the most accurate interpretation of their intent:
+    You are driving down the road. Examine the given image of an individual pedestrian. What are they trying to communicate to the driver using gestures.
 """
 
 # Object caption
 object = """
-    Analyze the given cropped image of an object in the scene. Identify its relevance to the vehicle's decision-making process. Based on its type, position, and potential motion, determine whether it is an object the vehicle should actively monitor. Categorize the object based on the following descriptions:
+    You are driving down the road. Analyze the given cropped image of an object in the scene. Identify its relevance to the vehicle's decision-making process. Based on its type, position, and potential motion, determine whether it is an object the vehicle should actively monitor. Categorize the object based on the following descriptions:
 """
 
-# Frame caption
-frame = """
-    Examine the given full-frame image representing the vehicle's surroundings. Identify all relevant objects, their spatial relationships, and their impact on the vehicle's decision-making. Based on the scene composition, categorize the overall driving context using the most appropriate description:
-"""
 # frame += """
 #     For example, the scene may indicate a **clear path** if the road ahead is free of obstacles, moving objects, or immediate hazards. If a pedestrian is present and may require the vehicle to stop, yield, or adjust speed, the scene falls under **pedestrian interaction**. When other vehicles in proximity influence movement, such as merging, stopping, or turning, the scene involves **vehicle interaction**.
 
@@ -31,49 +32,18 @@ output_prompt = """
 You are an AI driving assistant. Based on the scenario provided, choose the most appropriate driving action and output your response as a single JSON object with two keys: "action" and "reason".
 
 Possible Actions:
-  0. Constant speed  # Maintaining speed
-  1. Accelerate      # Increasing speed
-  2. Decelerate      # Slowing down
-  3. Hard Brake      # Abrupt stop
-  4. Turn left       # Changing direction left
-  5. Turn right      # Changing direction right
+  0. Constant   - Maintaining speed
+  1. Accelerate - Increasing speed
+  2. Decelerate - Slowing down
+  3. Hard Brake - Abrupt stop
+  4. Left       - Changing direction left
+  5. Right      - Changing direction right
 
 Instructions:
 - Choose only one action.
 - Provide exactly one JSON object with the keys "action" and "reason".
 - The "action" value must be one of the options above.
 - The "reason" should briefly explain why this action is most appropriate for the given scenario.
-
-Positive Example:
-Scenario: The vehicle is approaching a red light.
-Expected Output: {"action": "Decelerate", "reason": "Reducing speed to stop safely at the red light."}
-
-Negative Example:
-Scenario: The vehicle is stopped in a safe zone.
-Incorrect Output: {"action": "Accelerate", "reason": "Increasing speed from a standstill is unnecessary in a safe zone."}
-(Explanation: Accelerating is not appropriate because the vehicle is already stationary in a safe area.)
-
-Based on the scenario you receive, follow these guidelines to provide a clear and concise JSON output.
-"""
-
-test_prompt = """
-You are a helpful assistant analyzing a dash-cam scenario. Please read the context and produce the most appropriate driving action in JSON format. Follow these rules strictly:
-
-1. Only provide one of the following actions:  
-   - Accelerate  
-   - Decelerate  
-   - Brake  
-   - Turn left  
-   - Turn right  
-
-2. Output must be a JSON object/dict with exactly two keys: "action" and "reason".
-
-3. Do not include extra text, explanations, or disclaimers outside the JSON object.
-
-SCENARIO CONTEXT:
-- A narrow street with cars parked on both sides.
-- A man is walking down the street carrying a child in a blue shirt.
-- The pedestrian is signaling with outstretched arms to get the driver’s attention (possibly to stop or slow down).
 
 GOOD EXAMPLE (correct format):
 {
@@ -96,6 +66,5 @@ BAD EXAMPLES:
      "reason": "Emergency situation!"
    }
 
-YOUR TASK:
-Based on the scenario, produce only one JSON object with "action" and "reason". Nothing else.
+Based on the scenario you receive, follow these guidelines to provide a clear and concise JSON output.
 """

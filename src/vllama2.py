@@ -1,24 +1,29 @@
 from enum import Enum
 import numpy as np
 from PIL import Image
+import torch
 import sys, os
 sys.path.append("../VideoLLaMA2")
 sys.path.append("../../VideoLLaMA2")
+sys.path.append(".")
 from videollama2 import model_init, mm_infer
 from videollama2.utils import disable_torch_init
+import config.prompts as prompts
 
 def load_model():
 
     disable_torch_init()
 
     # Load the VideoLLaMA2 model
-    model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F' # '...-Base'
+    # model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F' # '...-Base'
+    model_path = 'DAMO-NLP-SG/VideoLLaMA2-7B'
     model, processor, tokenizer = model_init(model_path)
     model.to("cuda")
 
     return model, processor, tokenizer
 
 def unload_model(model, processor, tokenizer):
+    
     del model
     model = None
     del processor
@@ -33,11 +38,34 @@ class Modal(Enum):
 def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, vllama2_package=None):
 
     model, processor, tokenizer = load_model() if vllama2_package is None else vllama2_package
-    
-    processed = processor[modal](frame).to("cuda")
 
-    output = mm_infer(processed, prompt, model=model, tokenizer=tokenizer, do_sample=False, modal=modal)
-    # print("Image output:\n", output)
+    # Define generation hyperparameters
+    generation_args = {
+        # "temperature": 0.7,          # Controls randomness (lower = more deterministic)
+        "top_k": 100,                # Limits token selection to top 50 choices
+        "top_p": 0.95,               # Nucleus sampling threshold
+        "max_new_tokens": 512,           # Max number of tokens in response
+        "repetition_penalty": 1.2,   # Penalizes repetition
+        "no_repeat_ngram_size": 2,   # Prevents repeating n-grams (3-grams)
+        # "length_penalty": 1.0,       # Adjusts output length preference
+    }
+    
+    processed = processor[modal](frame).to(dtype=torch.float16, device="cuda")
+
+    # Perform inference
+    with torch.no_grad():
+        output = mm_infer(
+            processed,
+            prompt,
+            model=model,
+            tokenizer=tokenizer,
+            do_sample=False,
+            modal=modal,
+            max_new_tokens=512,
+            temperature=0.2
+            # **generation_args
+        )
+        # print("Image output:\n", output)
 
     return output
 
@@ -59,4 +87,27 @@ def sanity():
     print("Image output:\n", output)
 
 if __name__ == "__main__":
-    sanity()
+    # sanity()
+    vllama2_package = load_model()
+
+    # Image Inference
+    modal = 'image'
+    modal_path = 'saved_image0.jpg' 
+    instruct = """
+    Describe the pedestrian’s **attention** and any **gestures**. Focus on:  
+
+    - **Where they are looking?**
+    - **What are they gesturing?**
+    """
+    output = inference(modal_path, instruct, modal, vllama2_package)
+    print("Image output:\n", output)
+
+    modal = 'image'
+    modal_path = 'saved_image1.jpg' 
+    # instruct = prompts.pose
+    instruct = """ """
+    output = inference(modal_path, instruct, modal, vllama2_package)
+    print("Image output:\n", output)
+
+    model, processor, tokenizer = vllama2_package
+    unload_model(model, processor, tokenizer)

@@ -36,6 +36,10 @@ def vis_results(video_path, csv_path):
 
         # Load result
         if frame_counter not in df["frame_idx"].values: continue
+
+        cv2.putText(
+            frame, f'Frame: {frame_counter}', (20, 50),
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
         
         # Display FPS on the frame
         action = df[df["frame_idx"] == frame_counter]["pred_action"].values[0]
