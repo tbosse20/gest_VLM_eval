@@ -7,7 +7,7 @@ import platform
 
 import sys
 sys.path.append(".")
-# import src.vllama2 as vllama2
+import src.vllama2 as vllama2
 import config.prompts as prompts
 
 # Suppress YOLOv8 logging
@@ -71,7 +71,7 @@ def get_crops(frame, results):
         crop = frame[y1:y2, x1:x2]
         crops.append(crop)
 
-        cv2.imwrite(f'saved_image{i}.jpg', crop)
+        cv2.imwrite(f'saved_image{i}_lines.jpg', crop)
 
     return crops
 
@@ -79,7 +79,7 @@ def caption_crops(pose_crops, vllama2_package=None):
     # Analyze each cropped pedestrian w/wo pose
     vllama2_package = vllama2_package or vllama2.load_model()
     return [
-        f"Pedestrian {i}. {vllama2.inference(pose_crop, prompts.pose, 'image', vllama2_package)}"
+        f"Pedestrian {i}. {vllama2.inference(pose_crop, 'What is this pedestrian gesturing?', 'image', vllama2_package)}"
         # f"{i}. FAKE POSE CROP OUTPUT"
         for i, pose_crop in enumerate(pose_crops)
     ]
@@ -93,7 +93,7 @@ def main(frame, project_pose=True, vllama2_package=None):
     # Get the cropped region of interest
     pose_crops = get_crops(frame, pose_result)
     # Caption each pedestrian
-    # caption = caption_crops(pose_crops, vllama2_package)
+    caption = caption_crops(pose_crops, vllama2_package)
 
     return caption
 

@@ -16,7 +16,7 @@ def load_model():
 
     # Load the VideoLLaMA2 model
     # model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F' # '...-Base'
-    model_path = 'DAMO-NLP-SG/VideoLLaMA2-7B'
+    model_path = 'DAMO-NLP-SG/VideoLLaMA2-7B-16F'
     model, processor, tokenizer = model_init(model_path)
     model.to("cuda")
 
@@ -41,16 +41,16 @@ def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, vllama
 
     # Define generation hyperparameters
     generation_args = {
-        # "temperature": 0.7,          # Controls randomness (lower = more deterministic)
-        "top_k": 100,                # Limits token selection to top 50 choices
+        "temperature": 0.2,          # Controls randomness (lower = more deterministic)
+        "top_k": 50,                 # Limits token selection to top 50 choices
         "top_p": 0.95,               # Nucleus sampling threshold
-        "max_new_tokens": 512,           # Max number of tokens in response
+        "max_new_tokens": 512,       # Max number of tokens in response
         "repetition_penalty": 1.2,   # Penalizes repetition
         "no_repeat_ngram_size": 2,   # Prevents repeating n-grams (3-grams)
-        # "length_penalty": 1.0,       # Adjusts output length preference
+        "length_penalty": 1.0,       # Adjusts output length preference
     }
     
-    processed = processor[modal](frame).to(dtype=torch.float16, device="cuda")
+    processed = processor[modal](frame).to(device="cuda")
 
     # Perform inference
     with torch.no_grad():
@@ -61,11 +61,8 @@ def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, vllama
             tokenizer=tokenizer,
             do_sample=False,
             modal=modal,
-            max_new_tokens=512,
-            temperature=0.2
-            # **generation_args
+            **generation_args
         )
-        # print("Image output:\n", output)
 
     return output
 
@@ -90,22 +87,26 @@ if __name__ == "__main__":
     # sanity()
     vllama2_package = load_model()
 
-    # Image Inference
-    modal = 'image'
-    modal_path = 'saved_image0.jpg' 
-    instruct = """
-    Describe the pedestrian’s **attention** and any **gestures**. Focus on:  
+    # # Image Inference
+    # modal = 'image'
+    # modal_path = 'saved_image0.jpg' 
+    # instruct = """ You are an autonomous vehicle. Explain the pedestrian, and suggest what to do. """
 
-    - **Where they are looking?**
-    - **What are they gesturing?**
-    """
-    output = inference(modal_path, instruct, modal, vllama2_package)
-    print("Image output:\n", output)
+    # output = inference(modal_path, instruct, modal, vllama2_package)
+    # print("Image output:\n", output)
 
-    modal = 'image'
-    modal_path = 'saved_image1.jpg' 
+    # modal = 'image'
+    # modal_path = 'saved_image1.jpg' 
+    # # instruct = prompts.pose
+    # instruct = """ You are driving a car. What would you do in this situation? """
+    # output = inference(modal_path, instruct, modal, vllama2_package)
+    # print("Image output:\n", output)
+
+    modal = 'video'
+    # modal_path = 'data/sanity/input/video_0153.mp4' 
+    modal_path = 'data/sanity/output/short.mp4' 
     # instruct = prompts.pose
-    instruct = """ """
+    instruct = ""
     output = inference(modal_path, instruct, modal, vllama2_package)
     print("Image output:\n", output)
 
