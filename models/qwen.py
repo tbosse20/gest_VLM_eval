@@ -3,38 +3,10 @@ from qwen_vl_utils import process_vision_info
 import torch
 import os
 import argparse
-
-def from_end_frame(video_folder, start_frame, interval, end_frame):
-    return [
-        f"{video_folder}/frame_{frame_count:04d}.png"
-        for frame_count in range(start_frame, end_frame, interval)
-    ]
-
-def from_n_frame(video_folder, start_frame, interval, n_frames):
-    return [
-        f"{video_folder}/frame_{start_frame + frame_count:04d}.png"
-        for frame_count in range(0, n_frames, interval)
-        if os.path.exists(f"{video_folder}/frame_{start_frame + frame_count:04d}.png")
-    ]
-
-def generate_frame_list(video_folder, start_frame, interval=1, end_frame=None, n_frames=None):
-    
-    # Validate video folder
-    if not os.path.exists(video_folder):
-        raise FileNotFoundError(f"Video folder {video_folder} not found")
-    if not os.path.isdir(video_folder):
-        raise NotADirectoryError(f"Video folder {video_folder} is not a folder")
-    
-    # Get the highest frame number, if no end- or n-frames are provided
-    if end_frame is None and n_frames is None:
-        highest_frame = max([int(frame.split("_")[-1].split(".")[0]) for frame in os.listdir(video_folder)])
-        end_frame = highest_frame + 1
-    
-    # Generate the frame list
-    if end_frame is not None: 
-        return from_end_frame(video_folder, start_frame, interval, end_frame)
-    if n_frames is not None: 
-        return from_n_frame(video_folder, start_frame, interval, n_frames)
+import sys
+sys.path.append(".")
+import src.utils as utils
+import config.hyperparameters as hyperparameters
 
 def load_model():
     
@@ -60,8 +32,8 @@ def unload_model(model, processor):
 
 def inference(
     prompt: str,
-    model_package = None,
     frames_list: list[str] = None,
+    model_package = None,
     ):
     
     if len(frames_list) == 0:
@@ -103,7 +75,7 @@ def inference(
     inputs = inputs.to("cuda")
 
     # Inference
-    generated_ids = model.generate(**inputs, max_new_tokens=128)
+    generated_ids = model.generate(**inputs, **hyperparameters.generation_args)
     generated_ids_trimmed = [
         out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
     ]
@@ -127,6 +99,6 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
-    frame_list = generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
+    frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
     caption = inference(prompt="explain the video", frames_list=frame_list)
     print("Caption:", caption)

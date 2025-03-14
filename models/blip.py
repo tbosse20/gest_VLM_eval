@@ -5,7 +5,7 @@ import torch
 import sys, os
 sys.path.append(".")
 from transformers import AutoProcessor, AutoModelForImageTextToText
-import RMPS.prompts as prompts
+import config.hyperparameters as hyperparameters
 
 def load_model():
 
@@ -31,24 +31,13 @@ def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, model_
 
     model, processor = load_model() if model_package is None else model_package
 
-    # Define generation hyperparameters
-    generation_args = {
-        "temperature": 0.2,          # Controls randomness (lower = more deterministic)
-        "top_k": 50,                 # Limits token selection to top 50 choices
-        "top_p": 0.95,               # Nucleus sampling threshold
-        "max_new_tokens": 512,       # Max number of tokens in response
-        "repetition_penalty": 1.2,   # Penalizes repetition
-        "no_repeat_ngram_size": 2,   # Prevents repeating n-grams (3-grams)
-        "length_penalty": 1.0,       # Adjusts output length preference
-    }
-
     inputs = processor(frame, prompt, return_tensors="pt").to("cuda")
 
     # Perform inference
     with torch.no_grad():
         output = model.generate(
             **inputs,
-            # **generation_args
+            **hyperparameters.generation_args
         )
 
     caption = processor.tokenizer.decode(output[0], skip_special_tokens=True)

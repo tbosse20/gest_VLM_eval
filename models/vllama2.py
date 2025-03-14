@@ -8,7 +8,7 @@ sys.path.append("../../VideoLLaMA2")
 sys.path.append(".")
 from videollama2 import model_init, mm_infer
 from videollama2.utils import disable_torch_init
-import RMPS.prompts as prompts
+import config.hyperparameters as hyperparameters
 
 def load_model():
 
@@ -39,17 +39,6 @@ def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, vllama
 
     model, processor, tokenizer = load_model() if vllama2_package is None else vllama2_package
 
-    # Define generation hyperparameters
-    generation_args = {
-        "temperature": 0.2,          # Controls randomness (lower = more deterministic)
-        "top_k": 50,                 # Limits token selection to top 50 choices
-        "top_p": 0.95,               # Nucleus sampling threshold
-        "max_new_tokens": 512,       # Max number of tokens in response
-        "repetition_penalty": 1.2,   # Penalizes repetition
-        "no_repeat_ngram_size": 2,   # Prevents repeating n-grams (3-grams)
-        "length_penalty": 1.0,       # Adjusts output length preference
-    }
-    
     processed = processor[modal](frame).to(device="cuda")
 
     # Perform inference
@@ -61,7 +50,7 @@ def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, vllama
             tokenizer=tokenizer,
             do_sample=False,
             modal=modal,
-            **generation_args
+            **hyperparameters.generation_args
         )
 
     return output

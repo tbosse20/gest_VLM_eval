@@ -1,5 +1,8 @@
 import torch
 from transformers import AutoModelForCausalLM, AutoProcessor
+import sys
+sys.path.append(".")
+import config.hyperparameters as hyperparameters
 
 device = "cuda:0"
 model_path = "DAMO-NLP-SG/VideoLLaMA3-7B"
@@ -32,6 +35,6 @@ inputs = processor(
 inputs = {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in inputs.items()}
 if "pixel_values" in inputs:
     inputs["pixel_values"] = inputs["pixel_values"].to(torch.bfloat16)
-output_ids = model.generate(**inputs, max_new_tokens=1024)
+output_ids = model.generate(**inputs, **hyperparameters.generation_args)
 response = processor.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
 print(response)

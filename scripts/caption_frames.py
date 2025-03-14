@@ -3,10 +3,10 @@ import pandas as pd
 from tqdm import tqdm
 import sys
 sys.path.append(".")
-from models.qwen import generate_frame_list, inference, load_model, unload_model
 import config.prompts as prompts
+import src.utils as utils
 
-def caption_frames(video_path: str, csv_path: str, window: int < 16): # type: ignore
+def caption_frames(video_path: str, csv_path: str, window: int < 16, model_package, model_module): # type: ignore
     
     # Validate video path    
     if not os.path.exists(video_path):
@@ -41,7 +41,7 @@ def caption_frames(video_path: str, csv_path: str, window: int < 16): # type: ig
     for i in tqdm(range(0, 160 - window, window), desc="Processing"):
         
         # Generate frames list
-        frames_list = generate_frame_list(video_path, i, interval=1, n_frames=window)
+        frames_list = utils.generate_frame_list(video_path, i, interval=1, n_frames=window)
         
         # Prepare dictionary
         dictionary = {
@@ -51,9 +51,10 @@ def caption_frames(video_path: str, csv_path: str, window: int < 16): # type: ig
         
         # Iterate over prompts
         for prompt in prompts:
-            respond = inference(
+            respond = model_module.inference(
                 prompt=prompt.text,
                 frames_list=frames_list,
+                model_package=model_package
             )
             dictionary[prompt.alias] = [respond]
 
@@ -75,7 +76,7 @@ def caption_folder(data_folder: str, csv_path: str, window: int < 16): # type: i
         caption_frames.caption_frames(subfolder, csv_path, window)
 
 if __name__ == "__main__":
-    # Argsparser
+    
     import argparse
     parser = argparse.ArgumentParser(description="Caption frames")
     parser.add_argument("video_folder", type=str, help="Video folder path")
@@ -85,19 +86,20 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     # Default values
-    csv_path = "data/sanity/output/captions.csv" or args.csv_path
+    csv_path = "results/data/sanity/captions.csv" or args.csv_path
     
     if args.video_folder is None and args.data_folder is None:
         raise ValueError("Either video_folder or data_folder must be provided")
     
     # Load model
-    model_package = load_model()
+    import models.qwen as model_module
+    model_package = model_module.load_model()
     
     if args.video_folder is not None:
-        caption_frames(args.video_folder, csv_path, args.window)
+        caption_frames(args.video_folder, csv_path, args.window, model_package, model_module)
     
     if args.data_folder is not None:
-        caption_folder(args.data_folder, csv_path, args.window)
+        caption_folder(args.data_folder, csv_path, args.window, model_package, model_module)
         
     # Unload model
-    unload_model(*model_package)
+    model_module.unload_model(*model_package)
