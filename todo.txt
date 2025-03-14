@@ -1,11 +1,21 @@
 ToDo:
 - Run processing!! On test video
+- Evaluation method
+    - Class accuracy
+
+Write about:
+- VideoLLaMA2
+- Memory handling
+    - Fix OOM issue and clean
+
+##### FUTURE #####
+Todo:
+- Full pipeline
+    - Add temporal to pose estimation -> signal estimation
 - Organize pilot dataset
     - COOOL subset
     - YouTube videos
     - Amateur tests
-- Evaluation method
-    - Class accuracy
 
 Write about:
 - Predict driver reaction upon complete prompt using LLaMA (install LLaMA)
@@ -17,8 +27,3 @@ Write about:
     - Fix OOM issue and clean
 - Full pipeline
     - Run and save in parts (VLM -> LLM)
-
-
-Future:
-- Full pipeline
-    - Add temporal to pose estimation -> signal estimation 

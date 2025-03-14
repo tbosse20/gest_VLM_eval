@@ -15,8 +15,8 @@ def load_model():
     disable_torch_init()
 
     # Load the VideoLLaMA2 model
-    # model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F' # '...-Base'
-    model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F'
+    # model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F'
+    model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B' # 8F
     model, processor, tokenizer = model_init(model_path)
     model.to("cuda")
 
