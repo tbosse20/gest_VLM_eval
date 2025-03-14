@@ -1,9 +1,8 @@
-from transformers import Qwen2VLForConditionalGeneration, AutoTokenizer, AutoProcessor
+from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 import torch
-import pandas as pd
 import os
-from tqdm import tqdm
+import argparse
 
 def from_end_frame(video_folder, start_frame, interval, end_frame):
     return [
@@ -19,6 +18,19 @@ def from_n_frame(video_folder, start_frame, interval, n_frames):
     ]
 
 def generate_frame_list(video_folder, start_frame, interval=1, end_frame=None, n_frames=None):
+    
+    # Validate video folder
+    if not os.path.exists(video_folder):
+        raise FileNotFoundError(f"Video folder {video_folder} not found")
+    if not os.path.isdir(video_folder):
+        raise NotADirectoryError(f"Video folder {video_folder} is not a folder")
+    
+    # Get the highest frame number, if no end- or n-frames are provided
+    if end_frame is None and n_frames is None:
+        highest_frame = max([int(frame.split("_")[-1].split(".")[0]) for frame in os.listdir(video_folder)])
+        end_frame = highest_frame + 1
+    
+    # Generate the frame list
     if end_frame is not None: 
         return from_end_frame(video_folder, start_frame, interval, end_frame)
     if n_frames is not None: 
@@ -104,9 +116,17 @@ def inference(
 
     return output_text[0]
 
-video_folder = "data/sanity/input/video_0153"
-start_frame = 0,
-interval = 1,
-end_frame = None,
-n_frames = None,
-frame_list = generate_frame_list(video_folder, start_frame, interval, end_frame, n_frames)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate video captions using Qwen2VL model.")
+    parser.add_argument("--video_folder", type=str, help="Path to the video folder containing frames.", required=True)
+    parser.add_argument("--prompt",       type=str, help="The prompt to generate captions.",            required=True)
+    parser.add_argument("--start_frame",  type=int, help="The starting frame number.",                  default=0)
+    parser.add_argument("--interval",     type=int, help="The interval between frames.",                default=1)
+    parser.add_argument("--end_frame",    type=int, help="The ending frame number.",                    default=None)
+    parser.add_argument("--n_frames",     type=int, help="The number of frames to process.",            default=None)
+    
+    args = parser.parse_args()
+    
+    frame_list = generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
+    caption = inference(prompt="explain the video", frames_list=frame_list)
+    print("Caption:", caption)
