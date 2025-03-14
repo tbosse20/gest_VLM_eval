@@ -22,17 +22,18 @@ model_modules = [
 # Iterate over models
 for name in model_modules:
     model_module = importlib.import_module(name)
+    print('Processing using:', model_module)
     
     # Load model
     model_package = model_module.load_model()
-    
+
     # Caption frames from all videos in folder
-    caption_frames.caption_folder(data_folder, csv_path, window, model_package, model_module)
+    # caption_frames.caption_folder(data_folder, csv_path, window, model_package, model_module)
         
     # Unload model
     model_utils.unload_model(*model_package)
     
-    # Delete mo
+    # Delete model from system
     del model_module
     if name in sys.modules:
         del sys.modules[name]

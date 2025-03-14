@@ -34,7 +34,6 @@ def inference(
     if len(frames_list) == 0:
         return 'empty'
     
-    
     # Determine modal
     modal = 'image' if len(frames_list) == 1 else 'video'
     
