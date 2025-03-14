@@ -27,24 +27,23 @@ def inference(
     ):
 
     # Check if frames_list is empty or too long
-    if len(frames_list) > 16:
-        raise ValueError("Too many frames.")
     if len(frames_list) == 0:
         return 'empty'
     
     # Determine modal
-    modal = 'image' if len(frames_list) == 1 else 'video'
+    # modal = 'image' if len(frames_list) == 1 else 'video'
+    modal = 'video'
     
     # Create temporary output file as video or image
-    OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
-    utils.create_video(frames_list, OUTPUT_PATH)
+    # OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
+    # utils.create_video(frames_list, OUTPUT_PATH)
     
     # Load model
     unload_model_after = model_package is None
     model, processor, tokenizer = load_model() if model_package is None else model_package
 
     # Process input
-    processed = processor[modal](OUTPUT_PATH).to(device="cuda")
+    processed = processor[modal](frames_list).to(device="cuda")
     # Perform inference
     with torch.no_grad():
         output = mm_infer(
@@ -58,7 +57,7 @@ def inference(
         )
     
     # Remove temporary file
-    os.remove(OUTPUT_PATH)
+    # os.remove(OUTPUT_PATH)
     
     # Unload model
     if unload_model_after:
@@ -72,7 +71,7 @@ def sanity():
     modal = 'video'
     modal_path = 'data/sanity/input/video_0153.mp4' 
     instruct = 'What are the pedestrians gesturing to the ego driver?'
-    output = inference(modal_path, instruct, modal)
+    output = inference(instruct, modal_path)
     print("Video output:\n",output)
     print()
 	

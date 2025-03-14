@@ -29,7 +29,7 @@ for name in model_modules:
     model_package = model_module.load_model()
 
     # Caption frames from all videos in folder
-    # caption_frames.caption_folder(data_folder, csv_path, window, model_package, model_module)
+    caption_frames.caption_folder(data_folder, csv_path, window, model_package, model_module)
         
     # Unload model
     utils.unload_model(*model_package)

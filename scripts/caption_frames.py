@@ -3,7 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 import sys
 sys.path.append(".")
-import config.prompts as prompts
+from config.prompts import prompts
 import src.utils as utils
 
 def caption_frames(video_path: str, csv_path: str, window: int, model_package, model_module):
@@ -27,7 +27,7 @@ def caption_frames(video_path: str, csv_path: str, window: int, model_package, m
     
     # Generate csv file if not exists
     columns = ["video_name", "frame_idx"]
-    columns += [prompt.alias for prompt in prompts]
+    columns += [prompt['alias'] for prompt in prompts]
     
     # Generate csv file if not exists
     if not os.path.exists(csv_path):
@@ -52,14 +52,15 @@ def caption_frames(video_path: str, csv_path: str, window: int, model_package, m
         # Iterate over prompts
         for prompt in prompts:
             respond = model_module.inference(
-                prompt=prompt.text,
+                prompt=prompt['text'],
                 frames_list=frames_list,
                 model_package=model_package
             )
-            dictionary[prompt.alias] = [respond]
+            dictionary[prompt['alias']] = [respond]
 
-        df = pd.DataFrame(df)
+        df = pd.DataFrame(dictionary)
         df.to_csv(csv_path, mode="a", index=False, header=False)
+        break
 
 def caption_folder(data_folder: str, csv_path: str, window: int, model_package, model_module):
     
@@ -73,7 +74,7 @@ def caption_folder(data_folder: str, csv_path: str, window: int, model_package, 
     subfolders = [f.path for f in os.scandir(data_folder) if f.is_dir()]
     
     for subfolder in subfolders:
-        caption_frames.caption_frames(subfolder, csv_path, window, model_package, model_module)
+        caption_frames(subfolder, csv_path, window, model_package, model_module)
 
 if __name__ == "__main__":
     

@@ -28,9 +28,18 @@ def inference(
     model_package = None,
     ):
     
+    # Check if frames_list is empty
     if len(frames_list) == 0:
         return 'empty'
     
+    # Determine modal
+    modal = 'image' if len(frames_list) == 1 else 'video'
+    
+    # Create temporary output file as video or image
+    OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
+    utils.create_video(frames_list, OUTPUT_PATH)
+    
+    # Load model
     unload_model_after = model_package is None
     model, processor = load_model() if model_package is None else model_package
     
@@ -44,7 +53,7 @@ def inference(
                 {
                     "type": "video",
                     "video": {
-                        "video_path": "./assets/cat_and_chicken.mp4",
+                        "video_path": OUTPUT_PATH,
                         "fps": 1,
                         "max_frames": 180
                     }

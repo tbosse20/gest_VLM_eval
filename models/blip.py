@@ -16,21 +16,13 @@ def load_model():
 
     return model, processor
 
-def unload_model(model, processor):
-    del model
-    model = None
-    del processor
-    processor = None
-
 def inference(
     prompt: str,
     frames_list: list[str] = None,
     model_package = None
     ):
 
-    # Check if frames_list is empty or too long
-    if len(frames_list) > 16:
-        raise ValueError("Too many frames.")
+    # Check if frames_list is empty
     if len(frames_list) == 0:
         return 'empty'
     
@@ -55,6 +47,9 @@ def inference(
         )
 
     caption = processor.tokenizer.decode(output[0], skip_special_tokens=True)
+
+    if unload_model_after:
+        utils.unload_model(*model_package)
 
     return caption
 
@@ -95,4 +90,4 @@ if __name__ == "__main__":
     print("Image output:\n", output)
 
     model, processor = model_package
-    unload_model(model, processor)
+    utils.unload_model(model, processor)
