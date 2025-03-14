@@ -1,6 +1,3 @@
-from enum import Enum
-import numpy as np
-from PIL import Image
 import torch
 import sys, os
 sys.path.append("../VideoLLaMA2")
@@ -9,6 +6,7 @@ sys.path.append(".")
 from videollama2 import model_init, mm_infer
 from videollama2.utils import disable_torch_init
 import config.hyperparameters as hyperparameters
+import models.utils as model_utils
 
 def load_model():
 
@@ -22,25 +20,31 @@ def load_model():
 
     return model, processor, tokenizer
 
-def unload_model(model, processor, tokenizer):
+def inference(
+    prompt: str,
+    frames_list: list[str] = None,
+    model_package = None
+    ):
+
+    # Check if frames_list is empty or too long
+    if len(frames_list) > 16:
+        raise ValueError("Too many frames.")
+    if len(frames_list) == 0:
+        return 'empty'
     
-    del model
-    model = None
-    del processor
-    processor = None
-    del tokenizer
-    tokenizer = None
+    # Determine modal
+    modal = 'image' if len(frames_list) == 1 else 'video'
+    
+    # Create temporary output file as video or image
+    OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
+    model_utils.create_video(frames_list, OUTPUT_PATH)
+    
+    # Load model
+    unload_model_after = model_package is None
+    model, processor, tokenizer = load_model() if model_package is None else model_package
 
-class Modal(Enum):
-    IMAGE = 'image'
-    VIDEO = 'video'
-
-def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, vllama2_package=None):
-
-    model, processor, tokenizer = load_model() if vllama2_package is None else vllama2_package
-
-    processed = processor[modal](frame).to(device="cuda")
-
+    # Process input
+    processed = processor[modal](OUTPUT_PATH).to(device="cuda")
     # Perform inference
     with torch.no_grad():
         output = mm_infer(
@@ -52,6 +56,13 @@ def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, vllama
             modal=modal,
             **hyperparameters.generation_args
         )
+    
+    # Remove temporary file
+    os.remove(OUTPUT_PATH)
+    
+    # Unload model
+    if unload_model_after:
+        model_utils.unload_model(*model_package)
 
     return output
 

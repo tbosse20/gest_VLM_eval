@@ -5,6 +5,7 @@ import sys
 sys.path.append(".")
 import config.prompts as prompts
 import src.utils as utils
+import models.utils as model_utils
 
 def caption_frames(video_path: str, csv_path: str, window: int < 16, model_package, model_module): # type: ignore
     
@@ -102,4 +103,4 @@ if __name__ == "__main__":
         caption_folder(args.data_folder, csv_path, args.window, model_package, model_module)
         
     # Unload model
-    model_module.unload_model(*model_package)
+    model_utils.unload_model(*model_package)

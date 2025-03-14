@@ -3,6 +3,7 @@ import sys
 import os
 sys.path.append(".")
 import scripts.caption_frames as caption_frames 
+import models.utils as model_utils
 
 # Constants
 models_folder = "models"
@@ -29,7 +30,7 @@ for name in model_modules:
     caption_frames.caption_folder(data_folder, csv_path, window, model_package, model_module)
         
     # Unload model
-    model_module.unload_model(*model_package)
+    model_utils.unload_model(*model_package)
     
     # Delete mo
     del model_module

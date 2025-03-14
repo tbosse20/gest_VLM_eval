@@ -1,4 +1,3 @@
-from enum import Enum
 import numpy as np
 from PIL import Image
 import torch
@@ -6,6 +5,7 @@ import sys, os
 sys.path.append(".")
 from transformers import AutoProcessor, AutoModelForImageTextToText
 import config.hyperparameters as hyperparameters
+import models.utils as model_utils
 
 def load_model():
 
@@ -17,18 +17,33 @@ def load_model():
     return model, processor
 
 def unload_model(model, processor):
-    
     del model
     model = None
     del processor
     processor = None
 
-class Modal(Enum):
-    IMAGE = 'image'
-    VIDEO = 'video'
+def inference(
+    prompt: str,
+    frames_list: list[str] = None,
+    model_package = None
+    ):
 
-def inference(frame: np.ndarray | Image.Image, prompt: str, modal: Modal, model_package=None):
-
+    # Check if frames_list is empty or too long
+    if len(frames_list) > 16:
+        raise ValueError("Too many frames.")
+    if len(frames_list) == 0:
+        return 'empty'
+    
+    
+    # Determine modal
+    modal = 'image' if len(frames_list) == 1 else 'video'
+    
+    # Create temporary output file as video or image
+    OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
+    model_utils.create_video(frames_list, OUTPUT_PATH)
+    
+    # Load model
+    unload_model_after = model_package is None
     model, processor = load_model() if model_package is None else model_package
 
     inputs = processor(frame, prompt, return_tensors="pt").to("cuda")

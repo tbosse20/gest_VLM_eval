@@ -2,11 +2,11 @@ from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 import torch
 import os
-import argparse
 import sys
 sys.path.append(".")
 import src.utils as utils
 import config.hyperparameters as hyperparameters
+import models.utils as model_utils
 
 def load_model():
     
@@ -15,7 +15,7 @@ def load_model():
     # We recommend enabling flash_attention_2 for better acceleration and memory saving, especially in multi-image and video scenarios.
     model = Qwen2VLForConditionalGeneration.from_pretrained(
         model_name,
-        torch_dtype=torch.bfloat32,
+        torch_dtype=torch.bfloat16,
         attn_implementation="flash_attention_2",
         device_map="auto",
     )
@@ -24,11 +24,6 @@ def load_model():
     processor = AutoProcessor.from_pretrained(model_name)
     
     return model, processor
-
-def unload_model(model, processor):
-    del model
-    del processor
-    torch.cuda.empty_cache()
 
 def inference(
     prompt: str,
@@ -51,11 +46,10 @@ def inference(
                     "type": "video",
                     "video": frames_list,
                     "fps": 1.0,
-                },
-                {
+                }, {
                     "type": "text",
                     "text": prompt
-                    },
+                },
             ],
         }
     ]
@@ -84,20 +78,12 @@ def inference(
     )
     
     if unload_model_after:
-        unload_model(model, processor)
+        model_utils.unload_model(*model_package)
 
     return output_text[0]
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate video captions using Qwen2VL model.")
-    parser.add_argument("--video_folder", type=str, help="Path to the video folder containing frames.", required=True)
-    parser.add_argument("--prompt",       type=str, help="The prompt to generate captions.",            required=True)
-    parser.add_argument("--start_frame",  type=int, help="The starting frame number.",                  default=0)
-    parser.add_argument("--interval",     type=int, help="The interval between frames.",                default=1)
-    parser.add_argument("--end_frame",    type=int, help="The ending frame number.",                    default=None)
-    parser.add_argument("--n_frames",     type=int, help="The number of frames to process.",            default=None)
-    
-    args = parser.parse_args()
+    args = model_utils.argparse()
     
     frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
     caption = inference(prompt="explain the video", frames_list=frame_list)
