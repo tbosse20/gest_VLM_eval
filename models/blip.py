@@ -34,7 +34,6 @@ def inference(
     utils.create_video(frames_list, OUTPUT_PATH)
     
     # Load model
-    unload_model_after = model_package is None
     model, processor = load_model() if model_package is None else model_package
 
     inputs = processor(frame, prompt, return_tensors="pt").to("cuda")
@@ -48,8 +47,8 @@ def inference(
 
     caption = processor.tokenizer.decode(output[0], skip_special_tokens=True)
 
-    if unload_model_after:
-        utils.unload_model(*model_package)
+    if model_package is None:
+        utils.unload_model(*model, processor)
 
     return caption
 

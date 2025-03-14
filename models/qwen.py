@@ -34,7 +34,6 @@ def inference(
     if len(frames_list) == 0:
         return 'empty'
     
-    unload_model_after = model_package is None
     model, processor = load_model() if model_package is None else model_package
     
     # Messages containing a images list as a video and a text query
@@ -77,8 +76,8 @@ def inference(
         generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
     )
     
-    if unload_model_after:
-        utils.unload_model(*model_package)
+    if model_package is None:
+        utils.unload_model(*model, processor)
 
     return output_text[0]
 

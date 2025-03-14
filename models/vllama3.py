@@ -37,10 +37,9 @@ def inference(
     
     # Create temporary output file as video or image
     OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
-    utils.create_video(frames_list, OUTPUT_PATH)
+    utils.create_video_from_str(frames_list, OUTPUT_PATH)
     
     # Load model
-    unload_model_after = model_package is None
     model, processor = load_model() if model_package is None else model_package
     
     conversation = [
@@ -79,8 +78,8 @@ def inference(
     output_ids = model.generate(**inputs, **hyperparameters.generation_args)
     response = processor.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
     
-    if unload_model_after:
-        utils.unload_model(*model_package)
+    if model_package is None:
+        utils.unload_model(model, processor)
 
     return response
 

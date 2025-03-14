@@ -1,6 +1,7 @@
 import os
 import cv2
 import torch
+import numpy as np
 
 def from_end_frame(video_folder, start_frame, interval, end_frame):
     return [
@@ -35,19 +36,29 @@ def generate_frame_list(video_folder, start_frame, interval=1, end_frame=None, n
         return from_n_frame(video_folder, start_frame, interval, n_frames)
 
 # Function to create a video from images
-def create_video(frames, output_video_path):
+def create_video_from_frames(frames: list[np.ndarray], output_video_path):
 
     # Get frame size
     height, width, layers = frames[0].shape
     size = (width, height)
 
     # Create video writer
-    out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), fps=1, size=size)
+    out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), 1, size)
 
     for img in frames:
         out.write(img)
 
     out.release()
+
+def create_video_from_str(frame_paths: list[str], output_video_path):
+
+    frames = [
+        cv2.imread(f'/home/mi3/RPMS_Tonko/RMPS/{frame_path}')
+        for frame_path in frame_paths
+        if os.path.exists(frame_path)
+    ]
+
+    create_video_from_frames(frames, output_video_path)
 
 def unload_model(*args):
     for obj in args:
