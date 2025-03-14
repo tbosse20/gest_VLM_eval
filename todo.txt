@@ -3,7 +3,9 @@ ToDo:
     1.a.1 Record dataset (5 - 10 videos) Make it realistic
     1.a.2 Pre process videos (frames, pedestrian)
 1.b Pipeline
-    1.b.1 Temporal models VideoLLaMA2, BLIP2, etc.
+    ~~1.b.1 Temporal models VideoLLaMA2, BLIP2, etc.~~
+    Fix BLIP
+    Fix QWEN
 
 2. Run experiment
 3. Result analysis
