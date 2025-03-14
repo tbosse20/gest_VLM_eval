@@ -8,7 +8,7 @@ import platform
 import sys
 sys.path.append(".")
 import src.vllama2 as vllama2
-import config.prompts as prompts
+import RMPS.prompts as prompts
 
 # Suppress YOLOv8 logging
 logging.getLogger("ultralytics").setLevel(logging.ERROR)

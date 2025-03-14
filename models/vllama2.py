@@ -8,7 +8,7 @@ sys.path.append("../../VideoLLaMA2")
 sys.path.append(".")
 from videollama2 import model_init, mm_infer
 from videollama2.utils import disable_torch_init
-import config.prompts as prompts
+import RMPS.prompts as prompts
 
 def load_model():
 

@@ -5,7 +5,7 @@ import torch
 import sys, os
 sys.path.append(".")
 from transformers import AutoProcessor, AutoModelForImageTextToText
-import config.prompts as prompts
+import RMPS.prompts as prompts
 
 def load_model():
 

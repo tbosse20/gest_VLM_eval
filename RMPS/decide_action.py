@@ -6,7 +6,7 @@ import torch
 
 import sys
 sys.path.append(".")
-import config.prompts as prompts
+import RMPS.prompts as prompts
 import src.llama_instruct as llama_instruct
 
 def decide_action_csv(csv_path, sanity=False):

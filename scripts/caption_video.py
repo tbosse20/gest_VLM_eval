@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 import sys
 sys.path.append(".")
-import config.prompts as prompts
+import RMPS.prompts as prompts
 import src.object_detect as object_detect
 import src.pose as pose
 import src.vllama2 as vllama2
