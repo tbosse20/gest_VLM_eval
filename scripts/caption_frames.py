@@ -4,6 +4,7 @@ from tqdm import tqdm
 import sys
 sys.path.append(".")
 from models.qwen import generate_frame_list, inference, load_model, unload_model
+import config.prompts as prompts
 
 def caption_frames(video_path: str, csv_path: str, window: int < 16): # type: ignore
     
@@ -19,20 +20,14 @@ def caption_frames(video_path: str, csv_path: str, window: int < 16): # type: ig
     if window > 16:
         raise ValueError("Window must be less than or equal to 16")
 
-    # Load model
-    model_package = load_model()
-    model_name = model_package[0].__class__.__name__
-    
-    # Get prompt
-    prompt = prompt[0]
-    
-    # Rename csv_path
+    # Add constants to csv path
     csv_path = csv_path.replace(".csv", f"_window={window}_explain.csv")
-    csv_path = csv_path.replace(".csv", f"_{prompt.alias}.csv")
+    model_name = model_package[0].__class__.__name__
     csv_path = csv_path.replace(".csv", f"_model={model_name}.csv")
     
     # Generate csv file if not exists
-    columns = ["video_name", "frame_idx", "caption"]
+    columns = ["video_name", "frame_idx"]
+    columns += [prompt.alias for prompt in prompts]
     
     # Generate csv file if not exists
     if not os.path.exists(csv_path):
@@ -48,22 +43,22 @@ def caption_frames(video_path: str, csv_path: str, window: int < 16): # type: ig
         # Generate frames list
         frames_list = generate_frame_list(video_path, i, interval=1, n_frames=window)
         
-        # Run inference
-        respond = inference(
-            prompt=prompt.text,
-            frames_list=frames_list,
-        )
+        # Prepare dictionary
+        dictionary = {
+            "video_name": [video_name],
+            "frame_idx":  [i],
+        }
+        
+        # Iterate over prompts
+        for prompt in prompts:
+            respond = inference(
+                prompt=prompt.text,
+                frames_list=frames_list,
+            )
+            dictionary[prompt.alias] = [respond]
 
-        # Save to csv
-        df = pd.DataFrame({
-            "video_name":   [video_name],
-            "frame_idx":    [i],
-            "caption":      [respond]
-        })
+        df = pd.DataFrame(df)
         df.to_csv(csv_path, mode="a", index=False, header=False)
-
-    # Unload model
-    unload_model(*model_package)
 
 def caption_folder(data_folder: str, csv_path: str, window: int < 16): # type: ignore
     
@@ -95,8 +90,14 @@ if __name__ == "__main__":
     if args.video_folder is None and args.data_folder is None:
         raise ValueError("Either video_folder or data_folder must be provided")
     
+    # Load model
+    model_package = load_model()
+    
     if args.video_folder is not None:
         caption_frames(args.video_folder, csv_path, args.window)
     
     if args.data_folder is not None:
         caption_folder(args.data_folder, csv_path, args.window)
+        
+    # Unload model
+    unload_model(*model_package)
