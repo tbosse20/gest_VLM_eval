@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(".")
 import scripts.caption_frames as caption_frames 
-import models.utils as utils
+import src.utils as utils
 
 # Constants
 models_folder = "models"

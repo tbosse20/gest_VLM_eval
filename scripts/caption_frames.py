@@ -5,7 +5,6 @@ import sys
 sys.path.append(".")
 import config.prompts as prompts
 import src.utils as utils
-import models.utils as utils
 
 def caption_frames(video_path: str, csv_path: str, window: int, model_package, model_module):
     
