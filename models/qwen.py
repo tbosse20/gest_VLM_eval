@@ -18,7 +18,7 @@ def from_n_frame(video_folder, start_frame, interval, n_frames):
         if os.path.exists(f"{video_folder}/frame_{start_frame + frame_count:04d}.png")
     ]
 
-def generate_frame_list(video_folder, start_frame, interval, end_frame, n_frames):
+def generate_frame_list(video_folder, start_frame, interval=1, end_frame=None, n_frames=None):
     if end_frame is not None: 
         return from_end_frame(video_folder, start_frame, interval, end_frame)
     if n_frames is not None: 
