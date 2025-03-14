@@ -5,7 +5,7 @@ import sys
 sys.path.append(".")
 import dev.dev_utils as dev_utils
 
-def vis_results(video_path, csv_path):
+def vis_results(video_path, csv_path, keyword: str):
 
     df = pd.read_csv(csv_path, index_col=False)
 
@@ -42,7 +42,7 @@ def vis_results(video_path, csv_path):
             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
         
         # Display FPS on the frame
-        action = df[df["frame_idx"] == frame_counter]["pred_action"].values[0]
+        action = df[df["frame_idx"] == frame_counter][keyword].values[0]
         cv2.putText(
             frame, f'Pred. Action: {action}', (20, 100),
             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
@@ -64,6 +64,7 @@ def vis_results(video_path, csv_path):
 if __name__ == "__main__":
 
     video_path = "data/sanity/input/video_0153.mp4"
-    csv_path = "data/sanity/output/pred_actions.csv"
+    # csv_path = "data/sanity/output/pred_actions.csv"
+    csv_path = "data/sanity/output/caption_man_window=4.csv"
 
-    vis_results(video_path, csv_path)
+    vis_results(video_path, csv_path, keyword='caption')

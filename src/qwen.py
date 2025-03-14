@@ -14,14 +14,13 @@ def print_memory_usage(msg):
     print(f"Max Allocated Memory: {torch.cuda.max_memory_allocated() / 1024**2:.2f} MB")
     print(f"Max Cached Memory: {torch.cuda.max_memory_reserved() / 1024**2:.2f} MB")
     print()
-import os
-os.environ["TORCH_USE_CUDA_DSA"] = "1"
-torch.cuda.synchronize()  # Synchronize all the GPU operations
-torch.cuda.empty_cache()
-torch.cuda.reset_peak_memory_stats()
-torch.cuda.reset_max_memory_allocated()
-torch.cuda.reset_peak_memory_stats()
-print_memory_usage('Init')
+
+# torch.cuda.synchronize()  # Synchronize all the GPU operations
+# torch.cuda.empty_cache()
+# torch.cuda.reset_peak_memory_stats()
+# torch.cuda.reset_max_memory_allocated()
+# torch.cuda.reset_peak_memory_stats()
+# print_memory_usage('Init')
 
 # default: Load the model on the available device(s)
 # model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
@@ -31,29 +30,33 @@ print_memory_usage('Init')
 #     quantization_config=BitsAndBytesConfig(load_in_8bit=True)
 # )
 
+# model_name = "Qwen/Qwen2.5-VL-7B-Instruct"
+model_name = "Qwen/Qwen2-VL-7B-Instruct"
+
 # We recommend enabling flash_attention_2 for better acceleration and memory saving, especially in multi-image and video scenarios.
-model = AutoModelForImageTextToText.from_pretrained(
-    "Qwen/Qwen2.5-VL-7B-Instruct",
-    torch_dtype=torch.bfloat16,
+model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+    model_name,
+    # torch_dtype=torch.bfloat16,
     # attn_implementation="flash_attention_2",
-    device_map="cuda",
+    # device_map="cuda",
     # quantization_config=BitsAndBytesConfig(
     #     load_in_4bit=True, 
     #     bnb_4bit_compute_dtype=torch.float16,  # Use float16 instead of bfloat16
     #     bnb_4bit_use_double_quant=True  # Enable double quantization to save more memory
     # )
 )
-# model.eval()
+# model.to(torch.bfloat16)
+model.eval()
 # model.gradient_checkpointing_enable()
 
 # default processer
 processor = AutoProcessor.from_pretrained(
-    "Qwen/Qwen2.5-VL-7B-Instruct",
-    torch_dtype=torch.float16,
-    device_map="cuda"
+    model_name,
+    # torch_dtype=torch.bfloat16,
+    # device_map="cpu"
 )
 
-print_memory_usage('Model')
+# print_memory_usage('Model')
 
 # The default range for the number of visual tokens per image in the model is 4-16384.
 # You can set min_pixels and max_pixels according to your needs, such as a token range of 256-1280, to balance performance and cost.
@@ -87,50 +90,50 @@ inputs = processor(
     videos=video_inputs,
     padding=True,
     return_tensors="pt",
-).to("cuda", dtype=torch.float16)  # Use float16 on GPU
-
+)
+# inputs = inputs.to("cuda")  # Use float16 on GPU
+# inputs = inputs.to(torch.bfloat16)
 # Step 2: Flush processor after generating inputs (free up memory)
 # del processor
 # torch.cuda.empty_cache()
 # print_memory_usage('Input')
 
-inputs = inputs.to(dtype=torch.float32)
+# inputs = inputs.to(dtype=torch.float32)
 # Move tensors explicitly to GPU
-inputs = {key: value.to("cuda") for key, value in inputs.items()}
-inputs = {key: torch.nan_to_num(value, nan=0.0, posinf=1.0, neginf=-1.0) for key, value in inputs.items()}
+# inputs = {key: value.to("cuda") for key, value in inputs.items()}
 
 # Verify tensor locations
-for key, value in inputs.items():
-    print(f"{key}: {value.device}, {value.dtype}, {value}")
+# for key, value in inputs.items():
+#     print(f"{key}: {value.device}, {value.dtype}, {value}")
 
-def check_for_invalid_values(inputs):
-    for key, value in inputs.items():
-        if torch.isnan(value).any() or torch.isinf(value).any():
-            print(f"Warning: Invalid values found in {key} tensor")
-            return True
-    return False
-# Check for NaN or Inf before generation
-if check_for_invalid_values(inputs):
-    print("Invalid values detected in inputs. Stopping generation.")
-else:
-    print("Good to go..")
-inputs["pixel_values"] = inputs["pixel_values"].to(torch.float16)
+# def check_for_invalid_values(inputs):
+#     for key, value in inputs.items():
+#         if torch.isnan(value).any() or torch.isinf(value).any():
+#             print(f"Warning: Invalid values found in {key} tensor")
+#             return True
+#     return False
+# # Check for NaN or Inf before generation
+# if check_for_invalid_values(inputs):
+#     print("Invalid values detected in inputs. Stopping generation.")
+# else:
+#     print("Good to go..")
+# inputs["pixel_values"] = inputs["pixel_values"].to(torch.float16)
 # inputs = inputs[:1]
 # Clamp all values to a range to prevent overflow or underflow
 # Apply clamp to each tensor inside the inputs dictionary
-for key in inputs:
-    if isinstance(inputs[key], torch.Tensor):
-        inputs[key] = inputs[key].clamp(min=-1e6, max=1e6).long() 
+# for key in inputs:
+#     if isinstance(inputs[key], torch.Tensor):
+#         inputs[key] = inputs[key].clamp(min=-1e6, max=1e6).long() 
 
 
-torch.cuda.empty_cache()
+# torch.cuda.empty_cache()
 with torch.no_grad():
     # Inference: Generation of the output
     generated_ids = model.generate(**inputs, max_new_tokens=8)
-
-import torch
-print(torch.__version__)  # To check your PyTorch version
-print(torch.version.cuda)  # To check the CUDA version
+    print(torch.isnan(generated_ids).any(), torch.isinf(generated_ids).any())  # Detect NaNs/Infs
+# import torch
+# print(torch.__version__)  # To check your PyTorch version
+# print(torch.version.cuda)  # To check the CUDA version
 # del model
 # torch.cuda.empty_cache()
 # generated_ids.to("cpu")
@@ -140,7 +143,7 @@ generated_ids_trimmed = [
 processor = AutoProcessor.from_pretrained(
     "Qwen/Qwen2.5-VL-7B-Instruct",
     torch_dtype=torch.float16,
-    device_map="cuda"
+    device_map="cpu"
 )
 output_text = processor.batch_decode(
     generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
