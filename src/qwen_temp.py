@@ -46,7 +46,7 @@ def inference(
                     "video": frame_list,
                     "fps": 1.0,
                 },
-                {"type": "text", "text": "What is this pedestrian gesturing?"},
+                {"type": "text", "text": "Analyze the provided image and describe the pedestrian in detail, including their appearance, clothing, posture, and any significant features. Additionally, interpret their gesture and body language—are they signaling, pointing, waving, or displaying any other meaningful action? Based on their gesture, infer their possible intent or communication (e.g., are they trying to cross the street, signal a vehicle, or interact with someone?). Provide a clear and concise description."},
             ],
         }
     ]
@@ -104,7 +104,7 @@ def inference(
 # We recommend enabling flash_attention_2 for better acceleration and memory saving, especially in multi-image and video scenarios.
 model = Qwen2VLForConditionalGeneration.from_pretrained(
     "Qwen/Qwen2-VL-7B-Instruct",
-    torch_dtype=torch.bfloat16,
+    torch_dtype=torch.bfloat32,
     attn_implementation="flash_attention_2",
     device_map="auto",
 )
@@ -112,14 +112,14 @@ model = Qwen2VLForConditionalGeneration.from_pretrained(
 # default processer
 processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-7B-Instruct")
 
-csv_path = "data/sanity/output/caption_man_window=4.csv"
+csv_path = "data/sanity/output/caption_man_window=8_explain.csv"
 columns = ["video_name", "frame_idx", "caption"]
 # Generate csv file if not exists
 if not os.path.exists(csv_path):
     df = pd.DataFrame(columns=columns)
     df.to_csv(csv_path, mode="w", index=False, header=True)
 
-window = 4 # Batch size (<16)
+window = 8 # Batch size (<16)
 for i in tqdm(range(0, 160 - window, window), desc="Processing"):
     respond = inference(
         video_folder="data/sanity/input/video_0153/pedestrian_man",

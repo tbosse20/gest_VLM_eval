@@ -6,7 +6,8 @@ frame = """
 # Pose caption
 pose = """
     You are driving down the road. Examine the given image of an individual pedestrian. What are they trying to communicate to the driver using gestures.
-"""
+""" # "examine"
+analyze = "Analyze the provided image and describe the pedestrian in detail, including their appearance, clothing, posture, and any significant features. Additionally, interpret their gesture and body language—are they signaling, pointing, waving, or displaying any other meaningful action? Based on their gesture, infer their possible intent or communication (e.g., are they trying to cross the street, signal a vehicle, or interact with someone?). Provide a clear and concise description."
 
 # Object caption
 object = """
