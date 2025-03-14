@@ -10,13 +10,13 @@ models_folder = "models"
 # Default values (parsed into csv name)
 data_folder = "data/video_frames"               # Path to folder containing video frames
 window = 8                                      # Number of frames to process at once
-csv_path = "results/data/sanity/captions.csv"   # Path to save captions
+csv_path = "results/data/sanity_captions.csv"   # Path to save captions
 
 # Load all models modules
 model_modules = [
-    f[:-3]
-    for f in os.listdir(models_folder)
-    if f.endswith(".py") and f != "__init__.py"
+    f'{models_folder}.{module[:-3]}'
+    for module in os.listdir(models_folder)
+    if module.endswith(".py") and module != "__init__.py"
 ]
 
 # Iterate over models

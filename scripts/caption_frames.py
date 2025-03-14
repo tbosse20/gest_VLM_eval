@@ -7,7 +7,7 @@ import config.prompts as prompts
 import src.utils as utils
 import models.utils as model_utils
 
-def caption_frames(video_path: str, csv_path: str, window: int < 16, model_package, model_module): # type: ignore
+def caption_frames(video_path: str, csv_path: str, window: int, model_package, model_module):
     
     # Validate video path    
     if not os.path.exists(video_path):
@@ -62,7 +62,7 @@ def caption_frames(video_path: str, csv_path: str, window: int < 16, model_packa
         df = pd.DataFrame(df)
         df.to_csv(csv_path, mode="a", index=False, header=False)
 
-def caption_folder(data_folder: str, csv_path: str, window: int < 16): # type: ignore
+def caption_folder(data_folder: str, csv_path: str, window: int, model_package, model_module):
     
     # Validate folder path
     if not os.path.exists(data_folder):
@@ -74,7 +74,7 @@ def caption_folder(data_folder: str, csv_path: str, window: int < 16): # type: i
     subfolders = [f.path for f in os.scandir(data_folder) if f.is_dir()]
     
     for subfolder in subfolders:
-        caption_frames.caption_frames(subfolder, csv_path, window)
+        caption_frames.caption_frames(subfolder, csv_path, window, model_package, model_module)
 
 if __name__ == "__main__":
     
