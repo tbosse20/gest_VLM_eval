@@ -22,8 +22,7 @@ def caption_frames(video_path: str, csv_path: str, window: int, model_package, m
 
     # Add constants to csv path
     csv_path = csv_path.replace(".csv", f"_window={window}_explain.csv")
-    model_name = model_package[0].__class__.__name__
-    csv_path = csv_path.replace(".csv", f"_model={model_name}.csv")
+    csv_path = csv_path.replace(".csv", f"_model={model_module.__name__}.csv")
     
     # Generate csv file if not exists
     columns = ["video_name", "frame_idx"]
@@ -60,7 +59,6 @@ def caption_frames(video_path: str, csv_path: str, window: int, model_package, m
 
         df = pd.DataFrame(dictionary)
         df.to_csv(csv_path, mode="a", index=False, header=False)
-        break
 
 def caption_folder(data_folder: str, csv_path: str, window: int, model_package, model_module):
     

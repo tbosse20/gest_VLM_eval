@@ -22,8 +22,7 @@ model_modules = [
 # Iterate over models
 for name in model_modules:
     model_module = importlib.import_module(name)
-    module_name = name.split('.')[-1]
-    print('Processing using:', module_name)
+    print('Processing using:', model_module.__name__)
     
     # Load model
     model_package = model_module.load_model()
