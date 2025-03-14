@@ -6,7 +6,7 @@ sys.path.append(".")
 from videollama2 import model_init, mm_infer
 from videollama2.utils import disable_torch_init
 import config.hyperparameters as hyperparameters
-import models.utils as model_utils
+import src.utils as utils
 
 def load_model():
 
@@ -37,7 +37,7 @@ def inference(
     
     # Create temporary output file as video or image
     OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
-    model_utils.create_video(frames_list, OUTPUT_PATH)
+    utils.create_video(frames_list, OUTPUT_PATH)
     
     # Load model
     unload_model_after = model_package is None
@@ -62,7 +62,7 @@ def inference(
     
     # Unload model
     if unload_model_after:
-        model_utils.unload_model(*model_package)
+        utils.unload_model(*model_package)
 
     return output
 

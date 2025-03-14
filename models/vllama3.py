@@ -3,7 +3,6 @@ from transformers import AutoModelForCausalLM, AutoProcessor
 import sys
 sys.path.append(".")
 import config.hyperparameters as hyperparameters
-import models.utils as model_utils
 import src.utils as utils
 
 def load_model():
@@ -72,12 +71,12 @@ def inference(
     response = processor.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
     
     if unload_model_after:
-        model_utils.unload_model(*model_package)
+        utils.unload_model(*model_package)
 
     return response
 
 if __name__ == "__main__":
-    args = model_utils.argparse()
+    args = utils.argparse()
     
     frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
     caption = inference(prompt="explain the video", frames_list=frame_list)

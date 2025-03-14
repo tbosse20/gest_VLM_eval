@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(".")
 import scripts.caption_frames as caption_frames 
-import models.utils as model_utils
+import models.utils as utils
 
 # Constants
 models_folder = "models"
@@ -22,7 +22,8 @@ model_modules = [
 # Iterate over models
 for name in model_modules:
     model_module = importlib.import_module(name)
-    print('Processing using:', model_module)
+    module_name = name.split('.')[-1]
+    print('Processing using:', module_name)
     
     # Load model
     model_package = model_module.load_model()
@@ -31,7 +32,7 @@ for name in model_modules:
     # caption_frames.caption_folder(data_folder, csv_path, window, model_package, model_module)
         
     # Unload model
-    model_utils.unload_model(*model_package)
+    utils.unload_model(*model_package)
     
     # Delete model from system
     del model_module

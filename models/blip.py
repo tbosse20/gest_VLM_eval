@@ -5,7 +5,7 @@ import sys, os
 sys.path.append(".")
 from transformers import AutoProcessor, AutoModelForImageTextToText
 import config.hyperparameters as hyperparameters
-import models.utils as model_utils
+import src.utils as utils
 
 def load_model():
 
@@ -39,7 +39,7 @@ def inference(
     
     # Create temporary output file as video or image
     OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
-    model_utils.create_video(frames_list, OUTPUT_PATH)
+    utils.create_video(frames_list, OUTPUT_PATH)
     
     # Load model
     unload_model_after = model_package is None
