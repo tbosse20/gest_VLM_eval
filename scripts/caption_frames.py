@@ -6,42 +6,57 @@ sys.path.append(".")
 from config.prompts import prompts
 import src.utils as utils
 
-def caption_frames(video_path: str, window: int, model_package, model_module):
-    
-    # Validate video path    
-    if not os.path.exists(video_path):
-        raise FileNotFoundError(f"Video path {video_path} not found")
-    if not os.path.isdir(video_path):
-        raise NotADirectoryError(f"Video path {video_path} is not a folder")
-    
-    # Ensure window is valid
-    if window < 1:
-        raise ValueError("Window must be greater than 0")
-    if window > 16:
-        raise ValueError("Window must be less than or equal to 16")
+def caption_frames(video_path: str, window: int, model_package = None, model_module = None):
 
-    # Create csv file path
-    OUTPUT_FOLDER_PATH = 'results/data/captions'
-    module_name = model_module.__name__.split(".")[-1]
-    csv_path = f"{OUTPUT_FOLDER_PATH}/{module_name}.csv"
+    # Validate variables
+    def raises(video_path: str, window: int):
+        # Validate video path    
+        if not os.path.exists(video_path):
+            raise FileNotFoundError(f"Video path {video_path} not found")
+        if not os.path.isdir(video_path):
+            raise NotADirectoryError(f"Video path {video_path} is not a folder")
+        
+        # Ensure window is valid
+        if window < 1:
+            raise ValueError("Window must be greater than 0")
+        if window > 16:
+            raise ValueError("Window must be less than or equal to 16")
+    raises(video_path, window)
     
-    # Generate csv file if not exists
-    columns = ["video_name", "frame_idx"]
-    columns += [prompt['alias'] for prompt in prompts]
-    
-    # Generate csv file if not exists
-    if not os.path.exists(csv_path):
-        df = pd.DataFrame(columns=columns)
-        df.to_csv(csv_path, mode="w", index=False, header=True)
+    # Output csv path
+    def output_csv(csv_path: str, model_module):
+        
+        # Create csv file path
+        OUTPUT_FOLDER_PATH = 'results/data/captions'
+        module_name = model_module.__name__.split(".")[-1]
+        csv_path = f"{OUTPUT_FOLDER_PATH}/{module_name}.csv"
+        
+        # Generate csv file if not exists
+        columns = ["video_name", "frame_idx"]
+        columns += [prompt['alias'] for prompt in prompts]
+        
+        # Generate csv file if not exists
+        if not os.path.exists(csv_path):
+            df = pd.DataFrame(columns=columns)
+            df.to_csv(csv_path, mode="w", index=False, header=True)
+        
+        return csv_path
+    csv_path = output_csv(csv_path, model_module)
     
     # Get video name
     video_name = os.path.basename(video_path)
+    
+    # Get highest and lowest 0000 value in folder
+    frame_idx = [int(frame.split("_")[-1].split(".")[0]) for frame in os.listdir(video_path)]
+    start_frame, end_frame = min(frame_idx), max(frame_idx)
 
     # Iterate over video frames
-    for i in tqdm(range(0, 160 - window, window), desc="Processing"):
+    for i in tqdm(range(start_frame, end_frame - window, window), desc="Processing"):
         
         # Generate frames list
         frames_list = utils.generate_frame_list(video_path, i, interval=1, n_frames=window)
+        if len(frames_list) == 0: continue # Skip if no frames found
+        if len(frames_list) < window: continue # Skip if less than window frames
         
         # Prepare dictionary
         dictionary = {
@@ -56,6 +71,7 @@ def caption_frames(video_path: str, window: int, model_package, model_module):
                 frames_list=frames_list,
                 model_package=model_package
             )
+            # Ensure respond is always a string
             dictionary[prompt['alias']] = [respond]
 
         df = pd.DataFrame(dictionary)

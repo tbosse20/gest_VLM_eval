@@ -5,11 +5,8 @@ ToDo:
 1.b Make prompts
 
 x. Pipeline
-    - MAYBE rename frames to start from 0000.png
     - Add " " to caption output
     - Remove warnings
-    - Investigate why so many is empty
-    - Avoid batches with less than window 
 
 2. Run experiment
 3. Result analysis

@@ -16,7 +16,7 @@ def from_n_frame(video_folder, start_frame, interval, n_frames):
         if os.path.exists(f"{video_folder}/frame_{start_frame + frame_count:04d}.png")
     ]
 
-def generate_frame_list(video_folder, start_frame, interval=1, end_frame=None, n_frames=None):
+def generate_frame_list(video_folder, start_frame=0, interval=1, end_frame=None, n_frames=None):
     
     # Validate video folder
     if not os.path.exists(video_folder):
@@ -39,7 +39,7 @@ def generate_frame_list(video_folder, start_frame, interval=1, end_frame=None, n
 def create_video_from_frames(frames: list[np.ndarray], output_video_path):
 
     # Get frame size
-    height, width, layers = frames[0].shape
+    height, width, _ = frames[0].shape
     size = (width, height)
 
     # Create video writer
@@ -51,13 +51,15 @@ def create_video_from_frames(frames: list[np.ndarray], output_video_path):
     out.release()
 
 def create_video_from_str(frame_paths: list[str], output_video_path):
-
+    
+    # Load frames
     frames = [
         cv2.imread(f'/home/mi3/RPMS_Tonko/RMPS/{frame_path}')
         for frame_path in frame_paths
         if os.path.exists(frame_path)
     ]
 
+    # Create video
     create_video_from_frames(frames, output_video_path)
 
 def unload_model(*args):
@@ -78,3 +80,19 @@ def argparse():
     parser.add_argument("--n_frames",     type=int, help="The number of frames to process.",            default=None)
     
     return parser.parse_args()
+
+if __name__ == "__main__":
+    
+    for i in range(0, 160, 8):
+        frame_list = generate_frame_list(
+            start_frame = i,
+            interval = 1,
+            n_frames = 8
+        )
+        
+    frame_list = generate_frame_list(
+        "../video_frames/Go forward",
+        n_frames = 8
+    )
+    
+    print(frame_list)
