@@ -97,6 +97,8 @@ if __name__ == "__main__":
         raise ValueError("Either video_folder or data_folder must be provided")
     
     # Load model
+    import sys
+    sys.path.append(".")
     import models.qwen as model_module
     model_package = model_module.load_model()
     
