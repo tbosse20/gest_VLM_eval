@@ -40,6 +40,8 @@ def generate_caption(image_path):
 
 def compute_similarity_metrics(ground_truth, predicted):
     """Computes multiple similarity metrics between the ground truth and predicted captions."""
+    
+    # Ensure inputs are not empty
     if not ground_truth or not predicted:
         return pd.DataFrame({
             "cosine_similarity": 0.0,
@@ -67,7 +69,7 @@ def compute_similarity_metrics(ground_truth, predicted):
     _, _, bert_f1 = bert_score.score([predicted], [ground_truth], lang="en")
     metrics["bert_score"] = bert_f1.item()
 
-    return pd.DataFrame(metrics)
+    return pd.DataFrame([metrics])
 
 def make_sibling_folder(folder_path: str, sibling_name: str):
     """Create a sibling folder to the input folder."""
@@ -89,13 +91,13 @@ def process_csv(label_caption_csv, gen_caption_folder):
     if not os.path.exists(label_caption_csv):
         raise FileNotFoundError(f"Input CSV file '{label_caption_csv}' not found.")
 
-    COLUMNS = ["image_name", "frame_idx", "cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
+    COLUMNS = ["video_name", "frame_idx", "cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
     
     # Load CSV
     label_df = pd.read_csv(label_caption_csv)
 
     # Ensure necessary columns exist
-    required_columns = {"image_name", "frame_idx", "ground_truth_caption"}
+    required_columns = {"video_name", "frame_idx", "label"}
     if not required_columns.issubset(label_df.columns):
         raise ValueError(f"Input CSV must contain columns: {required_columns}")
     
@@ -113,9 +115,10 @@ def process_csv(label_caption_csv, gen_caption_folder):
 
         # Generate csv file if not exists
         metric_path = os.path.join(metrics_folder, os.path.basename(gen_caption_csv))
+
+        # Ensure metric file exists
         if not os.path.exists(metric_path):
-            df = pd.DataFrame(columns=COLUMNS)
-            df.to_csv(metric_path, mode="w", index=False, header=True)
+            pd.DataFrame(columns=COLUMNS).to_csv(metric_path, index=False, header=True)
         
         # Load generated captions
         gen_df = pd.read_csv(gen_caption_csv)
@@ -124,22 +127,28 @@ def process_csv(label_caption_csv, gen_caption_folder):
         for index, row in gen_df.iterrows():
             
             # Get image name and frame index
-            image_name = row["image_name"]
-            frame_idx = row["frame_idx"]
-            
-            # Get the corresponding ground truth caption from labels_df            
-            ground_truth_caption = label_df[
-                (label_df["image_name"] == image_name) & (label_df["frame_idx"] == frame_idx)
-            ]["ground_truth_caption"].values[0]
+            video_name, frame_idx = row["video_name"], row["frame_idx"]
+
+            # Retrieve the corresponding ground truth caption
+            label_caption = label_df.loc[(
+                (label_df["video_name"] == video_name) &
+                (label_df["frame_idx"] == frame_idx)
+                ), "label"
+            ]
+            if label_caption.empty or label_caption.values[0] in [None, "empty"]:
+                continue
+            label_caption = label_caption.values[0]
             
             # Get the predicted caption
             pred_caption = row["explain"]
+            if pred_caption in [None, "empty"]:
+                continue
             
             # Compute similarity metrics
-            metrics_df = compute_similarity_metrics(ground_truth_caption, pred_caption)
+            metrics_df = compute_similarity_metrics(label_caption, pred_caption)
 
             df = pd.DataFrame({
-                "image_name": [image_name],
+                "video_name": [video_name],
                 "frame_idx": [frame_idx]
             })
             df = pd.concat([df, metrics_df], axis=1)

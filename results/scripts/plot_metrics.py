@@ -1,41 +1,67 @@
 import pandas as pd
-import numpy as np
+import os
+import glob
 import matplotlib.pyplot as plt
 
-# Load csv
-df = pd.read_csv("data/sanity/output/similarity_metrics.csv")
+# Define folder containing CSVs
+csv_folder = "results/data/metrics"
 
-# Post processing
-# Remove "_score" and "_similarity" suffix from column names
-df.columns = df.columns.str.replace("_score", "")
-df.columns = df.columns.str.replace("_similarity", "")
-# Make capitalization consistent
-df.columns = df.columns.str.title()
+# Get list of all CSV files in the folder
+csv_files = glob.glob(os.path.join(csv_folder, "*.csv"))
+
+# Check if any CSV files were found
+if not csv_files:
+    print("No CSV files found in the folder.")
+    exit()
+
+# Create an empty list to store data
+data_list = []
+
+# Loop through each CSV file
+for file in csv_files:
+    df = pd.read_csv(file)
+    
+    # Drop unnecessary columns
+    df = df.drop(columns=["video_name", "frame_idx"], errors="ignore")
+    
+    # Store the model name
+    model_name = os.path.basename(file).split(".")[0]
+    
+    # Reshape DataFrame for boxplot (long format)
+    df_melted = df.melt(var_name="Metric", value_name="Score")
+    df_melted["Model"] = model_name  # Add model column
+
+    # Append to list
+    data_list.append(df_melted)
+
+# Combine all data into a single DataFrame
+merged_df = pd.concat(data_list, ignore_index=True)
+
+# --- PLOTTING GROUPED BOX PLOT ---
+
+# Clean column names
+merged_df["Metric"] = merged_df["Metric"].str.replace("_score", "", regex=True)
+merged_df["Metric"] = merged_df["Metric"].str.replace("_similarity", "", regex=True)
+merged_df["Metric"] = merged_df["Metric"].str.title()
 
 # Plot
-plt.figure(figsize=(7, 7))
+plt.figure(figsize=(10, 7))
 
-# Define bar width and positions
-num_metrics = len(df.columns) - 1  # Excluding 'case' column
-num_cases = len(df["Case"])
-bar_width = 0.15
-x = np.arange(num_metrics)
+# Boxplot: Group by metric, color by model
+import seaborn as sns
+sns.boxplot(x="Metric", y="Score", hue="Model", data=merged_df, showfliers=False)
 
-# Transpose the DataFrame for better grouping by metric
-metrics = df.columns[1:]  # Exclude 'case'
-cases = df["Case"]
-
-# Plot each case as a separate color group
-for i, case in enumerate(cases):
-    plt.bar(x + i * bar_width, df.iloc[i, 1:], width=bar_width, label=case)
-
-# Configure x-axis
-plt.xticks(x + (num_cases - 1) * bar_width / 2, metrics)
+# Configure plot
+plt.xticks(rotation=45, ha="right")
 plt.xlabel("Metrics")
 plt.ylabel("Score")
-plt.title("Clustered Bar Plot: Metrics as Groups, Cases as Colors")
-plt.legend(title="Cases", loc="upper left")
+plt.title("Boxplot of Similarity Metrics Across Models")
+plt.legend(title="Models")
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 
-plt.savefig("data/sanity/output/similarity_metrics.png")
+# Save the plot
+boxplot_path = "results/figures/similarity_metrics_boxplot.png"
+plt.savefig(boxplot_path)
+
+print(f"Boxplot saved to: {boxplot_path}")
