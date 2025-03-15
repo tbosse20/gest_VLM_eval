@@ -22,7 +22,8 @@ def caption_frames(video_path: str, window: int, model_package, model_module):
 
     # Create csv file path
     OUTPUT_FOLDER_PATH = 'results/data/captions'
-    csv_path = f"{OUTPUT_FOLDER_PATH}/{model_module.__name__}.csv"
+    module_name = model_module.__name__.split(".")[-1]
+    csv_path = f"{OUTPUT_FOLDER_PATH}/{module_name}.csv"
     
     # Generate csv file if not exists
     columns = ["video_name", "frame_idx"]
