@@ -1,5 +1,4 @@
 video_name,frame_idx,label
-man_0153,16,"empty"
 man_0153,24,"The pedestrian is walking with the side to the ego driver. They are facing away from the ego driver. One arm is down their side and one on an object."
 man_0153,32,"The pedestrian is walking with the side to the ego driver. They are facing away from the ego driver. One arm is in front of them and one is obscured behind them.
 man_0153,40,"The pedestrian is walking with the side and back to the ego driver. They are facing away from the ego driver. One arm is in reached out in front of them and one is obscured behind them.
@@ -11,10 +10,3 @@ man_0153,80,"The pedestrian is standing in front the ego driver to the side. The
 man_0153,88,"They walk down the road. They are facing the ego driver. One arm is reached out towards the ego driver with a flat palm. One arm is obscured behind them."
 man_0153,96,"They are walking down the road. They turn from their front to their side towards the ego driver. They face away from the ego driver and down towards the road. One arm goes from stretched out towards the ego driver with a flat palm to bend at their side. One arm is bend and obscured behind them."
 man_0153,104,"They are walking down the road. They turn from their side to their back towards the ego driver. They are facing away from the ego driver and down the road. They bend over slightly. One arm is bend at their side. One arm is obscured behind them."
-man_0153,112,"empty"
-man_0153,120,"empty"
-man_0153,128,"empty"
-man_0153,136,"empty"
-man_0153,144,"empty"
-man_0153,152,"empty"
-man_0153,160,"empty"
