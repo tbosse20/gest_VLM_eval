@@ -13,8 +13,7 @@ def load_model():
     disable_torch_init()
 
     # Load the VideoLLaMA2 model
-    # model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F'
-    model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B' # 8F
+    model_path = 'DAMO-NLP-SG/VideoLLaMA2.1-7B-16F'
     model, processor, tokenizer = model_init(model_path)
     model.to("cuda")
 
@@ -26,24 +25,24 @@ def inference(
     model_package = None
     ):
 
-    # Check if frames_list is empty or too long
-    if len(frames_list) == 0:
+    if frames_list is None or len(frames_list) == 0:
         return 'empty'
+    if len(frames_list) > 8:
+        raise ValueError("frames_list contains more than 8 elements")
     
     # Determine modal
-    # modal = 'image' if len(frames_list) == 1 else 'video'
-    modal = 'video'
+    modal = 'image' if len(frames_list) == 1 else 'video'
     
     # Create temporary output file as video or image
-    # OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
-    # utils.create_video(frames_list, OUTPUT_PATH)
+    OUTPUT_PATH = f"_tmp_output{'.png' if modal == 'image' else '.mp4'}"
+    utils.create_video_from_str(frames_list, OUTPUT_PATH)
     
     # Load model
-    unload_model_after = model_package is None
     model, processor, tokenizer = load_model() if model_package is None else model_package
 
     # Process input
-    processed = processor[modal](frames_list).to(device="cuda")
+    processed = processor[modal](OUTPUT_PATH).to(device="cuda")
+
     # Perform inference
     with torch.no_grad():
         output = mm_infer(
@@ -57,11 +56,11 @@ def inference(
         )
     
     # Remove temporary file
-    # os.remove(OUTPUT_PATH)
+    os.remove(OUTPUT_PATH)
     
     # Unload model
-    if unload_model_after:
-        utils.unload_model(*model_package)
+    if model_package is None:
+        utils.unload_model(model, processor, tokenizer)
 
     return output
 
@@ -83,7 +82,7 @@ def sanity():
     # print("Image output:\n", output)
 
 if __name__ == "__main__":
-    sanity()
+    # sanity()
     # vllama2_package = load_model()
 
     # # # Image Inference
@@ -111,3 +110,8 @@ if __name__ == "__main__":
 
     # model, processor, tokenizer = vllama2_package
     # unload_model(model, processor, tokenizer)
+    args = utils.argparse()
+    
+    frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
+    caption = inference(prompt="explain the video", frames_list=frame_list)
+    print("Caption:", caption)
