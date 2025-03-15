@@ -1,26 +1,27 @@
 ToDo:
-1.a Dataset
-    1.a.2 Annotate videos
-    1.a.1 Pre-process videos (frames, pedestrian)
-1.b Make prompts
+#. Pipeline
+    # Add " " to caption output
+    # Remove warnings
+#. Clean up
+    # VideoLLaMA2 file (__name__)
+    # readme (instructions)
 
-x. Pipeline
-    - Add " " to caption output
-    - Remove warnings
+1. Dataset
+    1. Front-Hand
+    1.1. Annotate videos
 
-2. Run experiment
+    2. Real-life
+    1.1. Clean up/sort
+    1.2. Annotate videos
+    1.2. Pre-process videos (frames, pedestrian)
+
+2. Run experiment!
 3. Result analysis
-
-x. Clean up
-    x.a VideoLLaMA2 file
-    x.b readme (instructions)
 
 Write about:
 - VideoLLaMA2
 - Memory handling
     - Fix OOM issue and clean
-
-
 
 ###### DONE ######
 1.b Pipeline
@@ -31,3 +32,4 @@ Write about:
 
 1.a Dataset
     1.a.1 Record dataset (5 - 10 videos) Make it realistic
+1.b Make prompts
