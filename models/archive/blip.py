@@ -9,9 +9,11 @@ import src.utils as utils
 
 def load_model():
 
+    model_name = "Salesforce/blip-image-captioning-base"
+    
     # Load the model
-    processor = AutoProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
-    model = AutoModelForImageTextToText.from_pretrained("Salesforce/blip-image-captioning-base")
+    processor = AutoProcessor.from_pretrained(model_name)
+    model = AutoModelForImageTextToText.from_pretrained(model_name)
     model.to("cuda")
 
     return model, processor

@@ -1,12 +1,12 @@
 from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
 import torch
+from typing import List
 import os
 import sys
 sys.path.append(".")
 import src.utils as utils
 import config.hyperparameters as hyperparameters
-import src.utils as utils
 
 def load_model():
     
@@ -17,7 +17,7 @@ def load_model():
         model_name,
         torch_dtype=torch.bfloat16,
         attn_implementation="flash_attention_2",
-        device_map="auto",
+        device_map="cuda",
     )
 
     # default processer
@@ -27,7 +27,7 @@ def load_model():
 
 def inference(
     prompt: str,
-    frames_list: list[str] = None,
+    frames_list: List[str],
     model_package = None,
     ):
     
@@ -77,7 +77,7 @@ def inference(
     )
     
     if model_package is None:
-        utils.unload_model(*model, processor)
+        utils.unload_model(model, processor)
 
     return output_text[0]
 

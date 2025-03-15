@@ -1,0 +1,20 @@
+frame_idx,label
+16, 
+24, "The pedestrian is walking with the side to the ego driver. They are facing away from the ego driver. One arm is down their side and one on an object."
+32, "The pedestrian is walking with the side to the ego driver. They are facing away from the ego driver. One arm is in front of them and one is obscured behind them.
+40, "The pedestrian is walking with the side and back to the ego driver. They are facing away from the ego driver. One arm is in reached out in front of them and one is obscured behind them.
+48, "The pedestrian stops walking and react to something. Their back is towards the ego driver. They are facing to the left of the road a bit ahead. Both arms are obscured, but looks like they are bend in front of them. "
+56, "The pedestrian is quickly moving in front of the ego driver. They are looking to the left of the road. One arm is reached out towards the road. One arm is slightly bend at their side."
+64, "The pedestrian is walking out on the road. They start looking towards the left side of the road. One arm is reached out towards the road and the ego driver. One is obscured behind themselves."
+72, "The pedestrian is stopping in front of the ego driver on the side. They are leaning towards. They are facing down and left towards the road. One hand is stretched out in front of them, with a flat palm. One arm is stretched out to the side."
+80, "The pedestrian is standing in front the ego driver to the side. They are standing up. They face the ego driver. One arm is reached out towards the ego driver with a flat palm. One arm is obscured behind them."
+88, "They walk down the road. They are facing the ego driver. One arm is reached out towards the ego driver with a flat palm. One arm is obscured behind them."
+96, "They are walking down the road. They turn from their front to their side towards the ego driver. They face away from the ego driver and down towards the road. One arm goes from stretched out towards the ego driver with a flat palm to bend at their side. One arm is bend and obscured behind them."
+104, "They are walking down the road. They turn from their side to their back towards the ego driver. They are facing away from the ego driver and down the road. They bend over slightly. One arm is bend at their side. One arm is obscured behind them."
+112, empty
+120, empty
+128, empty
+136, empty
+144, empty
+152, empty
+160, empty

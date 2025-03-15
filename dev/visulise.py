@@ -1,5 +1,6 @@
 import cv2
 import pandas as pd
+import os
 
 import sys
 sys.path.append(".")
@@ -7,7 +8,7 @@ import dev.dev_utils as dev_utils
 
 def vis_results(video_path, csv_path, keyword: str):
 
-    df = pd.read_csv(csv_path, index_col=False)
+    df = pd.read_csv(csv_path, index_col=False) if os.path.exists(csv_path) else None
 
     # Load the video
     cap = cv2.VideoCapture(video_path)
@@ -34,18 +35,16 @@ def vis_results(video_path, csv_path, keyword: str):
         # frame, prev_time = dev_utils.display_fps(frame, prev_time)
         frame_counter += 1
 
-        # Load result
-        if frame_counter not in df["frame_idx"].values: continue
-
         cv2.putText(
             frame, f'Frame: {frame_counter}', (20, 50),
             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
         
         # Display FPS on the frame
-        action = df[df["frame_idx"] == frame_counter][keyword].values[0]
-        cv2.putText(
-            frame, f'Pred. Action: {action}', (20, 100),
-            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
+        if df is not None:
+            action = df[df["frame_idx"] == frame_counter][keyword].values[0]
+            cv2.putText(
+                frame, f'Pred. Action: {action}', (20, 100),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
         
         # # Write the frame to the output video
         # out.write(frame)
@@ -63,8 +62,8 @@ def vis_results(video_path, csv_path, keyword: str):
 
 if __name__ == "__main__":
 
-    video_path = "data/sanity/input/video_0153.mp4"
+    video_path = "data/videos/video_0153.mp4"
     # csv_path = "data/sanity/output/pred_actions.csv"
-    csv_path = "data/sanity/output/caption_man_window=8_explain.csv"
+    csv_path = "data/labels/video_0153.csvs"
 
-    vis_results(video_path, csv_path, keyword='caption')
+    vis_results(video_path, csv_path, keyword='label')
