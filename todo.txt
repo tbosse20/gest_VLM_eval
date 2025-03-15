@@ -10,6 +10,9 @@ ToDo:
 2. Run experiment
 3. Result analysis
 
+x. Clean up
+    x.a VideoLLaMA2 file
+
 Write about:
 - VideoLLaMA2
 - Memory handling
