@@ -44,7 +44,8 @@ if __name__ == "__main__":
     # args = parser.parse_args()
 
     # data_folder = "data/video_frames" # Path to folder containing video frames
-    data_folder = "/media/mi3/3562-6238/DCIM/video_frames" # Path to folder containing video frames
+    data_folder = "/media/mi3/3562-6238/DCIM/video_frames" # Can't find SD
+    data_folder = "../video_frames" # Path to folder containing video frames
     models_folder = "models"
     window = 8 # Number of frames to process at once
     caption_across_models(data_folder, models_folder, window)

@@ -1,2 +1,49 @@
 video_name,frame_idx,none,determine,bodyanalysis,context,objective
 Go forward,0,empty,empty,empty,empty,empty
+Go forward,0,empty,empty,empty,empty,empty
+Idle,0,empty,empty,empty,empty,empty
+Idle,8,empty,empty,empty,empty,empty
+Idle,16,empty,empty,empty,empty,empty
+Idle,24,empty,empty,empty,empty,empty
+Idle,32,empty,empty,empty,empty,empty
+Idle,40,empty,empty,empty,empty,empty
+Idle,48,empty,empty,empty,empty,empty
+Idle,56,empty,empty,empty,empty,empty
+Idle,64,empty,empty,empty,empty,empty
+Idle,72,empty,empty,empty,empty,empty
+Idle,80,empty,empty,empty,empty,empty
+Idle,88,empty,empty,empty,empty,empty
+Idle,96,empty,empty,empty,empty,empty
+Idle,104,empty,empty,empty,empty,empty
+Idle,112,The man is standing still.,The pedestrian is making a gesture with his hand.,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and appears to be standing still, facing slightly to the right of the camera. His body posture is upright, with his arms hanging naturally by his sides. There are no visible movements or changes in his position throughout the video.",The pedestrian is making a stop gesture.,The pedestrian is standing still and not making any gestures.
+Idle,120,The man is standing still.,The pedestrian is standing still and not making any gestures.,"The pedestrian is standing still, facing to the right.",The pedestrian is standing still.,The pedestrian is standing still and not making any gestures.
+Idle,128,The man is standing still.,The pedestrian is not making any gesture.,"The pedestrian is standing still, facing to the right.",The pedestrian is standing still.,The pedestrian is standing still and not making any gestures.
+Idle,136,The man is standing still.,The pedestrian is not making any gesture.,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing still in profile view against a plain background. His body posture is upright, with his arms hanging naturally by his sides. There are no visible movements or changes in his position throughout the video.",The pedestrian is standing still and not making any gestures.,The pedestrian is standing still.
+Idle,144,The man is standing still.,The pedestrian is not making any gesture.,"The pedestrian is a man wearing glasses and a dark-colored sweater. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no visible motion or change in posture throughout the video.",The pedestrian is standing still.,The pedestrian is standing still.
+Stop + pass,0,empty,empty,empty,empty,empty
+Stop + pass,8,empty,empty,empty,empty,empty
+Stop + pass,16,empty,empty,empty,empty,empty
+Stop + pass,24,empty,empty,empty,empty,empty
+Stop + pass,32,empty,empty,empty,empty,empty
+Stop + pass,40,empty,empty,empty,empty,empty
+Stop + pass,48,The man is waving his hand in front of him.,The pedestrian is making a waving gesture with his right hand.,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a wall or screen. His right arm is raised with his hand open, as if he is gesturing or pointing at something. The motion appears to be slow and deliberate.",The pedestrian is making a stop gesture.,The pedestrian is making a stop gesture.
+Stop + pass,56,A man in a black shirt and glasses is standing with his hand out.,The pedestrian is making a stop gesture.,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain, light-colored background. His right arm is extended forward with his hand open, palm facing outward, as if he is signaling to stop or indicating something. The motion appears to be static, with no significant movement other than the initial gesture.",The pedestrian is making a stop gesture.,The pedestrian is making a stop gesture.
+Stop + pass,64,"A man is standing in front of a white wall, wearing glasses and a black shirt. He extends his right arm forward with an open palm facing outward while simultaneously moving his left hand back behind him.",The pedestrian is making a stop gesture.,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain background. His right arm is extended forward with his palm facing outward, while his left arm hangs by his side. The motion of the video shows him maintaining this posture throughout.",The pedestrian is making a stop gesture.,Stop
+Stop + pass,72,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his right arm extended out to the side with his palm facing forward, as if he is pushing something away or signaling for someone to stop. His left hand is slightly raised and bent at the elbow, with fingers pointing upwards. The background remains plain and unchanging throughout the video.",The pedestrian is making a stop gesture.,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has his right arm extended outward with his palm facing forward, as if he is signaling to stop or indicating something in front of him. His left arm is bent at the elbow, with the hand near his chest. The man appears to be standing still against a plain background.",The pedestrian is making a stop gesture.,The pedestrian is signaling to stop.
+Stop + pass,80,A man in a black shirt is standing with his arms outstretched.,The pedestrian is making a stop gesture.,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, with his right arm raised above his head while his left hand extends forward, palm facing outward as if signaling ""stop."" His movements are deliberate; he raises his arms up and down repeatedly, maintaining the same posture throughout the video.",The pedestrian is making a stop gesture.,The pedestrian is making a stop gesture.
+Stop + pass,88,"A man is standing in front of a white wall, moving his hands around.",The pedestrian is making a stop gesture.,"The pedestrian is a young man with short hair and glasses, dressed in a black long-sleeved shirt. He stands still against a plain white background before raising his right arm to point towards the camera. His left hand moves fluidly around his head as he continues this gesture for several seconds.",The pedestrian is making a stop gesture.,The pedestrian is making a stop gesture.
+Stop + pass,96,A man in a black shirt is standing with his arms outstretched.,The pedestrian is making a stop gesture with his hand.,"The pedestrian is a man wearing glasses and a dark long-sleeved shirt. He stands with his right arm extended outward, palm facing forward, while his left arm remains bent at the elbow with the hand near his chest. His body posture suggests he might be gesturing or signaling something.",The pedestrian is making a stop gesture.,The pedestrian is making a stop gesture.
+Stop + pass,104,"The man is standing in front of a white wall, wearing glasses and a black shirt. He has his right arm extended outward with his palm facing forward, while his left hand is slightly raised. His posture suggests he might be demonstrating or explaining something.",The pedestrian is making a stop gesture with his hand.,"The pedestrian is standing still, facing the camera. He has his arms extended out to the sides with palms facing forward. His body posture appears relaxed and steady.",The pedestrian is making a stop gesture.,The pedestrian is making a stop gesture.
+Stop + pass,112,empty,empty,empty,empty,empty
+Stop + pass,120,empty,empty,empty,empty,empty
+Stop + pass,128,empty,empty,empty,empty,empty
+Stop + pass,136,empty,empty,empty,empty,empty
+Stop + pass,144,empty,empty,empty,empty,empty
+Stop (blurry),0,empty,empty,empty,empty,empty
+Stop (blurry),8,empty,empty,empty,empty,empty
+Stop (blurry),16,empty,empty,empty,empty,empty
+Stop (blurry),24,empty,empty,empty,empty,empty
+Stop (blurry),32,empty,empty,empty,empty,empty
+Stop (blurry),40,empty,empty,empty,empty,empty
+Stop (blurry),48,empty,empty,empty,empty,empty
+Stop (blurry),56,empty,empty,empty,empty,empty

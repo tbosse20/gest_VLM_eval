@@ -1,9 +1,15 @@
 ToDo:
 1.a Dataset
-    1.a.1 Record dataset (5 - 10 videos) Make it realistic
     1.a.2 Annotate videos
     1.a.1 Pre-process videos (frames, pedestrian)
 1.b Make prompts
+
+x. Pipeline
+    - MAYBE rename frames to start from 0000.png
+    - Add " " to caption output
+    - Remove warnings
+    - Investigate why so many is empty
+    - Avoid batches with less than window 
 
 2. Run experiment
 3. Result analysis
@@ -25,3 +31,6 @@ Write about:
     Fix BLIP
     Fix QWEN
     Fix VideoLLaMA2, 16F
+
+1.a Dataset
+    1.a.1 Record dataset (5 - 10 videos) Make it realistic
