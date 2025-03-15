@@ -6,7 +6,7 @@ sys.path.append(".")
 from config.prompts import prompts
 import src.utils as utils
 
-def caption_frames(video_path: str, csv_path: str, window: int, model_package, model_module):
+def caption_frames(video_path: str, window: int, model_package, model_module):
     
     # Validate video path    
     if not os.path.exists(video_path):
@@ -20,9 +20,9 @@ def caption_frames(video_path: str, csv_path: str, window: int, model_package, m
     if window > 16:
         raise ValueError("Window must be less than or equal to 16")
 
-    # Add constants to csv path
-    csv_path = csv_path.replace(".csv", f"_window={window}_explain.csv")
-    csv_path = csv_path.replace(".csv", f"_model={model_module.__name__}.csv")
+    # Create csv file path
+    OUTPUT_FOLDER_PATH = 'results/data/captions'
+    csv_path = f"{OUTPUT_FOLDER_PATH}/{model_module.__name__}.csv"
     
     # Generate csv file if not exists
     columns = ["video_name", "frame_idx"]
@@ -60,7 +60,7 @@ def caption_frames(video_path: str, csv_path: str, window: int, model_package, m
         df = pd.DataFrame(dictionary)
         df.to_csv(csv_path, mode="a", index=False, header=False)
 
-def caption_folder(data_folder: str, csv_path: str, window: int, model_package, model_module):
+def caption_folder(data_folder: str, window: int, model_package, model_module):
     
     # Validate folder path
     if not os.path.exists(data_folder):
@@ -72,7 +72,12 @@ def caption_folder(data_folder: str, csv_path: str, window: int, model_package, 
     subfolders = [f.path for f in os.scandir(data_folder) if f.is_dir()]
     
     for subfolder in subfolders:
-        caption_frames(subfolder, csv_path, window, model_package, model_module)
+        
+        # Skip 'full_frame' folders
+        if 'full_frame' in subfolder: continue
+        
+        # Caption frames
+        caption_frames(subfolder, window, model_package, model_module)
 
 if __name__ == "__main__":
     

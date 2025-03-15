@@ -7,10 +7,8 @@ import src.utils as utils
 
 # Constants
 models_folder = "models"
-# Default values (parsed into csv name)
 data_folder = "data/video_frames"               # Path to folder containing video frames
 window = 8                                      # Number of frames to process at once
-csv_path = "results/data/sanity_captions.csv"   # Path to save captions
 
 # Load all models modules
 model_modules = [
@@ -28,7 +26,7 @@ for name in model_modules:
     model_package = model_module.load_model()
 
     # Caption frames from all videos in folder
-    caption_frames.caption_folder(data_folder, csv_path, window, model_package, model_module)
+    caption_frames.caption_folder(data_folder, window, model_package, model_module)
         
     # Unload model
     utils.unload_model(*model_package)
