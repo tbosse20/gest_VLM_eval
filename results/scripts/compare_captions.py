@@ -144,27 +144,22 @@ def process_csv(label_caption_csv, gen_caption_folder):
             if label_caption.empty or label_caption.values[0] in [None, "empty"]:
                 continue
             label_caption = label_caption.values[0]
+                
+            # Get the predicted caption
+            pred_caption, prompt_type = row["caption"], row["prompt_type"]
+            if pred_caption in [None, "empty"]: continue
             
-            # Process each prompt type
-            prompt_types = [key for key in row.keys() if key not in ["video_name", "frame_idx"]]
-            for prompt_type in prompt_types:
-                
-                # Get the predicted caption
-                pred_caption = row[prompt_type]
-                if pred_caption in [None, "empty"]:
-                    continue
-                
-                # Compute similarity metrics
-                metrics_df = compute_similarity_metrics(label_caption, pred_caption)
-                
-                frame_sample_df = pd.DataFrame({
-                    "video_name": [video_name],
-                    "frame_idx": [frame_idx],
-                    "prompt": [prompt_type],
-                })
-
-                frame_sample_df = pd.concat([frame_sample_df, metrics_df], axis=1)
-                frame_sample_df.to_csv(metric_path, mode="a", index=False, header=False)
+            # Compute similarity metrics
+            metrics_df = compute_similarity_metrics(label_caption, pred_caption)
+            
+            frame_sample_df = pd.DataFrame({
+                "video_name": [video_name],
+                "frame_idx": [frame_idx],
+                "prompt_type": [prompt_type],
+            })
+            frame_sample_df = pd.concat([frame_sample_df, metrics_df], axis=1)
+            
+            frame_sample_df.to_csv(metric_path, mode="a", index=False, header=False)
             
 # Example Usage
 if __name__ == "__main__":

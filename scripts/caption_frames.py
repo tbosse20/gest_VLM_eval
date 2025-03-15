@@ -66,13 +66,17 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
         
         # Iterate over prompts
         for prompt in prompts:
+            
+            # Get prompt
+            dictionary['prompt_type'] = [prompt['alias']]
+            
+            # Get model response and append to dictionary
             respond = model_module.inference(
                 prompt=prompt['text'],
                 frames_list=frames_list,
                 model_package=model_package
             )
-            # Ensure respond is always a string
-            dictionary[prompt['alias']] = [respond]
+            dictionary['caption'] = [respond]
 
         df = pd.DataFrame(dictionary)
         df.to_csv(csv_path, mode="a", index=False, header=False)

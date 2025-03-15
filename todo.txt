@@ -5,6 +5,7 @@ ToDo:
 #. Clean up
     # VideoLLaMA2 file (__name__)
     # readme (instructions)
+    # Rm RMPS, weights, etc
 
 1. Dataset
     1. Front-Hand
