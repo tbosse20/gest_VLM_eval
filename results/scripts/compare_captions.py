@@ -23,6 +23,7 @@ sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
 rouge_scorer_obj = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
 
 from nltk.translate.bleu_score import SmoothingFunction
+from tqdm import tqdm
 smoothing = SmoothingFunction()
 
 def jaccard_similarity(sent1, sent2):
@@ -91,7 +92,8 @@ def process_csv(label_caption_csv, gen_caption_folder):
     if not os.path.exists(label_caption_csv):
         raise FileNotFoundError(f"Input CSV file '{label_caption_csv}' not found.")
 
-    COLUMNS = ["video_name", "frame_idx", "cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
+    COLUMNS = ["video_name", "frame_idx", "prompt"]
+    METRICS = ["cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
     
     # Load CSV
     label_df = pd.read_csv(label_caption_csv)
@@ -118,14 +120,15 @@ def process_csv(label_caption_csv, gen_caption_folder):
 
         # Ensure metric file exists
         if not os.path.exists(metric_path):
-            pd.DataFrame(columns=COLUMNS).to_csv(metric_path, index=False, header=True)
+            pd.DataFrame(columns=COLUMNS + METRICS).to_csv(
+                metric_path, index=False, header=True)
         
         # Load generated captions
         gen_df = pd.read_csv(gen_caption_csv)
                 
         # Process each row
-        for index, row in gen_df.iterrows():
-            
+        gen_caption_csv_name = os.path.basename(gen_caption_csv).split(".")[0]
+        for index, row in tqdm(gen_df.iterrows(), total=gen_df.shape[0], desc=f"Proc. {gen_caption_csv_name}"):
             # Get image name and frame index
             video_name, frame_idx = row["video_name"], row["frame_idx"]
 
@@ -139,20 +142,26 @@ def process_csv(label_caption_csv, gen_caption_folder):
                 continue
             label_caption = label_caption.values[0]
             
-            # Get the predicted caption
-            pred_caption = row["explain"]
-            if pred_caption in [None, "empty"]:
-                continue
-            
-            # Compute similarity metrics
-            metrics_df = compute_similarity_metrics(label_caption, pred_caption)
+            # Process each prompt type
+            prompt_types = [key for key in row.keys() if key not in ["video_name", "frame_idx"]]
+            for prompt_type in prompt_types:
+                
+                # Get the predicted caption
+                pred_caption = row[prompt_type]
+                if pred_caption in [None, "empty"]:
+                    continue
+                
+                # Compute similarity metrics
+                metrics_df = compute_similarity_metrics(label_caption, pred_caption)
+                
+                frame_sample_df = pd.DataFrame({
+                    "video_name": [video_name],
+                    "frame_idx": [frame_idx],
+                    "prompt": [prompt_type],
+                })
 
-            df = pd.DataFrame({
-                "video_name": [video_name],
-                "frame_idx": [frame_idx]
-            })
-            df = pd.concat([df, metrics_df], axis=1)
-            df.to_csv(metric_path, mode="a", index=False, header=False)
+                frame_sample_df = pd.concat([frame_sample_df, metrics_df], axis=1)
+                frame_sample_df.to_csv(metric_path, mode="a", index=False, header=False)
             
 # Example Usage
 if __name__ == "__main__":
