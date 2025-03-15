@@ -1,19 +1,27 @@
 ToDo:
 1.a Dataset
     1.a.1 Record dataset (5 - 10 videos) Make it realistic
-    1.a.2 Pre process videos (frames, pedestrian)
-1.b Pipeline
-    ~~1.b.1 Temporal models VideoLLaMA2, BLIP2, etc.~~
-    Fix BLIP
-    Fix QWEN
+    1.a.2 Annotate videos
+    1.a.1 Pre-process videos (frames, pedestrian)
+1.b Make prompts
 
 2. Run experiment
 3. Result analysis
 
 x. Clean up
     x.a VideoLLaMA2 file
+    x.b readme (instructions)
 
 Write about:
 - VideoLLaMA2
 - Memory handling
     - Fix OOM issue and clean
+
+
+
+###### DONE ######
+1.b Pipeline
+    1.b.1 Temporal models VideoLLaMA2, BLIP2, etc.
+    Fix BLIP
+    Fix QWEN
+    Fix VideoLLaMA2, 16F

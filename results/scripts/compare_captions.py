@@ -103,6 +103,7 @@ def process_csv(label_caption_csv, gen_caption_folder):
     if not required_columns.issubset(label_df.columns):
         raise ValueError(f"Input CSV must contain columns: {required_columns}")
     
+    # Get list of generated caption CSVs (ex.: results/data/CAPTIONS/proxy.csv)
     gen_caption_csvs = [
         os.path.join(gen_caption_folder, f)
         for f in os.listdir(gen_caption_folder)
@@ -115,11 +116,13 @@ def process_csv(label_caption_csv, gen_caption_folder):
     # Loop through generated caption CSVs
     for gen_caption_csv in gen_caption_csvs:
 
-        # Generate csv file if not exists
+        # Get metric csv file (ex.: results/data/METRICS/proxy.csv)
         metric_path = os.path.join(metrics_folder, os.path.basename(gen_caption_csv))
-
-        # Ensure metric file exists
-        if not os.path.exists(metric_path):
+        
+        # Make or skip metric csv file
+        if os.path.exists(metric_path):
+            continue
+        else:
             pd.DataFrame(columns=COLUMNS + METRICS).to_csv(
                 metric_path, index=False, header=True)
         
