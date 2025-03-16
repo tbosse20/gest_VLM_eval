@@ -1,14 +1,4 @@
 ToDo:
-#. Pipeline
-    # Add " " to caption output
-    # Remove warnings
-    # -> Skips last few frames 
-#. Clean up
-    # VideoLLaMA2 file (__name__)
-    # readme (instructions)
-    # Rm RMPS, weights, etc
-# Sanity checks
-
 1. Dataset
     1. Front-Hand
     1.1. Annotate videos
@@ -25,6 +15,16 @@ Write about:
 - VideoLLaMA2
 - Memory handling
     - Fix OOM issue and clean
+
+#. Pipeline
+    # Add " " to caption output
+    # Remove warnings
+    # Skips last few frames 
+#. Clean up
+    # VideoLLaMA2 file (__name__)
+    # readme (instructions)
+    # Rm RMPS, weights, etc
+# Sanity checks
 
 ###### DONE ######
 1.b Pipeline
