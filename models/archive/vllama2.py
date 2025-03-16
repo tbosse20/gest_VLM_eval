@@ -10,6 +10,7 @@ import src.utils as utils
 
 def load_model():
 
+    torch.cuda.empty_cache()
     disable_torch_init()
 
     # Load the VideoLLaMA2 model

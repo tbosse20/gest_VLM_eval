@@ -9,6 +9,7 @@ import src.utils as utils
 import config.hyperparameters as hyperparameters
 
 def load_model():
+    torch.cuda.empty_cache()
     
     model_name = "Qwen/Qwen2-VL-7B-Instruct"
     
@@ -31,6 +32,8 @@ def inference(
     model_package = None,
     ):
     
+    if len(frames_list) > 8:
+        raise ValueError
     if len(frames_list) == 0:
         return 'empty'
     

@@ -1,6 +1,6 @@
 prompts = [
     {
-        "alias": "none",
+        "alias": "blank",
         "text": ""
     },
     {

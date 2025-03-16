@@ -54,7 +54,7 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
     start_frame, end_frame = min(frame_idx), max(frame_idx)
 
     # Iterate over video frames
-    for i in tqdm(range(start_frame, end_frame - window, window), desc="Processing"):
+    for i in tqdm(range(start_frame, end_frame - window, window), desc=f"{video_name}"):
         
         # Generate frames list
         frames_list = utils.generate_frame_list(video_path, i, interval=1, n_frames=window)

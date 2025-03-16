@@ -6,6 +6,7 @@ import config.hyperparameters as hyperparameters
 import src.utils as utils
 
 def load_model():
+    torch.cuda.empty_cache()
 
     model_path = "DAMO-NLP-SG/VideoLLaMA3-7B"
     model = AutoModelForCausalLM.from_pretrained(
