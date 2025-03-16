@@ -1,10 +1,18 @@
 ToDo:
+#. Pipeline
+    # Add " " to caption output and replace breaks with "\n"
+    # Remove warnings
+#. Clean up
+    # VideoLLaMA2 file (__name__)
+    # readme (instructions)
+    # Rm RMPS, weights, etc
+
 1. Dataset
     1. Front-Hand
     1.1. Annotate videos
 
     2. Real-life
-    1.1. Clean up/sort
+    1.1. Clean up/sort/cut
     1.2. Annotate videos
     1.2. Pre-process videos (frames, pedestrian)
 

@@ -153,9 +153,9 @@ def process_csv(label_caption_csv, gen_caption_folder):
             metrics_df = compute_similarity_metrics(label_caption, pred_caption)
             
             frame_sample_df = pd.DataFrame({
-                "video_name": [video_name],
-                "frame_idx": [frame_idx],
-                "prompt_type": [prompt_type],
+                "video_name":   [video_name],
+                "frame_idx":    [frame_idx],
+                "prompt_type":  [prompt_type],
             })
             frame_sample_df = pd.concat([frame_sample_df, metrics_df], axis=1)
             

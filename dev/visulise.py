@@ -64,6 +64,7 @@ if __name__ == "__main__":
 
     video_path = "data/videos/video_0153.mp4"
     # csv_path = "data/sanity/output/pred_actions.csv"
-    csv_path = "data/labels/video_0153.csvs"
+    # csv_path = "data/labels/video_0153.csvs"
+    csv_path = ""
 
     vis_results(video_path, csv_path, keyword='label')

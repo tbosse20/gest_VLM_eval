@@ -65,7 +65,7 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
         # Prepare dictionary
         dictionary = {
             "video_name": [video_name],
-            "frame_idx":  [i],
+            "frame_idx":  [i + window],
         }
         
         # Iterate over prompts
