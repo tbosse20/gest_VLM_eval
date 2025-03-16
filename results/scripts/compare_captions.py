@@ -115,6 +115,9 @@ def process_csv(label_caption_csv, gen_caption_folder):
     
     # Loop through generated caption CSVs
     for gen_caption_csv in gen_caption_csvs:
+        
+        # if "proxy" not in gen_caption_csv:
+        #     continue
 
         # Get metric csv file (ex.: results/data/METRICS/proxy.csv)
         metric_path = os.path.join(metrics_folder, os.path.basename(gen_caption_csv))
@@ -163,7 +166,7 @@ def process_csv(label_caption_csv, gen_caption_folder):
             
 # Example Usage
 if __name__ == "__main__":
-    label_caption_csv = "data/labels/video_0153.csv"  # Input CSV file
+    label_caption_csv = "data/labels/firsthand.csv"  # Input CSV file
     gen_caption_folder = "results/data/captions/"  # Generated captions folder
 
     process_csv(label_caption_csv, gen_caption_folder)

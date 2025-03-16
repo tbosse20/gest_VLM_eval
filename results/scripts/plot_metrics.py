@@ -39,20 +39,23 @@ def plot_metrics(metrics_folder, include_prompt=None):
     # Combine all data into a single DataFrame
     merged_df = pd.concat(data_list, ignore_index=True)
     merged_df["Metric"] = merged_df["Metric"].str.title()
-
+    
     # --- PLOTTING GROUPED BOX PLOT ---
 
     # Plot
-    plt.figure(figsize=(10, 7))
+    plt.figure(figsize=(7, 3))
+    
+    # Only keep cos, jaccard and meteor
+    merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Meteor"])]
 
     # Boxplot: Group by metric, color by model
     import seaborn as sns
-    sns.boxplot(x="Metric", y="Score", hue="Model", data=merged_df, showfliers=False)
+    sns.boxplot(x="Metric", y="Score", hue="Model", data=merged_df, showfliers=False, width=0.5)
 
     # Configure plot
     plt.xlabel("Metrics")
     plt.ylabel("Score")
-    plt.title(f'Boxplot of Similarity Metrics Across Models (prompt: {include_prompt if include_prompt else "All"})')
+    # plt.title(f'Boxplot of Similarity Metrics Across Models (prompt: {include_prompt if include_prompt else "All"})')
     plt.legend(title="Models")
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
@@ -61,10 +64,13 @@ def plot_metrics(metrics_folder, include_prompt=None):
     date_time = pd.Timestamp.now().strftime("%Y%m%d_%H%M")
     boxplot_path = f"results/figures/metrics_boxplot.png"
     boxplot_path = boxplot_path.replace(".png", f"_{include_prompt}.png") if include_prompt else boxplot_path
-    boxplot_path = boxplot_path.replace(".png", f"_{date_time}.png")
+    # boxplot_path = boxplot_path.replace(".png", f"_{date_time}.png")
     plt.savefig(boxplot_path)
-
     print(f"Boxplot saved to: {boxplot_path}")
+    
+    # Get the average of merged_df
+    avg_df = merged_df.groupby(["Model", "Metric"]).mean().reset_index()
+    print(avg_df)
 
 if __name__ == "__main__":
     import sys
