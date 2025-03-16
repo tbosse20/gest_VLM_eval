@@ -24,16 +24,19 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
     raises(video_path, window)
     
     # Output csv path
-    def output_csv(csv_path: str, model_module):
+    def output_csv(model_module):
         
         # Create csv file path
         OUTPUT_FOLDER_PATH = 'results/data/captions'
+        if not os.path.exists(OUTPUT_FOLDER_PATH):
+            os.makedirs(OUTPUT_FOLDER_PATH)
+
+        # 
         module_name = model_module.__name__.split(".")[-1]
         csv_path = f"{OUTPUT_FOLDER_PATH}/{module_name}.csv"
         
         # Generate csv file if not exists
-        columns = ["video_name", "frame_idx"]
-        columns += [prompt['alias'] for prompt in prompts]
+        columns = ["video_name", "frame_idx", "prompt_type", "caption"]
         
         # Generate csv file if not exists
         if not os.path.exists(csv_path):
@@ -41,7 +44,7 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
             df.to_csv(csv_path, mode="w", index=False, header=True)
         
         return csv_path
-    csv_path = output_csv(csv_path, model_module)
+    csv_path = output_csv(model_module)
     
     # Get video name
     video_name = os.path.basename(video_path)
@@ -78,8 +81,8 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
             )
             dictionary['caption'] = [respond]
 
-        df = pd.DataFrame(dictionary)
-        df.to_csv(csv_path, mode="a", index=False, header=False)
+            df = pd.DataFrame(dictionary)
+            df.to_csv(csv_path, mode="a", index=False, header=False)
 
 def caption_folder(data_folder: str, window: int, model_package, model_module):
     

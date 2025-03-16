@@ -1,0 +1,421 @@
+video_name,frame_idx,caption
+Idle,114,blank,The man is standing still.
+Idle,114,determine,The pedestrian is not making any gestures.
+Idle,114,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing still, facing to the right side of the frame. His body posture is upright, with his arms hanging naturally by his sides. There are no visible movements or changes in his position throughout the video."
+Idle,114,context,The pedestrian is standing still.
+Idle,114,objective,The pedestrian is standing still.
+Idle,122,blank,The man is standing still.
+Idle,122,determine,The pedestrian is standing still with his hands behind him.
+Idle,122,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still, facing to the right side of the frame with his arms at his sides. His body posture remains unchanged throughout the video."
+Idle,122,context,The pedestrian is standing still.
+Idle,122,objective,The pedestrian is standing still.
+Idle,130,blank,The man in the video is wearing glasses and a black shirt.
+Idle,130,determine,The pedestrian is standing still with his hands in front of him.
+Idle,130,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed from him throughout the video."
+Idle,130,context,The pedestrian is standing still and not making any gestures.
+Idle,130,objective,The pedestrian is standing still and not making any gestures.
+Idle,138,blank,The man is standing still.
+Idle,138,determine,The pedestrian is making a gesture with their hand.
+Idle,138,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed in this scene."
+Idle,138,context,The pedestrian is standing still and not making any gestures.
+Idle,138,objective,The pedestrian is standing still.
+Idle,146,blank,The man is standing still.
+Idle,146,determine,The pedestrian is standing still and not making any gestures.
+Idle,146,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still, facing to the right side of the frame with his arms at his sides. His posture is upright, and he appears to be looking straight ahead. There are no visible movements or changes in his body position throughout the video."
+Idle,146,context,The pedestrian is standing still and not making any gestures.
+Idle,146,objective,The pedestrian is standing still and not making any gestures.
+Idle,154,blank,The man is standing still.
+Idle,154,determine,The pedestrian is making a gesture with their hand.
+Idle,154,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed from him throughout the video."
+Idle,154,context,The pedestrian is standing still.
+Idle,154,objective,The pedestrian is standing still and not making any gestures.
+Idle,162,blank,The man is standing still.
+Idle,162,determine,The pedestrian is not making any gesture.
+Idle,162,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He stands still, facing to the right side of the frame with his body slightly turned towards the camera. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no visible motion in this scene."
+Idle,162,context,The pedestrian is standing still and not making any gestures.
+Idle,162,objective,The pedestrian is standing still.
+Idle,170,blank,The man is standing still.
+Idle,170,determine,The pedestrian is standing still and not making any gestures.
+Idle,170,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no visible motion or change in posture throughout the video."
+Idle,170,context,The pedestrian is standing still and not making any gestures.
+Idle,170,objective,The pedestrian is standing still.
+Idle,178,blank,The man is standing still.
+Idle,178,determine,The pedestrian is making a gesture with his hand.
+Idle,178,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed from him throughout the video."
+Idle,178,context,The pedestrian is standing still.
+Idle,178,objective,The pedestrian is standing still.
+Stop + pass,51,blank,"A man in a black shirt and glasses is standing in front of a white wall. He raises his right hand with the palm facing outward, as if signaling ""stop"" or indicating something he wants to emphasize."
+Stop + pass,51,determine,The pedestrian is making a stop gesture with his hand.
+Stop + pass,51,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain, light-colored background. His right arm is extended forward with his hand open, palm facing outward, as if he is signaling to stop or indicating something. The motion of the gesture appears deliberate and focused on communication."
+Stop + pass,51,context,The pedestrian is making a stop gesture.
+Stop + pass,51,objective,stop
+Stop + pass,59,blank,"A man is standing in front of a white wall, wearing glasses and holding his right hand up with his palm facing forward."
+Stop + pass,59,determine,The pedestrian is making a stop gesture.
+Stop + pass,59,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his right arm extended forward, palm facing outward in a stop gesture. His left hand moves slightly as he maintains the stop position."
+Stop + pass,59,context,The pedestrian is making a stop gesture.
+Stop + pass,59,objective,stop
+Stop + pass,67,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt."
+Stop + pass,67,determine,The pedestrian is making a stop gesture with his hand.
+Stop + pass,67,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain background. His right arm is extended outward with his palm facing forward, while his left arm remains by his side. The motion appears to be static as he maintains this position throughout the video."
+Stop + pass,67,context,The pedestrian is making a stop gesture.
+Stop + pass,67,objective,stop
+Stop + pass,75,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his right arm extended out to the side with his palm facing forward, as if he is trying to stop something or someone from moving towards him."
+Stop + pass,75,determine,The pedestrian is making a stop gesture.
+Stop + pass,75,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, with his right arm extended outward at shoulder height and his left hand raised to chest level with fingers spread apart. His movements are slow and deliberate as he gestures expressively while speaking or presenting."
+Stop + pass,75,context,The pedestrian is making a stop gesture.
+Stop + pass,75,objective,stop
+Stop + pass,83,blank,"A man is standing in front of a white wall, moving his arms and hands around."
+Stop + pass,83,determine,The pedestrian is making a stop gesture.
+Stop + pass,83,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, with his right arm extended forward at shoulder height, palm facing outward as if signaling ""stop."" His left hand moves fluidly around the space near his head, occasionally extending it towards the camera while maintaining focus on something off-camera."
+Stop + pass,83,context,The pedestrian is making a stop gesture.
+Stop + pass,83,objective,The pedestrian is making a stop gesture.
+Stop + pass,91,blank,"A man is standing in front of a white wall, moving his arms and hands around."
+Stop + pass,91,determine,The pedestrian is making a gesture with his hand.
+Stop + pass,91,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands with his right arm extended forward, palm facing outwards, while his left hand moves fluidly around it. His movements are deliberate as he raises his hands above his head before bringing them back down to the starting position."
+Stop + pass,91,context,The pedestrian is making a stop gesture.
+Stop + pass,91,objective,The pedestrian is making a stop gesture.
+Stop + pass,99,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his arms outstretched with one hand open and the other closed into a fist."
+Stop + pass,99,determine,The pedestrian is making a stop gesture.
+Stop + pass,99,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his left arm extended outward, palm facing forward, while his right hand remains by his side. His posture suggests he might be gesturing or signaling something to someone off-camera."
+Stop + pass,99,context,The pedestrian is making a stop gesture.
+Stop + pass,99,objective,The pedestrian is making a stop gesture.
+Stop (blurry),71,blank,A man in a black shirt and glasses is walking across the stage.
+Stop (blurry),71,determine,The pedestrian is making a peace sign.
+Stop (blurry),71,bodyanalysis,"The pedestrian is walking steadily from right to left across the frame, maintaining a consistent pace. He has short light brown hair and wears glasses with thin frames, dressed in a dark long-sleeved shirt. His movements are smooth as he approaches the camera before continuing on his path."
+Stop (blurry),71,context,The pedestrian is walking.
+Stop (blurry),71,objective,The pedestrian is walking straight ahead.
+Stop (blurry),79,blank,A man is standing in front of a white screen.
+Stop (blurry),79,determine,The pedestrian is making a gesture with his hands.
+Stop (blurry),79,bodyanalysis,"The pedestrian is walking steadily from the right side of the frame towards the left, maintaining a consistent pace. He has short hair and wears glasses, dressed in a dark-colored long-sleeved shirt. His arms swing naturally at his sides as he moves forward against a plain gray background."
+Stop (blurry),79,context,The pedestrian is making a stop gesture.
+Stop (blurry),79,objective,The pedestrian is making a stop gesture.
+Stop (blurry),87,blank,A man in a black shirt is standing with his arms outstretched.
+Stop (blurry),87,determine,The pedestrian is making a gesture with his hands.
+Stop (blurry),87,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain, light-colored background. His arms are extended forward with his palms facing down, as if he is holding something or gesturing towards an object. The motion appears to be slow and deliberate, suggesting that he might be demonstrating or explaining something."
+Stop (blurry),87,context,The pedestrian is making a stop gesture.
+Stop (blurry),87,objective,The pedestrian is making a stop gesture.
+Stop (blurry),95,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his arms outstretched with palms facing forward as if he's trying to stop something or someone from coming closer."
+Stop (blurry),95,determine,The pedestrian is making a gesture with his hands.
+Stop (blurry),95,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain, light-colored background. His arms are extended forward with his palms facing outward, as if he is trying to stop something or someone from coming closer. The motion appears to be slow and deliberate, suggesting caution or hesitation."
+Stop (blurry),95,context,The pedestrian is making a stop gesture.
+Stop (blurry),95,objective,The pedestrian is making a stop gesture.
+Stop (blurry),103,blank,The man is standing in front of a white wall.
+Stop (blurry),103,determine,The pedestrian is making a stop gesture with his hand.
+Stop (blurry),103,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain gray background. His right arm is extended forward with his palm facing outward, while his left hand is slightly raised with the palm down. The man appears to be stationary and not moving."
+Stop (blurry),103,context,The pedestrian is making a stop gesture.
+Stop (blurry),103,objective,The pedestrian is making a stop gesture.
+Stop (blurry),111,blank,"A man is standing in front of a white wall, moving his hands back and forth."
+Stop (blurry),111,determine,The pedestrian is making a stop gesture with his hand.
+Stop (blurry),111,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain gray background. His arms are extended outward, with his palms facing forward. The motion appears to be slow and deliberate as he moves his hands slightly from side to side while maintaining the overall position."
+Stop (blurry),111,context,The pedestrian is making a stop gesture.
+Stop (blurry),111,objective,The pedestrian is making a stop gesture.
+Go left,89,blank,The man is moving his hands in a circular motion.
+Go left,89,determine,The pedestrian is making a gesture with his hands.
+Go left,89,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still at first, then begins to move his arms in a rhythmic motion. His movements are fluid and continuous, with his hands moving up and down in front of him. The background is plain and gray, providing a neutral backdrop for the man's actions."
+Go left,89,context,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go left,89,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go left,97,blank,A man in a black shirt is standing and moving his hands around.
+Go left,97,determine,The pedestrian is making a gesture with his hands.
+Go left,97,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain background, possibly a wall or screen. His arms are extended forward with his hands open, as if he is reaching out to catch something. The motion appears to be slow and deliberate, suggesting that he might be performing an action like catching a ball or gesturing during a presentation."
+Go left,97,context,"The pedestrian is making a gesture with their hands, moving them in front of their body."
+Go left,97,objective,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go left,105,blank,A man in a black shirt and glasses is dancing.
+Go left,105,determine,The pedestrian is making a gesture with his hand.
+Go left,105,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a wall or curtain. His body posture suggests he is engaged in some form of physical activity, likely dancing or performing martial arts moves. The man's arms are extended outward with his right arm slightly bent at the elbow and his left arm more straightened. Both hands appear to be making fluid motions, as if reaching out or pushing something away."
+Go left,105,context,"The pedestrian is making a gesture with their right hand, extending it forward and slightly to the side."
+Go left,105,objective,The pedestrian is making a stop gesture.
+Go left,113,blank,A man in a black shirt is moving his arms back and forth.
+Go left,113,determine,The pedestrian is making a gesture with his hands.
+Go left,113,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain, light-colored background. His arms are extended outward with his palms facing forward. The motion appears to be slow and deliberate, as if he is reaching out or gesturing towards something."
+Go left,113,context,"The pedestrian is making a gesture with their right arm extended forward, palm facing outward."
+Go left,113,objective,"The pedestrian is making a gesture with their right arm extended forward, palm facing outward. This could indicate they are signaling to stop or yield."
+Go left,121,blank,A man in a black shirt is standing and moving his arms around.
+Go left,121,determine,The pedestrian is making a gesture with his hand.
+Go left,121,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended forward with his hand open, while his left arm moves slightly behind him. The motion appears to be slow and deliberate, as if he is gesturing or pointing at something."
+Go left,121,context,"The pedestrian is making a gesture with their hand, possibly indicating they want to cross the road."
+Go left,121,objective,The pedestrian is making a stop gesture.
+Go left,129,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Go left,129,determine,The pedestrian is pointing with his right hand.
+Go left,129,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended forward, pointing directly at the camera with his index finger. The left arm extends out to the side, parallel to his body. Both arms are straight and appear to be holding something small, possibly a pen or a similar object."
+Go left,129,context,"The pedestrian is extending their arm forward, indicating a stop or halt gesture."
+Go left,129,objective,"The pedestrian is pointing forward with their right hand, indicating they are directing traffic or signaling a specific direction."
+Go left,137,blank,A man in a black shirt and glasses is dancing.
+Go left,137,determine,The pedestrian is making a gesture with his hand.
+Go left,137,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands with his right arm extended forward, palm facing down, while his left arm is bent at the elbow with the hand near his chest. His body leans slightly to the side, creating an expressive pose that conveys motion or direction."
+Go left,137,context,"The pedestrian is extending their arm, which could indicate a stop or caution signal."
+Go left,137,objective,"The pedestrian is making a gesture with his right arm extended forward, palm facing outward. This could indicate that he is signaling for the vehicle to stop or proceed with caution."
+Go left,145,blank,The man is moving his arms in a circular motion.
+Go left,145,determine,"The pedestrian is extending his right arm forward and moving it in a circular motion, as if he is trying to catch something or reach for an object."
+Go left,145,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands with his right arm extended forward, palm facing outward, while his left arm is bent at the elbow with the hand near his chest. His body leans slightly to the side, creating an expressive pose that suggests he might be gesturing or emphasizing something. The background features a plain white wall, highlighting his focused stance as he engages in this deliberate action."
+Go left,145,context,"The pedestrian is extending their right arm forward, which could indicate a stop or caution signal."
+Go left,145,objective,"The pedestrian is extending their right arm forward, which could indicate a stop or caution signal."
+Go left,153,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He extends his right arm forward with an open hand while keeping his left arm extended to the side. His body remains mostly still as he maintains this pose throughout the video."
+Go left,153,determine,The pedestrian is making a gesture with his hand.
+Go left,153,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended forward with his hand open, while his left arm remains bent at the elbow with the hand close to his body. The man appears to be stationary and not moving."
+Go left,153,context,"The pedestrian is making a gesture with their right hand, extending it forward and slightly to the side."
+Go left,153,objective,"The pedestrian is extending their right arm forward, which could indicate a stop or caution signal."
+Go left,161,blank,A man is dancing in front of a white wall.
+Go left,161,determine,The pedestrian is making a gesture with his hand.
+Go left,161,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His arms are extended out to the sides, with his right arm pointing forward and his left arm slightly bent at the elbow. The man appears to be gesturing or demonstrating something, possibly related to dance or movement."
+Go left,161,context,"The pedestrian is making a gesture with their right hand, extending it forward and slightly to the side."
+Go left,161,objective,"The pedestrian is making a gesture with his right hand, pointing forward."
+Go left,169,blank,"The man is moving his hands and arms in a rhythmic manner, suggesting he might be dancing or performing some form of expressive movement."
+Go left,169,determine,The pedestrian is making a gesture with his hands.
+Go left,169,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His arms are moving rhythmically, with his hands occasionally touching each other or gesturing outward. The motion appears to be fluid and continuous, suggesting he might be dancing or performing some form of expressive movement."
+Go left,169,context,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go left,169,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go left,177,blank,A man in a black shirt is moving his arms and hands around.
+Go left,177,determine,The pedestrian is making a gesture with his hands.
+Go left,177,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain, light-colored background. His arms are extended outward with his hands open, as if he is gesturing or presenting something. The motion of his arms appears to be fluid and continuous, suggesting that he might be explaining or demonstrating something related to the topic at hand."
+Go left,177,context,"The pedestrian is making a gesture with his hands, indicating he wants to cross the road."
+Go left,177,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go left,185,blank,The man is moving his arms in a circular motion.
+Go left,185,determine,The pedestrian is making a gesture with his right hand.
+Go left,185,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his arms extended outward to the sides at shoulder height. His hands are open and slightly curled, as if he is reaching for something or gesturing. The motion appears to be slow and deliberate, suggesting a focused and controlled movement."
+Go left,185,context,"The pedestrian is making a gesture with their right hand, extending it outward and slightly upward."
+Go left,185,objective,"The pedestrian is making a gesture with their right arm extended outward, palm facing forward. This could indicate they are signaling to stop or yield."
+Go left,193,blank,A man in a black shirt is standing with his arms outstretched.
+Go left,193,determine,The pedestrian is making a gesture with his hands.
+Go left,193,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his arms extended out to the sides at shoulder height. His right arm is slightly bent at the elbow, while his left arm remains straight. The man appears to be holding an object between his hands, which are positioned close together."
+Go left,193,context,"The pedestrian is making a gesture with their right arm extended outward, palm facing forward. This could indicate they are signaling to stop or yield while crossing the road."
+Go left,193,objective,"The pedestrian is extending his right arm forward, palm facing outward. This gesture typically indicates a stop or caution signal in traffic contexts."
+Go left,201,blank,The man is standing in front of a white wall.
+Go left,201,determine,The pedestrian is making a gesture with his hands.
+Go left,201,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a wall or screen. His arms are extended outward with his palms facing forward, as if he is reaching out to someone or something. The motion appears to be slow and deliberate, suggesting that he might be demonstrating or explaining something related to the topic at hand."
+Go left,201,context,"The pedestrian is making a gesture with their hand, possibly indicating they want to cross the road."
+Go left,201,objective,"The pedestrian is making a gesture with their right hand, extending it outward. This could indicate they are signaling to stop or slow down the vehicle."
+Stop + drive,87,blank,"A man is standing in front of a white wall, moving his arms and hands around."
+Stop + drive,87,determine,The pedestrian is waving his hand.
+Stop + drive,87,bodyanalysis,"The pedestrian is walking towards the camera, his short light brown hair and glasses visible as he moves. Dressed in a dark long-sleeved shirt featuring a red graphic design on the front, he extends his right arm forward with an open hand before retracting it back to his side while continuing to walk."
+Stop + drive,87,context,"The pedestrian is waving their hand, which could indicate a greeting or an attempt to signal the vehicle."
+Stop + drive,87,objective,The pedestrian is making a stop gesture.
+Stop + drive,95,blank,"A man in a black shirt and glasses is standing against a white wall. He extends his right arm towards the camera, holding it out for several seconds before retracting it back to its original position."
+Stop + drive,95,determine,The pedestrian is making a stop gesture.
+Stop + drive,95,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still with his right arm extended forward, palm facing outward in a stopping gesture. His left hand hangs by his side."
+Stop + drive,95,context,The pedestrian is making a stop gesture.
+Stop + drive,95,objective,The pedestrian is making a stop gesture.
+Stop + drive,103,blank,"A man in a black shirt and glasses is standing against a white wall. He raises his right hand with the palm facing forward, as if signaling ""stop"" or indicating something to be held up."
+Stop + drive,103,determine,The pedestrian is making a stop gesture.
+Stop + drive,103,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white wall, facing the camera with his right arm extended forward, palm open and fingers spread apart as if signaling ""stop"" or ""wait."" His left hand is relaxed by his side. The man remains stationary throughout the video, maintaining this posture without any significant movement."
+Stop + drive,103,context,The pedestrian is making a stop gesture.
+Stop + drive,103,objective,stop
+Stop + drive,111,blank,"A man wearing glasses and a black shirt is standing in front of a white wall. He has his right arm extended with his palm facing forward, as if he is pushing something away or signaling to stop. His left hand is slightly raised and bent at the elbow."
+Stop + drive,111,determine,The pedestrian is making a stop gesture.
+Stop + drive,111,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still with his right arm extended forward, palm facing outward in a stop gesture. His left hand hangs by his side. The background is plain white."
+Stop + drive,111,context,The pedestrian is making a stop gesture.
+Stop + drive,111,objective,The pedestrian is making a stop gesture.
+Stop + drive,119,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Stop + drive,119,determine,The pedestrian is making a stop gesture.
+Stop + drive,119,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a white wall, with his right arm extended forward at shoulder height, palm facing outward as if signaling ""stop."" His left hand hangs by his side. Throughout the video, he maintains this posture without any significant movement or change in position."
+Stop + drive,119,context,The pedestrian is making a stop gesture.
+Stop + drive,119,objective,The pedestrian is signaling to stop.
+Stop + drive,127,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Stop + drive,127,determine,The pedestrian is making a stop gesture.
+Stop + drive,127,bodyanalysis,"The pedestrian is standing still, facing the camera. He has his right arm extended forward with his index finger pointing to the left side of the frame. His left hand is raised in front of him with all fingers spread out."
+Stop + drive,127,context,The pedestrian is making a stop gesture.
+Stop + drive,127,objective,The pedestrian is making a stop gesture.
+Stop + drive,135,blank,"A man in a black shirt and glasses is standing with his arms outstretched, moving them back and forth."
+Stop + drive,135,determine,The pedestrian is making a stop sign with his hand.
+Stop + drive,135,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a white background, with his right arm extended forward and his left hand raised with the palm facing outward. His body posture suggests he might be gesturing or signaling something."
+Stop + drive,135,context,The pedestrian is making a stop gesture.
+Stop + drive,135,objective,The pedestrian is making a stop gesture.
+Stop + drive,143,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Stop + drive,143,determine,The pedestrian is making a gesture with his hand.
+Stop + drive,143,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a white wall, with his right arm extended forward pointing to the left side of the frame. His left hand is raised with fingers spread out, as if he is signaling or directing attention. The man appears to be stationary, maintaining this posture throughout the video."
+Stop + drive,143,context,The pedestrian is making a stop gesture.
+Stop + drive,143,objective,The pedestrian is making a stop gesture.
+Stop + drive,151,blank,The man is pointing with his right hand and holding up a stop sign with the other.
+Stop + drive,151,determine,The pedestrian is making a stop gesture.
+Stop + drive,151,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, with his right arm extended forward at shoulder height, pointing towards the left side of the frame. His left hand is held up in a stopping gesture, palm facing outward. The man's body posture remains static throughout the video."
+Stop + drive,151,context,The pedestrian is making a stop gesture.
+Stop + drive,151,objective,The pedestrian is making a stop gesture.
+Stop + drive,159,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive,159,determine,The pedestrian is making a stop gesture.
+Stop + drive,159,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a white wall, with his right arm extended forward and his left hand raised with the palm facing outward. His body posture suggests he might be gesturing or signaling to someone off-camera."
+Stop + drive,159,context,The pedestrian is making a stop gesture.
+Stop + drive,159,objective,The pedestrian is making a stop gesture.
+Stop + drive,167,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive,167,determine,The pedestrian is making a stop gesture.
+Stop + drive,167,bodyanalysis,"The pedestrian is standing still, facing the camera. He has short brown hair and wears glasses along with a black long-sleeved shirt. His right arm extends outward while his left hand remains raised in front of him, palm open as if gesturing or signaling to someone off-camera."
+Stop + drive,167,context,The pedestrian is making a stop gesture.
+Stop + drive,167,objective,The pedestrian is making a stop gesture.
+Follow,36,blank,The man is walking forward and waving his right hand.
+Follow,36,determine,The pedestrian is making a waving gesture.
+Follow,36,bodyanalysis,"The pedestrian is walking steadily towards the camera, his short light brown hair and beard visible as he moves. Dressed in a black long-sleeved shirt and wearing glasses, he maintains a consistent pace while looking straight ahead against a plain white background."
+Follow,36,context,The pedestrian is waving their hand.
+Follow,36,objective,"The pedestrian is waving their hand, indicating they want to cross the road."
+Follow,44,blank,A man in a black shirt is standing and waving his hand.
+Follow,44,determine,The pedestrian is making a stop gesture.
+Follow,44,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored shirt. He is standing in front of a plain, light-colored background. His right arm is extended forward with his hand open, as if he is gesturing or reaching out to something. The motion appears to be slow and deliberate, suggesting that he might be emphasizing a point or directing attention to an object or person off-camera."
+Follow,44,context,The pedestrian is making a stop gesture.
+Follow,44,objective,The pedestrian is making a stop gesture.
+Follow,52,blank,A man in a black shirt is standing on stage and waving his hand.
+Follow,52,determine,The pedestrian is making a gesture with his hand.
+Follow,52,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored shirt. He is standing in front of a plain background, possibly on a stage or presentation area. His right arm is extended forward with his hand open, as if he is gesturing or presenting something to an audience. The motion appears to be slow and deliberate, suggesting that he might be emphasizing a point during a speech or demonstration."
+Follow,52,context,The pedestrian is waving their hand.
+Follow,52,objective,The pedestrian is making a stop gesture.
+Follow,60,blank,A man in a black shirt is standing on stage and waving his hand.
+Follow,60,determine,The pedestrian is making a waving gesture with his hand.
+Follow,60,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a wall or screen. His right arm is raised with his hand open, as if he is gesturing or pointing towards something off-camera. The motion appears to be slow and deliberate, suggesting that he might be explaining or emphasizing a point."
+Follow,60,context,The pedestrian is making a stop gesture.
+Follow,60,objective,The pedestrian is making a stop gesture.
+Reverse,79,blank,The man is walking in place.
+Reverse,79,determine,The pedestrian is making a gesture with his hands.
+Reverse,79,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is walking forward with his arms slightly bent at the elbows, moving in a steady pace. His body posture is upright, and he appears to be focused on his path."
+Reverse,79,context,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Reverse,79,objective,The pedestrian is making a stop gesture.
+Reverse,87,blank,"A man is standing in front of a white wall, moving his hands up and down."
+Reverse,87,determine,The pedestrian is making a gesture with his hands.
+Reverse,87,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, facing the camera with his hands raised slightly above waist level. His fingers are spread apart as he moves them fluidly from side to side, creating an expressive gesture that suggests communication or emphasis on something being said. The movements are continuous and rhythmic, maintaining eye contact with the viewer throughout the video."
+Reverse,87,context,The pedestrian is making a stop gesture.
+Reverse,87,objective,The pedestrian is making a stop gesture.
+Reverse,95,blank,A man in a black shirt is standing with his hands up and fingers spread.
+Reverse,95,determine,The pedestrian is making a gesture with his hands.
+Reverse,95,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He stands in front of a plain background, with his arms extended outward at shoulder height. His hands are open and slightly spread apart, as if he is gesturing or presenting something. The motion of his hands appears to be slow and deliberate, moving back and forth in a fluid manner."
+Reverse,95,context,The pedestrian is making a stop gesture.
+Reverse,95,objective,The pedestrian is making a stop gesture.
+Reverse,103,blank,A man in a black shirt is standing with his hands up and fingers spread.
+Reverse,103,determine,The pedestrian is making a stop gesture.
+Reverse,103,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain, light-colored background. His hands are raised with fingers spread apart, as if he is gesturing or explaining something. The motion of his hands appears to be fluid and continuous, suggesting that he might be speaking or presenting."
+Reverse,103,context,The pedestrian is making a stop gesture.
+Reverse,103,objective,The pedestrian is making a stop gesture.
+Reverse,111,blank,"A man is standing in front of a white wall, juggling three cards."
+Reverse,111,determine,The pedestrian is making a stop gesture with his hands.
+Reverse,111,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain background, with his arms extended forward and palms facing outward. His hands are moving slightly up and down as if he is gesturing or explaining something."
+Reverse,111,context,The pedestrian is making a stop gesture.
+Reverse,111,objective,The pedestrian is making a stop gesture.
+Reverse,119,blank,The man is moving his hands back and forth.
+Reverse,119,determine,The pedestrian is making a stop gesture.
+Reverse,119,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain background, with his arms extended forward and palms facing outward. His hands are moving slightly up and down as if he is gesturing or explaining something."
+Reverse,119,context,The pedestrian is making a stop gesture.
+Reverse,119,objective,The pedestrian is making a stop gesture.
+Reverse,127,blank,The man is moving his hands in a circular motion.
+Reverse,127,determine,The pedestrian is making a stop gesture.
+Reverse,127,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored t-shirt. He stands in front of a plain background, with his arms extended outward at shoulder height. His hands are open and palms facing forward, as if he is gesturing or presenting something. The motion of his hands appears to be slow and deliberate, moving slightly up and down while maintaining the same position relative to his body."
+Reverse,127,context,The pedestrian is making a stop gesture.
+Reverse,127,objective,stop
+Reverse,135,blank,The man is moving his hands in a circular motion.
+Reverse,135,determine,The pedestrian is making a stop gesture.
+Reverse,135,bodyanalysis,"The pedestrian is standing in front of a white wall, wearing glasses and a dark-colored t-shirt. With his arms extended forward at chest level, he moves them up and down rhythmically while keeping his hands open with fingers spread apart. His movements are smooth and continuous throughout the video."
+Reverse,135,context,The pedestrian is making a stop gesture.
+Reverse,135,objective,The pedestrian is making a stop gesture.
+Stop + drive2,196,blank,"A man is standing in front of a white screen, moving his arms and head rhythmically."
+Stop + drive2,196,determine,The pedestrian is making a gesture with his right hand.
+Stop + drive2,196,bodyanalysis,"The pedestrian is a young man with short, light brown hair and glasses. He is wearing a black long-sleeved shirt. His body posture suggests he is in motion, possibly walking or running. The video captures him from various angles, showing his dynamic movements as he progresses through the scene."
+Stop + drive2,196,context,The pedestrian is making a waving gesture.
+Stop + drive2,196,objective,"The pedestrian is making a gesture with their right hand, which appears to be pointing or indicating something."
+Stop + drive2,204,blank,The man raises his hand and waves it back and forth.
+Stop + drive2,204,determine,The pedestrian is making a stop gesture.
+Stop + drive2,204,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain background, extending his right arm forward with an open hand as if gesturing or signaling something. His posture remains steady throughout the video, maintaining focus on his extended hand against the neutral backdrop."
+Stop + drive2,204,context,The pedestrian is making a stop gesture.
+Stop + drive2,204,objective,stop
+Stop + drive2,212,blank,"A man is standing in front of a white wall, wearing glasses and holding his hand up."
+Stop + drive2,212,determine,The pedestrian is making a stop gesture.
+Stop + drive2,212,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short, light-colored hair. His right arm is extended forward with his palm facing outward in a stopping gesture. The background is plain and gray."
+Stop + drive2,212,context,The pedestrian is making a stop gesture.
+Stop + drive2,212,objective,stop
+Stop + drive2,220,blank,A man in a black shirt is standing with his right arm extended and palm facing outward.
+Stop + drive2,220,determine,The pedestrian is making a stop gesture with his hand.
+Stop + drive2,220,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his right arm extended forward and his left arm slightly bent at the elbow. His body posture suggests he might be gesturing or pointing towards something off-camera."
+Stop + drive2,220,context,The pedestrian is making a stop gesture.
+Stop + drive2,220,objective,stop
+Stop + drive2,228,blank,The man is demonstrating a martial arts move.
+Stop + drive2,228,determine,The pedestrian is making a stop gesture.
+Stop + drive2,228,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his right arm extended forward, pointing to the left side of the frame. His left hand is raised in front of him, palm facing outward as if signaling ""stop"" or indicating something specific. The background is plain and light-colored, providing a clear contrast to his dark attire."
+Stop + drive2,228,context,The pedestrian is making a stop gesture.
+Stop + drive2,228,objective,The pedestrian is making a stop gesture.
+Stop + drive2,236,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive2,236,determine,The pedestrian is making a stop gesture with his hand.
+Stop + drive2,236,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his right arm extended forward and his left hand raised with the palm facing outward as if signaling ""stop."" His body posture suggests he might be demonstrating or explaining something related to traffic signals or safety instructions."
+Stop + drive2,236,context,The pedestrian is making a stop gesture.
+Stop + drive2,236,objective,The pedestrian is signaling to stop.
+Stop + drive2,244,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive2,244,determine,The pedestrian is making a stop gesture.
+Stop + drive2,244,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended outward with his hand open, palm facing forward, as if he is signaling to stop or halt something. The motion appears to be static, with no visible movement other than the initial gesture."
+Stop + drive2,244,context,The pedestrian is making a stop gesture.
+Stop + drive2,244,objective,The pedestrian is making a stop gesture.
+Stop + drive2,252,blank,The person is extending their hand and pointing.
+Stop + drive2,252,determine,The pedestrian is making a stop gesture.
+Stop + drive2,252,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his right arm extended forward, pointing to the left side of the frame. His left hand is raised in front of him, palm facing outward as if signaling ""stop"" or indicating something specific. The background is plain and light-colored, providing a clear view of his actions."
+Stop + drive2,252,context,The pedestrian is making a stop gesture.
+Stop + drive2,252,objective,The pedestrian is making a stop gesture.
+Stop + drive2,260,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his arms outstretched with palms facing forward as if he's trying to stop something or someone from coming closer."
+Stop + drive2,260,determine,The pedestrian is making a stop gesture.
+Stop + drive2,260,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a stage or presentation area. His arms are extended outward with his palms facing forward, as if he is gesturing to emphasize a point or directing attention. The motion appears deliberate and focused, suggesting that he might be giving a speech or presenting something important."
+Stop + drive2,260,context,The pedestrian is making a stop gesture.
+Stop + drive2,260,objective,The pedestrian is making a stop gesture.
+Stop + drive2,268,blank,"A man is standing in front of a white wall, moving his hands back and forth."
+Stop + drive2,268,determine,The pedestrian is making a stop gesture.
+Stop + drive2,268,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a gray background, with his right arm extended forward and his left hand raised as if he is about to catch something or gesture towards someone. His body posture suggests that he might be engaged in some form of communication or demonstration."
+Stop + drive2,268,context,The pedestrian is making a stop gesture.
+Stop + drive2,268,objective,The pedestrian is making a stop gesture.
+Stop + drive2,276,blank,A man is standing in front of a white wall. He extends his right arm and points with his index finger while holding up his left hand palm out as if to stop something.
+Stop + drive2,276,determine,The pedestrian is making a stop gesture.
+Stop + drive2,276,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a white background, with his right arm extended forward and his left hand raised to the side. His body posture suggests he is making a gesture or signal, possibly indicating ""stop"" or ""wait."" The motion appears static as there is no visible movement captured in the video."
+Stop + drive2,276,context,The pedestrian is making a stop gesture.
+Stop + drive2,276,objective,The pedestrian is making a stop gesture.
+Getting a cap,218,blank,"A man in a black shirt and glasses is standing against a white wall. He raises his right hand, palm facing outward, as if to signal ""stop"" or indicate something on the wall behind him."
+Getting a cap,218,determine,The pedestrian is waving his hand.
+Getting a cap,218,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands against a plain white wall, initially facing the camera with his arms at his sides. As he begins to move his right arm up and down, it creates a blur effect due to its rapid motion. His left hand remains still throughout this action, while his body stays mostly stationary."
+Getting a cap,218,context,The pedestrian is waving their hand.
+Getting a cap,218,objective,The pedestrian is making a stop gesture.
+Getting a cap,226,blank,A man in a black shirt is standing against a white wall.
+Getting a cap,226,determine,The pedestrian is waving their hand in the air.
+Getting a cap,226,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a white wall, with his right arm raised high above his head, palm facing forward as if signaling to stop or indicating something at a distance. His left hand hangs by his side, while he maintains this position throughout the video."
+Getting a cap,226,context,The pedestrian is waving their hand in the air.
+Getting a cap,226,objective,"The pedestrian is raising their right hand, which could indicate a stop or caution signal."
+Getting a cap,234,blank,"A man is standing in front of a white wall, raising his right hand and holding it up."
+Getting a cap,234,determine,The pedestrian is making a waving gesture.
+Getting a cap,234,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has his right arm raised with his hand open, as if he is waving or gesturing towards something. His left arm is bent at the elbow, with the fist clenched near his waist. The man appears to be standing still against a plain white wall."
+Getting a cap,234,context,The pedestrian is waving.
+Getting a cap,234,objective,"The pedestrian is raising his right arm, which could indicate a stop or caution signal."
+Getting a cap,242,blank,"A man in a black shirt and glasses is standing with his right arm raised, waving."
+Getting a cap,242,determine,The pedestrian is making a waving gesture.
+Getting a cap,242,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has his right arm raised with an open hand, as if waving or gesturing. His left arm is bent at the elbow with his fist clenched near his waist. The man appears to be standing still against a plain white wall."
+Getting a cap,242,context,The pedestrian is waving their hand.
+Getting a cap,242,objective,The pedestrian is waving.
+Go forward,107,blank,A man in a black shirt is standing with his arms outstretched.
+Go forward,107,determine,The pedestrian is making a gesture with his hands.
+Go forward,107,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He stands in front of a plain background, facing the camera with his arms extended outward at shoulder height. His hands are open and slightly raised, fingers spread apart as if gesturing or explaining something. Throughout the video, he maintains this posture without significant movement."
+Go forward,107,context,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go forward,107,objective,The pedestrian is making a stop gesture.
+Go forward,115,blank,A man in a black shirt is standing and moving his hands around.
+Go forward,115,determine,The pedestrian is making a gesture with his hands.
+Go forward,115,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His hands are raised with fingers spread apart, as if he is gesturing or explaining something. The motion of his hands appears to be slow and deliberate, suggesting that he might be emphasizing certain points while speaking."
+Go forward,115,context,The pedestrian is making a stop gesture.
+Go forward,115,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go forward,123,blank,A man in a black shirt is standing and moving his hands.
+Go forward,123,determine,The pedestrian is making a gesture with his hands.
+Go forward,123,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His hands are raised, with his fingers spread apart, as if he is gesturing or explaining something. The motion of his hands appears to be slow and deliberate, suggesting that he might be emphasizing certain points while speaking."
+Go forward,123,context,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road or signaling for assistance."
+Go forward,123,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road or signaling for assistance."
+Go forward,131,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his hands up with palms facing forward as if he's about to catch something."
+Go forward,131,determine,The pedestrian is making a gesture with his hands.
+Go forward,131,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, gesturing with his hands as he speaks. His movements are fluid and expressive, emphasizing points by raising or lowering his arms while keeping his body mostly stationary."
+Go forward,131,context,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road or signaling for assistance."
+Go forward,131,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go forward,139,blank,A man in a black shirt is standing and moving his hands.
+Go forward,139,determine,The pedestrian is making a gesture with his hands.
+Go forward,139,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt paired with dark pants. He stands against a plain white background, facing the camera as he moves his hands fluidly up and down while speaking or gesturing. His short hair complements his focused demeanor throughout the video."
+Go forward,139,context,"The pedestrian is making a gesture with their hand, possibly indicating they are about to cross the road or signaling for you to stop."
+Go forward,139,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go forward,147,blank,"A man is standing in front of a white wall, moving his hands and arms."
+Go forward,147,determine,The pedestrian is making a gesture with his hand.
+Go forward,147,bodyanalysis,"The pedestrian is a man wearing glasses, dressed in a black long-sleeved shirt and dark pants. He stands against a plain white wall with his right arm extended forward, palm facing outward, while his left hand rests by his side. His movements are slow and deliberate as he maintains this posture throughout the video."
+Go forward,147,context,"The pedestrian is making a gesture with their hand, possibly indicating they want to cross the road."
+Go forward,147,objective,The pedestrian is making a stop gesture.
+Go forward,155,blank,"The man is standing in front of a white wall, wearing glasses and a black sweater. He repeatedly moves his hand up to his chest area while speaking."
+Go forward,155,determine,The pedestrian is making a gesture with his hand.
+Go forward,155,bodyanalysis,"The pedestrian is a man wearing glasses, dressed in a black long-sleeved shirt and dark pants. He stands against a plain white wall with his right arm extended forward, palm facing down, while the rest of his body remains still."
+Go forward,155,context,"The pedestrian is making a gesture with their right hand, which could indicate they are signaling to stop or slow down."
+Go forward,155,objective,The pedestrian is making a stop gesture.
+Go forward,163,blank,A man in a black shirt is standing against the wall and moving his hands.
+Go forward,163,determine,The pedestrian is making a gesture with his hand.
+Go forward,163,bodyanalysis,"The pedestrian is a man wearing glasses, dressed in a black long-sleeved shirt and dark pants. He stands still against the white wall before moving his right arm slightly to adjust his position or gesture while speaking. His movements are minimal as he maintains focus on delivering information about how to make an object float using magnets."
+Go forward,163,context,"The pedestrian is making a gesture with their hand, possibly indicating they are about to cross the road or signaling something."
+Go forward,163,objective,"The pedestrian is making a gesture with their right hand, which appears to be pointing or indicating something."
+Go forward,171,blank,A man in a black shirt and glasses is walking across the room.
+Go forward,171,determine,The pedestrian is making a gesture with his hand.
+Go forward,171,bodyanalysis,"The pedestrian is walking steadily towards the camera, maintaining a straight posture with his arms hanging naturally by his sides. His movements are smooth and continuous as he approaches directly in front of him against a plain white wall background."
+Go forward,171,context,"The pedestrian is making a gesture with his right hand, which appears to be pointing or indicating something."
+Go forward,171,objective,The pedestrian is standing still and not making any gestures.

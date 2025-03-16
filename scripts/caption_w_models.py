@@ -17,7 +17,7 @@ def caption_across_models(data_folder, models_folder, window):
     # Iterate over models
     for name in model_modules:
         model_module = importlib.import_module(name)
-        print('Processing using:', model_module.__name__)
+        print('Processing using:', model_module.__name__.split(".")[-1])
         
         # Load model
         model_package = model_module.load_model()
