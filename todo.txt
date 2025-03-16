@@ -19,7 +19,8 @@ Write about:
 #. Pipeline
     # Add " " to caption output
     # Remove warnings
-    # Skips last few frames 
+    # Skips last few frames
+    # Make all models work running same script
 #. Clean up
     # VideoLLaMA2 file (__name__)
     # readme (instructions)
