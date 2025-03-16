@@ -1,4 +1,4 @@
-video_name,frame_idx,caption
+video_name,frame_idx,prompt_type,caption
 Idle,114,blank,The man is standing still.
 Idle,114,determine,The pedestrian is not making any gestures.
 Idle,114,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing still, facing to the right side of the frame. His body posture is upright, with his arms hanging naturally by his sides. There are no visible movements or changes in his position throughout the video."

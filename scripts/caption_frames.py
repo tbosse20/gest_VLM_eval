@@ -5,6 +5,7 @@ import sys
 sys.path.append(".")
 from config.prompts import prompts
 import src.utils as utils
+import re
 
 def caption_frames(video_path: str, window: int, model_package = None, model_module = None):
 
@@ -79,6 +80,7 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
                 frames_list=frames_list,
                 model_package=model_package
             )
+            respond = re.sub(r' {2,}', '\\\\s', respond.replace('\n', '\\\\n').strip())
             dictionary['caption'] = [respond]
 
             df = pd.DataFrame(dictionary)
