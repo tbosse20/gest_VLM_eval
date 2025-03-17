@@ -2,12 +2,12 @@ ToDo:
 #. Pipeline
     # Add " " to caption output and replace breaks with "\n"
     # Remove warnings
-    # Make all models work running same script
-    # Skips last few frames
+    # Make all models work running same script wh OOM
+    # Skips last few frames..
 #. Clean up
-    # VideoLLaMA2 file (__name__)
+    # VideoLLaMA2 file (__name__). Adapt to image, frames, and video
     # readme (instructions)
-    # Rm RMPS, weights, etc
+    # Rm RMPS, weights, etc. non-used
 # Sanity checks
 
 1. Dataset

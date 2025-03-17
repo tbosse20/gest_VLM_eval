@@ -84,8 +84,11 @@ def caption_video(video_path, csv_path, interval=1, vllama2_package=None, sanity
             # Write to csv
             video_name = os.path.basename(video_path)
             re_complete_caption = re.sub(r'\s+', ' ', complete_caption).strip()
-            df = pd.DataFrame({"video_name": [video_name], "frame_idx": [frame_idx], "caption": [re_complete_caption]})
-            df.to_csv(csv_path, mode="a", index=False, header=False)
+            pd.DataFrame({
+                "video_name": [video_name],
+                "frame_idx":  [frame_idx],
+                "caption":    [re_complete_caption]
+            }).to_csv(csv_path, mode="a", index=False, header=False)
 
             ### Finalize ### 
             # Add current frame rate to the frame shown

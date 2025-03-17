@@ -67,8 +67,9 @@ def inference(
 
 def sanity():
 
+    model_package = load_model()
+
     # Video Inference
-    modal = 'video'
     modal_path = 'data/sanity/input/video_0153.mp4' 
     instruct = 'What are the pedestrians gesturing to the ego driver?'
     output = inference(instruct, modal_path)
@@ -76,41 +77,19 @@ def sanity():
     print()
 	
     # Image Inference
-    # modal = 'image'
-    # modal_path = 'data/sanity/input/video_0153.png' 
-    # instruct = 'What is happening in this image?'
-    # output = inference(modal_path, instruct, modal)
-    # print("Image output:\n", output)
+    modal_path = 'data/sanity/input/video_0153.png' 
+    instruct = 'What is happening in this image?'
+    output = inference(modal_path, instruct)
+    print("Image output:\n", output)
+
+    utils.unload_model(*model_package)
 
 if __name__ == "__main__":
+
+    # # Sanity check
     # sanity()
-    # vllama2_package = load_model()
+    # exit()
 
-    # # # Image Inference
-    # # modal = 'image'
-    # # modal_path = 'saved_image0.jpg' 
-    # # instruct = """ You are an autonomous vehicle. Explain the pedestrian, and suggest what to do. """
-
-    # # output = inference(modal_path, instruct, modal, vllama2_package)
-    # # print("Image output:\n", output)
-
-    # # modal = 'image'
-    # # modal_path = 'saved_image1.jpg' 
-    # # # instruct = prompts.pose
-    # # instruct = """ You are driving a car. What would you do in this situation? """
-    # # output = inference(modal_path, instruct, modal, vllama2_package)
-    # # print("Image output:\n", output)
-
-    # modal = 'video'
-    # # modal_path = 'data/sanity/input/video_0153.mp4' 
-    # modal_path = 'data/sanity/output/short.mp4' 
-    # # instruct = prompts.pose
-    # instruct = ""
-    # output = inference(modal_path, instruct, modal, vllama2_package)
-    # print("Image output:\n", output)
-
-    # model, processor, tokenizer = vllama2_package
-    # unload_model(model, processor, tokenizer)
     args = utils.argparse()
     
     frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
