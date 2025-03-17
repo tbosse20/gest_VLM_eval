@@ -69,17 +69,13 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
         }
         
         # Iterate over prompts
-        for prompt in prompts:
+        for prompt_type, prompt in prompts.items():
             
             # Get prompt
-            dictionary['prompt_type'] = [prompt['alias']]
+            dictionary['prompt_type'] = [prompt_type]
             
             # Get model response and append to dictionary
-            respond = model_module.inference(
-                prompt=prompt['text'],
-                frames_list=frames_list,
-                model_package=model_package
-            )
+            respond = model_module.inference(prompt, frames_list, model_package)
             respond = re.sub(r' {2,}', '\\\\s', respond.replace('\n', '\\\\n').strip())
             dictionary['caption'] = [respond]
 

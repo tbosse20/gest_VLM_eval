@@ -46,7 +46,7 @@ def plot_metrics(metrics_folder, include_prompt=None):
     plt.figure(figsize=(7, 3))
     
     # Only keep cos, jaccard and meteor
-    merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Meteor"])]
+    # merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Meteor"])]
 
     # Boxplot: Group by metric, color by model
     import seaborn as sns
@@ -62,7 +62,7 @@ def plot_metrics(metrics_folder, include_prompt=None):
 
     # Save the plot
     date_time = pd.Timestamp.now().strftime("%Y%m%d_%H%M")
-    boxplot_path = f"results/figures/metrics_boxplot.png"
+    boxplot_path = f"results/figures/metrics_boxplot2.png"
     boxplot_path = boxplot_path.replace(".png", f"_{include_prompt}.png") if include_prompt else boxplot_path
     # boxplot_path = boxplot_path.replace(".png", f"_{date_time}.png")
     plt.savefig(boxplot_path)
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     
     # Get list of prompt types
     from config.prompts import prompts
-    prompt_types = [prompt["alias"] for prompt in prompts]
+    prompt_types = prompts.keys()
     
     import argparse
     parser = argparse.ArgumentParser(description="Plot similarity metrics from CSV files.")

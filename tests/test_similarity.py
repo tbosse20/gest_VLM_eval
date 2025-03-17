@@ -7,31 +7,28 @@ class TestSimilarityMetrics(unittest.TestCase):
 
     def test_similarity_metrics(self):
         # Example test cases with different levels of similarity
+        GT = "A person signals a driver to stop with their hand."
         test_cases = [
             ("A pedestrian raises their hand to stop traffic.",
-             "A person signals a driver to stop with their hand.",
-             "High similarity"),  # Expect high similarity
+             GT, "High"),  # Expect high similarity
 
             ("A pedestrian waves to say thanks.",
-             "A pedestrian raises their hand to stop traffic.",
-             "Moderate similarity"),  # Expect moderate similarity
+             GT, "Moderate"),  # Expect moderate similarity
 
             ("A cyclist gestures to indicate a turn.",
-             "A pedestrian waves to get a taxi.",
-             "Low similarity"),  # Expect low similarity
+             GT, "Low"),  # Expect low similarity
 
             ("The sky is blue and the sun is shining.",
-             "A pedestrian signals a driver to yield.",
-             "Very low similarity"),  # Expect very low similarity
+             GT, "Very low"),  # Expect very low similarity
 
             ("",
-             "A pedestrian waves to stop a car.",
-             "Edge case: empty ground truth"),  # Edge case: empty string
+             GT, "Edge case: empty ground truth"),  # Edge case: empty string
 
             ("A pedestrian waves at the driver.",
-             "",
-             "Edge case: empty predicted caption"),  # Edge case: empty string
+             "", "Edge case: empty predicted caption"),  # Edge case: empty string
         ]
+        
+        
 
         for ground_truth, predicted, description in test_cases:
             with self.subTest(msg=description):
@@ -50,5 +47,9 @@ class TestSimilarityMetrics(unittest.TestCase):
                     for metric in metrics.values():
                         self.assertEqual(metric, 0.0, f"Expected zero for {description}, but got {metric}")
 
+                # Make a bar plot for the metrics
+                
+
+            
 if __name__ == "__main__":
     unittest.main()
