@@ -2,10 +2,13 @@ ToDo:
 #. Pipeline
     # Add " " to caption output and replace breaks with "\n"
     # Remove warnings
+    # Make all models work running same script
+    # Skips last few frames
 #. Clean up
     # VideoLLaMA2 file (__name__)
     # readme (instructions)
     # Rm RMPS, weights, etc
+# Sanity checks
 
 1. Dataset
     1. Front-Hand
@@ -18,22 +21,12 @@ ToDo:
 
 2. Run experiment!
 3. Result analysis
+4. Write paper
 
 Write about:
 - VideoLLaMA2
 - Memory handling
     - Fix OOM issue and clean
-
-#. Pipeline
-    # Add " " to caption output
-    # Remove warnings
-    # Skips last few frames
-    # Make all models work running same script
-#. Clean up
-    # VideoLLaMA2 file (__name__)
-    # readme (instructions)
-    # Rm RMPS, weights, etc
-# Sanity checks
 
 ###### DONE ######
 1.b Pipeline

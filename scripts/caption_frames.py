@@ -64,8 +64,10 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
         
         # Prepare dictionary
         dictionary = {
-            "video_name": [video_name],
-            "frame_idx":  [i + window],
+            "video_name":   [video_name],
+            "start_frame":  [i],
+            "end_frame":    [i + window],
+            "window_size":  [window],
         }
         
         # Iterate over prompts
@@ -79,6 +81,7 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
             respond = re.sub(r' {2,}', '\\\\s', respond.replace('\n', '\\\\n').strip())
             dictionary['caption'] = [respond]
 
+            # Save to csv
             df = pd.DataFrame(dictionary)
             df.to_csv(csv_path, mode="a", index=False, header=False)
 

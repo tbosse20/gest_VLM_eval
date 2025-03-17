@@ -5,7 +5,7 @@ import gc
 
 import sys
 sys.path.append(".")
-import scripts.caption_video as caption_video
+import RMPS.caption_video as caption_video
 import scripts.decide_action as decide_action
 
 def caption_video(frame):

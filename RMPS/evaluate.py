@@ -5,8 +5,8 @@ def compare_csv():
     df1 = pd.read_csv('data/sanity/output/actions.csv')
     df2 = pd.read_csv('data/sanity/output/pred_actions.csv')
 
-    # Merge on 'video_name' and 'frame_idx'
-    merged_df = pd.merge(df1, df2, on=["video_name", "frame_idx"])
+    # Merge on 'video_name', 'start_frame', and 'end_frame'
+    merged_df = pd.merge(df1, df2, on=["video_name", "start_frame", "end_frame"])
     
     # Ensure index alignment by resetting index
     merged_df = merged_df.reset_index(drop=True)
