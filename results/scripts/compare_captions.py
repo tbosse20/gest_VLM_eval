@@ -117,9 +117,9 @@ def process_csv(label_caption_csv, gen_caption_folder):
     for gen_caption_csv in gen_caption_csvs:
         
         # Only process this model
-        # model_only = "proxy"
-        # if model_only not in gen_caption_csv:
-        #     continue
+        model_only = "proxy"
+        if model_only not in gen_caption_csv:
+            continue
 
         # Get metric csv file (ex.: results/data/METRICS/proxy.csv)
         metric_path = os.path.join(metrics_folder, os.path.basename(gen_caption_csv))
@@ -141,7 +141,7 @@ def process_csv(label_caption_csv, gen_caption_folder):
             video_name, frame_idx = row["video_name"], row["frame_idx"]
 
             # Only process these videos
-            videos_only = ["Stop + drive", "Stop + pass", "Follow", "Getting a cap", "Go left"]
+            videos_only = ["Stop + pass", "Follow", "Getting a cap", "Go left"]
             if video_name not in videos_only:
                 continue
             
