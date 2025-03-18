@@ -65,7 +65,7 @@ def save_video_frames_folder(videos_folder: str, output_folder: str):
 
 if __name__ == "__main__":
     
-    videos_folder = "D:/DCIM/100_0104"  # Folder containing videos
+    videos_folder = "../realworldgestures_front"  # Folder containing videos
     # output_folder = "data/video_frames" # Folder to save frames
-    output_folder = "D:/DCIM/video_frames" # Folder to save frames
+    output_folder = "../realworldgestures_video_frames" # Folder to save frames
     save_video_frames_folder(videos_folder, output_folder)

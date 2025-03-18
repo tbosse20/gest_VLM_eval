@@ -92,7 +92,7 @@ def process_csv(label_caption_csv, gen_caption_folder):
     if not os.path.exists(label_caption_csv):
         raise FileNotFoundError(f"Input CSV file '{label_caption_csv}' not found.")
 
-    COLUMNS = ["video_name", "frame_idx", "prompt"]
+    COLUMNS = ["video_name", "frame_idx", "prompt_type"]
     METRICS = ["cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
     
     # Load CSV
@@ -156,12 +156,14 @@ def process_csv(label_caption_csv, gen_caption_folder):
             label_caption = label_caption.values[0]
                 
             # Get the predicted caption
-            pred_caption, prompt_type = row["caption"], row["prompt_type"]
+            pred_caption = row["caption"]
             if pred_caption in [None, "empty"]: continue
             
             # Compute similarity metrics
             metrics_df = compute_similarity_metrics(label_caption, pred_caption)
             
+            # Get prompt type if available
+            prompt_type = row["prompt_type"] if "prompt_type" in row else None
             # Save results to CSV
             frame_sample_df = pd.DataFrame({
                 "video_name":  [video_name],

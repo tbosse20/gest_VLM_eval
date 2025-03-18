@@ -1,0 +1,2 @@
+video_name,frame_idx,prompt_type,cosine,jaccard,bleu,meteor,rouge_l,bert
+None,0,None,0,0,0,0,0,0
