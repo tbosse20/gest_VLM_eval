@@ -10,6 +10,8 @@ ToDo:
     # Rm RMPS, weights, etc. non-used
 # Sanity checks
 
+# LLM input - What will be a good input for a LLM?
+
 1. Dataset
     1. Front-Hand
     1.1. Annotate videos

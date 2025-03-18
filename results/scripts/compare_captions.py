@@ -92,14 +92,14 @@ def process_csv(label_caption_csv, gen_caption_folder):
     if not os.path.exists(label_caption_csv):
         raise FileNotFoundError(f"Input CSV file '{label_caption_csv}' not found.")
 
-    COLUMNS = ["video_name", "start_frame", "prompt"]
+    COLUMNS = ["video_name", "frame_idx", "prompt"]
     METRICS = ["cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
     
     # Load CSV
     label_df = pd.read_csv(label_caption_csv)
 
     # Ensure necessary columns exist
-    required_columns = {"video_name", "start_frame", "label"}
+    required_columns = {"video_name", "frame_idx", "label"}
     if not required_columns.issubset(label_df.columns):
         raise ValueError(f"Input CSV must contain columns: {required_columns}")
     
@@ -116,7 +116,9 @@ def process_csv(label_caption_csv, gen_caption_folder):
     # Loop through generated caption CSVs
     for gen_caption_csv in gen_caption_csvs:
         
-        # if "proxy" not in gen_caption_csv:
+        # Only process this model
+        # model_only = "proxy"
+        # if model_only not in gen_caption_csv:
         #     continue
 
         # Get metric csv file (ex.: results/data/METRICS/proxy.csv)
@@ -136,12 +138,17 @@ def process_csv(label_caption_csv, gen_caption_folder):
         gen_caption_csv_name = os.path.basename(gen_caption_csv).split(".")[0]
         for index, row in tqdm(gen_df.iterrows(), total=gen_df.shape[0], desc=f"Proc. {gen_caption_csv_name}"):
             # Get image name and frame index
-            video_name, start_frame, end_frame = row["video_name"], row["start_frame"], row["end_frame"]
+            video_name, frame_idx = row["video_name"], row["frame_idx"]
 
+            # Only process these videos
+            videos_only = ["Stop + drive", "Stop + pass", "Follow", "Getting a cap", "Go left"]
+            if video_name not in videos_only:
+                continue
+            
             # Retrieve the corresponding ground truth caption
             label_caption = label_df.loc[(
                 (label_df["video_name"] == video_name) &
-                (label_df["start_frame"] == start_frame)
+                (label_df["frame_idx"] == frame_idx)
                 ), "label"
             ]
             if label_caption.empty or label_caption.values[0] in [None, "empty"]:
@@ -158,8 +165,7 @@ def process_csv(label_caption_csv, gen_caption_folder):
             # Save results to CSV
             frame_sample_df = pd.DataFrame({
                 "video_name":  [video_name],
-                "start_frame": [start_frame],
-                "end_frame":   [end_frame],
+                "frame_idx": [frame_idx],
                 "prompt_type": [prompt_type],
             })
             frame_sample_df = pd.concat([frame_sample_df, metrics_df], axis=1)

@@ -1,49 +1,534 @@
 video_name,frame_idx,prompt,cosine,jaccard,bleu,meteor,rouge_l,bert
-Idle,114,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,114,determine,0.5159541368484497,0.12,0.010831003172855106,0.10603964960811434,0.23529411764705882,0.9065341353416443
-Idle,114,bodyanalysis,0.6428930759429932,0.2037037037037037,0.03685286206252273,0.3330498866213152,0.2682926829268293,0.8781755566596985
-Idle,114,context,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,114,objective,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,122,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,122,determine,0.6065238118171692,0.19230769230769232,0.05607916112826589,0.18278688524590164,0.2702702702702703,0.8969001770019531
-Idle,122,bodyanalysis,0.6351073980331421,0.18181818181818182,0.048540905267463956,0.34940036900369004,0.3384615384615384,0.8802220821380615
-Idle,122,context,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,122,objective,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,130,blank,0.1343124657869339,0.06666666666666667,0.006980705362777759,0.06097560975609757,0.10256410256410256,0.860131561756134
-Idle,130,determine,0.6149165630340576,0.2222222222222222,0.07306251530426115,0.23270283723245394,0.30769230769230765,0.9009503126144409
-Idle,130,bodyanalysis,0.6513994932174683,0.18181818181818182,0.03549988305905961,0.31356851825310705,0.2650602409638554,0.8821543455123901
-Idle,130,context,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,130,objective,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,138,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,138,determine,0.6632816195487976,0.2,0.020394850770307917,0.17546867855509832,0.2777777777777778,0.8982582688331604
-Idle,138,bodyanalysis,0.6509637832641602,0.18867924528301888,0.03614851517838537,0.2971351142082849,0.2682926829268293,0.8782634735107422
-Idle,138,context,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,138,objective,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,146,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,146,determine,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,146,bodyanalysis,0.6373870968818665,0.18181818181818182,0.03357371652369962,0.33189746486830024,0.2650602409638554,0.880910336971283
-Idle,146,context,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,146,objective,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,154,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,154,determine,0.6632816195487976,0.2,0.020394850770307917,0.17546867855509832,0.2777777777777778,0.8982582688331604
-Idle,154,bodyanalysis,0.6513994932174683,0.18181818181818182,0.03549988305905961,0.31356851825310705,0.2650602409638554,0.8821543455123901
-Idle,154,context,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,154,objective,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,162,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,162,determine,0.5553756952285767,0.12,0.010831003172855106,0.10603964960811434,0.23529411764705882,0.9055385589599609
-Idle,162,bodyanalysis,0.6363054513931274,0.18181818181818182,0.03617637532636864,0.3330498866213152,0.2650602409638554,0.881184995174408
-Idle,162,context,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,162,objective,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,170,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,170,determine,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,170,bodyanalysis,0.6257128715515137,0.2,0.0348599833962719,0.32961638263552845,0.2558139534883721,0.8797708749771118
-Idle,170,context,0.6164823770523071,0.14814814814814814,0.05303639607699453,0.1536885245901639,0.2702702702702703,0.9077473878860474
-Idle,170,objective,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,178,blank,0.30497145652770996,0.13043478260869565,0.0018855939591447205,0.10692701069270107,0.18750000000000003,0.8779178857803345
-Idle,178,determine,0.6458542346954346,0.15384615384615385,0.019288258982890678,0.15308641975308643,0.2222222222222222,0.8948289752006531
-Idle,178,bodyanalysis,0.6454545259475708,0.18181818181818182,0.03549988305905961,0.31356851825310705,0.2619047619047619,0.8804947137832642
-Idle,178,context,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
-Idle,178,objective,0.6676754951477051,0.18181818181818182,0.010028146616223624,0.15690376569037656,0.25,0.8933998942375183
+Idle,114,blank,The man is standing still.
+Idle,114,determine,The pedestrian is not making any gestures.
+Idle,114,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing still, facing to the right side of the frame. His body posture is upright, with his arms hanging naturally by his sides. There are no visible movements or changes in his position throughout the video."
+Idle,114,context,The pedestrian is standing still.
+Idle,114,objective,The pedestrian is standing still.
+Idle,122,blank,The man is standing still.
+Idle,122,determine,The pedestrian is standing still with his hands behind him.
+Idle,122,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still, facing to the right side of the frame with his arms at his sides. His body posture remains unchanged throughout the video."
+Idle,122,context,The pedestrian is standing still.
+Idle,122,objective,The pedestrian is standing still.
+Idle,130,blank,The man in the video is wearing glasses and a black shirt.
+Idle,130,determine,The pedestrian is standing still with his hands in front of him.
+Idle,130,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed from him throughout the video."
+Idle,130,context,The pedestrian is standing still and not making any gestures.
+Idle,130,objective,The pedestrian is standing still and not making any gestures.
+Idle,138,blank,The man is standing still.
+Idle,138,determine,The pedestrian is making a gesture with their hand.
+Idle,138,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed in this scene."
+Idle,138,context,The pedestrian is standing still and not making any gestures.
+Idle,138,objective,The pedestrian is standing still.
+Idle,146,blank,The man is standing still.
+Idle,146,determine,The pedestrian is standing still and not making any gestures.
+Idle,146,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still, facing to the right side of the frame with his arms at his sides. His posture is upright, and he appears to be looking straight ahead. There are no visible movements or changes in his body position throughout the video."
+Idle,146,context,The pedestrian is standing still and not making any gestures.
+Idle,146,objective,The pedestrian is standing still and not making any gestures.
+Idle,154,blank,The man is standing still.
+Idle,154,determine,The pedestrian is making a gesture with their hand.
+Idle,154,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed from him throughout the video."
+Idle,154,context,The pedestrian is standing still.
+Idle,154,objective,The pedestrian is standing still and not making any gestures.
+Idle,162,blank,The man is standing still.
+Idle,162,determine,The pedestrian is not making any gesture.
+Idle,162,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He stands still, facing to the right side of the frame with his body slightly turned towards the camera. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no visible motion in this scene."
+Idle,162,context,The pedestrian is standing still and not making any gestures.
+Idle,162,objective,The pedestrian is standing still.
+Idle,170,blank,The man is standing still.
+Idle,170,determine,The pedestrian is standing still and not making any gestures.
+Idle,170,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no visible motion or change in posture throughout the video."
+Idle,170,context,The pedestrian is standing still and not making any gestures.
+Idle,170,objective,The pedestrian is standing still.
+Idle,178,blank,The man is standing still.
+Idle,178,determine,The pedestrian is making a gesture with his hand.
+Idle,178,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He is standing still, facing to the right side of the frame with his body in profile view. His arms are relaxed by his sides, and he appears to be looking straight ahead. There is no motion observed from him throughout the video."
+Idle,178,context,The pedestrian is standing still.
+Idle,178,objective,The pedestrian is standing still.
+Stop + pass,51,blank,"A man in a black shirt and glasses is standing in front of a white wall. He raises his right hand with the palm facing outward, as if signaling ""stop"" or indicating something he wants to emphasize."
+Stop + pass,51,determine,The pedestrian is making a stop gesture with his hand.
+Stop + pass,51,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain, light-colored background. His right arm is extended forward with his hand open, palm facing outward, as if he is signaling to stop or indicating something. The motion of the gesture appears deliberate and focused on communication."
+Stop + pass,51,context,The pedestrian is making a stop gesture.
+Stop + pass,51,objective,stop
+Stop + pass,59,blank,"A man is standing in front of a white wall, wearing glasses and holding his right hand up with his palm facing forward."
+Stop + pass,59,determine,The pedestrian is making a stop gesture.
+Stop + pass,59,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his right arm extended forward, palm facing outward in a stop gesture. His left hand moves slightly as he maintains the stop position."
+Stop + pass,59,context,The pedestrian is making a stop gesture.
+Stop + pass,59,objective,stop
+Stop + pass,67,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt."
+Stop + pass,67,determine,The pedestrian is making a stop gesture with his hand.
+Stop + pass,67,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain background. His right arm is extended outward with his palm facing forward, while his left arm remains by his side. The motion appears to be static as he maintains this position throughout the video."
+Stop + pass,67,context,The pedestrian is making a stop gesture.
+Stop + pass,67,objective,stop
+Stop + pass,75,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his right arm extended out to the side with his palm facing forward, as if he is trying to stop something or someone from moving towards him."
+Stop + pass,75,determine,The pedestrian is making a stop gesture.
+Stop + pass,75,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, with his right arm extended outward at shoulder height and his left hand raised to chest level with fingers spread apart. His movements are slow and deliberate as he gestures expressively while speaking or presenting."
+Stop + pass,75,context,The pedestrian is making a stop gesture.
+Stop + pass,75,objective,stop
+Stop + pass,83,blank,"A man is standing in front of a white wall, moving his arms and hands around."
+Stop + pass,83,determine,The pedestrian is making a stop gesture.
+Stop + pass,83,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, with his right arm extended forward at shoulder height, palm facing outward as if signaling ""stop."" His left hand moves fluidly around the space near his head, occasionally extending it towards the camera while maintaining focus on something off-camera."
+Stop + pass,83,context,The pedestrian is making a stop gesture.
+Stop + pass,83,objective,The pedestrian is making a stop gesture.
+Stop + pass,91,blank,"A man is standing in front of a white wall, moving his arms and hands around."
+Stop + pass,91,determine,The pedestrian is making a gesture with his hand.
+Stop + pass,91,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands with his right arm extended forward, palm facing outwards, while his left hand moves fluidly around it. His movements are deliberate as he raises his hands above his head before bringing them back down to the starting position."
+Stop + pass,91,context,The pedestrian is making a stop gesture.
+Stop + pass,91,objective,The pedestrian is making a stop gesture.
+Stop + pass,99,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his arms outstretched with one hand open and the other closed into a fist."
+Stop + pass,99,determine,The pedestrian is making a stop gesture.
+Stop + pass,99,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his left arm extended outward, palm facing forward, while his right hand remains by his side. His posture suggests he might be gesturing or signaling something to someone off-camera."
+Stop + pass,99,context,The pedestrian is making a stop gesture.
+Stop + pass,99,objective,The pedestrian is making a stop gesture.
+Stop (blurry),71,blank,A man in a black shirt and glasses is walking across the stage.
+Stop (blurry),71,determine,The pedestrian is making a peace sign.
+Stop (blurry),71,bodyanalysis,"The pedestrian is walking steadily from right to left across the frame, maintaining a consistent pace. He has short light brown hair and wears glasses with thin frames, dressed in a dark long-sleeved shirt. His movements are smooth as he approaches the camera before continuing on his path."
+Stop (blurry),71,context,The pedestrian is walking.
+Stop (blurry),71,objective,The pedestrian is walking straight ahead.
+Stop (blurry),79,blank,A man is standing in front of a white screen.
+Stop (blurry),79,determine,The pedestrian is making a gesture with his hands.
+Stop (blurry),79,bodyanalysis,"The pedestrian is walking steadily from the right side of the frame towards the left, maintaining a consistent pace. He has short hair and wears glasses, dressed in a dark-colored long-sleeved shirt. His arms swing naturally at his sides as he moves forward against a plain gray background."
+Stop (blurry),79,context,The pedestrian is making a stop gesture.
+Stop (blurry),79,objective,The pedestrian is making a stop gesture.
+Stop (blurry),87,blank,A man in a black shirt is standing with his arms outstretched.
+Stop (blurry),87,determine,The pedestrian is making a gesture with his hands.
+Stop (blurry),87,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain, light-colored background. His arms are extended forward with his palms facing down, as if he is holding something or gesturing towards an object. The motion appears to be slow and deliberate, suggesting that he might be demonstrating or explaining something."
+Stop (blurry),87,context,The pedestrian is making a stop gesture.
+Stop (blurry),87,objective,The pedestrian is making a stop gesture.
+Stop (blurry),95,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his arms outstretched with palms facing forward as if he's trying to stop something or someone from coming closer."
+Stop (blurry),95,determine,The pedestrian is making a gesture with his hands.
+Stop (blurry),95,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short hair and is standing in front of a plain, light-colored background. His arms are extended forward with his palms facing outward, as if he is trying to stop something or someone from coming closer. The motion appears to be slow and deliberate, suggesting caution or hesitation."
+Stop (blurry),95,context,The pedestrian is making a stop gesture.
+Stop (blurry),95,objective,The pedestrian is making a stop gesture.
+Stop (blurry),103,blank,The man is standing in front of a white wall.
+Stop (blurry),103,determine,The pedestrian is making a stop gesture with his hand.
+Stop (blurry),103,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain gray background. His right arm is extended forward with his palm facing outward, while his left hand is slightly raised with the palm down. The man appears to be stationary and not moving."
+Stop (blurry),103,context,The pedestrian is making a stop gesture.
+Stop (blurry),103,objective,The pedestrian is making a stop gesture.
+Stop (blurry),111,blank,"A man is standing in front of a white wall, moving his hands back and forth."
+Stop (blurry),111,determine,The pedestrian is making a stop gesture with his hand.
+Stop (blurry),111,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain gray background. His arms are extended outward, with his palms facing forward. The motion appears to be slow and deliberate as he moves his hands slightly from side to side while maintaining the overall position."
+Stop (blurry),111,context,The pedestrian is making a stop gesture.
+Stop (blurry),111,objective,The pedestrian is making a stop gesture.
+Go left,89,blank,The man is moving his hands in a circular motion.
+Go left,89,determine,The pedestrian is making a gesture with his hands.
+Go left,89,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still at first, then begins to move his arms in a rhythmic motion. His movements are fluid and continuous, with his hands moving up and down in front of him. The background is plain and gray, providing a neutral backdrop for the man's actions."
+Go left,89,context,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go left,89,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go left,97,blank,A man in a black shirt is standing and moving his hands around.
+Go left,97,determine,The pedestrian is making a gesture with his hands.
+Go left,97,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain background, possibly a wall or screen. His arms are extended forward with his hands open, as if he is reaching out to catch something. The motion appears to be slow and deliberate, suggesting that he might be performing an action like catching a ball or gesturing during a presentation."
+Go left,97,context,"The pedestrian is making a gesture with their hands, moving them in front of their body."
+Go left,97,objective,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go left,105,blank,A man in a black shirt and glasses is dancing.
+Go left,105,determine,The pedestrian is making a gesture with his hand.
+Go left,105,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a wall or curtain. His body posture suggests he is engaged in some form of physical activity, likely dancing or performing martial arts moves. The man's arms are extended outward with his right arm slightly bent at the elbow and his left arm more straightened. Both hands appear to be making fluid motions, as if reaching out or pushing something away."
+Go left,105,context,"The pedestrian is making a gesture with their right hand, extending it forward and slightly to the side."
+Go left,105,objective,The pedestrian is making a stop gesture.
+Go left,113,blank,A man in a black shirt is moving his arms back and forth.
+Go left,113,determine,The pedestrian is making a gesture with his hands.
+Go left,113,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain, light-colored background. His arms are extended outward with his palms facing forward. The motion appears to be slow and deliberate, as if he is reaching out or gesturing towards something."
+Go left,113,context,"The pedestrian is making a gesture with their right arm extended forward, palm facing outward."
+Go left,113,objective,"The pedestrian is making a gesture with their right arm extended forward, palm facing outward. This could indicate they are signaling to stop or yield."
+Go left,121,blank,A man in a black shirt is standing and moving his arms around.
+Go left,121,determine,The pedestrian is making a gesture with his hand.
+Go left,121,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended forward with his hand open, while his left arm moves slightly behind him. The motion appears to be slow and deliberate, as if he is gesturing or pointing at something."
+Go left,121,context,"The pedestrian is making a gesture with their hand, possibly indicating they want to cross the road."
+Go left,121,objective,The pedestrian is making a stop gesture.
+Go left,129,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Go left,129,determine,The pedestrian is pointing with his right hand.
+Go left,129,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended forward, pointing directly at the camera with his index finger. The left arm extends out to the side, parallel to his body. Both arms are straight and appear to be holding something small, possibly a pen or a similar object."
+Go left,129,context,"The pedestrian is extending their arm forward, indicating a stop or halt gesture."
+Go left,129,objective,"The pedestrian is pointing forward with their right hand, indicating they are directing traffic or signaling a specific direction."
+Go left,137,blank,A man in a black shirt and glasses is dancing.
+Go left,137,determine,The pedestrian is making a gesture with his hand.
+Go left,137,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands with his right arm extended forward, palm facing down, while his left arm is bent at the elbow with the hand near his chest. His body leans slightly to the side, creating an expressive pose that conveys motion or direction."
+Go left,137,context,"The pedestrian is extending their arm, which could indicate a stop or caution signal."
+Go left,137,objective,"The pedestrian is making a gesture with his right arm extended forward, palm facing outward. This could indicate that he is signaling for the vehicle to stop or proceed with caution."
+Go left,145,blank,The man is moving his arms in a circular motion.
+Go left,145,determine,"The pedestrian is extending his right arm forward and moving it in a circular motion, as if he is trying to catch something or reach for an object."
+Go left,145,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands with his right arm extended forward, palm facing outward, while his left arm is bent at the elbow with the hand near his chest. His body leans slightly to the side, creating an expressive pose that suggests he might be gesturing or emphasizing something. The background features a plain white wall, highlighting his focused stance as he engages in this deliberate action."
+Go left,145,context,"The pedestrian is extending their right arm forward, which could indicate a stop or caution signal."
+Go left,145,objective,"The pedestrian is extending their right arm forward, which could indicate a stop or caution signal."
+Go left,153,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He extends his right arm forward with an open hand while keeping his left arm extended to the side. His body remains mostly still as he maintains this pose throughout the video."
+Go left,153,determine,The pedestrian is making a gesture with his hand.
+Go left,153,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended forward with his hand open, while his left arm remains bent at the elbow with the hand close to his body. The man appears to be stationary and not moving."
+Go left,153,context,"The pedestrian is making a gesture with their right hand, extending it forward and slightly to the side."
+Go left,153,objective,"The pedestrian is extending their right arm forward, which could indicate a stop or caution signal."
+Go left,161,blank,A man is dancing in front of a white wall.
+Go left,161,determine,The pedestrian is making a gesture with his hand.
+Go left,161,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His arms are extended out to the sides, with his right arm pointing forward and his left arm slightly bent at the elbow. The man appears to be gesturing or demonstrating something, possibly related to dance or movement."
+Go left,161,context,"The pedestrian is making a gesture with their right hand, extending it forward and slightly to the side."
+Go left,161,objective,"The pedestrian is making a gesture with his right hand, pointing forward."
+Go left,169,blank,"The man is moving his hands and arms in a rhythmic manner, suggesting he might be dancing or performing some form of expressive movement."
+Go left,169,determine,The pedestrian is making a gesture with his hands.
+Go left,169,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His arms are moving rhythmically, with his hands occasionally touching each other or gesturing outward. The motion appears to be fluid and continuous, suggesting he might be dancing or performing some form of expressive movement."
+Go left,169,context,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go left,169,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go left,177,blank,A man in a black shirt is moving his arms and hands around.
+Go left,177,determine,The pedestrian is making a gesture with his hands.
+Go left,177,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain, light-colored background. His arms are extended outward with his hands open, as if he is gesturing or presenting something. The motion of his arms appears to be fluid and continuous, suggesting that he might be explaining or demonstrating something related to the topic at hand."
+Go left,177,context,"The pedestrian is making a gesture with his hands, indicating he wants to cross the road."
+Go left,177,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go left,185,blank,The man is moving his arms in a circular motion.
+Go left,185,determine,The pedestrian is making a gesture with his right hand.
+Go left,185,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his arms extended outward to the sides at shoulder height. His hands are open and slightly curled, as if he is reaching for something or gesturing. The motion appears to be slow and deliberate, suggesting a focused and controlled movement."
+Go left,185,context,"The pedestrian is making a gesture with their right hand, extending it outward and slightly upward."
+Go left,185,objective,"The pedestrian is making a gesture with their right arm extended outward, palm facing forward. This could indicate they are signaling to stop or yield."
+Go left,193,blank,A man in a black shirt is standing with his arms outstretched.
+Go left,193,determine,The pedestrian is making a gesture with his hands.
+Go left,193,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his arms extended out to the sides at shoulder height. His right arm is slightly bent at the elbow, while his left arm remains straight. The man appears to be holding an object between his hands, which are positioned close together."
+Go left,193,context,"The pedestrian is making a gesture with their right arm extended outward, palm facing forward. This could indicate they are signaling to stop or yield while crossing the road."
+Go left,193,objective,"The pedestrian is extending his right arm forward, palm facing outward. This gesture typically indicates a stop or caution signal in traffic contexts."
+Go left,201,blank,The man is standing in front of a white wall.
+Go left,201,determine,The pedestrian is making a gesture with his hands.
+Go left,201,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a wall or screen. His arms are extended outward with his palms facing forward, as if he is reaching out to someone or something. The motion appears to be slow and deliberate, suggesting that he might be demonstrating or explaining something related to the topic at hand."
+Go left,201,context,"The pedestrian is making a gesture with their hand, possibly indicating they want to cross the road."
+Go left,201,objective,"The pedestrian is making a gesture with their right hand, extending it outward. This could indicate they are signaling to stop or slow down the vehicle."
+Stop + drive,87,blank,"A man is standing in front of a white wall, moving his arms and hands around."
+Stop + drive,87,determine,The pedestrian is waving his hand.
+Stop + drive,87,bodyanalysis,"The pedestrian is walking towards the camera, his short light brown hair and glasses visible as he moves. Dressed in a dark long-sleeved shirt featuring a red graphic design on the front, he extends his right arm forward with an open hand before retracting it back to his side while continuing to walk."
+Stop + drive,87,context,"The pedestrian is waving their hand, which could indicate a greeting or an attempt to signal the vehicle."
+Stop + drive,87,objective,The pedestrian is making a stop gesture.
+Stop + drive,95,blank,"A man in a black shirt and glasses is standing against a white wall. He extends his right arm towards the camera, holding it out for several seconds before retracting it back to its original position."
+Stop + drive,95,determine,The pedestrian is making a stop gesture.
+Stop + drive,95,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still with his right arm extended forward, palm facing outward in a stopping gesture. His left hand hangs by his side."
+Stop + drive,95,context,The pedestrian is making a stop gesture.
+Stop + drive,95,objective,The pedestrian is making a stop gesture.
+Stop + drive,103,blank,"A man in a black shirt and glasses is standing against a white wall. He raises his right hand with the palm facing forward, as if signaling ""stop"" or indicating something to be held up."
+Stop + drive,103,determine,The pedestrian is making a stop gesture.
+Stop + drive,103,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white wall, facing the camera with his right arm extended forward, palm open and fingers spread apart as if signaling ""stop"" or ""wait."" His left hand is relaxed by his side. The man remains stationary throughout the video, maintaining this posture without any significant movement."
+Stop + drive,103,context,The pedestrian is making a stop gesture.
+Stop + drive,103,objective,stop
+Stop + drive,111,blank,"A man wearing glasses and a black shirt is standing in front of a white wall. He has his right arm extended with his palm facing forward, as if he is pushing something away or signaling to stop. His left hand is slightly raised and bent at the elbow."
+Stop + drive,111,determine,The pedestrian is making a stop gesture.
+Stop + drive,111,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands still with his right arm extended forward, palm facing outward in a stop gesture. His left hand hangs by his side. The background is plain white."
+Stop + drive,111,context,The pedestrian is making a stop gesture.
+Stop + drive,111,objective,The pedestrian is making a stop gesture.
+Stop + drive,119,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Stop + drive,119,determine,The pedestrian is making a stop gesture.
+Stop + drive,119,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a white wall, with his right arm extended forward at shoulder height, palm facing outward as if signaling ""stop."" His left hand hangs by his side. Throughout the video, he maintains this posture without any significant movement or change in position."
+Stop + drive,119,context,The pedestrian is making a stop gesture.
+Stop + drive,119,objective,The pedestrian is signaling to stop.
+Stop + drive,127,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Stop + drive,127,determine,The pedestrian is making a stop gesture.
+Stop + drive,127,bodyanalysis,"The pedestrian is standing still, facing the camera. He has his right arm extended forward with his index finger pointing to the left side of the frame. His left hand is raised in front of him with all fingers spread out."
+Stop + drive,127,context,The pedestrian is making a stop gesture.
+Stop + drive,127,objective,The pedestrian is making a stop gesture.
+Stop + drive,135,blank,"A man in a black shirt and glasses is standing with his arms outstretched, moving them back and forth."
+Stop + drive,135,determine,The pedestrian is making a stop sign with his hand.
+Stop + drive,135,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a white background, with his right arm extended forward and his left hand raised with the palm facing outward. His body posture suggests he might be gesturing or signaling something."
+Stop + drive,135,context,The pedestrian is making a stop gesture.
+Stop + drive,135,objective,The pedestrian is making a stop gesture.
+Stop + drive,143,blank,A man in a black shirt and glasses is standing with his arms outstretched.
+Stop + drive,143,determine,The pedestrian is making a gesture with his hand.
+Stop + drive,143,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a white wall, with his right arm extended forward pointing to the left side of the frame. His left hand is raised with fingers spread out, as if he is signaling or directing attention. The man appears to be stationary, maintaining this posture throughout the video."
+Stop + drive,143,context,The pedestrian is making a stop gesture.
+Stop + drive,143,objective,The pedestrian is making a stop gesture.
+Stop + drive,151,blank,The man is pointing with his right hand and holding up a stop sign with the other.
+Stop + drive,151,determine,The pedestrian is making a stop gesture.
+Stop + drive,151,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, with his right arm extended forward at shoulder height, pointing towards the left side of the frame. His left hand is held up in a stopping gesture, palm facing outward. The man's body posture remains static throughout the video."
+Stop + drive,151,context,The pedestrian is making a stop gesture.
+Stop + drive,151,objective,The pedestrian is making a stop gesture.
+Stop + drive,159,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive,159,determine,The pedestrian is making a stop gesture.
+Stop + drive,159,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a white wall, with his right arm extended forward and his left hand raised with the palm facing outward. His body posture suggests he might be gesturing or signaling to someone off-camera."
+Stop + drive,159,context,The pedestrian is making a stop gesture.
+Stop + drive,159,objective,The pedestrian is making a stop gesture.
+Stop + drive,167,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive,167,determine,The pedestrian is making a stop gesture.
+Stop + drive,167,bodyanalysis,"The pedestrian is standing still, facing the camera. He has short brown hair and wears glasses along with a black long-sleeved shirt. His right arm extends outward while his left hand remains raised in front of him, palm open as if gesturing or signaling to someone off-camera."
+Stop + drive,167,context,The pedestrian is making a stop gesture.
+Stop + drive,167,objective,The pedestrian is making a stop gesture.
+Follow,36,blank,The man is walking forward and waving his right hand.
+Follow,36,determine,The pedestrian is making a waving gesture.
+Follow,36,bodyanalysis,"The pedestrian is walking steadily towards the camera, his short light brown hair and beard visible as he moves. Dressed in a black long-sleeved shirt and wearing glasses, he maintains a consistent pace while looking straight ahead against a plain white background."
+Follow,36,context,The pedestrian is waving their hand.
+Follow,36,objective,"The pedestrian is waving their hand, indicating they want to cross the road."
+Follow,44,blank,A man in a black shirt is standing and waving his hand.
+Follow,44,determine,The pedestrian is making a stop gesture.
+Follow,44,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored shirt. He is standing in front of a plain, light-colored background. His right arm is extended forward with his hand open, as if he is gesturing or reaching out to something. The motion appears to be slow and deliberate, suggesting that he might be emphasizing a point or directing attention to an object or person off-camera."
+Follow,44,context,The pedestrian is making a stop gesture.
+Follow,44,objective,The pedestrian is making a stop gesture.
+Follow,52,blank,A man in a black shirt is standing on stage and waving his hand.
+Follow,52,determine,The pedestrian is making a gesture with his hand.
+Follow,52,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored shirt. He is standing in front of a plain background, possibly on a stage or presentation area. His right arm is extended forward with his hand open, as if he is gesturing or presenting something to an audience. The motion appears to be slow and deliberate, suggesting that he might be emphasizing a point during a speech or demonstration."
+Follow,52,context,The pedestrian is waving their hand.
+Follow,52,objective,The pedestrian is making a stop gesture.
+Follow,60,blank,A man in a black shirt is standing on stage and waving his hand.
+Follow,60,determine,The pedestrian is making a waving gesture with his hand.
+Follow,60,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a wall or screen. His right arm is raised with his hand open, as if he is gesturing or pointing towards something off-camera. The motion appears to be slow and deliberate, suggesting that he might be explaining or emphasizing a point."
+Follow,60,context,The pedestrian is making a stop gesture.
+Follow,60,objective,The pedestrian is making a stop gesture.
+Reverse,79,blank,The man is walking in place.
+Reverse,79,determine,The pedestrian is making a gesture with his hands.
+Reverse,79,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is walking forward with his arms slightly bent at the elbows, moving in a steady pace. His body posture is upright, and he appears to be focused on his path."
+Reverse,79,context,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Reverse,79,objective,The pedestrian is making a stop gesture.
+Reverse,87,blank,"A man is standing in front of a white wall, moving his hands up and down."
+Reverse,87,determine,The pedestrian is making a gesture with his hands.
+Reverse,87,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, facing the camera with his hands raised slightly above waist level. His fingers are spread apart as he moves them fluidly from side to side, creating an expressive gesture that suggests communication or emphasis on something being said. The movements are continuous and rhythmic, maintaining eye contact with the viewer throughout the video."
+Reverse,87,context,The pedestrian is making a stop gesture.
+Reverse,87,objective,The pedestrian is making a stop gesture.
+Reverse,95,blank,A man in a black shirt is standing with his hands up and fingers spread.
+Reverse,95,determine,The pedestrian is making a gesture with his hands.
+Reverse,95,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He stands in front of a plain background, with his arms extended outward at shoulder height. His hands are open and slightly spread apart, as if he is gesturing or presenting something. The motion of his hands appears to be slow and deliberate, moving back and forth in a fluid manner."
+Reverse,95,context,The pedestrian is making a stop gesture.
+Reverse,95,objective,The pedestrian is making a stop gesture.
+Reverse,103,blank,A man in a black shirt is standing with his hands up and fingers spread.
+Reverse,103,determine,The pedestrian is making a stop gesture.
+Reverse,103,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain, light-colored background. His hands are raised with fingers spread apart, as if he is gesturing or explaining something. The motion of his hands appears to be fluid and continuous, suggesting that he might be speaking or presenting."
+Reverse,103,context,The pedestrian is making a stop gesture.
+Reverse,103,objective,The pedestrian is making a stop gesture.
+Reverse,111,blank,"A man is standing in front of a white wall, juggling three cards."
+Reverse,111,determine,The pedestrian is making a stop gesture with his hands.
+Reverse,111,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain background, with his arms extended forward and palms facing outward. His hands are moving slightly up and down as if he is gesturing or explaining something."
+Reverse,111,context,The pedestrian is making a stop gesture.
+Reverse,111,objective,The pedestrian is making a stop gesture.
+Reverse,119,blank,The man is moving his hands back and forth.
+Reverse,119,determine,The pedestrian is making a stop gesture.
+Reverse,119,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a plain background, with his arms extended forward and palms facing outward. His hands are moving slightly up and down as if he is gesturing or explaining something."
+Reverse,119,context,The pedestrian is making a stop gesture.
+Reverse,119,objective,The pedestrian is making a stop gesture.
+Reverse,127,blank,The man is moving his hands in a circular motion.
+Reverse,127,determine,The pedestrian is making a stop gesture.
+Reverse,127,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored t-shirt. He stands in front of a plain background, with his arms extended outward at shoulder height. His hands are open and palms facing forward, as if he is gesturing or presenting something. The motion of his hands appears to be slow and deliberate, moving slightly up and down while maintaining the same position relative to his body."
+Reverse,127,context,The pedestrian is making a stop gesture.
+Reverse,127,objective,stop
+Reverse,135,blank,The man is moving his hands in a circular motion.
+Reverse,135,determine,The pedestrian is making a stop gesture.
+Reverse,135,bodyanalysis,"The pedestrian is standing in front of a white wall, wearing glasses and a dark-colored t-shirt. With his arms extended forward at chest level, he moves them up and down rhythmically while keeping his hands open with fingers spread apart. His movements are smooth and continuous throughout the video."
+Reverse,135,context,The pedestrian is making a stop gesture.
+Reverse,135,objective,The pedestrian is making a stop gesture.
+Stop + drive2,196,blank,"A man is standing in front of a white screen, moving his arms and head rhythmically."
+Stop + drive2,196,determine,The pedestrian is making a gesture with his right hand.
+Stop + drive2,196,bodyanalysis,"The pedestrian is a young man with short, light brown hair and glasses. He is wearing a black long-sleeved shirt. His body posture suggests he is in motion, possibly walking or running. The video captures him from various angles, showing his dynamic movements as he progresses through the scene."
+Stop + drive2,196,context,The pedestrian is making a waving gesture.
+Stop + drive2,196,objective,"The pedestrian is making a gesture with their right hand, which appears to be pointing or indicating something."
+Stop + drive2,204,blank,The man raises his hand and waves it back and forth.
+Stop + drive2,204,determine,The pedestrian is making a stop gesture.
+Stop + drive2,204,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain background, extending his right arm forward with an open hand as if gesturing or signaling something. His posture remains steady throughout the video, maintaining focus on his extended hand against the neutral backdrop."
+Stop + drive2,204,context,The pedestrian is making a stop gesture.
+Stop + drive2,204,objective,stop
+Stop + drive2,212,blank,"A man is standing in front of a white wall, wearing glasses and holding his hand up."
+Stop + drive2,212,determine,The pedestrian is making a stop gesture.
+Stop + drive2,212,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has short, light-colored hair. His right arm is extended forward with his palm facing outward in a stopping gesture. The background is plain and gray."
+Stop + drive2,212,context,The pedestrian is making a stop gesture.
+Stop + drive2,212,objective,stop
+Stop + drive2,220,blank,A man in a black shirt is standing with his right arm extended and palm facing outward.
+Stop + drive2,220,determine,The pedestrian is making a stop gesture with his hand.
+Stop + drive2,220,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his right arm extended forward and his left arm slightly bent at the elbow. His body posture suggests he might be gesturing or pointing towards something off-camera."
+Stop + drive2,220,context,The pedestrian is making a stop gesture.
+Stop + drive2,220,objective,stop
+Stop + drive2,228,blank,The man is demonstrating a martial arts move.
+Stop + drive2,228,determine,The pedestrian is making a stop gesture.
+Stop + drive2,228,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his right arm extended forward, pointing to the left side of the frame. His left hand is raised in front of him, palm facing outward as if signaling ""stop"" or indicating something specific. The background is plain and light-colored, providing a clear contrast to his dark attire."
+Stop + drive2,228,context,The pedestrian is making a stop gesture.
+Stop + drive2,228,objective,The pedestrian is making a stop gesture.
+Stop + drive2,236,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive2,236,determine,The pedestrian is making a stop gesture with his hand.
+Stop + drive2,236,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, with his right arm extended forward and his left hand raised with the palm facing outward as if signaling ""stop."" His body posture suggests he might be demonstrating or explaining something related to traffic signals or safety instructions."
+Stop + drive2,236,context,The pedestrian is making a stop gesture.
+Stop + drive2,236,objective,The pedestrian is signaling to stop.
+Stop + drive2,244,blank,A man in a black shirt is standing with his arms outstretched.
+Stop + drive2,244,determine,The pedestrian is making a stop gesture.
+Stop + drive2,244,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His right arm is extended outward with his hand open, palm facing forward, as if he is signaling to stop or halt something. The motion appears to be static, with no visible movement other than the initial gesture."
+Stop + drive2,244,context,The pedestrian is making a stop gesture.
+Stop + drive2,244,objective,The pedestrian is making a stop gesture.
+Stop + drive2,252,blank,The person is extending their hand and pointing.
+Stop + drive2,252,determine,The pedestrian is making a stop gesture.
+Stop + drive2,252,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands with his right arm extended forward, pointing to the left side of the frame. His left hand is raised in front of him, palm facing outward as if signaling ""stop"" or indicating something specific. The background is plain and light-colored, providing a clear view of his actions."
+Stop + drive2,252,context,The pedestrian is making a stop gesture.
+Stop + drive2,252,objective,The pedestrian is making a stop gesture.
+Stop + drive2,260,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his arms outstretched with palms facing forward as if he's trying to stop something or someone from coming closer."
+Stop + drive2,260,determine,The pedestrian is making a stop gesture.
+Stop + drive2,260,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain background, possibly a stage or presentation area. His arms are extended outward with his palms facing forward, as if he is gesturing to emphasize a point or directing attention. The motion appears deliberate and focused, suggesting that he might be giving a speech or presenting something important."
+Stop + drive2,260,context,The pedestrian is making a stop gesture.
+Stop + drive2,260,objective,The pedestrian is making a stop gesture.
+Stop + drive2,268,blank,"A man is standing in front of a white wall, moving his hands back and forth."
+Stop + drive2,268,determine,The pedestrian is making a stop gesture.
+Stop + drive2,268,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a gray background, with his right arm extended forward and his left hand raised as if he is about to catch something or gesture towards someone. His body posture suggests that he might be engaged in some form of communication or demonstration."
+Stop + drive2,268,context,The pedestrian is making a stop gesture.
+Stop + drive2,268,objective,The pedestrian is making a stop gesture.
+Stop + drive2,276,blank,A man is standing in front of a white wall. He extends his right arm and points with his index finger while holding up his left hand palm out as if to stop something.
+Stop + drive2,276,determine,The pedestrian is making a stop gesture.
+Stop + drive2,276,bodyanalysis,"The pedestrian is a man wearing glasses and a black shirt. He is standing in front of a white background, with his right arm extended forward and his left hand raised to the side. His body posture suggests he is making a gesture or signal, possibly indicating ""stop"" or ""wait."" The motion appears static as there is no visible movement captured in the video."
+Stop + drive2,276,context,The pedestrian is making a stop gesture.
+Stop + drive2,276,objective,The pedestrian is making a stop gesture.
+Getting a cap,218,blank,"A man in a black shirt and glasses is standing against a white wall. He raises his right hand, palm facing outward, as if to signal ""stop"" or indicate something on the wall behind him."
+Getting a cap,218,determine,The pedestrian is waving his hand.
+Getting a cap,218,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt. He stands against a plain white wall, initially facing the camera with his arms at his sides. As he begins to move his right arm up and down, it creates a blur effect due to its rapid motion. His left hand remains still throughout this action, while his body stays mostly stationary."
+Getting a cap,218,context,The pedestrian is waving their hand.
+Getting a cap,218,objective,The pedestrian is making a stop gesture.
+Getting a cap,226,blank,A man in a black shirt is standing against a white wall.
+Getting a cap,226,determine,The pedestrian is waving their hand in the air.
+Getting a cap,226,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a white wall, with his right arm raised high above his head, palm facing forward as if signaling to stop or indicating something at a distance. His left hand hangs by his side, while he maintains this position throughout the video."
+Getting a cap,226,context,The pedestrian is waving their hand in the air.
+Getting a cap,226,objective,"The pedestrian is raising their right hand, which could indicate a stop or caution signal."
+Getting a cap,234,blank,"A man is standing in front of a white wall, raising his right hand and holding it up."
+Getting a cap,234,determine,The pedestrian is making a waving gesture.
+Getting a cap,234,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has his right arm raised with his hand open, as if he is waving or gesturing towards something. His left arm is bent at the elbow, with the fist clenched near his waist. The man appears to be standing still against a plain white wall."
+Getting a cap,234,context,The pedestrian is waving.
+Getting a cap,234,objective,"The pedestrian is raising his right arm, which could indicate a stop or caution signal."
+Getting a cap,242,blank,"A man in a black shirt and glasses is standing with his right arm raised, waving."
+Getting a cap,242,determine,The pedestrian is making a waving gesture.
+Getting a cap,242,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He has his right arm raised with an open hand, as if waving or gesturing. His left arm is bent at the elbow with his fist clenched near his waist. The man appears to be standing still against a plain white wall."
+Getting a cap,242,context,The pedestrian is waving their hand.
+Getting a cap,242,objective,The pedestrian is waving.
+Go forward,107,blank,A man in a black shirt is standing with his arms outstretched.
+Go forward,107,determine,The pedestrian is making a gesture with his hands.
+Go forward,107,bodyanalysis,"The pedestrian is a man wearing glasses and a dark-colored long-sleeved shirt. He stands in front of a plain background, facing the camera with his arms extended outward at shoulder height. His hands are open and slightly raised, fingers spread apart as if gesturing or explaining something. Throughout the video, he maintains this posture without significant movement."
+Go forward,107,context,"The pedestrian is making a gesture with their hands, possibly indicating they want to cross the road."
+Go forward,107,objective,The pedestrian is making a stop gesture.
+Go forward,115,blank,A man in a black shirt is standing and moving his hands around.
+Go forward,115,determine,The pedestrian is making a gesture with his hands.
+Go forward,115,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His hands are raised with fingers spread apart, as if he is gesturing or explaining something. The motion of his hands appears to be slow and deliberate, suggesting that he might be emphasizing certain points while speaking."
+Go forward,115,context,The pedestrian is making a stop gesture.
+Go forward,115,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go forward,123,blank,A man in a black shirt is standing and moving his hands.
+Go forward,123,determine,The pedestrian is making a gesture with his hands.
+Go forward,123,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He is standing in front of a plain white background. His hands are raised, with his fingers spread apart, as if he is gesturing or explaining something. The motion of his hands appears to be slow and deliberate, suggesting that he might be emphasizing certain points while speaking."
+Go forward,123,context,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road or signaling for assistance."
+Go forward,123,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road or signaling for assistance."
+Go forward,131,blank,"A man is standing in front of a white wall, wearing glasses and a black shirt. He has his hands up with palms facing forward as if he's about to catch something."
+Go forward,131,determine,The pedestrian is making a gesture with his hands.
+Go forward,131,bodyanalysis,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He stands in front of a plain white background, gesturing with his hands as he speaks. His movements are fluid and expressive, emphasizing points by raising or lowering his arms while keeping his body mostly stationary."
+Go forward,131,context,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road or signaling for assistance."
+Go forward,131,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go forward,139,blank,A man in a black shirt is standing and moving his hands.
+Go forward,139,determine,The pedestrian is making a gesture with his hands.
+Go forward,139,bodyanalysis,"The pedestrian is a man wearing glasses and dressed in a black long-sleeved shirt paired with dark pants. He stands against a plain white background, facing the camera as he moves his hands fluidly up and down while speaking or gesturing. His short hair complements his focused demeanor throughout the video."
+Go forward,139,context,"The pedestrian is making a gesture with their hand, possibly indicating they are about to cross the road or signaling for you to stop."
+Go forward,139,objective,"The pedestrian is making a gesture with their hands, possibly indicating they are about to cross the road."
+Go forward,147,blank,"A man is standing in front of a white wall, moving his hands and arms."
+Go forward,147,determine,The pedestrian is making a gesture with his hand.
+Go forward,147,bodyanalysis,"The pedestrian is a man wearing glasses, dressed in a black long-sleeved shirt and dark pants. He stands against a plain white wall with his right arm extended forward, palm facing outward, while his left hand rests by his side. His movements are slow and deliberate as he maintains this posture throughout the video."
+Go forward,147,context,"The pedestrian is making a gesture with their hand, possibly indicating they want to cross the road."
+Go forward,147,objective,The pedestrian is making a stop gesture.
+Go forward,155,blank,"The man is standing in front of a white wall, wearing glasses and a black sweater. He repeatedly moves his hand up to his chest area while speaking."
+Go forward,155,determine,The pedestrian is making a gesture with his hand.
+Go forward,155,bodyanalysis,"The pedestrian is a man wearing glasses, dressed in a black long-sleeved shirt and dark pants. He stands against a plain white wall with his right arm extended forward, palm facing down, while the rest of his body remains still."
+Go forward,155,context,"The pedestrian is making a gesture with their right hand, which could indicate they are signaling to stop or slow down."
+Go forward,155,objective,The pedestrian is making a stop gesture.
+Go forward,163,blank,A man in a black shirt is standing against the wall and moving his hands.
+Go forward,163,determine,The pedestrian is making a gesture with his hand.
+Go forward,163,bodyanalysis,"The pedestrian is a man wearing glasses, dressed in a black long-sleeved shirt and dark pants. He stands still against the white wall before moving his right arm slightly to adjust his position or gesture while speaking. His movements are minimal as he maintains focus on delivering information about how to make an object float using magnets."
+Go forward,163,context,"The pedestrian is making a gesture with their hand, possibly indicating they are about to cross the road or signaling something."
+Go forward,163,objective,"The pedestrian is making a gesture with their right hand, which appears to be pointing or indicating something."
+Go forward,171,blank,A man in a black shirt and glasses is walking across the room.
+Go forward,171,determine,The pedestrian is making a gesture with his hand.
+Go forward,171,bodyanalysis,"The pedestrian is walking steadily towards the camera, maintaining a straight posture with his arms hanging naturally by his sides. His movements are smooth and continuous as he approaches directly in front of him against a plain white wall background."
+Go forward,171,context,"The pedestrian is making a gesture with his right hand, which appears to be pointing or indicating something."
+Go forward,171,objective,The pedestrian is standing still and not making any gestures.
+Stop + pass,51,blank,0.402113139629364,0.2037037037037037,0.02452009343409667,0.18340031997502634,0.1978021978021978,0.8680853247642517
+Stop + pass,51,determine,0.543033242225647,0.10526315789473684,0.0013780632217418045,0.05040322580645161,0.125,0.8796306848526001
+Stop + pass,51,bodyanalysis,0.6381950974464417,0.18461538461538463,0.03780184872261129,0.2015209902791549,0.23214285714285715,0.8695679306983948
+Stop + pass,51,context,0.571100115776062,0.08333333333333333,0.00019837674291674825,0.030425963488843816,0.13114754098360656,0.8795463442802429
+Stop + pass,51,objective,0.1480485498905182,0.0,0,0.0,0.03636363636363636,0.7907639741897583
+Stop + pass,59,blank,0.373494029045105,0.2,0.01095414806423507,0.1374802634386424,0.18823529411764706,0.8700595498085022
+Stop + pass,59,determine,0.5726592540740967,0.08108108108108109,6.32636441367225e-05,0.035398230088495575,0.11594202898550726,0.8777008056640625
+Stop + pass,59,bodyanalysis,0.6277554035186768,0.14035087719298245,0.01688254469298918,0.09228187919463086,0.19801980198019803,0.8697078824043274
+Stop + pass,59,context,0.5726592540740967,0.08108108108108109,6.32636441367225e-05,0.035398230088495575,0.11594202898550726,0.8777008056640625
+Stop + pass,59,objective,0.14040091633796692,0.0,0,0.0,0.031746031746031744,0.7895841598510742
+Stop + pass,67,blank,0.2929002344608307,0.1590909090909091,0.0026766826551650412,0.08739679077737965,0.16091954022988506,0.848550021648407
+Stop + pass,67,determine,0.5336090922355652,0.14634146341463414,0.00027860655986765374,0.061633281972265024,0.1234567901234568,0.8731479644775391
+Stop + pass,67,bodyanalysis,0.6295732259750366,0.23880597014925373,0.029538139837594585,0.2064240330278453,0.2153846153846154,0.8682032227516174
+Stop + pass,67,context,0.5525411367416382,0.1282051282051282,1.9871825850438782e-05,0.04643962848297213,0.12820512820512822,0.8740969300270081
+Stop + pass,67,objective,0.10020966082811356,0.02702702702702703,7.069460411011021e-32,0.0078125,0.02777777777777778,0.7886762022972107
+Stop + pass,75,blank,0.4960111975669861,0.22727272727272727,0.02130623839132785,0.2053148148148148,0.19130434782608693,0.8654001951217651
+Stop + pass,75,determine,0.5711281299591064,0.08888888888888889,2.1679653569482907e-05,0.03924646781789639,0.10389610389610389,0.8703041076660156
+Stop + pass,75,bodyanalysis,0.6131036281585693,0.2,0.026602141828329984,0.18527696793002912,0.20472440944881892,0.853352963924408
+Stop + pass,75,context,0.5711281299591064,0.08888888888888889,2.1679653569482907e-05,0.03924646781789639,0.10389610389610389,0.8703041076660156
+Stop + pass,75,objective,0.11664362251758575,0.023809523809523808,1.921678577226187e-31,0.007923930269413628,0.028169014084507043,0.7897109389305115
+Stop + pass,83,blank,0.348908394575119,0.11538461538461539,0.002005795103709775,0.09135311143270623,0.17582417582417584,0.8614212274551392
+Stop + pass,83,determine,0.5858088731765747,0.08695652173913043,1.0613093587024491e-05,0.03665689149560117,0.0975609756097561,0.8747413158416748
+Stop + pass,83,bodyanalysis,0.6655981540679932,0.1686746987951807,0.026630532301446193,0.17990960556558228,0.1897810218978102,0.8579177856445312
+Stop + pass,83,context,0.5858088731765747,0.08695652173913043,1.0613093587024491e-05,0.03665689149560117,0.0975609756097561,0.8747413158416748
+Stop + pass,83,objective,0.5858088731765747,0.08695652173913043,1.0613093587024491e-05,0.03665689149560117,0.0975609756097561,0.8747413158416748
+Stop + pass,91,blank,0.3292011618614197,0.11764705882352941,0.0012165762275014598,0.08273263433813892,0.14141414141414144,0.8550736904144287
+Stop + pass,91,determine,0.5568501949310303,0.0851063829787234,3.425794517055513e-05,0.03968253968253968,0.08695652173913043,0.864714503288269
+Stop + pass,91,bodyanalysis,0.6243671178817749,0.17105263157894737,0.01594113771107411,0.14264981273408242,0.15942028985507245,0.8546019196510315
+Stop + pass,91,context,0.5568680167198181,0.08888888888888889,3.3845851383950844e-06,0.03315649867374005,0.08888888888888889,0.8696352243423462
+Stop + pass,91,objective,0.5568680167198181,0.08888888888888889,3.3845851383950844e-06,0.03315649867374005,0.08888888888888889,0.8696352243423462
+Stop + pass,99,blank,0.33680450916290283,0.15,0.01097109560901705,0.10523338048090523,0.16822429906542058,0.8602724075317383
+Stop + pass,99,determine,0.5655798316001892,0.09090909090909091,1.0613093587024491e-05,0.03665689149560117,0.0975609756097561,0.8734871745109558
+Stop + pass,99,bodyanalysis,0.6140279769897461,0.15942028985507245,0.014170556214240041,0.10431154381084838,0.1652892561983471,0.8686343431472778
+Stop + pass,99,context,0.5655798316001892,0.09090909090909091,1.0613093587024491e-05,0.03665689149560117,0.0975609756097561,0.8734871745109558
+Stop + pass,99,objective,0.5655798316001892,0.09090909090909091,1.0613093587024491e-05,0.03665689149560117,0.0975609756097561,0.8734871745109558
+Go left,89,blank,0.19760051369667053,0.1111111111111111,0.0006041696211525891,0.04434589800443458,0.13559322033898302,0.876532256603241
+Go left,89,determine,0.5181391835212708,0.14705882352941177,0.001583641433793837,0.09475308641975308,0.1724137931034483,0.8874117732048035
+Go left,89,bodyanalysis,0.5498455166816711,0.1875,0.03238479216459793,0.2236653237270389,0.23853211009174313,0.8613907694816589
+Go left,89,context,0.5173333287239075,0.21052631578947367,0.012622587676870326,0.16244541484716157,0.21212121212121207,0.8889641761779785
+Go left,89,objective,0.5311639308929443,0.23684210526315788,0.018253145764944665,0.19355768018869618,0.23880597014925373,0.8886983394622803
+Go left,97,blank,0.2421010136604309,0.09302325581395349,0.00048715976258382115,0.05785381026438569,0.09638554216867469,0.8494827747344971
+Go left,97,determine,0.5043412446975708,0.07317073170731707,0.00013515772636761258,0.04939358372456964,0.10126582278481011,0.8674333095550537
+Go left,97,bodyanalysis,0.5261765718460083,0.1282051282051282,0.07000432326568139,0.12753900031836995,0.15942028985507248,0.8538873791694641
+Go left,97,context,0.6208879947662354,0.21951219512195122,0.004209063387333414,0.14657507739938078,0.23255813953488372,0.882911205291748
+Go left,97,objective,0.5477725267410278,0.1590909090909091,0.0031142827847433444,0.09025511859102792,0.16091954022988506,0.870572566986084
+Go left,105,blank,0.015475030988454819,0.07692307692307693,0.00020683770876149424,0.027726432532347505,0.05797101449275363,0.8409403562545776
+Go left,105,determine,0.4974800944328308,0.07692307692307693,0.00045882306761570326,0.037037037037037035,0.1176470588235294,0.8759621381759644
+Go left,105,bodyanalysis,0.5467031002044678,0.14942528735632185,0.06816202738508483,0.22571254071661237,0.2222222222222222,0.8577234745025635
+Go left,105,context,0.6025475263595581,0.13636363636363635,0.0074962720057429,0.0819672131147541,0.15584415584415584,0.8800355792045593
+Go left,105,objective,0.49969667196273804,0.08108108108108109,9.711367994496798e-05,0.03717472118959108,0.09090909090909091,0.8758836388587952
+Go left,113,blank,0.20564232766628265,0.09302325581395349,0.0006384859667568797,0.04595588235294117,0.08333333333333333,0.8566638231277466
+Go left,113,determine,0.5140423774719238,0.07317073170731707,0.00045882306761570326,0.05844907407407407,0.1176470588235294,0.8767240047454834
+Go left,113,bodyanalysis,0.6262943744659424,0.18461538461538463,0.08609874988887566,0.17931514417458191,0.21621621621621623,0.8659682869911194
+Go left,113,context,0.6391232013702393,0.13636363636363635,0.004140271851750975,0.09744162087912088,0.13513513513513511,0.8822635412216187
+Go left,113,objective,0.6257716417312622,0.17647058823529413,0.012297421486619754,0.1533772981614708,0.19047619047619047,0.8834099173545837
+Go left,121,blank,0.3024069666862488,0.10869565217391304,0.0006007772091420436,0.048,0.09876543209876543,0.856482744216919
+Go left,121,determine,0.5166910290718079,0.06666666666666667,0.00016879157371103178,0.032206119162640906,0.10389610389610389,0.8712816834449768
+Go left,121,bodyanalysis,0.6666627526283264,0.14864864864864866,0.07999332936097503,0.17457417557068777,0.19047619047619047,0.8705861568450928
+Go left,121,context,0.5382175445556641,0.14583333333333334,0.003503091761126362,0.07154213036565978,0.16470588235294117,0.8755092024803162
+Go left,121,objective,0.5225584506988525,0.06976744186046512,2.684737269019485e-05,0.03231017770597738,0.08,0.867260754108429
+Go left,129,blank,0.2912469208240509,0.09090909090909091,0.0008755075147287456,0.041118421052631575,0.07500000000000001,0.851437509059906
+Go left,129,determine,0.5818691253662109,0.075,9.7628248600471e-05,0.024916943521594685,0.10810810810810813,0.872823178768158
+Go left,129,bodyanalysis,0.6524796485900879,0.16,0.09016861034977283,0.2176664917101485,0.23880597014925375,0.8706429600715637
+Go left,129,context,0.6084153056144714,0.14285714285714285,0.0015508892839597695,0.057660626029654036,0.1518987341772152,0.878699541091919
+Go left,129,objective,0.6231077313423157,0.14893617021276595,0.005050555598874459,0.07823684122915073,0.16470588235294117,0.8778430223464966
+Go left,137,blank,0.046422962099313736,0.046511627906976744,4.1702796674571075e-05,0.014792899408284023,0.047619047619047616,0.8327779173851013
+Go left,137,determine,0.5055917501449585,0.07142857142857142,8.66604834916954e-05,0.02962962962962963,0.0963855421686747,0.8705298900604248
+Go left,137,bodyanalysis,0.6128571033477783,0.1232876712328767,0.020471386854569257,0.16890984568872244,0.16793893129770993,0.8667728900909424
+Go left,137,context,0.540520429611206,0.08695652173913043,0.0010455603408259006,0.04411764705882354,0.13636363636363638,0.8670172095298767
+Go left,137,objective,0.6211464405059814,0.10344827586206896,0.009530414210025347,0.0985332653520993,0.13333333333333333,0.8793303370475769
+Go left,145,blank,0.29453667998313904,0.0975609756097561,8.819067761759232e-05,0.05502958579881657,0.09523809523809523,0.8709053993225098
+Go left,145,determine,0.6122938990592957,0.12727272727272726,0.008216510525589053,0.09157060518731988,0.1372549019607843,0.8714636564254761
+Go left,145,bodyanalysis,0.5916818976402283,0.10227272727272728,0.020793612557871724,0.17083333333333334,0.16993464052287582,0.8625476360321045
+Go left,145,context,0.5914241075515747,0.10869565217391304,0.0018433671579095063,0.051319648093841645,0.13333333333333333,0.8698627948760986
+Go left,145,objective,0.5914241075515747,0.10869565217391304,0.0018433671579095063,0.051319648093841645,0.13333333333333333,0.8698627948760986
+Go left,153,blank,0.46440014243125916,0.13636363636363635,0.05919667163205566,0.13545785018706716,0.17094017094017094,0.8688152432441711
+Go left,153,determine,0.490300714969635,0.075,0.00015104133650360195,0.03174603174603175,0.10256410256410256,0.8711467981338501
+Go left,153,bodyanalysis,0.6671415567398071,0.15384615384615385,0.08259233395851266,0.19656150156481098,0.22047244094488191,0.8666641116142273
+Go left,153,context,0.6080212593078613,0.10869565217391304,0.004138413929230481,0.06259780907668232,0.13793103448275862,0.8744753003120422
+Go left,153,objective,0.5904608368873596,0.1111111111111111,0.0025195841709444223,0.05494505494505495,0.1411764705882353,0.870079517364502
+Go left,161,blank,0.1707717478275299,0.08888888888888889,0.0002782261660461672,0.05859374999999999,0.09999999999999999,0.8481965065002441
+Go left,161,determine,0.5173705816268921,0.06521739130434782,0.00013515772636761258,0.04939358372456964,0.10126582278481011,0.8631272912025452
+Go left,161,bodyanalysis,0.6159821152687073,0.1780821917808219,0.08038967920806267,0.23152473350101807,0.22900763358778625,0.8468936681747437
+Go left,161,context,0.6235702037811279,0.11764705882352941,0.004068582749238828,0.098070987654321,0.1590909090909091,0.8629822134971619
+Go left,161,objective,0.5935088396072388,0.061224489795918366,0.0006710327345192979,0.057943925233644854,0.09756097560975609,0.8625370860099792
+Go left,169,blank,0.17947563529014587,0.1276595744680851,0.004952098497026851,0.07990867579908675,0.1714285714285714,0.8681996464729309
+Go left,169,determine,0.5113198161125183,0.11764705882352941,0.0020902304973678394,0.07461583924349882,0.14545454545454548,0.8850144743919373
+Go left,169,bodyanalysis,0.5427046418190002,0.1875,0.09007231281898273,0.21481481481481485,0.21153846153846154,0.8603572249412537
+Go left,169,context,0.5057998895645142,0.21621621621621623,0.013212276484742175,0.1354873822004526,0.2222222222222222,0.886818528175354
+Go left,169,objective,0.5200847387313843,0.24324324324324326,0.01485134425432392,0.17222222222222222,0.25,0.8853589296340942
+Go left,177,blank,0.1969401091337204,0.11363636363636363,0.0004963063002307741,0.05172413793103448,0.10526315789473684,0.8560982346534729
+Go left,177,determine,0.4845426678657532,0.06976744186046512,0.0002941883527144599,0.04436728395061729,0.1111111111111111,0.870599091053009
+Go left,177,bodyanalysis,0.5538030862808228,0.14666666666666667,0.08181377883658,0.19296346295452152,0.21538461538461537,0.8532319664955139
+Go left,177,context,0.4876675307750702,0.10638297872340426,0.003836936514716948,0.07313703068420048,0.1518987341772152,0.8694865703582764
+Go left,177,objective,0.5230175256729126,0.17391304347826086,0.005608033817674925,0.11765326580141393,0.19753086419753085,0.8706883192062378
+Go left,185,blank,0.27028173208236694,0.06976744186046512,0.00016934439305922255,0.04472271914132379,0.11267605633802817,0.8728676438331604
+Go left,185,determine,0.526731014251709,0.06976744186046512,0.0006368370483353502,0.0564624329159213,0.11267605633802817,0.8756742477416992
+Go left,185,bodyanalysis,0.5955742597579956,0.14864864864864866,0.08878705171543746,0.2252934877048352,0.2258064516129032,0.8615919351577759
+Go left,185,context,0.57587730884552,0.10638297872340426,0.0041540920159554165,0.08488351092649449,0.12987012987012986,0.8800888061523438
+Go left,185,objective,0.6045546531677246,0.17307692307692307,0.011351950792704936,0.14856755710414246,0.18604651162790697,0.8833905458450317
+Go left,193,blank,0.26350751519203186,0.06666666666666667,0.0007935777499644344,0.05812615101289135,0.08450704225352114,0.8588283658027649
+Go left,193,determine,0.5131329298019409,0.06976744186046512,0.00045882306761570326,0.05844907407407407,0.1176470588235294,0.8760814666748047
+Go left,193,bodyanalysis,0.6556217074394226,0.16216216216216217,0.09727453452875306,0.23331228956228953,0.2439024390243902,0.8665704131126404
+Go left,193,context,0.6461424231529236,0.16071428571428573,0.014982168848307406,0.16182375316990702,0.18181818181818182,0.8816713094711304
+Go left,193,objective,0.6431017518043518,0.1111111111111111,0.010190138426999559,0.09603452166064982,0.12195121951219512,0.8684293627738953
+Go left,201,blank,0.2612738311290741,0.15384615384615385,0.005578490742814313,0.12092174309833448,0.1904761904761905,0.8617198467254639
+Go left,201,determine,0.5160993337631226,0.07317073170731707,0.000893665307616236,0.06494341563786009,0.12903225806451613,0.875749409198761
+Go left,201,bodyanalysis,0.5864027738571167,0.14285714285714285,0.07405458661858044,0.2244065046833213,0.1951219512195122,0.8547719717025757
+Go left,201,context,0.5451765060424805,0.1590909090909091,0.008465498302450662,0.11820862698055681,0.2,0.8783810138702393
+Go left,201,objective,0.6120802164077759,0.1320754716981132,0.015733334803783437,0.158799270492746,0.20253164556962025,0.8807454705238342
 Stop + drive,87,blank,0.35773274302482605,0.175,0.033702933169057626,0.14090401785714285,0.1875,0.8756648302078247
 Stop + drive,87,determine,0.41817477345466614,0.08571428571428572,0.00018424716498378947,0.03424657534246575,0.1111111111111111,0.8805748224258423
 Stop + drive,87,bodyanalysis,0.4756712317466736,0.16417910447761194,0.0272936302200797,0.1626303910205575,0.17647058823529413,0.8649765253067017
@@ -99,88 +584,43 @@ Stop + drive,167,determine,0.5694716572761536,0.09302325581395349,7.842074389772
 Stop + drive,167,bodyanalysis,0.6387282609939575,0.21428571428571427,0.06723626623811071,0.23507350038317734,0.2363636363636364,0.8747325539588928
 Stop + drive,167,context,0.5694716572761536,0.09302325581395349,7.842074389772509e-05,0.06690647482014388,0.11764705882352942,0.8669942021369934
 Stop + drive,167,objective,0.5694716572761536,0.09302325581395349,7.842074389772509e-05,0.06690647482014388,0.11764705882352942,0.8669942021369934
-Reverse,79,blank,0.1721211075782776,0.10714285714285714,0.0005052392784929306,0.04807692307692308,0.15,0.8807149529457092
-Reverse,79,determine,0.4684903621673584,0.0967741935483871,0.007379361822357566,0.08112874779541446,0.13953488372093023,0.8809083104133606
-Reverse,79,bodyanalysis,0.49064233899116516,0.11320754716981132,0.026220538724357412,0.1002865329512894,0.12820512820512822,0.8522420525550842
-Reverse,79,context,0.46799635887145996,0.16666666666666666,0.026138015128503642,0.1480221718316956,0.23076923076923078,0.8775273561477661
-Reverse,79,objective,0.4992257058620453,0.10344827586206896,0.0034540779342202236,0.08164714235001774,0.14634146341463417,0.8756954073905945
-Reverse,87,blank,0.3059931993484497,0.1875,0.08815064282983343,0.18503289473684212,0.25,0.8839365243911743
-Reverse,87,determine,0.48832207918167114,0.14285714285714285,0.009902922358150247,0.10627104377104377,0.1951219512195122,0.8931291699409485
-Reverse,87,bodyanalysis,0.5027951002120972,0.14666666666666667,0.024772622152645706,0.3234526070441989,0.22429906542056072,0.8600789904594421
-Reverse,87,context,0.47138649225234985,0.1111111111111111,0.004596383638000597,0.08662900188323916,0.15384615384615383,0.8846434950828552
-Reverse,87,objective,0.47138649225234985,0.1111111111111111,0.004596383638000597,0.08662900188323916,0.15384615384615383,0.8846434950828552
-Reverse,95,blank,0.1726943850517273,0.10810810810810811,0.007173990859109608,0.08841036414565827,0.11320754716981134,0.8590661287307739
-Reverse,95,determine,0.5015802383422852,0.09090909090909091,0.004731502079624401,0.08992165242165244,0.1702127659574468,0.8826041221618652
-Reverse,95,bodyanalysis,0.5758603811264038,0.20967741935483872,0.037039826060455326,0.2762598924252287,0.28,0.8711405396461487
-Reverse,95,context,0.5256394147872925,0.0967741935483871,0.0019505804042812842,0.07322508755173511,0.17777777777777778,0.8836647272109985
-Reverse,95,objective,0.5256394147872925,0.0967741935483871,0.0019505804042812842,0.07322508755173511,0.17777777777777778,0.8836647272109985
-Reverse,103,blank,0.16518312692642212,0.10256410256410256,0.00449873136559631,0.07514880952380953,0.1,0.8566669225692749
-Reverse,103,determine,0.5289741158485413,0.09090909090909091,0.0007175784290869647,0.06202804746494068,0.15384615384615385,0.880541205406189
-Reverse,103,bodyanalysis,0.4875991642475128,0.18032786885245902,0.08990845492237175,0.20806587276993227,0.19607843137254902,0.8636698126792908
-Reverse,103,context,0.5289741158485413,0.09090909090909091,0.0007175784290869647,0.06202804746494068,0.15384615384615385,0.880541205406189
-Reverse,103,objective,0.5289741158485413,0.09090909090909091,0.0007175784290869647,0.06202804746494068,0.15384615384615385,0.880541205406189
-Reverse,111,blank,0.28523215651512146,0.13513513513513514,0.014397349417600892,0.10353430353430351,0.15384615384615385,0.8640044927597046
-Reverse,111,determine,0.4954550862312317,0.08108108108108109,0.001566366385385635,0.06603033472803346,0.12903225806451613,0.8702812194824219
-Reverse,111,bodyanalysis,0.605356752872467,0.2641509433962264,0.11773344143341286,0.25728970638823123,0.26804123711340205,0.8793611526489258
-Reverse,111,context,0.5331562757492065,0.08823529411764706,0.00026398235148919404,0.05380116959064328,0.13559322033898308,0.8734112977981567
-Reverse,111,objective,0.5331562757492065,0.08823529411764706,0.00026398235148919404,0.05380116959064328,0.13559322033898308,0.8734112977981567
-Reverse,119,blank,0.30850762128829956,0.14705882352941177,0.0005996384489972514,0.05341880341880342,0.2,0.8842795491218567
-Reverse,119,determine,0.5334194898605347,0.08823529411764706,0.0003045207999480308,0.05484024797329518,0.13793103448275862,0.8737773299217224
-Reverse,119,bodyanalysis,0.6039156913757324,0.2641509433962264,0.12037902665233079,0.27798374251661445,0.2708333333333333,0.8786843419075012
-Reverse,119,context,0.5334194898605347,0.08823529411764706,0.0003045207999480308,0.05484024797329518,0.13793103448275862,0.8737773299217224
-Reverse,119,objective,0.5334194898605347,0.08823529411764706,0.0003045207999480308,0.05484024797329518,0.13793103448275862,0.8737773299217224
-Reverse,127,blank,0.26531675457954407,0.10526315789473684,0.00024563703729761497,0.037593984962406006,0.08823529411764706,0.8739844560623169
-Reverse,127,determine,0.5445284843444824,0.08333333333333333,0.00011202694170996206,0.04830917874396135,0.12307692307692308,0.8709681034088135
-Reverse,127,bodyanalysis,0.666674017906189,0.19718309859154928,0.031399891567737044,0.25278400336181533,0.25,0.8670163750648499
-Reverse,127,context,0.5445284843444824,0.08333333333333333,0.00011202694170996206,0.04830917874396135,0.12307692307692308,0.8709681034088135
-Reverse,127,objective,0.0892748236656189,0.0,0,0.0,0.0,0.7898664474487305
-Reverse,135,blank,0.26971495151519775,0.1111111111111111,0.0003000217548615995,0.03891050583657587,0.09090909090909091,0.8733216524124146
-Reverse,135,determine,0.5258693695068359,0.08823529411764706,0.0001490756177761699,0.05001087192868015,0.09523809523809523,0.8577922582626343
-Reverse,135,bodyanalysis,0.6021739840507507,0.16129032258064516,0.11472705062451498,0.22830018083182638,0.24299065420560748,0.8657197952270508
-Reverse,135,context,0.5258693695068359,0.08823529411764706,0.0001490756177761699,0.05001087192868015,0.09523809523809523,0.8577922582626343
-Reverse,135,objective,0.5258693695068359,0.08823529411764706,0.0001490756177761699,0.05001087192868015,0.09523809523809523,0.8577922582626343
-Go forward,107,blank,0.3382311165332794,0.13333333333333333,0.005797248593317865,0.0939360119047619,0.125,0.8707326650619507
-Go forward,107,determine,0.5158623456954956,0.10344827586206896,0.005908931020818041,0.0767434100767434,0.13333333333333333,0.88653564453125
-Go forward,107,bodyanalysis,0.5803449749946594,0.15873015873015872,0.03172217635982493,0.284598300952026,0.23157894736842105,0.8655847311019897
-Go forward,107,context,0.48562300205230713,0.14705882352941177,0.02115509597480877,0.12504072987943954,0.18867924528301885,0.8835188746452332
-Go forward,107,objective,0.4992334246635437,0.1111111111111111,0.0025956611360788877,0.07720711648204096,0.13953488372093023,0.8770062327384949
-Go forward,115,blank,0.2748527526855469,0.1388888888888889,0.004794128612639383,0.11162012798138453,0.14814814814814817,0.86601722240448
-Go forward,115,determine,0.5578227043151855,0.08571428571428572,0.003390269386095882,0.09841269841269842,0.16,0.8854950070381165
-Go forward,115,bodyanalysis,0.555142879486084,0.1875,0.0852157555385807,0.22410833492275414,0.2178217821782178,0.8606381416320801
-Go forward,115,context,0.5375939607620239,0.09090909090909091,0.0012706842602035458,0.08394281914893618,0.16666666666666669,0.881114661693573
-Go forward,115,objective,0.566106915473938,0.1794871794871795,0.018412679932382967,0.1922480620155039,0.23728813559322035,0.8839758634567261
-Go forward,123,blank,0.27358555793762207,0.13157894736842105,0.0024510160324155914,0.08551724137931034,0.13559322033898305,0.8659589290618896
-Go forward,123,determine,0.559615969657898,0.07894736842105263,0.0017406223409537418,0.08611111111111112,0.14285714285714285,0.8830181956291199
-Go forward,123,bodyanalysis,0.5677173137664795,0.1791044776119403,0.08375853894238805,0.2094778007821486,0.20370370370370372,0.8619505763053894
-Go forward,123,context,0.5787407159805298,0.15217391304347827,0.017057255672095463,0.16719101123595506,0.20289855072463767,0.8741861581802368
-Go forward,123,objective,0.5787407159805298,0.15217391304347827,0.017057255672095463,0.16719101123595506,0.20289855072463767,0.8741861581802368
-Go forward,131,blank,0.36976999044418335,0.19230769230769232,0.08544704419473444,0.20604395604395606,0.22499999999999998,0.8767710328102112
-Go forward,131,determine,0.559615969657898,0.07894736842105263,0.0017406223409537418,0.08611111111111112,0.14285714285714285,0.8830181956291199
-Go forward,131,bodyanalysis,0.6112191677093506,0.15873015873015872,0.03617804849314351,0.23021646000577897,0.18749999999999997,0.8599326610565186
-Go forward,131,context,0.5787407159805298,0.15217391304347827,0.017057255672095463,0.16719101123595506,0.20289855072463767,0.8741861581802368
-Go forward,131,objective,0.5716491937637329,0.16666666666666666,0.013193261683126076,0.16870748299319727,0.21538461538461537,0.8819441199302673
-Go forward,139,blank,0.2782053053379059,0.11904761904761904,0.0014866163711072691,0.07607361963190185,0.12307692307692308,0.8648161292076111
-Go forward,139,determine,0.5667885541915894,0.07142857142857142,0.000893665307616236,0.07654320987654321,0.12903225806451613,0.8794522881507874
-Go forward,139,bodyanalysis,0.5524556636810303,0.09722222222222222,0.02250570363872575,0.13007137490608567,0.17142857142857143,0.8515576124191284
-Go forward,139,context,0.5693410634994507,0.13725490196078433,0.014458200618955901,0.14850299401197606,0.20779220779220778,0.8685617446899414
-Go forward,139,objective,0.5641026496887207,0.15217391304347827,0.009453385084553281,0.15030303030303033,0.19718309859154928,0.8777524828910828
-Go forward,147,blank,0.39293110370635986,0.13333333333333333,0.019124451879077613,0.12668540470080247,0.20289855072463767,0.8761351108551025
-Go forward,147,determine,0.5676921606063843,0.06976744186046512,0.0007996868533280165,0.050505050505050504,0.12698412698412698,0.8791803121566772
-Go forward,147,bodyanalysis,0.5813086032867432,0.136986301369863,0.023203039690167775,0.1648559670781893,0.1834862385321101,0.8732759952545166
-Go forward,147,context,0.574949324131012,0.1276595744680851,0.007680139266791407,0.08946322067594432,0.19718309859154928,0.8822490572929382
-Go forward,147,objective,0.5501920580863953,0.07317073170731707,0.00019837674291674825,0.04056795131845842,0.13114754098360656,0.8741239905357361
-Go forward,155,blank,0.25640419125556946,0.15384615384615385,0.06641186214053543,0.16346837242359633,0.20779220779220778,0.8693593740463257
-Go forward,155,determine,0.5677602887153625,0.075,0.0013937814127542737,0.05555555555555556,0.13793103448275862,0.882707417011261
-Go forward,155,bodyanalysis,0.5559378862380981,0.1111111111111111,0.0233365288131605,0.14278105187196094,0.15555555555555559,0.8672771453857422
-Go forward,155,context,0.5588934421539307,0.1702127659574468,0.01472834167571767,0.13755411255411254,0.2,0.8771626353263855
-Go forward,155,objective,0.5428754091262817,0.07894736842105263,0.0004052295428672689,0.044642857142857144,0.14285714285714285,0.8771334886550903
-Go forward,163,blank,0.243019700050354,0.08695652173913043,0.0023097256970260162,0.049019607843137254,0.1142857142857143,0.8637611865997314
-Go forward,163,determine,0.5453228950500488,0.07142857142857142,0.0007155912374974756,0.049603174603174614,0.125,0.8777704834938049
-Go forward,163,bodyanalysis,0.4873812198638916,0.0875,0.020874365970730738,0.12681159420289856,0.1415929203539823,0.8472277522087097
-Go forward,163,context,0.5628336071968079,0.14285714285714285,0.011068014333956237,0.12315891472868216,0.21052631578947364,0.872379720211029
-Go forward,163,objective,0.5802698135375977,0.10204081632653061,0.007776790470146105,0.07797270955165693,0.16438356164383564,0.8768138885498047
-Go forward,171,blank,0.13552606105804443,0.08108108108108109,0.0016151436493444867,0.0351288056206089,0.10169491525423728,0.8495111465454102
-Go forward,171,determine,0.4739764332771301,0.12121212121212122,0.0020902304973678394,0.04728132387706856,0.14545454545454548,0.8746812343597412
-Go forward,171,bodyanalysis,0.4973335862159729,0.14285714285714285,0.03663628864861028,0.16387665198237886,0.13953488372093023,0.8665109872817993
-Go forward,171,context,0.514387845993042,0.12195121951219512,0.01282175986590793,0.06944444444444445,0.125,0.8651143312454224
-Go forward,171,objective,0.34871500730514526,0.11764705882352941,0.007177695684929232,0.04716981132075471,0.14285714285714285,0.8645440340042114
+Follow,36,blank,0.3569983243942261,0.061224489795918366,7.609134071236003e-05,0.03169572107765451,0.10126582278481013,0.8727770447731018
+Follow,36,determine,0.46486079692840576,0.08888888888888889,2.500888945920824e-05,0.03980891719745223,0.13157894736842105,0.8730692267417908
+Follow,36,bodyanalysis,0.5135712027549744,0.11267605633802817,0.01709234174432435,0.09049773755656108,0.14285714285714285,0.8450122475624084
+Follow,36,context,0.4759121537208557,0.09090909090909091,5.978673151200735e-06,0.03189792663476874,0.13333333333333333,0.8783698081970215
+Follow,36,objective,0.5059159398078918,0.125,0.0012312861423027196,0.05520504731861199,0.17073170731707318,0.8783900737762451
+Follow,44,blank,0.16406625509262085,0.08333333333333333,0.00022651830617070455,0.032051282051282055,0.075,0.8485113382339478
+Follow,44,determine,0.5204564929008484,0.09090909090909091,2.8849379441343903e-05,0.04038772213247173,0.13333333333333333,0.8668581247329712
+Follow,44,bodyanalysis,0.6017311811447144,0.18181818181818182,0.03098583711200654,0.20258904410151396,0.20437956204379562,0.8611123561859131
+Follow,44,context,0.5204564929008484,0.09090909090909091,2.8849379441343903e-05,0.04038772213247173,0.13333333333333333,0.8668581247329712
+Follow,44,objective,0.5204564929008484,0.09090909090909091,2.8849379441343903e-05,0.04038772213247173,0.13333333333333333,0.8668581247329712
+Follow,52,blank,0.13826479017734528,0.08,0.0004267935124812274,0.031948881789137386,0.07317073170731708,0.8472345471382141
+Follow,52,determine,0.5229763984680176,0.1111111111111111,0.00019178425494700076,0.05636070853462157,0.12987012987012989,0.8711467385292053
+Follow,52,bodyanalysis,0.5759416818618774,0.17721518987341772,0.030519255908343732,0.20169658135216803,0.20289855072463767,0.8591507077217102
+Follow,52,context,0.4608238935470581,0.09302325581395349,7.062967782291249e-06,0.03236245954692557,0.13513513513513514,0.8754386305809021
+Follow,52,objective,0.5204564929008484,0.09090909090909091,2.8849379441343903e-05,0.04038772213247173,0.13333333333333333,0.8668581247329712
+Follow,60,blank,0.13624930381774902,0.07547169811320754,0.00022440291776524386,0.02828854314002829,0.06593406593406594,0.8424579501152039
+Follow,60,determine,0.42282676696777344,0.10204081632653061,0.00014608961250460443,0.049786628733997154,0.11494252873563217,0.8645107746124268
+Follow,60,bodyanalysis,0.5766727924346924,0.19480519480519481,0.026442286982613562,0.1681216931216931,0.1971830985915493,0.8528986573219299
+Follow,60,context,0.5176226496696472,0.0851063829787234,7.975498839931836e-06,0.03571428571428571,0.11904761904761903,0.861930787563324
+Follow,60,objective,0.5176226496696472,0.0851063829787234,7.975498839931836e-06,0.03571428571428571,0.11904761904761903,0.861930787563324
+Getting a cap,218,blank,0.3895499110221863,0.109375,0.007963028561244576,0.0718132854578097,0.12903225806451615,0.8705788254737854
+Getting a cap,218,determine,0.4656182825565338,0.1,3.739481265013143e-05,0.03787878787878788,0.125,0.8870426416397095
+Getting a cap,218,bodyanalysis,0.5436409711837769,0.13414634146341464,0.02179072589998992,0.1360544217687075,0.17600000000000002,0.8654645681381226
+Getting a cap,218,context,0.4815978705883026,0.1282051282051282,3.954020029799266e-05,0.047348484848484855,0.15625000000000003,0.8916260004043579
+Getting a cap,218,objective,0.5374733805656433,0.07142857142857142,0.00011202694170996206,0.03780718336483932,0.0923076923076923,0.8754889369010925
+Getting a cap,226,blank,0.21052728593349457,0.0625,0.000618038973100345,0.02631578947368421,0.05405405405405405,0.8434383273124695
+Getting a cap,226,determine,0.4336048364639282,0.11363636363636363,0.00039096503207350754,0.052910052910052914,0.16901408450704225,0.8884455561637878
+Getting a cap,226,bodyanalysis,0.603256344795227,0.16666666666666666,0.030226632835720302,0.1900809151785714,0.23140495867768596,0.8706203103065491
+Getting a cap,226,context,0.4336048364639282,0.11363636363636363,0.00039096503207350754,0.052910052910052914,0.16901408450704225,0.8884455561637878
+Getting a cap,226,objective,0.5865538120269775,0.09803921568627451,0.003238729298827526,0.04363001745200698,0.15584415584415584,0.8684208989143372
+Getting a cap,234,blank,0.30878856778144836,0.11538461538461539,0.015456683308964046,0.11647491708126037,0.16867469879518074,0.8709462285041809
+Getting a cap,234,determine,0.4135744571685791,0.06666666666666667,4.121240871240658e-05,0.033783783783783786,0.08333333333333333,0.8732284307479858
+Getting a cap,234,bodyanalysis,0.5846605896949768,0.13333333333333333,0.02455610998569464,0.15735268705719718,0.2096774193548387,0.8652678728103638
+Getting a cap,234,context,0.39937788248062134,0.07142857142857142,9.473144308333434e-08,0.025466893039049237,0.08695652173913043,0.8775637149810791
+Getting a cap,234,objective,0.589418351650238,0.05660377358490566,0.002333745891067449,0.03333333333333333,0.125,0.8691088557243347
+Getting a cap,242,blank,0.24998466670513153,0.11538461538461539,0.001033799858790817,0.045180722891566265,0.11363636363636365,0.861441433429718
+Getting a cap,242,determine,0.41437041759490967,0.06382978723404255,1.5161197886449215e-05,0.03053435114503817,0.0759493670886076,0.8724244236946106
+Getting a cap,242,bodyanalysis,0.5779282450675964,0.14666666666666667,0.02811852346670108,0.1715416270971827,0.23622047244094488,0.8608502149581909
+Getting a cap,242,context,0.45097899436950684,0.11363636363636363,3.834291032649082e-06,0.03822629969418961,0.12820512820512822,0.8818363547325134
+Getting a cap,242,objective,0.39813029766082764,0.06818181818181818,1.6461856433342402e-08,0.023006134969325152,0.07894736842105264,0.8766202330589294

@@ -1,0 +1,10 @@
+Version 1 - Body:
+The ego driver should stop and wait despite the green traffic light.
+
+Reasoning: The policeman's hand signals override traffic lights. His raised right hand indicates stop for the ego vehicle, while his extended left arm directs traffic in another direction. Ignoring his signal could lead to a traffic violation or accident.
+
+Version 2 - Interpret:
+The ego driver should stop immediately, despite the green traffic light. A police officer's hand signals take precedence over traffic signals, ensuring safety and proper traffic control. The raised hand clearly instructs vehicles to stop.
+
+Version 3 - Both:
+The ego driver should stop despite the green traffic light. The policeman's hand signal takes precedence over traffic lights, as officers can override automated signals to ensure safety and manage traffic flow effectively.

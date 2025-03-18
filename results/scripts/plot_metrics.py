@@ -3,7 +3,7 @@ import os
 import glob
 import matplotlib.pyplot as plt
 
-def plot_metrics(metrics_folder, include_prompt=None):
+def plot_metrics(metrics_folder, include_prompt=None, include_gesture=None):
     
     # Get list of all CSV files in the folder
     csv_files = glob.glob(os.path.join(metrics_folder, "*.csv"))
@@ -22,6 +22,9 @@ def plot_metrics(metrics_folder, include_prompt=None):
         
         if include_prompt:
             df = df[df["prompt"] == include_prompt]
+        
+        if include_gesture:
+            df = df[df["gesture"] == include_gesture]
         
         # Drop unnecessary columns
         df = df.drop(columns=["video_name", "frame_idx", "prompt"], errors="ignore")
@@ -45,8 +48,8 @@ def plot_metrics(metrics_folder, include_prompt=None):
     # Plot
     plt.figure(figsize=(7, 3))
     
-    # Only keep cos, jaccard and meteor
-    # merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Meteor"])]
+    # Only keep cos, Jaccard, Bleu, and meteor
+    merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Bleu", "Meteor"])]
 
     # Boxplot: Group by metric, color by model
     import seaborn as sns
@@ -62,7 +65,7 @@ def plot_metrics(metrics_folder, include_prompt=None):
 
     # Save the plot
     date_time = pd.Timestamp.now().strftime("%Y%m%d_%H%M")
-    boxplot_path = f"results/figures/metrics_boxplot2.png"
+    boxplot_path = f"results/figures/metrics_boxplot.png"
     boxplot_path = boxplot_path.replace(".png", f"_{include_prompt}.png") if include_prompt else boxplot_path
     # boxplot_path = boxplot_path.replace(".png", f"_{date_time}.png")
     plt.savefig(boxplot_path)
@@ -84,6 +87,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Plot similarity metrics from CSV files.")
     parser.add_argument("--metrics_folder", type=str, help="Path to the folder containing metrics CSV files.")
     parser.add_argument("--include_prompt", type=str, help="Include only the specified prompt type.", choices=prompt_types)
+    parser.add_argument("--include_gesture", type=str, help="Include only the specified gesture type.")
     args = parser.parse_args()
 
     # Define folder containing CSVs
