@@ -135,8 +135,6 @@ def prin_latex_table(merged_df):
 
     # Print the formatted LaTeX-style table
     print(latex_table)
-
-
     print()
 
 if __name__ == "__main__":
