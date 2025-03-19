@@ -52,20 +52,22 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     # Only keep cos, Jaccard, Bleu, and meteor
     merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Bleu", "Meteor"])]
     
-    # Boxplot: Group by metric, color by model
+    # Boxplot: Group by prompt type, color by model
     if prompt_types:
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
         sns.boxplot(x="prompt_type", y="Score", hue="Model", data=cosine_df, showfliers=False, width=0.9)
         plt.xlabel("Prompt Type")
         plt.title("Cosine Similarity Scores Across Prompt Type")
-        
+    
+    # Boxplot: Group by gesture, color by model
     elif gestures:
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
         sns.boxplot(x="video_name", y="Score", hue="Model", data=cosine_df, showfliers=False, width=0.9)
         plt.xticks(rotation=45//2)
         plt.xlabel("Gesture")
         plt.title("Cosine Similarity Scores Across Gestures")
-        
+    
+    # Boxplot: Group by metric, color by model
     else:
         sns.boxplot(x="Metric", y="Score", hue="Model", data=merged_df, showfliers=False, width=0.9)
         plt.xlabel("Metrics")
