@@ -14,12 +14,11 @@ ToDo:
 
 1. Dataset
     1. Front-Hand
-    1.1. Participant annotation
+    1.1. Participant annotation     <-
 
     2. Real-life
-    1.1. Clean up/sort/cut
     1.2. Annotate videos
-    1.2. Pre-process videos (frames, pedestrian)
+    1.2. Pre-process videos (frames, pedestrian)    <-
 
 2. Run experiment!
 3. Result analysis

@@ -1,13 +1,12 @@
-# RMPS
+# VLM traffic gesture evaluation
 
-# Caption
-
-1. Convert each video to a folder contaning all frames
-2. Run `scripts/caption_w_model` with fixed variables:
-- `video_frames` - Path to frames folders
-- `window` - Batch of frames
-- `models_folder` - Path to model modules
-    Captions all videos' frames across the variables:
-    - Differnt prompt types in `config.prompts`
-    - Fixed `window`  
-3. Run `results
+## VLM generate captions and compare with ground truth.
+1. Run `dev/split_video.py` to convert videos to frames.
+2. Run `scripts/caption_w_models.py` to generate captions across:
+    - Models in the folder `models/`.
+    - Prompt types in `config/prompts`.
+3. Run `results/scripts/compare_captions.py` to compare with the ground truth.
+    - Annotate the ground truth captions in `data/labels/` as:
+        - `video_name, frame_idx, label`
+4. Run `results/scripts/plot_metrics.py` to boxplot and print result.
+    - Use `--prompt_type` or `--gestures` to compare across.
