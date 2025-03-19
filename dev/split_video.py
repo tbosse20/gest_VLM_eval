@@ -39,7 +39,7 @@ def save_video_frames(video_path, output_folder):
     
     cap.release()
     
-def save_video_frames_folder(videos_folder: str, output_folder: str):
+def save_video_frames_folder(videos_folder: str):
     
     # Validate input folder
     if not os.path.exists(videos_folder):
@@ -48,13 +48,12 @@ def save_video_frames_folder(videos_folder: str, output_folder: str):
         raise NotADirectoryError(f"Input folder '{videos_folder}' is not a directory")
     
     # Create output folder if it doesn't exist
+    output_folder = videos_folder + "_frames"
     if not os.path.exists(output_folder):
         os.makedirs(output_folder, exist_ok=True)
     
-    # Get all video names in the folder
+    # Loop through all video names in the folder
     video_names = os.listdir(videos_folder)
-    
-    # Loop through each video
     for video_name in video_names:
         # Get video path
         video_path = f"{videos_folder}/{video_name}"
@@ -65,7 +64,5 @@ def save_video_frames_folder(videos_folder: str, output_folder: str):
 
 if __name__ == "__main__":
     
-    videos_folder = "../realworldgestures_front"  # Folder containing videos
-    # output_folder = "data/video_frames" # Folder to save frames
-    output_folder = "../realworldgestures_video_frames" # Folder to save frames
-    save_video_frames_folder(videos_folder, output_folder)
+    videos_folder = "../realworldgestures"  # Folder containing videos
+    save_video_frames_folder(videos_folder)
