@@ -1,4 +1,15 @@
-ToDo:
+1. Dataset
+    1. Front-Hand
+    1.1. Participant annotation                     <-
+
+    2. Real-life
+    1.2. Annotate videos
+    1.2. Pre-process videos (frames, pedestrian)    <-
+
+2. Run experiment!
+3. Result analysis
+4. Write paper
+
 #. Pipeline
     # Add " " to caption output and replace breaks with "\n"
     # Remove warnings
@@ -9,33 +20,3 @@ ToDo:
     # readme (instructions)
     # Rm RMPS, weights, etc. non-used
 # Sanity checks
-
-# LLM input - What will be a good input for a LLM?
-
-1. Dataset
-    1. Front-Hand
-    1.1. Participant annotation     <-
-
-    2. Real-life
-    1.2. Annotate videos
-    1.2. Pre-process videos (frames, pedestrian)    <-
-
-2. Run experiment!
-3. Result analysis
-4. Write paper
-
-Write about:
-- VideoLLaMA2
-- Memory handling
-    - Fix OOM issue and clean
-
-###### DONE ######
-1.b Pipeline
-    1.b.1 Temporal models VideoLLaMA2, BLIP2, etc.
-    Fix BLIP
-    Fix QWEN
-    Fix VideoLLaMA2, 16F
-
-1.a Dataset
-    1.a.1 Record dataset (5 - 10 videos) Make it realistic
-1.b Make prompts
