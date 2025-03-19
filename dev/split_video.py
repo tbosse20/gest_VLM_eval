@@ -2,7 +2,7 @@ import cv2
 import os
 from tqdm import tqdm
 
-def save_video_frames(video_path, output_folder):
+def save_video_frames(video_path, output_folder, interval: int = 1):
     
     # Create output folder if it doesn't exist
     if os.path.exists(output_folder):
@@ -29,9 +29,10 @@ def save_video_frames(video_path, output_folder):
             ret, frame = cap.read()
             if not ret: break
             
-            # Save frame
-            frame_filename = os.path.join(output_folder, f"frame_{frame_idx:04d}.png")
-            cv2.imwrite(frame_filename, frame)
+            # Save frame in interval
+            if frame_idx % interval == 0:
+                frame_filename = os.path.join(output_folder, f"frame_{frame_idx:04d}.png")
+                cv2.imwrite(frame_filename, frame)
             
             # Update progress bar
             pbar.update(1)
@@ -39,7 +40,7 @@ def save_video_frames(video_path, output_folder):
     
     cap.release()
     
-def save_video_frames_folder(videos_folder: str):
+def save_video_frames_folder(videos_folder: str, interval: int):
     
     # Validate input folder
     if not os.path.exists(videos_folder):
@@ -55,14 +56,17 @@ def save_video_frames_folder(videos_folder: str):
     # Loop through all video names in the folder
     video_names = os.listdir(videos_folder)
     for video_name in video_names:
+        # 
+        if not video_name.endswith(".mp4"): continue
         # Get video path
         video_path = f"{videos_folder}/{video_name}"
         # Create output folder for video frames
         video_output_folder = f"{output_folder}/{video_name.split('.')[0]}"
         # Create output folder if it doesn't exist
-        save_video_frames(video_path, video_output_folder)
+        save_video_frames(video_path, video_output_folder, interval)
 
 if __name__ == "__main__":
     
     videos_folder = "../realworldgestures"  # Folder containing videos
-    save_video_frames_folder(videos_folder)
+    interval = 18 # 36 fps / 18 = 2 fps
+    save_video_frames_folder(videos_folder, interval)
