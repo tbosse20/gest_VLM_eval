@@ -50,6 +50,12 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
     # Get video name
     video_name = os.path.basename(video_path)
     
+    # Skip computed videos
+    computed_video_names = pd.read_csv(csv_path, index_col=False)["video_name"].values
+    if video_name in computed_video_names:
+        print(f"'{video_name}' already captioned, skip..")
+        return
+    
     # Get highest and lowest 0000 value in folder
     frame_idx = [int(frame.split("_")[-1].split(".")[0]) for frame in os.listdir(video_path)]
     start_frame, end_frame = min(frame_idx), max(frame_idx)
