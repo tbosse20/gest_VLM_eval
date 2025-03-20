@@ -19,6 +19,12 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     
     # Loop through each CSV file
     for file in csv_files:
+        
+        # Skip proxy files
+        if 'proxy' in file:
+            continue
+        
+        # Load the CSV file
         df = pd.read_csv(file)
         
         # Drop unnecessary columns
@@ -50,33 +56,45 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     plt.figure(figsize=(8, 4))
     
     # Only keep cos, Jaccard, Bleu, and meteor
-    merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Bleu", "Meteor"])]
+    merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Bleu"])]
+    # Sort the metrics
+    merged_df["Metric"] = pd.Categorical(merged_df["Metric"], sorted(merged_df["Metric"].unique()))
     
     # Boxplot: Group by prompt type, color by model
     if prompt_types:
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
-        sns.boxplot(x="prompt_type", y="Score", hue="Model", data=cosine_df, showfliers=False, width=0.9)
-        plt.xlabel("Prompt Type")
-        plt.title("Cosine Similarity Scores Across Prompt Type")
+        sns.boxplot(
+            x="prompt_type", y="Score", hue="Model", data=cosine_df,
+            showfliers=False, width=0.9)
+        plt.xlabel("Prompt Type", fontstyle="italic")
+        # plt.title("Cosine Similarity Scores Across Prompt Type")
     
     # Boxplot: Group by gesture, color by model
     elif gestures:
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
-        sns.boxplot(x="video_name", y="Score", hue="Model", data=cosine_df, showfliers=False, width=0.9)
+        sns.boxplot(
+            x="video_name", y="Score", hue="Model", data=cosine_df,
+            showfliers=False, width=0.9)
         plt.xticks(rotation=45//2)
-        plt.xlabel("Gesture")
-        plt.title("Cosine Similarity Scores Across Gestures")
+        plt.xlabel("Gesture", fontstyle="italic")
+        # plt.title("Cosine Similarity Scores Across Gestures")
     
     # Boxplot: Group by metric, color by model
     else:
-        sns.boxplot(x="Metric", y="Score", hue="Model", data=merged_df, showfliers=False, width=0.9)
-        plt.xlabel("Metrics")
-        plt.title("Similarity Metrics Across Models")
+        sns.boxplot(
+            x="Metric", y="Score", hue="Model", data=merged_df,
+            showfliers=False, width=0.9)
+        plt.xlabel("Metrics", fontstyle="italic")
+        # plt.title("Similarity Metrics Across Models")
 
     # Configure plot
-    plt.ylabel("Score")
+    plt.ylabel("Score", fontstyle="italic")
     # plt.title(f'Boxplot of Similarity Metrics Across Models (prompt: {include_prompt if include_prompt else "All"})')
-    plt.legend(title="Models", bbox_to_anchor=(1.05, 0.5), loc='center left')
+    plt.legend(
+        title="Models", 
+        bbox_to_anchor=(1.05, 0.5), 
+        loc='center left', 
+        title_fontproperties={'weight': 'bold'})
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
 
@@ -104,7 +122,6 @@ def prin_latex_table(merged_df, prompt_types=False, gesture=False):
     # Compute the average scores
     group_cols = ["Model", focus]
     numeric_cols = merged_df.select_dtypes(include=["number"]).columns.tolist()
-
     avg_df = merged_df.groupby(group_cols)[numeric_cols].mean().reset_index()
     print(avg_df)
     print()
@@ -113,21 +130,20 @@ def prin_latex_table(merged_df, prompt_types=False, gesture=False):
     max_scores = avg_df.groupby(focus)["Score"].transform("max")
 
     # Compute the percentage difference to the highest score
-    avg_df["Difference [%]"] = -((max_scores - avg_df["Score"]) / max_scores) * 100
+    avg_df["Difference [%]"] = (avg_df["Score"] / max_scores) * 100
 
     # Compute the overall average score for each model across all metrics
     model_averages = avg_df.groupby("Model")["Score"].mean()
-
     # Find the highest model average
     max_avg_score = model_averages.max()
-
     # Compute percentage difference for model averages
-    model_avg_diff = -((max_avg_score - model_averages) / max_avg_score) * 100
+    model_avg_diff = (model_averages / max_avg_score) * 100
 
     # Convert DataFrame to LaTeX-style formatted output
     latex_table = ""
     models = avg_df["Model"].unique()
     metrics = avg_df[focus].unique()
+    metrics = sorted(metrics, key=lambda x: x.lower())
 
     # Convert to pivot format for easier LaTeX conversion
     pivot_df = avg_df.pivot(index="Model", columns=focus, values=["Score", "Difference [%]"])
