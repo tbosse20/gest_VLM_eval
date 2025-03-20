@@ -1,76 +1,10 @@
 import os
 import pandas as pd
-import numpy as np
 from pathlib import Path
-import itertools
-import nltk
-from sentence_transformers import SentenceTransformer, util
-from nltk.translate.bleu_score import sentence_bleu
-from nltk.translate.meteor_score import meteor_score
-from rouge_score import rouge_scorer
-import bert_score
-import logging
-logging.getLogger("transformers").setLevel(logging.ERROR)
-
-# Ensure necessary NLTK resources are available
-# nltk.download('wordnet')
-# nltk.download('omw-1.4')
-
-# Load pre-trained embedding model
-sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
-
-# Initialize ROUGE scorer
-rouge_scorer_obj = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
-
-from nltk.translate.bleu_score import SmoothingFunction
 from tqdm import tqdm
-smoothing = SmoothingFunction()
-
-def jaccard_similarity(sent1, sent2):
-    """Compute Jaccard Similarity between two sentences."""
-    set1, set2 = set(sent1.lower().split()), set(sent2.lower().split())
-    intersection = len(set1.intersection(set2))
-    union = len(set1.union(set2))
-    return intersection / union if union else 0.0
-
-
-def generate_caption(image_path):
-    """Placeholder function for image captioning. Replace with an actual model."""
-    return "A pedestrian raises their hand to stop traffic."  # Dummy caption
-
-
-def compute_similarity_metrics(ground_truth, predicted):
-    """Computes multiple similarity metrics between the ground truth and predicted captions."""
-    
-    # Ensure inputs are not empty
-    if not ground_truth or not predicted:
-        return pd.DataFrame({
-            "cosine_similarity": 0.0,
-            "jaccard_similarity": 0.0,
-            "bleu_score": 0.0,
-            "meteor_score": 0.0,
-            "rouge_l_score": 0.0,
-            "bert_score": 0.0
-        })
-
-    # Compute embeddings
-    gt_embedding = sbert_model.encode(ground_truth, convert_to_tensor=True)
-    pred_embedding = sbert_model.encode(predicted, convert_to_tensor=True)
-
-    # Compute similarity metrics
-    metrics = {
-        "cosine_similarity":  util.pytorch_cos_sim(gt_embedding, pred_embedding).item(),
-        "jaccard_similarity": jaccard_similarity(ground_truth, predicted),
-        "bleu_score":         sentence_bleu([ground_truth.split()], predicted.split(), smoothing_function=smoothing.method1),
-        "meteor_score":       meteor_score([ground_truth.split()], predicted.split()),
-        "rouge_l_score":      rouge_scorer_obj.score(ground_truth, predicted)["rougeL"].fmeasure
-    }
-
-    # Compute BERTScore
-    _, _, bert_f1 = bert_score.score([predicted], [ground_truth], lang="en")
-    metrics["bert_score"] = bert_f1.item()
-
-    return pd.DataFrame([metrics])
+import sys
+sys.path.append(".")
+from results.src.compute_similarity_metrics import compute_similarity_metrics
 
 def make_sibling_folder(folder_path: str, sibling_name: str):
     """Create a sibling folder to the input folder."""
@@ -94,6 +28,7 @@ def process_csv(label_caption_csv, gen_caption_folder):
 
     COLUMNS = ["video_name", "frame_idx", "prompt_type"]
     METRICS = ["cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
+    METRICS.sort()
     
     # Load CSV
     label_df = pd.read_csv(label_caption_csv)
@@ -149,7 +84,7 @@ def process_csv(label_caption_csv, gen_caption_folder):
             # if video_name not in videos_only:
             #     continue
             # Exclude these videos
-            videos_exclude = ["Go forward"]
+            videos_exclude = ["Go forward", "Follow", "Getting a cap"]
             if video_name in videos_exclude:
                 continue
             
