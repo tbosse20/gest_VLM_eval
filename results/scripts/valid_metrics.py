@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import sys
-
-sys.path.append(".")
-from results.scripts.compare_captions import compute_similarity_metrics
 from tqdm import tqdm
+import sys
+sys.path.append(".")
+from results.src.compute_similarity_metrics import compute_similarity_metrics
 
 def validate_metrics():
     ground_truths = [
