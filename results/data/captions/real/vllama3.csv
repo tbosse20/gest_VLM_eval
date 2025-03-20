@@ -1,0 +1,606 @@
+video_name,frame_idx,prompt_type,caption
+video_18,0,8,8,blank,A car is driving down a road.
+video_18,0,8,8,determine,The pedestrian is waving their hand.
+video_18,0,8,8,body,The pedestrian is walking across the street.
+video_18,0,8,8,context,The pedestrian is making a stop gesture.
+video_18,0,8,8,objective,The pedestrian is making a stop gesture.
+video_18,144,152,8,blank,A car is waiting at a red light.
+video_18,144,152,8,determine,The pedestrian is making a stop gesture.
+video_18,144,152,8,body,"The pedestrian is wearing a yellow safety vest and is standing near the white utility truck. The person appears to be stationary, possibly directing traffic or assisting with some activity related to the truck's presence at the intersection."
+video_18,144,152,8,context,The pedestrian is making a stop gesture.
+video_18,144,152,8,objective,The pedestrian is making a stop gesture.
+video_18,288,296,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_18,288,296,8,determine,The pedestrian is pointing to the right.
+video_18,288,296,8,body,"The pedestrian is wearing a yellow vest and black pants, standing on the right side of the road near a white police vehicle. Initially still, he begins to walk towards the left side while gesturing with his hands as if directing traffic or communicating with someone off-camera. His movements are deliberate and purposeful, indicating active engagement in managing the flow around him."
+video_18,288,296,8,context,The pedestrian is making a stop gesture.
+video_18,288,296,8,objective,The pedestrian is making a stop gesture.
+video_18,432,440,8,blank,A man is standing in the middle of a crosswalk directing traffic.
+video_18,432,440,8,determine,The pedestrian is making a stop gesture.
+video_18,432,440,8,body,"The pedestrian is a man wearing a high-visibility vest and a cap. He is standing on the sidewalk, facing the road. His body posture suggests he is directing traffic or pedestrians. The man's movements are minimal; he appears to be stationary while gesturing with his right hand, possibly signaling for vehicles to stop or proceed."
+video_18,432,440,8,context,The pedestrian is making a stop gesture.
+video_18,432,440,8,objective,The pedestrian is making a stop gesture.
+video_05,0,8,8,blank,A car is driving down a road and stops at an intersection.
+video_05,0,8,8,determine,The pedestrian is crossing the street.
+video_05,0,8,8,body,"The pedestrian is walking steadily across the street, maintaining a consistent pace as they cross from one side to the other."
+video_05,0,8,8,context,The pedestrian is making a stop gesture.
+video_05,0,8,8,objective,The pedestrian is making a stop gesture.
+video_05,144,152,8,blank,"The video shows a person standing in the middle of an intersection, directing traffic."
+video_05,144,152,8,determine,The pedestrian is standing still.
+video_05,144,152,8,body,"The pedestrian is standing in the middle of the road, facing the camera. They are wearing a high-visibility vest and appear to be directing traffic or waiting for vehicles to pass. The person's body posture suggests they are stationary, with their arms possibly outstretched to guide drivers."
+video_05,144,152,8,context,The pedestrian is making a stop gesture.
+video_05,144,152,8,objective,The pedestrian is making a stop gesture.
+video_05,288,296,8,blank,A man is standing in the middle of a street directing traffic.
+video_05,288,296,8,determine,The pedestrian is making a stop gesture.
+video_05,288,296,8,body,"The pedestrian is standing in the middle of a crosswalk, facing the traffic light. The person appears to be stationary and waiting for the signal to change before crossing the street."
+video_05,288,296,8,context,The pedestrian is making a stop gesture.
+video_05,288,296,8,objective,The pedestrian is making a stop gesture.
+video_05,432,440,8,blank,A man is standing in the middle of a crosswalk directing traffic.
+video_05,432,440,8,determine,The pedestrian is making a stop gesture.
+video_05,432,440,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of an intersection, directing traffic with his arms and hands. His body posture indicates that he is actively gesturing to control the flow of vehicles."
+video_05,432,440,8,context,The pedestrian is making a stop gesture.
+video_05,432,440,8,objective,The pedestrian is making a stop gesture.
+video_05,576,584,8,blank,A man is standing in the middle of a crosswalk.
+video_05,576,584,8,determine,The pedestrian is holding up his hand.
+video_05,576,584,8,body,"The pedestrian is standing in the middle of a crosswalk, wearing a high-visibility vest. The person appears to be stationary and looking around, possibly waiting for traffic signals or observing their surroundings."
+video_05,576,584,8,context,The pedestrian is making a stop gesture.
+video_05,576,584,8,objective,The pedestrian is making a stop gesture.
+video_05,720,728,8,blank,"A man is standing in the middle of a crosswalk, directing traffic."
+video_05,720,728,8,determine,The pedestrian is waving his hand.
+video_05,720,728,8,body,"The pedestrian is a man wearing a green uniform and a reflective vest. He is standing at the crosswalk, waiting for the traffic light to change. His body posture indicates that he is stationary and attentive to the surroundings."
+video_05,720,728,8,context,The pedestrian is making a stop gesture.
+video_05,720,728,8,objective,The pedestrian is making a stop gesture.
+video_05,864,872,8,blank,A car is stopped at a red light while an officer stands in the street.
+video_05,864,872,8,determine,The pedestrian is making a stop gesture.
+video_05,864,872,8,body,"The pedestrian is standing still at the crosswalk, waiting for the traffic light to change."
+video_05,864,872,8,context,The pedestrian is making a stop gesture.
+video_05,864,872,8,objective,The pedestrian is making a stop gesture.
+video_05,1008,1016,8,blank,A car is driving through an intersection while a person stands in the middle of it.
+video_05,1008,1016,8,determine,The pedestrian is making a stop gesture.
+video_05,1008,1016,8,body,"The pedestrian is a man wearing a green vest and black pants. He is standing on the sidewalk, facing the traffic light. His body posture suggests he is waiting for the signal to change before crossing the street."
+video_05,1008,1016,8,context,The pedestrian is making a stop gesture.
+video_05,1008,1016,8,objective,The pedestrian is making a stop gesture.
+video_05,1152,1160,8,blank,A car is driving through an intersection while a person directs traffic.
+video_05,1152,1160,8,determine,The pedestrian is making a stop gesture.
+video_05,1152,1160,8,body,"The pedestrian is standing still at the crosswalk, waiting for the traffic light to change."
+video_05,1152,1160,8,context,The pedestrian is making a stop gesture.
+video_05,1152,1160,8,objective,The pedestrian is making a stop gesture.
+video_05,1296,1304,8,blank,A car is driving through an intersection.
+video_05,1296,1304,8,determine,The pedestrian is crossing the street.
+video_05,1296,1304,8,body,"The pedestrian is standing still at the crosswalk, facing the traffic light."
+video_05,1296,1304,8,context,The pedestrian is making a stop gesture.
+video_05,1296,1304,8,objective,The pedestrian is making a stop gesture.
+video_05,1440,1448,8,blank,A car is driving through an intersection while a traffic officer stands in the middle of it.
+video_05,1440,1448,8,determine,The pedestrian is standing still.
+video_05,1440,1448,8,body,"The pedestrian is standing still at the crosswalk, wearing a high-visibility vest."
+video_05,1440,1448,8,context,The pedestrian is making a stop gesture.
+video_05,1440,1448,8,objective,The pedestrian is making a stop gesture.
+video_05,1584,1592,8,blank,A car is driving through an intersection.
+video_05,1584,1592,8,determine,The pedestrian is crossing the street.
+video_05,1584,1592,8,body,"The pedestrian is wearing a high-visibility vest and standing on the sidewalk near the traffic light. The person appears to be stationary, possibly waiting for the signal to change or observing the vehicles passing by."
+video_05,1584,1592,8,context,The pedestrian is making a stop gesture.
+video_05,1584,1592,8,objective,The pedestrian is making a stop gesture.
+video_05,1728,1736,8,blank,A man is directing traffic at an intersection.
+video_05,1728,1736,8,determine,The pedestrian is waving his hand.
+video_05,1728,1736,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing on the side of the road, near the traffic light. His body posture suggests he is directing or controlling traffic."
+video_05,1728,1736,8,context,The pedestrian is making a stop gesture.
+video_05,1728,1736,8,objective,The pedestrian is making a stop gesture.
+video_05,1872,1880,8,blank,A man in a safety vest is directing traffic at an intersection.
+video_05,1872,1880,8,determine,The pedestrian is crossing the street.
+video_05,1872,1880,8,body,"The pedestrian, dressed in a black jacket and pants with a yellow reflective vest over the top, walks steadily across the crosswalk. He maintains an upright posture as he approaches the other side of the street before turning left onto another road."
+video_05,1872,1880,8,context,The pedestrian is making a stop gesture.
+video_05,1872,1880,8,objective,The pedestrian is making a stop gesture.
+video_05,2016,2024,8,blank,A car is driving down a road.
+video_05,2016,2024,8,determine,The pedestrian is making a peace sign with their hand.
+video_05,2016,2024,8,body,"The pedestrian is walking on the sidewalk, moving forward with a steady pace. Their body posture suggests they are in motion, likely heading towards their destination."
+video_05,2016,2024,8,context,The pedestrian is making a stop gesture.
+video_05,2016,2024,8,objective,No gesture
+video_14,0,8,8,blank,A car is driving down a street.
+video_14,0,8,8,determine,The pedestrian is waving their hand.
+video_14,0,8,8,body,"The pedestrian is walking on the sidewalk to the right of the road, moving forward at a steady pace."
+video_14,0,8,8,context,The pedestrian is making a stop gesture.
+video_14,0,8,8,objective,The pedestrian is making a stop gesture.
+video_14,144,152,8,blank,A car is driving down a street.
+video_14,144,152,8,determine,The pedestrian is making a stop gesture.
+video_14,144,152,8,body,"The pedestrian is wearing a yellow safety vest and black pants, standing still on the sidewalk."
+video_14,144,152,8,context,The pedestrian is making a stop gesture.
+video_14,144,152,8,objective,The pedestrian is making a stop gesture.
+video_03,0,8,8,blank,A car is stopped at a stop sign.
+video_03,0,8,8,determine,The pedestrian is waving their hand.
+video_03,0,8,8,body,"The pedestrian is standing on the side of the road, wearing a high-visibility vest. The person appears to be stationary and not in motion."
+video_03,0,8,8,context,The pedestrian is making a stop gesture.
+video_03,0,8,8,objective,The pedestrian is making a stop gesture.
+video_03,144,152,8,blank,A car is driving down the road and a person in an orange vest waves them on.
+video_03,144,152,8,determine,The pedestrian is making a stop sign with his hand.
+video_03,144,152,8,body,"The pedestrian, dressed in a green jacket and black pants with short hair, stands on the side of the road before walking steadily towards the right. A yellow safety vest adds visibility as they move away from the camera's perspective."
+video_03,144,152,8,context,The pedestrian is making a stop gesture.
+video_03,144,152,8,objective,The pedestrian is making a stop gesture.
+video_15,0,8,8,blank,A car is driving down a road.
+video_15,0,8,8,determine,The pedestrian is crossing the street.
+video_15,0,8,8,body,"The pedestrian is wearing a yellow jacket and black pants, standing still on the sidewalk before crossing the street. Their movements are deliberate as they walk across from left to right in front of the white truck at the intersection with traffic lights."
+video_15,0,8,8,context,The pedestrian is making a stop gesture.
+video_15,0,8,8,objective,The pedestrian is making a stop gesture.
+video_15,144,152,8,blank,A police officer is directing traffic at an intersection.
+video_15,144,152,8,determine,The pedestrian is crossing the street.
+video_15,144,152,8,body,"The pedestrian is wearing a high-visibility vest and is walking across the street. The person's body posture indicates they are moving forward, with their arms swinging naturally as they walk."
+video_15,144,152,8,context,The pedestrian is making a stop gesture.
+video_15,144,152,8,objective,The pedestrian is making a stop gesture.
+video_15,288,296,8,blank,A man in a yellow vest is standing at an intersection.
+video_15,288,296,8,determine,The pedestrian is crossing the street.
+video_15,288,296,8,body,"The pedestrian is wearing a yellow safety vest and black pants, standing still in the middle of the crosswalk."
+video_15,288,296,8,context,The pedestrian is making a stop gesture.
+video_15,288,296,8,objective,The pedestrian is making a stop gesture.
+video_15,432,440,8,blank,"A police officer is standing in the middle of a crosswalk, directing traffic."
+video_15,432,440,8,determine,The pedestrian is waving their hand.
+video_15,432,440,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the sidewalk, facing the street. His body posture suggests he is waiting to cross the road."
+video_15,432,440,8,context,The pedestrian is making a stop gesture.
+video_15,432,440,8,objective,The pedestrian is making a stop gesture.
+video_15,576,584,8,blank,"A man in a yellow vest is standing at an intersection, directing traffic."
+video_15,576,584,8,determine,The pedestrian is crossing the street.
+video_15,576,584,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the sidewalk, facing the street. His body posture suggests he is waiting to cross the road. There are no visible movements from him in this frame."
+video_15,576,584,8,context,The pedestrian is making a stop gesture.
+video_15,576,584,8,objective,The pedestrian is making a stop gesture.
+video_15,720,728,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_15,720,728,8,determine,The pedestrian is crossing the street.
+video_15,720,728,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the side of the road, facing the traffic light. His body posture suggests he is waiting for the signal to change before crossing the street."
+video_15,720,728,8,context,The pedestrian is making a stop gesture.
+video_15,720,728,8,objective,The pedestrian is making a stop gesture.
+video_15,864,872,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_15,864,872,8,determine,The pedestrian is waving his hand.
+video_15,864,872,8,body,"The pedestrian is wearing a yellow safety vest and black pants, standing on the sidewalk near an intersection. He walks towards the camera before turning left to cross the street, moving steadily across while looking around for traffic."
+video_15,864,872,8,context,The pedestrian is making a stop gesture.
+video_15,864,872,8,objective,The pedestrian is making a stop gesture.
+video_15,1008,1016,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_15,1008,1016,8,determine,The pedestrian is making a stop gesture.
+video_15,1008,1016,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing in the middle of the crosswalk, facing the traffic light. His body posture suggests he is waiting for the signal to change before crossing the street."
+video_15,1008,1016,8,context,The pedestrian is making a stop gesture.
+video_15,1008,1016,8,objective,The pedestrian is making a stop gesture.
+video_15,1152,1160,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_15,1152,1160,8,determine,The pedestrian is making a stop gesture.
+video_15,1152,1160,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the side of the road, facing the traffic light. His body posture indicates that he is directing traffic or pedestrians. The man's movements are minimal; he remains mostly stationary while occasionally gesturing with his arms to guide vehicles and cyclists through the intersection."
+video_15,1152,1160,8,context,The pedestrian is making a stop gesture.
+video_15,1152,1160,8,objective,The pedestrian is making a stop gesture.
+video_15,1296,1304,8,blank,A man is directing traffic at an intersection.
+video_15,1296,1304,8,determine,The pedestrian is pointing to the right.
+video_15,1296,1304,8,body,"The pedestrian is wearing a black jacket and blue jeans, standing still at the crosswalk. He begins to walk across the street as the traffic light changes from red to green, moving steadily towards the other side of the road while maintaining his pace throughout the crossing."
+video_15,1296,1304,8,context,The pedestrian is making a stop gesture.
+video_15,1296,1304,8,objective,The pedestrian is signaling to stop.
+video_13,0,8,8,blank,A car is stopped at a red light on an empty street.
+video_13,0,8,8,determine,The pedestrian is standing still.
+video_13,0,8,8,body,"The pedestrian is standing still on the sidewalk, facing the street. They are wearing a high-visibility vest and appear to be directing traffic or waiting for something."
+video_13,0,8,8,context,The pedestrian is making a stop gesture.
+video_13,0,8,8,objective,"The pedestrian is standing still, facing the road."
+video_13,144,152,8,blank,A car is driving through an intersection while a man in yellow directs traffic.
+video_13,144,152,8,determine,The pedestrian is standing still and not making any gestures.
+video_13,144,152,8,body,"The pedestrian is standing on the side of the road, wearing a high-visibility vest. He remains stationary throughout the video, observing the traffic and waiting for his turn to cross."
+video_13,144,152,8,context,The pedestrian is making a stop gesture.
+video_13,144,152,8,objective,The pedestrian is making a stop gesture.
+video_13,288,296,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_13,288,296,8,determine,The pedestrian is waving his hand.
+video_13,288,296,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the side of the road, near some orange traffic cones. The man appears to be directing or controlling traffic at an intersection. His body posture suggests he is actively engaged in his task, possibly gesturing with his hands to guide vehicles."
+video_13,288,296,8,context,The pedestrian is making a stop gesture.
+video_13,288,296,8,objective,The pedestrian is making a stop gesture.
+video_13,432,440,8,blank,A person is directing traffic on a city street.
+video_13,432,440,8,determine,The pedestrian is pointing to the right.
+video_13,432,440,8,body,"The pedestrian is standing on the side of the road, wearing a black jacket and pants. They are holding an orange traffic cone in their right hand. The person appears to be stationary, possibly directing or monitoring traffic."
+video_13,432,440,8,context,The pedestrian is making a stop gesture.
+video_13,432,440,8,objective,The pedestrian is making a stop gesture.
+video_07,0,8,8,blank,The video shows a person standing in the middle of an empty road.
+video_07,0,8,8,determine,"The pedestrian is standing in the middle of the road, holding their arms up."
+video_07,0,8,8,body,"The pedestrian is standing in the middle of the road, facing the traffic lights. The person appears to be stationary and waiting for the light to change."
+video_07,0,8,8,context,The pedestrian is making a stop gesture.
+video_07,0,8,8,objective,The pedestrian is making a stop gesture.
+video_07,144,152,8,blank,A man is standing in the middle of a road directing traffic.
+video_07,144,152,8,determine,The pedestrian is waving their arms.
+video_07,144,152,8,body,"The pedestrian is standing in the middle of a crosswalk, wearing dark clothing. They are facing the camera and appear to be stationary."
+video_07,144,152,8,context,The pedestrian is making a stop gesture.
+video_07,144,152,8,objective,The pedestrian is signaling to stop.
+video_07,288,296,8,blank,A police officer is directing traffic at an intersection.
+video_07,288,296,8,determine,The pedestrian is making a stop gesture.
+video_07,288,296,8,body,"The pedestrian is a man wearing a high-visibility vest. He stands on the side of the road, facing the camera. His body posture is upright and he appears to be stationary."
+video_07,288,296,8,context,The pedestrian is making a stop gesture.
+video_07,288,296,8,objective,The pedestrian is making a stop gesture.
+video_01,0,8,8,blank,A car is driving down a street.
+video_01,0,8,8,determine,The pedestrian is crossing the street.
+video_01,0,8,8,body,"The pedestrian is walking on the sidewalk to the right of the road, moving forward steadily."
+video_01,0,8,8,context,The pedestrian is making a stop gesture.
+video_01,0,8,8,objective,The pedestrian is making a stop gesture.
+video_01,144,152,8,blank,A bus is driving through an intersection.
+video_01,144,152,8,determine,The pedestrian is crossing the street.
+video_01,144,152,8,body,"The pedestrian is standing still on the sidewalk, wearing a yellow jacket."
+video_01,144,152,8,context,The pedestrian is making a stop gesture.
+video_01,144,152,8,objective,The pedestrian is making a stop gesture.
+video_01,288,296,8,blank,A bus is driving down the road and turns left at an intersection.
+video_01,288,296,8,determine,The pedestrian is crossing the street.
+video_01,288,296,8,body,"The pedestrian is a man wearing a yellow safety vest. He is walking across the street from right to left, moving steadily and purposefully."
+video_01,288,296,8,context,The pedestrian is making a stop gesture.
+video_01,288,296,8,objective,The pedestrian is making a stop gesture.
+video_01,432,440,8,blank,A police officer is directing traffic at an intersection.
+video_01,432,440,8,determine,The pedestrian is waving his hand.
+video_01,432,440,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the side of the road, facing the traffic light. His body posture suggests he is directing or controlling the flow of vehicles at an intersection."
+video_01,432,440,8,context,The pedestrian is making a stop gesture.
+video_01,432,440,8,objective,The pedestrian is making a stop gesture.
+video_01,576,584,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_01,576,584,8,determine,The pedestrian is crossing the street.
+video_01,576,584,8,body,"The pedestrian is a man wearing a yellow safety vest. He is walking across the street, moving from right to left in the frame. His body posture suggests he is focused on crossing safely and efficiently."
+video_01,576,584,8,context,The pedestrian is making a stop gesture.
+video_01,576,584,8,objective,The pedestrian is making a stop gesture.
+video_01,720,728,8,blank,A white car is stopped at a red light.
+video_01,720,728,8,determine,The pedestrian is holding up their hand.
+video_01,720,728,8,body,"The pedestrian is wearing a green jacket and black pants, standing still on the sidewalk before walking towards the crosswalk. They pause briefly at the edge of the road to look both ways for traffic, then proceed confidently across the street while maintaining eye contact with the camera."
+video_01,720,728,8,context,The pedestrian is making a stop gesture.
+video_01,720,728,8,objective,The pedestrian is making a stop gesture.
+video_01,864,872,8,blank,A white car is stopped at a red light.
+video_01,864,872,8,determine,The pedestrian is standing still.
+video_01,864,872,8,body,"The pedestrian is wearing a green jacket and black pants, standing still on the sidewalk."
+video_01,864,872,8,context,The pedestrian is making a stop gesture.
+video_01,864,872,8,objective,The pedestrian is standing still and not making any specific gesture.
+video_01,1008,1016,8,blank,The video shows a white Tesla Model 3 stopped at an intersection. The car is stationary and waiting for the traffic light to change.
+video_01,1008,1016,8,determine,The pedestrian is standing still and not making any gestures.
+video_01,1008,1016,8,body,"The pedestrian is standing still on the sidewalk, facing the street."
+video_01,1008,1016,8,context,The pedestrian is making a stop gesture.
+video_01,1008,1016,8,objective,The pedestrian is standing still and not making any specific gesture.
+video_01,1152,1160,8,blank,A white Tesla is stopped at a red light.
+video_01,1152,1160,8,determine,The pedestrian is crossing the street.
+video_01,1152,1160,8,body,"The pedestrian is standing still on the sidewalk, facing the street."
+video_01,1152,1160,8,context,The pedestrian is making a stop gesture.
+video_01,1152,1160,8,objective,The pedestrian is making a stop gesture.
+video_01,1296,1304,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_01,1296,1304,8,determine,The pedestrian is making a hand gesture.
+video_01,1296,1304,8,body,The pedestrian is wearing a yellow vest and is walking across the street. The motion of the pedestrian appears to be steady and purposeful as they cross from one side of Lake Road to the other.
+video_01,1296,1304,8,context,The pedestrian is making a stop gesture.
+video_01,1296,1304,8,objective,The pedestrian is making a stop gesture.
+video_01,1440,1448,8,blank,A white Tesla is stopped at a red light.
+video_01,1440,1448,8,determine,The pedestrian is making a stop gesture.
+video_01,1440,1448,8,body,"The pedestrian is standing still at the crosswalk, facing the traffic light."
+video_01,1440,1448,8,context,The pedestrian is making a stop gesture.
+video_01,1440,1448,8,objective,The pedestrian is making a stop gesture.
+video_01,1584,1592,8,blank,A white Tesla is stopped at a red light.
+video_01,1584,1592,8,determine,The pedestrian is making a hand gesture.
+video_01,1584,1592,8,body,"The pedestrian is wearing a yellow vest and is walking towards the right side of the frame. The person's body posture suggests they are moving forward at a steady pace, with their arms swinging naturally by their sides."
+video_01,1584,1592,8,context,The pedestrian is making a stop gesture.
+video_01,1584,1592,8,objective,"The pedestrian is making a hand gesture, possibly indicating for the vehicle to stop or proceed with caution."
+video_01,1728,1736,8,blank,A police officer is directing traffic at an intersection.
+video_01,1728,1736,8,determine,The pedestrian is pointing to the right.
+video_01,1728,1736,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the sidewalk near the intersection, facing the road. His body posture suggests he is observing or waiting for something. There are no significant movements observed in this frame."
+video_01,1728,1736,8,context,The pedestrian is making a stop gesture.
+video_01,1728,1736,8,objective,The pedestrian is making a stop gesture.
+video_01,1872,1880,8,blank,A car is driving down the road and a person in an orange vest walks out into traffic.
+video_01,1872,1880,8,determine,The pedestrian is holding up their hand.
+video_01,1872,1880,8,body,"The pedestrian, dressed in a black jacket and pants with a yellow safety vest over it, stands at the crosswalk. Initially still, they begin to walk across the street as the traffic light changes from red to green. Their movements are steady and purposeful, reflecting their focus on safely crossing despite the presence of vehicles nearby."
+video_01,1872,1880,8,context,The pedestrian is making a stop gesture.
+video_01,1872,1880,8,objective,The pedestrian is making a stop gesture.
+video_17,0,8,8,blank,A person is directing traffic at an intersection.
+video_17,0,8,8,determine,The pedestrian is waving their arms.
+video_17,0,8,8,body,The pedestrian is walking across the street.
+video_17,0,8,8,context,The pedestrian is making a stop gesture.
+video_17,0,8,8,objective,The pedestrian is making a stop gesture.
+video_17,144,152,8,blank,A man is directing traffic at an intersection.
+video_17,144,152,8,determine,The pedestrian is crossing the street.
+video_17,144,152,8,body,"The pedestrian is wearing a yellow safety vest and black pants, standing in the middle of the road with arms outstretched. He moves his arms up and down to signal traffic while remaining stationary throughout the video at an intersection controlled by red lights."
+video_17,144,152,8,context,The pedestrian is making a stop gesture.
+video_17,144,152,8,objective,The pedestrian is making a stop gesture.
+video_17,288,296,8,blank,"A police officer is standing in the middle of a street, directing traffic."
+video_17,288,296,8,determine,The pedestrian is waving their arms.
+video_17,288,296,8,body,"The pedestrian is a man wearing a yellow safety vest and black pants. He is standing in the middle of an intersection, facing away from the camera. His body posture suggests he is directing traffic or pedestrians. The man appears to be stationary at first but then starts moving his arms slightly as if signaling or gesturing."
+video_17,288,296,8,context,The pedestrian is making a stop gesture.
+video_17,288,296,8,objective,The pedestrian is making a stop gesture.
+video_17,432,440,8,blank,A man is directing traffic at an intersection.
+video_17,432,440,8,determine,The pedestrian is waving his hand.
+video_17,432,440,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing at the intersection, facing the traffic light. His body posture indicates that he is stationary and waiting for the signal to change before crossing the street."
+video_17,432,440,8,context,The pedestrian is making a stop gesture.
+video_17,432,440,8,objective,The pedestrian is making a stop gesture.
+video_17,576,584,8,blank,A police officer is directing traffic at an intersection.
+video_17,576,584,8,determine,The pedestrian is pointing to the right.
+video_17,576,584,8,body,"The pedestrian is a man wearing a yellow safety vest and black pants. He is standing in the middle of an intersection, facing away from the camera. His body posture suggests he is directing traffic or pedestrians. The man's movements are minimal; he appears to be stationary, occasionally gesturing with his arms to direct others."
+video_17,576,584,8,context,The pedestrian is pointing to the right.
+video_17,576,584,8,objective,The pedestrian is pointing to the right.
+video_17,720,728,8,blank,"A man in a yellow vest is standing at an intersection, directing traffic."
+video_17,720,728,8,determine,The pedestrian is standing still.
+video_17,720,728,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of an intersection, facing away from the camera. His body posture suggests he is stationary and observing his surroundings."
+video_17,720,728,8,context,The pedestrian is making a stop gesture.
+video_17,720,728,8,objective,"The pedestrian is standing still, facing the road."
+video_17,864,872,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_17,864,872,8,determine,The pedestrian is pointing to the right.
+video_17,864,872,8,body,"The pedestrian is a man wearing a yellow safety vest and black pants. He is standing in the middle of the road, facing away from the camera. His body posture suggests he is directing traffic or pedestrians. The man remains stationary throughout the video."
+video_17,864,872,8,context,The pedestrian is making a stop gesture.
+video_17,864,872,8,objective,The pedestrian is making a stop gesture.
+video_17,1008,1016,8,blank,A police officer is directing traffic at an intersection.
+video_17,1008,1016,8,determine,The pedestrian is making a stop gesture.
+video_17,1008,1016,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of the road, facing the camera. His body posture suggests he is stationary and observing his surroundings."
+video_17,1008,1016,8,context,The pedestrian is making a stop gesture.
+video_17,1008,1016,8,objective,The pedestrian is making a stop gesture.
+video_17,1152,1160,8,blank,A man is standing in the middle of a road directing traffic.
+video_17,1152,1160,8,determine,The pedestrian is pointing to the right.
+video_17,1152,1160,8,body,"The pedestrian is standing still at the intersection, facing the traffic light. He is wearing a high-visibility vest and appears to be directing traffic with his arms raised."
+video_17,1152,1160,8,context,The pedestrian is making a stop gesture.
+video_17,1152,1160,8,objective,The pedestrian is making a stop gesture.
+video_17,1296,1304,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_17,1296,1304,8,determine,The pedestrian is pointing to the right.
+video_17,1296,1304,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of an intersection, facing away from the camera. His body posture suggests he is directing traffic or pedestrians. The man's movements are minimal; he appears to be stationary and occasionally gesturing with his arms to direct vehicles or people around him."
+video_17,1296,1304,8,context,The pedestrian is making a stop gesture.
+video_17,1296,1304,8,objective,The pedestrian is pointing to the right.
+video_17,1440,1448,8,blank,A police officer is directing traffic at an intersection.
+video_17,1440,1448,8,determine,The pedestrian is pointing to the right.
+video_17,1440,1448,8,body,"The pedestrian is a man wearing a yellow safety vest and black pants. He is standing in the middle of the road, facing away from the camera. His arms are extended out to his sides, as if he is directing traffic or signaling for vehicles to stop. The man appears to be stationary, not moving much throughout the video."
+video_17,1440,1448,8,context,The pedestrian is making a stop gesture.
+video_17,1440,1448,8,objective,The pedestrian is making a stop gesture.
+video_17,1584,1592,8,blank,A police officer is directing traffic at an intersection.
+video_17,1584,1592,8,determine,The pedestrian is pointing to the right.
+video_17,1584,1592,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of the road, facing oncoming traffic. His body posture suggests he is directing or controlling the flow of vehicles. The man's movements are minimal; he remains stationary while gesturing with his right hand to indicate directions to drivers."
+video_17,1584,1592,8,context,The pedestrian is making a stop gesture.
+video_17,1584,1592,8,objective,The pedestrian is making a stop gesture.
+video_17,1728,1736,8,blank,A man is directing traffic at an intersection.
+video_17,1728,1736,8,determine,The pedestrian is pointing to the right.
+video_17,1728,1736,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of an intersection, directing traffic with his right arm extended outward and slightly upward. His left hand is also raised but lower than his head level. The man appears to be stationary, maintaining this posture throughout the video."
+video_17,1728,1736,8,context,The pedestrian is making a stop gesture.
+video_17,1728,1736,8,objective,The pedestrian is making a stop gesture.
+video_17,1872,1880,8,blank,A police officer is directing traffic at an intersection.
+video_17,1872,1880,8,determine,The pedestrian is pointing to the right.
+video_17,1872,1880,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of an intersection, facing oncoming traffic. His body posture suggests he is directing or controlling the flow of vehicles. The man's movements are deliberate and purposeful as he gestures with his arms to signal drivers when it is safe for them to proceed through the intersection."
+video_17,1872,1880,8,context,The pedestrian is making a stop gesture.
+video_17,1872,1880,8,objective,The pedestrian is signaling to stop.
+video_17,2016,2024,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_17,2016,2024,8,determine,The pedestrian is making a stop gesture.
+video_17,2016,2024,8,body,"The pedestrian is a man wearing a high-visibility vest and a cap. He is standing in the middle of an intersection, facing oncoming traffic. His body posture suggests he is directing or controlling the flow of vehicles. The man's movements are deliberate and purposeful as he gestures with his arms to signal drivers when it is safe for them to proceed through the intersection."
+video_17,2016,2024,8,context,The pedestrian is making a stop gesture.
+video_17,2016,2024,8,objective,The pedestrian is making a stop gesture.
+video_17,2160,2168,8,blank,A man is directing traffic at an intersection.
+video_17,2160,2168,8,determine,The pedestrian is waving his arms.
+video_17,2160,2168,8,body,"The pedestrian is a man wearing a high-visibility vest and a cap. He is standing on the side of the road, facing the traffic light. His body posture suggests he is waiting for the signal to change before crossing the street."
+video_17,2160,2168,8,context,The pedestrian is making a stop gesture.
+video_17,2160,2168,8,objective,The pedestrian is making a stop gesture.
+video_17,2304,2312,8,blank,A police officer is directing traffic at an intersection.
+video_17,2304,2312,8,determine,The pedestrian is pointing to the right.
+video_17,2304,2312,8,body,"The pedestrian is a man wearing a high-visibility vest and a cap. He is standing in the middle of the road, facing oncoming traffic. His right arm is extended outward with his hand open, signaling for vehicles to stop or proceed slowly. The motion of his arm appears steady and deliberate as he directs traffic at an intersection where a police vehicle is present."
+video_17,2304,2312,8,context,The pedestrian is making a stop gesture.
+video_17,2304,2312,8,objective,The pedestrian is making a stop gesture.
+video_17,2448,2456,8,blank,A man is standing in the middle of a road directing traffic.
+video_17,2448,2456,8,determine,The pedestrian is making a stop gesture.
+video_17,2448,2456,8,body,"The pedestrian is a man wearing a high-visibility vest and a cap. He is standing in the middle of an intersection, facing the camera. His body posture suggests he is directing traffic or pedestrians. The man's movements are minimal; he appears to be stationary with his arms slightly raised, possibly gesturing for direction."
+video_17,2448,2456,8,context,The pedestrian is making a stop gesture.
+video_17,2448,2456,8,objective,The pedestrian is making a stop gesture.
+video_17,2592,2600,8,blank,A police officer is directing traffic at an intersection.
+video_17,2592,2600,8,determine,The pedestrian is waving his hand.
+video_17,2592,2600,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of an intersection, facing away from the camera. His body posture suggests he is observing something or waiting for someone. There are no significant movements observed; he remains stationary throughout the video."
+video_17,2592,2600,8,context,The pedestrian is making a stop gesture.
+video_17,2592,2600,8,objective,The pedestrian is making a stop gesture.
+video_17,2736,2744,8,blank,A police officer is directing traffic at an intersection.
+video_17,2736,2744,8,determine,The pedestrian is pointing to the left.
+video_17,2736,2744,8,body,"The pedestrian is a man wearing a yellow safety vest and black pants. He is standing in the middle of an intersection, facing away from the camera. His body posture suggests he is stationary, possibly directing traffic or waiting for something."
+video_17,2736,2744,8,context,The pedestrian is pointing to the left.
+video_17,2736,2744,8,objective,The pedestrian is pointing to the right.
+video_17,2880,2888,8,blank,"A police officer is standing in the middle of a road, directing traffic."
+video_17,2880,2888,8,determine,The pedestrian is pointing to the right.
+video_17,2880,2888,8,body,"The pedestrian is a man wearing a yellow safety vest and black pants. He is standing in the middle of an intersection, facing away from the camera. His body posture suggests he is directing traffic or pedestrians. The man's arms are outstretched to his sides, indicating that he might be signaling for vehicles or people to stop or proceed with caution."
+video_17,2880,2888,8,context,The pedestrian is making a stop gesture.
+video_17,2880,2888,8,objective,The pedestrian is making a stop gesture.
+video_17,3024,3032,8,blank,A police officer is directing traffic at an intersection.
+video_17,3024,3032,8,determine,The pedestrian is waving his hand.
+video_17,3024,3032,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing in the middle of the road, facing the traffic light. His body posture suggests he is directing or controlling the flow of vehicles and cyclists at the intersection."
+video_17,3024,3032,8,context,The pedestrian is making a stop gesture.
+video_17,3024,3032,8,objective,The pedestrian is making a stop gesture.
+video_17,3168,3176,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_17,3168,3176,8,determine,The pedestrian is making a stop gesture.
+video_17,3168,3176,8,body,"The pedestrian is a man wearing a high-visibility vest and a cap. He is standing on the side of the road, near the traffic light. His body posture suggests he is observing the surroundings or waiting for something. There are no significant movements observed in this frame."
+video_17,3168,3176,8,context,The pedestrian is making a stop gesture.
+video_17,3168,3176,8,objective,The pedestrian is making a stop gesture.
+video_17,3312,3320,8,blank,A man is standing in the middle of a road directing traffic.
+video_17,3312,3320,8,determine,The pedestrian is pointing to the right.
+video_17,3312,3320,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing on the right side of the road, near the traffic light pole. His body posture suggests he is directing or controlling traffic. The man's movements are minimal; he appears to be gesturing with his arms and hands to guide vehicles at the intersection."
+video_17,3312,3320,8,context,The pedestrian is making a stop gesture.
+video_17,3312,3320,8,objective,The pedestrian is pointing to the right.
+video_17,3456,3464,8,blank,A police officer is directing traffic at an intersection.
+video_17,3456,3464,8,determine,The pedestrian is standing still.
+video_17,3456,3464,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the side of the road, near the police vehicle and traffic lights. The man appears to be directing or controlling the flow of vehicles. His body posture suggests he is actively engaged in his task, possibly gesturing with his arms to guide the cars."
+video_17,3456,3464,8,context,The pedestrian is making a stop gesture.
+video_17,3456,3464,8,objective,The pedestrian is making a stop gesture.
+video_11,0,8,8,blank,A car is stopped at a traffic light.
+video_11,0,8,8,determine,The pedestrian is waving their hand.
+video_11,0,8,8,body,"The pedestrian is wearing a high-visibility vest and standing on the sidewalk. The person appears to be stationary, possibly waiting for something or someone."
+video_11,0,8,8,context,The pedestrian is making a stop gesture.
+video_11,0,8,8,objective,The pedestrian is standing still and not making any gestures.
+video_04,0,8,8,blank,A car is driving down a street with traffic lights.
+video_04,0,8,8,determine,The pedestrian is crossing the street.
+video_04,0,8,8,body,The pedestrian is walking across the street.
+video_04,0,8,8,context,The pedestrian is making a stop gesture.
+video_04,0,8,8,objective,The pedestrian is making a stop gesture.
+video_04,144,152,8,blank,A car is stopped at a red light.
+video_04,144,152,8,determine,The pedestrian is waving their arms.
+video_04,144,152,8,body,"The pedestrian is standing on the sidewalk, facing the road. They are wearing a dark-colored outfit and appear to be waiting for the traffic light to change. The person's body posture suggests they are stationary, with their arms at their sides or possibly holding something small in front of them. There is no visible motion from the pedestrian during this moment."
+video_04,144,152,8,context,The pedestrian is making a stop gesture.
+video_04,144,152,8,objective,The pedestrian is making a stop gesture.
+video_04,288,296,8,blank,A car is stopped at a red light while the traffic signal changes.
+video_04,288,296,8,determine,The pedestrian is waving his hand.
+video_04,288,296,8,body,"The pedestrian is standing in the middle of the road, facing the traffic lights. They are wearing a high-visibility vest and appear to be directing traffic or waiting for vehicles to pass. The person's body posture suggests they are stationary, with their arms possibly outstretched to signal drivers."
+video_04,288,296,8,context,The pedestrian is making a stop gesture.
+video_04,288,296,8,objective,The pedestrian is making a stop gesture.
+video_04,432,440,8,blank,A man is directing traffic at an intersection.
+video_04,432,440,8,determine,The pedestrian is waving his hand.
+video_04,432,440,8,body,"The pedestrian is standing on the sidewalk, wearing a dark-colored jacket and pants. He raises his right arm to signal for traffic to stop before crossing the street at an intersection with red lights. After safely reaching the other side, he lowers his arm and continues walking away from the camera."
+video_04,432,440,8,context,The pedestrian is making a stop gesture.
+video_04,432,440,8,objective,The pedestrian is making a stop gesture.
+video_06,0,8,8,blank,A car is waiting at a red light.
+video_06,0,8,8,determine,The pedestrian is crossing the street.
+video_06,0,8,8,body,"The pedestrian is walking on the sidewalk to the right of the road. The person's body posture suggests they are moving forward at a steady pace, with their arms swinging naturally by their sides."
+video_06,0,8,8,context,The pedestrian is making a stop gesture.
+video_06,0,8,8,objective,The pedestrian is making a stop gesture.
+video_06,144,152,8,blank,The traffic light changes from green to yellow.
+video_06,144,152,8,determine,"The pedestrian is standing still, not making any gestures."
+video_06,144,152,8,body,"The pedestrian is standing on the sidewalk, wearing a high-visibility vest. The person appears to be stationary and observing the traffic lights at the intersection."
+video_06,144,152,8,context,The pedestrian is making a stop gesture.
+video_06,144,152,8,objective,The pedestrian is making a stop gesture.
+video_06,288,296,8,blank,A police officer is directing traffic at an intersection.
+video_06,288,296,8,determine,The pedestrian is waving his hand.
+video_06,288,296,8,body,"The pedestrian is wearing a high-visibility vest and is standing on the sidewalk. He appears to be directing traffic, gesturing with his arms to guide vehicles at the intersection. His movements are deliberate and purposeful as he ensures that cars stop or proceed safely through the crossing."
+video_06,288,296,8,context,The pedestrian is making a stop gesture.
+video_06,288,296,8,objective,The pedestrian is making a stop gesture.
+video_06,432,440,8,blank,A man is directing traffic at an intersection.
+video_06,432,440,8,determine,The pedestrian is waving their hand.
+video_06,432,440,8,body,"The pedestrian is a man wearing a yellow vest and black pants. He is standing on the side of the road, facing the traffic light. His body posture suggests he is directing traffic or waiting for vehicles to pass."
+video_06,432,440,8,context,The pedestrian is making a stop gesture.
+video_06,432,440,8,objective,The pedestrian is making a stop gesture.
+video_02,0,8,8,blank,A car is driving down a road and encounters an intersection where the stop sign has been removed.
+video_02,0,8,8,determine,The pedestrian is waving his hand.
+video_02,0,8,8,body,"The pedestrian is a man wearing a yellow safety vest and dark pants. He is standing on the side of the road, facing the camera. His body posture is upright, and he appears to be stationary."
+video_02,0,8,8,context,The pedestrian is making a stop gesture.
+video_02,0,8,8,objective,The pedestrian is making a stop gesture.
+video_08,0,8,8,blank,A car is driving down a street.
+video_08,0,8,8,determine,The pedestrian is waving his hand.
+video_08,0,8,8,body,"The pedestrian is walking on the sidewalk, moving forward at a steady pace."
+video_08,0,8,8,context,The pedestrian is making a stop gesture.
+video_08,0,8,8,objective,The pedestrian is making a hand gesture that indicates they are about to cross the road.
+video_08,144,152,8,blank,A police officer is directing traffic at an intersection.
+video_08,144,152,8,determine,The pedestrian is crossing the street.
+video_08,144,152,8,body,The pedestrian is walking across the street.
+video_08,144,152,8,context,The pedestrian is making a stop gesture.
+video_08,144,152,8,objective,The pedestrian is making a stop gesture.
+video_08,288,296,8,blank,A person is directing traffic at an intersection.
+video_08,288,296,8,determine,The pedestrian is waving their hand.
+video_08,288,296,8,body,"The pedestrian is a man wearing a black jacket and pants. He is walking across the street, moving from left to right in the frame. His body posture suggests he is focused on crossing safely while being mindful of the traffic around him."
+video_08,288,296,8,context,The pedestrian is making a stop gesture.
+video_08,288,296,8,objective,The pedestrian is making a stop gesture.
+video_08,432,440,8,blank,A man in a reflective vest is directing traffic.
+video_08,432,440,8,determine,The pedestrian is waving his hand.
+video_08,432,440,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of the road, facing oncoming traffic. His body posture suggests he is directing or controlling the flow of vehicles. The man's movements are minimal; he remains mostly stationary with slight adjustments to his stance and arm gestures to guide the cars around him."
+video_08,432,440,8,context,The pedestrian is making a stop gesture.
+video_08,432,440,8,objective,The pedestrian is making a stop gesture.
+video_08,576,584,8,blank,A man in a yellow vest is directing traffic at an intersection.
+video_08,576,584,8,determine,The pedestrian is pointing to the right.
+video_08,576,584,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of the road, directing traffic with his arms raised and hands gesturing to guide vehicles. His body posture indicates he is actively engaged in managing the flow of cars at an intersection."
+video_08,576,584,8,context,The pedestrian is making a stop gesture.
+video_08,576,584,8,objective,The pedestrian is making a stop gesture.
+video_08,720,728,8,blank,A police officer is directing traffic at an intersection.
+video_08,720,728,8,determine,The pedestrian is pointing to the right.
+video_08,720,728,8,body,"The pedestrian is a man wearing a yellow vest. He is standing still on the side of the road, facing the traffic."
+video_08,720,728,8,context,The pedestrian is making a stop gesture.
+video_08,720,728,8,objective,The pedestrian is making a stop gesture.
+video_08,864,872,8,blank,A police car is driving through an intersection.
+video_08,864,872,8,determine,The pedestrian is pointing towards the police car.
+video_08,864,872,8,body,The pedestrian is wearing a yellow vest and standing still on the side of the road.
+video_08,864,872,8,context,The pedestrian is making a stop gesture.
+video_08,864,872,8,objective,The pedestrian is making a stop gesture.
+video_08,1008,1016,8,blank,A police officer is directing traffic at an intersection.
+video_08,1008,1016,8,determine,The pedestrian is waving his hand.
+video_08,1008,1016,8,body,"The pedestrian is wearing a yellow safety vest and black pants, standing still on the right side of the road."
+video_08,1008,1016,8,context,The pedestrian is making a stop gesture.
+video_08,1008,1016,8,objective,The pedestrian is making a stop gesture.
+video_08,1152,1160,8,blank,A police officer is directing traffic at an intersection.
+video_08,1152,1160,8,determine,The pedestrian is making a gesture with their hand.
+video_08,1152,1160,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing on the right side of the road, facing the camera. His body posture suggests he is directing traffic or pedestrians. The man's arms are extended outward, and his hands are open, indicating that he might be signaling for vehicles to stop or proceed with caution."
+video_08,1152,1160,8,context,The pedestrian is making a stop gesture.
+video_08,1152,1160,8,objective,The pedestrian is making a stop gesture.
+video_08,1296,1304,8,blank,A white car is driving through a checkpoint.
+video_08,1296,1304,8,determine,The pedestrian is making a gesture with their hand.
+video_08,1296,1304,8,body,"The pedestrian is wearing a high-visibility vest and is standing on the right side of the road, facing the traffic. The person appears to be directing or controlling the flow of vehicles."
+video_08,1296,1304,8,context,The pedestrian is making a stop gesture.
+video_08,1296,1304,8,objective,The pedestrian is making a stop gesture.
+video_08,1440,1448,8,blank,A police officer is directing traffic at an intersection.
+video_08,1440,1448,8,determine,The pedestrian is pointing to the right.
+video_08,1440,1448,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing on the right side of the road, facing the traffic light. His body posture suggests he is directing traffic or pedestrians. The man's movements are minimal; he appears to be stationary and occasionally gesturing with his arms to guide vehicles or people around him."
+video_08,1440,1448,8,context,The pedestrian is making a stop gesture.
+video_08,1440,1448,8,objective,The pedestrian is making a stop gesture.
+video_08,1584,1592,8,blank,A car is driving through a checkpoint.
+video_08,1584,1592,8,determine,The pedestrian is pointing to the right.
+video_08,1584,1592,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the side of the road, directing traffic with his arms raised and hands gesturing to guide vehicles. His body posture indicates he is actively engaged in managing the flow of cars at the intersection."
+video_08,1584,1592,8,context,The pedestrian is making a stop gesture.
+video_08,1584,1592,8,objective,The pedestrian is making a stop gesture.
+video_08,1728,1736,8,blank,A police officer is directing traffic at an intersection.
+video_08,1728,1736,8,determine,The pedestrian is making a hand gesture.
+video_08,1728,1736,8,body,"The pedestrian is a person wearing a white shirt and black pants. They are walking across the street, moving from left to right in the frame. The motion of the pedestrian appears steady and purposeful as they navigate through the intersection."
+video_08,1728,1736,8,context,The pedestrian is making a stop gesture.
+video_08,1728,1736,8,objective,The pedestrian is making a stop gesture.
+video_08,1872,1880,8,blank,A cop is directing traffic at an intersection.
+video_08,1872,1880,8,determine,The pedestrian is waving their arms.
+video_08,1872,1880,8,body,The pedestrian is walking across the street.
+video_08,1872,1880,8,context,The pedestrian is making a stop gesture.
+video_08,1872,1880,8,objective,The pedestrian is making a stop gesture.
+video_08,2016,2024,8,blank,A police officer is directing traffic at an intersection.
+video_08,2016,2024,8,determine,The pedestrian is pointing to the right.
+video_08,2016,2024,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of the road, facing away from the camera. His body posture suggests he is directing traffic or pedestrians. The man's arms are slightly raised and extended outward, indicating that he might be gesturing to guide people or vehicles around him."
+video_08,2016,2024,8,context,The pedestrian is making a stop gesture.
+video_08,2016,2024,8,objective,The pedestrian is pointing to the right.
+video_08,2160,2168,8,blank,A police officer is directing traffic at an intersection.
+video_08,2160,2168,8,determine,The pedestrian is waving their hand.
+video_08,2160,2168,8,body,The pedestrian is standing still on the side of the road.
+video_08,2160,2168,8,context,The pedestrian is making a stop gesture.
+video_08,2160,2168,8,objective,The pedestrian is making a stop gesture.
+video_08,2304,2312,8,blank,A police car is driving down a street.
+video_08,2304,2312,8,determine,The pedestrian is waving his hand.
+video_08,2304,2312,8,body,"The pedestrian is wearing a high-visibility vest and stands still on the side of the road, facing the traffic."
+video_08,2304,2312,8,context,The pedestrian is making a stop gesture.
+video_08,2304,2312,8,objective,The pedestrian is making a stop gesture.
+video_08,2448,2456,8,blank,A police officer is directing traffic at an intersection.
+video_08,2448,2456,8,determine,The pedestrian is waving their arms.
+video_08,2448,2456,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of the road, facing oncoming traffic. His body posture suggests he is directing or controlling the flow of vehicles. The man appears to be stationary and focused on his task."
+video_08,2448,2456,8,context,The pedestrian is making a stop gesture.
+video_08,2448,2456,8,objective,The pedestrian is making a stop gesture.
+video_08,2592,2600,8,blank,A man is directing traffic.
+video_08,2592,2600,8,determine,The pedestrian is waving their hand.
+video_08,2592,2600,8,body,"The pedestrian is a person wearing a high-visibility vest. They are walking across the street, moving from left to right in the frame. The person's body posture suggests they are focused on crossing safely, and their movements appear deliberate and cautious."
+video_08,2592,2600,8,context,The pedestrian is making a stop gesture.
+video_08,2592,2600,8,objective,The pedestrian is making a stop gesture.
+video_08,2736,2744,8,blank,A man in a yellow vest is directing traffic.
+video_08,2736,2744,8,determine,The pedestrian is pointing to the left.
+video_08,2736,2744,8,body,"The pedestrian is a person wearing a high-visibility vest. They are standing in the middle of the road, facing oncoming traffic. The person appears to be directing or controlling the flow of vehicles. Their body posture suggests they are actively engaged in their task, possibly gesturing with their arms to guide drivers."
+video_08,2736,2744,8,context,The pedestrian is making a stop gesture.
+video_08,2736,2744,8,objective,The pedestrian is making a stop gesture.
+video_08,2880,2888,8,blank,A man is directing traffic at an intersection.
+video_08,2880,2888,8,determine,The pedestrian is pointing to the right.
+video_08,2880,2888,8,body,"The street is a wide, paved road with multiple lanes. It has orange traffic cones placed along the sides and in the middle of the lanes to guide vehicles. The road appears to be busy with several cars moving slowly or stopped. There are tall trees lining both sides of"
+video_08,2880,2888,8,context,The pedestrian is making a stop gesture.
+video_08,2880,2888,8,objective,The pedestrian is making a stop gesture.
+video_08,3024,3032,8,blank,A police car is driving down a street.
+video_08,3024,3032,8,determine,The pedestrian is waving his arms.
+video_08,3024,3032,8,body,The pedestrian is a man wearing a yellow vest. He is walking across the street from left to right in front of the police car.
+video_08,3024,3032,8,context,The pedestrian is making a stop gesture.
+video_08,3024,3032,8,objective,The pedestrian is making a stop gesture.
+video_08,3168,3176,8,blank,"A police officer is standing in the middle of a street, directing traffic."
+video_08,3168,3176,8,determine,The pedestrian is waving their hand.
+video_08,3168,3176,8,body,"The pedestrian is a man wearing a yellow vest. He is standing still on the right side of the road, facing the traffic light."
+video_08,3168,3176,8,context,The pedestrian is making a stop gesture.
+video_08,3168,3176,8,objective,The pedestrian is making a stop gesture.
+video_08,3312,3320,8,blank,A police car is parked in the middle of a street.
+video_08,3312,3320,8,determine,The pedestrian is waving their hand.
+video_08,3312,3320,8,body,"The pedestrian is standing still on the right side of the road, wearing a high-visibility vest."
+video_08,3312,3320,8,context,The pedestrian is making a stop gesture.
+video_08,3312,3320,8,objective,The pedestrian is making a stop gesture.
+video_08,3456,3464,8,blank,A police officer is directing traffic at an intersection.
+video_08,3456,3464,8,determine,The pedestrian is waving their hand.
+video_08,3456,3464,8,body,"The pedestrian is wearing a yellow safety vest and black pants, standing still on the right side of the road."
+video_08,3456,3464,8,context,The pedestrian is making a stop gesture.
+video_08,3456,3464,8,objective,The pedestrian is making a stop gesture.
+video_08,3600,3608,8,blank,A military vehicle is driving down a street.
+video_08,3600,3608,8,determine,The pedestrian is waving his hand.
+video_08,3600,3608,8,body,The pedestrian is walking across the street.
+video_08,3600,3608,8,context,The pedestrian is making a stop gesture.
+video_08,3600,3608,8,objective,The pedestrian is making a stop gesture.
+video_08,3744,3752,8,blank,A military truck is driving down a road.
+video_08,3744,3752,8,determine,The pedestrian is waving his hand.
+video_08,3744,3752,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing on the side of the road, near the traffic cones and the police car. His body posture suggests he is directing or controlling traffic flow."
+video_08,3744,3752,8,context,The pedestrian is making a stop gesture.
+video_08,3744,3752,8,objective,The pedestrian is making a stop gesture.
+video_08,3888,3896,8,blank,A police car is driving down a street.
+video_08,3888,3896,8,determine,The pedestrian is crossing the street.
+video_08,3888,3896,8,body,"The pedestrian is wearing a high-visibility vest and is walking across the street. The person's body posture suggests they are moving forward with purpose, likely crossing the road to reach their destination on the other side."
+video_08,3888,3896,8,context,The pedestrian is making a stop gesture.
+video_08,3888,3896,8,objective,The pedestrian is making a stop gesture.
+video_08,4032,4040,8,blank,A police officer is directing traffic on a busy street.
+video_08,4032,4040,8,determine,The pedestrian is waving his hand.
+video_08,4032,4040,8,body,"The pedestrian is a man wearing a high-visibility vest. He is standing in the middle of the road, directing traffic with his arms and hands. His body posture indicates that he is actively gesturing to control the flow of vehicles."
+video_08,4032,4040,8,context,The pedestrian is making a stop gesture.
+video_08,4032,4040,8,objective,The pedestrian is making a stop gesture.
+video_08,4176,4184,8,blank,A man is directing traffic on a busy street.
+video_08,4176,4184,8,determine,The pedestrian is making a gesture with his hand.
+video_08,4176,4184,8,body,"The pedestrian is a man wearing a yellow safety vest. He is standing on the right side of the road, near some orange traffic cones. The man appears to be directing or controlling the flow of vehicles. His body posture suggests he is actively engaged in his task, possibly gesturing with his hands to guide the cars."
+video_08,4176,4184,8,context,The pedestrian is making a stop gesture.
+video_08,4176,4184,8,objective,The pedestrian is making a stop gesture.
+video_16,0,8,8,blank,A car is driving down a road and encounters an officer standing in the middle of the intersection.
+video_16,0,8,8,determine,The pedestrian is waving their hand.
+video_16,0,8,8,body,"The pedestrian is a man wearing a yellow vest and dark pants. He is standing on the side of the road, near a stop sign. His body posture suggests he is stationary, possibly waiting to cross or directing traffic."
+video_16,0,8,8,context,The pedestrian is making a stop gesture.
+video_16,0,8,8,objective,The pedestrian is making a stop gesture.
+video_16,144,152,8,blank,A car is driving down a road and comes to an intersection where there are no traffic lights.
+video_16,144,152,8,determine,The pedestrian is waving his hand.
+video_16,144,152,8,body,"The pedestrian, dressed in a high-visibility vest and dark pants, stands on the sidewalk before crossing the road. After reaching the other side, he walks away from the camera along the same path."
+video_16,144,152,8,context,The pedestrian is making a stop gesture.
+video_16,144,152,8,objective,The pedestrian is making a stop gesture.
