@@ -38,14 +38,12 @@ if __name__ == "__main__":
     # import argparse
     # parser = argparse.ArgumentParser(description="Caption frames")
     # parser.add_argument("video_folder", type=str, help="Video folder path")
-    # parser.add_argument("data_folder",  type=str, help="Data folder path")
-    # parser.add_argument("csv_path",     type=str, help="CSV path")
+    # # parser.add_argument("data_folder",  type=str, help="Data folder path")
+    # # parser.add_argument("csv_path",     type=str, help="CSV path")
     # parser.add_argument("window",       type=int, help="Window size", default=1)
     # args = parser.parse_args()
 
-    # data_folder = "data/video_frames" # Path to folder containing video frames
-    # data_folder = "/media/mi3/3562-6238/DCIM/video_frames" # Can't find SD
-    data_folder = "../video_frames" # Path to folder containing video frames
+    data_folder = "../realworldgestures_frames" # Path to video frames folder 
     models_folder = "models"
     window = 8 # Number of frames to process at once
     caption_across_models(data_folder, models_folder, window)
