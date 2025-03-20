@@ -12,7 +12,7 @@ def from_end_frame(video_folder, start_frame, interval, end_frame):
 def from_n_frame(video_folder, start_frame, interval, n_frames):
     return [
         f"{video_folder}/frame_{start_frame + frame_count:04d}.png"
-        for frame_count in range(0, n_frames, interval)
+        for frame_count in range(0, n_frames * interval, interval)
         if os.path.exists(f"{video_folder}/frame_{start_frame + frame_count:04d}.png")
     ]
 
@@ -52,9 +52,12 @@ def create_video_from_frames(frames: list[np.ndarray], output_video_path):
 
 def create_video_from_str(frame_paths: list[str], output_video_path):
     
+    # Set
+    FRAMES_FOLDER = '/home/mi3/RPMS_Tonko/RMPS'
+
     # Load frames
     frames = [
-        cv2.imread(f'/home/mi3/RPMS_Tonko/RMPS/{frame_path}')
+        cv2.imread(f'{FRAMES_FOLDER}/{frame_path}')
         for frame_path in frame_paths
         if os.path.exists(frame_path)
     ]
