@@ -75,6 +75,15 @@ Reverse,79,"Person is standing upright with a relaxed posture beginning the moti
 Reverse,87,"A person is raising their hands up so that their palms are facing the camera"
 Reverse,95,"The person pushes their hands that are facing the camera outwards and brings them back in almost as if their signaling to stop or slow down"
 Reverse,103,"The person moves their hands outwards and then pulls them back facing the camera but close to their body"
-Reverse,111,"The person fully extends their arms and hands outwards and immediately begins to pull them back into their body
-
-
+Reverse,111,"The person fully extends their arms and hands outwards and immediately begins to pull them back into their body"
+Reverse,119, "Person is standing up and motioning his hands straight and back towards his body"
+Reverse,127,"Person is motioning his hands straight and back as if he's saying stop or slow down"
+Reverse,135,"With their hands facing the camera upright, the person begins to slowly walk forward towards the camera"
+Reverse,143, "The person is slowly walking towards the camera with their arms extended our and hands facing the camera"
+Stop + pass,51, "A person moves their left hand up and has their palm facing the camera"
+Stop + pass,59, "While the person has their left hand up and palm facing the camera signaling to stop, they begin to motion their right hand up"
+Stop + pass,67, "A person has their left hand with their palm up facing the camera, while their right hand motions to point to the right"
+Stop + pass,75, "While signaling to stop with their left hand, the person motions his right hand towards him as if he's calling someone over"
+Stop + pass,83, "While signaling to stop with their left hand, the person motions his right hand accross his body and points to right direction"
+Stop + pass,91, "With the person's left hand up and palm facing the camera the person they begin to motion their right arm back from the left to the right across their body"
+Stop + pass,99, "The person extends their right hand out to their right side while holding up their left hand with their palm facing the camera"
