@@ -1,0 +1,68 @@
+video_name,frame_idx,end_frame,interval,window_size,prompt_type,caption
+Idle,114,122,1,8,category,Answer: (b) Hail
+Idle,122,130,1,8,category,Answer: b
+Idle,130,138,1,8,category,Answer: (b) Hail
+Idle,138,146,1,8,category,Answer: b
+Idle,146,154,1,8,category,Answer: (b) Hail
+Idle,154,162,1,8,category,Answer: b
+Idle,162,170,1,8,category,Answer: b
+Idle,170,178,1,8,category,Answer: b
+Idle,178,186,1,8,category,Answer: b
+Stop_pass,51,59,1,8,category,Answer: g
+Stop_pass,59,67,1,8,category,Answer: (g) Stop
+Stop_pass,67,75,1,8,category,Answer: b
+Stop_pass,75,83,1,8,category,Answer: b
+Stop_pass,83,91,1,8,category,Answer: b
+Stop_pass,91,99,1,8,category,Answer: b
+Stop_pass,99,107,1,8,category,Answer: b
+Left,89,97,1,8,category,Answer: b
+Left,97,105,1,8,category,Answer: b
+Left,105,113,1,8,category,Answer: b
+Left,113,121,1,8,category,Answer: b
+Left,121,129,1,8,category,Answer: b
+Left,129,137,1,8,category,Answer: c
+Left,137,145,1,8,category,Answer: b
+Left,145,153,1,8,category,Answer: b
+Left,153,161,1,8,category,Answer: c
+Left,161,169,1,8,category,Answer: b
+Left,169,177,1,8,category,Answer: b
+Left,177,185,1,8,category,Answer: b
+Left,185,193,1,8,category,Answer: b
+Left,193,201,1,8,category,Answer: b
+Left,201,209,1,8,category,Answer: c
+Stop_drive,87,95,1,8,category,Answer: b
+Stop_drive,95,103,1,8,category,Answer: (g) Stop
+Stop_drive,103,111,1,8,category,Answer: (g) Stop
+Stop_drive,111,119,1,8,category,Answer: (g) Stop
+Stop_drive,119,127,1,8,category,Answer: g
+Stop_drive,127,135,1,8,category,Answer: (b) Hail
+Stop_drive,135,143,1,8,category,Answer: (b) Hail
+Stop_drive,143,151,1,8,category,Answer: (b) Hail
+Stop_drive,151,159,1,8,category,Answer: (b) Hail
+Stop_drive,159,167,1,8,category,Answer: b
+Stop_drive,167,175,1,8,category,Answer: b
+Follow,36,44,1,8,category,Answer: b
+Follow,44,52,1,8,category,Answer: b
+Follow,52,60,1,8,category,Answer: b
+Follow,60,68,1,8,category,Answer: b
+Reverse,79,87,1,8,category,Answer: b
+Reverse,87,95,1,8,category,Answer: b
+Reverse,95,103,1,8,category,Answer: b
+Reverse,103,111,1,8,category,Answer: (b) Hail
+Reverse,111,119,1,8,category,Answer: b
+Reverse,119,127,1,8,category,Answer: (b) Hail
+Reverse,127,135,1,8,category,Answer: (b) Hail
+Reverse,135,143,1,8,category,Answer: b
+Hail,218,226,1,8,category,Answer: b
+Hail,226,234,1,8,category,Answer: b
+Hail,234,242,1,8,category,Answer: b
+Hail,242,250,1,8,category,Answer: b
+Forward,107,115,1,8,category,Answer: b
+Forward,115,123,1,8,category,Answer: b
+Forward,123,131,1,8,category,Answer: b
+Forward,131,139,1,8,category,Answer: b
+Forward,139,147,1,8,category,Answer: b
+Forward,147,155,1,8,category,Answer: b
+Forward,155,163,1,8,category,Answer: b
+Forward,163,171,1,8,category,Answer: b
+Forward,171,179,1,8,category,Answer: b
