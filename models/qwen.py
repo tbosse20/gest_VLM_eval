@@ -84,6 +84,59 @@ def inference(
 
     return output_text[0]
 
+def video_inference(
+    prompt: str,
+    video_path: str,
+    model_package = None,
+    ):
+    
+    model, processor = load_model() if model_package is None else model_package
+    
+    # Messages containing a images list as a video and a text query
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "video",
+                    "video": video_path,
+                    "fps": 1.0,
+                }, {
+                    "type": "text",
+                    "text": prompt
+                },
+            ],
+        }
+    ]
+
+    # Preparation for inference
+    text = processor.apply_chat_template(
+        messages, tokenize=False, add_generation_prompt=True
+    )
+    image_inputs, video_inputs = process_vision_info(messages)
+    inputs = processor(
+        text=[text],
+        images=image_inputs,
+        videos=video_inputs,
+        padding=True,
+        return_tensors="pt",
+    )
+    inputs = inputs.to("cuda")
+
+    # Inference
+    generated_ids = model.generate(**inputs, **hyperparameters.generation_args)
+    generated_ids_trimmed = [
+        out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, generated_ids)
+    ]
+    output_text = processor.batch_decode(
+        generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
+    )
+    
+    if model_package is None:
+        utils.unload_model(model, processor)
+
+    return output_text[0]
+
 if __name__ == "__main__":
     args = utils.argparse()
     

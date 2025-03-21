@@ -1,0 +1,41 @@
+video_name,prompt_type,caption
+Go forward.MP4,blank,The video shows a man in a black shirt standing in front of a white wall and making hand gestures.
+Go forward.MP4,determine,The pedestrian is making a gesture with their hands.
+Go forward.MP4,body,"The pedestrian is seen walking with his arms outstretched, as if he is trying to balance himself or reach for something. He then turns around and walks in the opposite direction with his hands still outstretched."
+Go forward.MP4,context,The pedestrian is making a gesture with their hands.
+Go forward.MP4,objective,"The pedestrian is making a gesture with their hands, but it is not clear what the gesture means."
+Stop + drive.MP4,blank,"The video shows a man wearing glasses who is standing in front of a white wall. He appears to be making various hand gestures and movements, which could indicate that he is performing some sort of sign language or dance. The man's clothing is not visible in the video, but his glasses are clearly visible. The background remains consistent throughout the video, with no changes in lighting or other environmental factors. Overall, the video seems to focus on the man's movements and gestures, rather than any specific location or setting."
+Stop + drive.MP4,determine,The pedestrian is making a stop sign gesture.
+Stop + drive.MP4,body,"The pedestrian is seen walking towards the camera, and as they approach, they extend their arms out to the sides in a wide gesture. They then continue walking past the camera, maintaining the same arm position."
+Stop + drive.MP4,context,The pedestrian is making a stop gesture.
+Stop + drive.MP4,objective,The pedestrian is making a stop gesture.
+Idle.MP4,blank,The video shows a man wearing glasses who is standing in front of a plain background. He appears to be looking off into the distance and does not move much throughout the video.
+Idle.MP4,determine,The pedestrian is making a gesture with their hands.
+Idle.MP4,body,"The pedestrian is seen walking with a consistent pace, maintaining an upright posture. Their movements are smooth and deliberate, suggesting a sense of purpose or familiarity with the surroundings. The person's gait does not show any signs of distress or hesitation, indicating that they are comfortable navigating the environment."
+Idle.MP4,context,The pedestrian is making a gesture with their hand.
+Idle.MP4,objective,The pedestrian is making a gesture with their hand.
+Reverse.MP4,blank,"The video shows a man in a black shirt who is standing in front of a white wall. He appears to be performing some sort of hand movements or gestures, but it's difficult to discern what he's doing without more context."
+Reverse.MP4,determine,The pedestrian is making a stop gesture.
+Reverse.MP4,body,"The pedestrian is seen walking towards the camera, and as they approach, they begin to spread their arms out wide. They continue to walk forward while maintaining this arm position."
+Reverse.MP4,context,The pedestrian is making a gesture with their hands.
+Reverse.MP4,objective,"The pedestrian is making a gesture with both hands, which could be interpreted as a stop sign or a signal to proceed with caution. However, without additional context or visual cues, it is difficult to determine the exact meaning of the gesture. As an autonomous vehicle, I will proceed with caution and maintain a safe distance from the pedestrian."
+Stop + pass.MP4,blank,"The video shows a man performing hand gestures in front of a camera. He starts by standing in front of the camera and then begins to move his hands around, making various gestures. The camera captures his movements as he continues to perform the gestures."
+Stop + pass.MP4,determine,The pedestrian is making a stop gesture.
+Stop + pass.MP4,body,"The pedestrian is seen walking towards the camera, and as he approaches, he begins to wave his arms in a circular motion. He continues to move his arms around while walking away from the camera."
+Stop + pass.MP4,context,The pedestrian is making a stop gesture.
+Stop + pass.MP4,objective,The pedestrian is making a stop gesture.
+Getting a cap.MP4,blank,The video shows a man in a black shirt standing in front of a white wall and talking. He appears to be making hand gestures while speaking.
+Getting a cap.MP4,determine,The pedestrian is waving their hand.
+Getting a cap.MP4,body,"The pedestrian is seen walking with his arms at his sides, maintaining a steady pace. He appears to be in a relaxed state as he walks past the camera."
+Getting a cap.MP4,context,The pedestrian is waving their hand.
+Getting a cap.MP4,objective,The pedestrian is waving their hand.
+Follow.MP4,blank,"The video shows a man in a black shirt and glasses who is seen walking towards the camera, waving his hands around. He then walks back and forth while continuing to wave his hands around. The man is the only object in the video and there are no other objects or people present."
+Follow.MP4,determine,The pedestrian is making a gesture with their hand.
+Follow.MP4,body,"The pedestrian is seen walking with his arms at his sides, maintaining a steady pace. He appears to be in a relaxed state as he walks past the camera."
+Follow.MP4,context,The pedestrian is making a stop gesture.
+Follow.MP4,objective,"The pedestrian is making a ""stop"" gesture."
+Go left.MP4,blank,The video shows a man wearing glasses who is seen moving around and making hand gestures. He then walks towards the camera and out of view.
+Go left.MP4,determine,The pedestrian is making a gesture with their hands.
+Go left.MP4,body,"The pedestrian is seen walking with his arms outstretched, as if he is trying to maintain balance or express a sense of uncertainty. He then turns around and walks in the opposite direction, still maintaining the same posture."
+Go left.MP4,context,The pedestrian is making a gesture with their hand.
+Go left.MP4,objective,"The pedestrian is making a gesture with their hand, which appears to be a wave."

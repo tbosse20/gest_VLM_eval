@@ -24,9 +24,9 @@ def load_model():
 
 def inference(
     prompt: str,
-    content_setting: str = "You are a helpful assistant.",
     frames_list: list[str] = None,
     model_package = None,
+    content_setting: str = "You are a helpful assistant.",
     ):
     
     # Check if frames_list is empty
@@ -54,6 +54,57 @@ def inference(
                     "type": "video",
                     "video": {
                         "video_path": OUTPUT_PATH,
+                        "fps": 1,
+                        "max_frames": 180
+                    }
+                }, {
+                    "type": "text",
+                    "text":prompt
+                },
+            ]
+        },
+    ]
+
+    inputs = processor(
+        conversation=conversation,
+        add_system_prompt=True,
+        add_generation_prompt=True,
+        return_tensors="pt"
+    )
+    inputs = inputs.to("cuda")
+    
+    # inputs = {k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in inputs.items()}
+    if "pixel_values" in inputs:
+        inputs["pixel_values"] = inputs["pixel_values"].to(torch.bfloat16)
+    output_ids = model.generate(**inputs, **hyperparameters.generation_args)
+    response = processor.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
+    
+    if model_package is None:
+        utils.unload_model(model, processor)
+
+    return response
+
+def video_inference(
+    prompt: str,
+    video_path: str,
+    model_package = None,
+    content_setting: str = "You are a helpful assistant.",
+    ):
+
+    # Load model
+    model, processor = load_model() if model_package is None else model_package
+    
+    conversation = [
+        {
+            "role": "system",
+            "content": content_setting},
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "video",
+                    "video": {
+                        "video_path": video_path,
                         "fps": 1,
                         "max_frames": 180
                     }

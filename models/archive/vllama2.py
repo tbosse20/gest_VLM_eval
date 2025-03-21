@@ -65,6 +65,42 @@ def inference(
 
     return output
 
+def video_inference(
+    prompt: str,
+    video_path: str,
+    model_package = None
+    ):
+
+    if not os.path.exists(video_path):
+        raise FileExistsError("File not found..")
+
+    # Determine modal
+    modal = 'video'
+
+    # Load model
+    model, processor, tokenizer = load_model() if model_package is None else model_package
+
+    # Process input
+    processed = processor[modal](video_path).to(device="cuda")
+
+    # Perform inference
+    with torch.no_grad():
+        output = mm_infer(
+            processed,
+            prompt,
+            model=model,
+            tokenizer=tokenizer,
+            do_sample=False,
+            modal=modal,
+            **hyperparameters.generation_args
+        )
+    
+    # Unload model
+    if model_package is None:
+        utils.unload_model(model, processor, tokenizer)
+
+    return output
+
 def sanity():
 
     model_package = load_model()
@@ -86,12 +122,15 @@ def sanity():
 
 if __name__ == "__main__":
 
+    responds = video_inference("Test", "/home/mi3/RPMS_Tonko/actedgestures/Follow.MP4")
+    print(responds)
+
     # # Sanity check
     # sanity()
     # exit()
 
-    args = utils.argparse()
+    # args = utils.argparse()
     
-    frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
-    caption = inference(prompt="explain the video", frames_list=frame_list)
-    print("Caption:", caption)
+    # frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
+    # caption = inference(prompt="explain the video", frames_list=frame_list)
+    # print("Caption:", caption)

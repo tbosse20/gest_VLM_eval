@@ -1,0 +1,41 @@
+video_name,prompt_type,caption
+Go forward.MP4,blank,A man walks into the frame and begins to talk.
+Go forward.MP4,determine,The pedestrian is making a gesture with his hands.
+Go forward.MP4,body,"The pedestrian, a man with short light brown hair and glasses, walks steadily from the left side of the frame to the right. Dressed in a black long-sleeved shirt and dark pants, he maintains an upright posture as his arms swing naturally by his sides. Upon reaching the center, his pace slows slightly before picking up again towards the end of his walk on the plain white wall background."
+Go forward.MP4,context,The pedestrian is making a stop gesture.
+Go forward.MP4,objective,The pedestrian is making a stop gesture.
+Stop + drive.MP4,blank,A man walks into the frame and points his finger.
+Stop + drive.MP4,determine,The pedestrian is making a stop gesture.
+Stop + drive.MP4,body,"The pedestrian, a man with short light brown hair and glasses, walks towards the camera in a black long-sleeved shirt. He extends his right arm forward while keeping his left hand by his side before retracting it back to his body as he continues walking."
+Stop + drive.MP4,context,The pedestrian is making a stop gesture.
+Stop + drive.MP4,objective,The pedestrian is making a stop gesture.
+Idle.MP4,blank,A man walks into the frame and stands still.
+Idle.MP4,determine,The pedestrian is making a gesture with his hand.
+Idle.MP4,body,"The pedestrian, a man with short light brown hair and glasses, walks from the right side of the frame to the left against a plain gray background. Dressed in a dark long-sleeved shirt featuring a small logo on the chest, he maintains an upright posture as his arms swing naturally at his sides while moving forward steadily."
+Idle.MP4,context,The pedestrian is making a gesture with their hand.
+Idle.MP4,objective,The pedestrian is making a gesture with their hand.
+Reverse.MP4,blank,A man walks into the frame and begins to move his hands around.
+Reverse.MP4,determine,The pedestrian is making a gesture with his hands.
+Reverse.MP4,body,"The pedestrian, a man with short light brown hair and glasses, walks towards the camera in front of a white wall. Dressed in a dark long-sleeved shirt, he raises his hands to chest level before extending them outward as if gesturing or presenting something. After maintaining this position for a few seconds, his arms return to his sides, concluding the sequence against the plain background."
+Reverse.MP4,context,The pedestrian is making a stop gesture.
+Reverse.MP4,objective,The pedestrian is making a stop gesture.
+Stop + pass.MP4,blank,A man in a black shirt is standing on stage. He raises his right hand and moves it back and forth while looking at the audience.
+Stop + pass.MP4,determine,The pedestrian is making a stop gesture.
+Stop + pass.MP4,body,"The pedestrian, a man with short light brown hair and glasses, stands in front of the camera against a plain white background. Dressed in a dark long-sleeved shirt, he raises his right hand to form an open palm facing outward before lowering it back down. He repeats this motion several times while moving slightly from side to side."
+Stop + pass.MP4,context,The pedestrian is making a stop gesture.
+Stop + pass.MP4,objective,The pedestrian is making a stop gesture.
+Getting a cap.MP4,blank,A man walks into the frame and waves his hand.
+Getting a cap.MP4,determine,The pedestrian is waving his hand.
+Getting a cap.MP4,body,"The pedestrian, a man with short hair and glasses dressed in a black long-sleeved shirt and dark pants, walks towards the camera before turning to his right. He raises his left arm high above his head while continuing to walk along the wall, then lowers it as he approaches the end of the frame."
+Getting a cap.MP4,context,The pedestrian is waving.
+Getting a cap.MP4,objective,"The pedestrian is raising their right hand, which could indicate a stop or caution signal."
+Follow.MP4,blank,"A man in a black shirt and glasses walks into the frame from the right side, waves his hand, and then exits to the left."
+Follow.MP4,determine,The pedestrian is waving his hand.
+Follow.MP4,body,"The pedestrian, a man with short light brown hair and glasses, walks towards the camera in a black long-sleeved shirt. He raises his right hand to wave before continuing forward at a steady pace until he exits the frame on the left side of the screen."
+Follow.MP4,context,"The pedestrian is waving their hand, which could indicate a greeting or signaling to stop."
+Follow.MP4,objective,"The pedestrian is waving their hand, which could indicate a greeting or an intention to stop the vehicle."
+Go left.MP4,blank,"A man in a black shirt and glasses is standing on a stage. He begins to move his arms around, as if he's conducting an orchestra or leading a group of dancers."
+Go left.MP4,determine,The pedestrian is making a gesture with his hands.
+Go left.MP4,body,"The pedestrian is a man wearing glasses and a black long-sleeved shirt. He walks towards the camera, then stops to extend his arms outwards with palms facing forward. His movements are deliberate and controlled as he maintains this position for a few seconds before lowering his hands back down."
+Go left.MP4,context,"The pedestrian is making a gesture with his hands, indicating he wants to cross the road."
+Go left.MP4,objective,"The pedestrian is making a gesture with their right hand, extending it outward and slightly upward. This could indicate they are signaling to stop or yield."
