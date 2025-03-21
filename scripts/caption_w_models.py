@@ -5,7 +5,7 @@ sys.path.append(".")
 import scripts.caption_frames as caption_frames 
 import src.utils as utils
 
-def caption_across_models(data_folder, models_folder, window):
+def caption_across_models(data_folder, models_folder, window, interval: int):
 
     # Load all models modules
     model_modules = [
@@ -23,7 +23,7 @@ def caption_across_models(data_folder, models_folder, window):
         model_package = model_module.load_model()
 
         # Caption frames from all videos in folder
-        caption_frames.caption_folder(data_folder, window, model_package, model_module)
+        caption_frames.caption_folder(data_folder, window, interval, model_package, model_module)
             
         # Unload model
         utils.unload_model(*model_package)
@@ -43,7 +43,9 @@ if __name__ == "__main__":
     # parser.add_argument("window",       type=int, help="Window size", default=1)
     # args = parser.parse_args()
 
-    data_folder = "../realworldgestures_frames" # Path to video frames folder 
+    # data_folder = "../realworldgestures_frames" # Path to video frames folder 
+    data_folder = "../video_frames" # Path to video frames folder 
     models_folder = "models"
     window = 8 # Number of frames to process at once
-    caption_across_models(data_folder, models_folder, window)
+    interval = 1
+    caption_across_models(data_folder, models_folder, window, interval)

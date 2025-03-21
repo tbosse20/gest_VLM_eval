@@ -7,7 +7,7 @@ from config.prompts import prompts
 import src.utils as utils
 import re
 
-def caption_frames(video_path: str, window: int, model_package = None, model_module = None):
+def caption_frames(video_path: str, window: int, interval: int, model_package = None, model_module = None):
 
     # Validate variables
     def raises(video_path: str, window: int):
@@ -37,7 +37,15 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
         csv_path = f"{OUTPUT_FOLDER_PATH}/{module_name}.csv"
         
         # Generate csv file if not exists
-        columns = ["video_name", "frame_idx", "prompt_type", "caption"]
+        columns = [
+            "video_name",
+            "frame_idx",
+            "end_frame",
+            "interval",
+            'window_size',
+            "prompt_type",
+            "caption"
+        ]
         
         # Generate csv file if not exists
         if not os.path.exists(csv_path):
@@ -61,7 +69,6 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
     start_frame, end_frame = min(frame_idx), max(frame_idx)
 
     # Iterate over video frames
-    interval = 18
     for i in tqdm(range(start_frame, end_frame - interval * window, interval * window), desc=f"{video_name}"):
 
         # Generate frames list
@@ -74,6 +81,7 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
             "video_name":   [video_name],
             "start_frame":  [i],
             "end_frame":    [i + window],
+            "interval":     [interval],
             "window_size":  [window],
         }
         
@@ -92,7 +100,7 @@ def caption_frames(video_path: str, window: int, model_package = None, model_mod
             df = pd.DataFrame(dictionary)
             df.to_csv(csv_path, mode="a", index=False, header=False)
 
-def caption_folder(data_folder: str, window: int, model_package, model_module):
+def caption_folder(data_folder: str, window: int, interval: int, model_package, model_module):
     
     # Validate folder path
     if not os.path.exists(data_folder):
@@ -109,7 +117,7 @@ def caption_folder(data_folder: str, window: int, model_package, model_module):
         if 'full_frame' in subfolder: continue
         
         # Caption frames
-        caption_frames(subfolder, window, model_package, model_module)
+        caption_frames(subfolder, window, interval, model_package, model_module)
 
 if __name__ == "__main__":
     
@@ -130,7 +138,7 @@ if __name__ == "__main__":
     # Load model
     import sys
     sys.path.append(".")
-    import models.qwen as model_module
+    import models.archive.qwen as model_module
     model_package = model_module.load_model()
     
     if args.video_folder is not None:
