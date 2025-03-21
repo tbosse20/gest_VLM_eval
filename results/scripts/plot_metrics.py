@@ -6,6 +6,12 @@ import seaborn as sns
 
 def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     
+    # Check if the folder exists
+    if not os.path.exists(metrics_folder):
+        raise FileNotFoundError(f"Folder '{metrics_folder}' not found.")
+    if not os.path.isdir(metrics_folder):
+        raise NotADirectoryError(f"'{metrics_folder}' is not a folder.")
+    
     # Get list of all CSV files in the folder
     csv_files = glob.glob(os.path.join(metrics_folder, "*.csv"))
 
@@ -23,7 +29,7 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
         # Skip proxy files
         if 'proxy' in file:
             continue
-        
+
         # Load the CSV file
         df = pd.read_csv(file)
         
@@ -53,19 +59,41 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     # --- PLOTTING GROUPED BOX PLOT ---
 
     # Plot
-    plt.figure(figsize=(8, 4))
+    plt.figure(figsize=(5, 3))
     
+    # Define colors for each case
+    colors = [
+        "#4e79a7",  # Deep Blue
+        "#f28e2b",  # Warm Orange
+        "#e15759",  # Reddish-Pink
+        "#76b7b2",  # Teal
+        "#59a14f",  # Green
+    ]
     # Only keep cos, Jaccard, Bleu, and meteor
-    merged_df = merged_df[merged_df["Metric"].isin(["Cosine", "Jaccard", "Bleu"])]
+    merged_df = merged_df[merged_df["Metric"].isin([
+        "Cosine",
+        # "Jaccard",
+        # "Bleu",
+    ])]
     # Sort the metrics
     merged_df["Metric"] = pd.Categorical(merged_df["Metric"], sorted(merged_df["Metric"].unique()))
+    
+    # Make all values positive
+    merged_df["Score"] = merged_df["Score"].abs()
+    
+    # Print min and max scores
+    min_score = merged_df["Score"].min()
+    max_score = merged_df["Score"].max()
+    print(f"Min score: {min_score:.2f}")
+    print(f"Max score: {max_score:.2f}")
     
     # Boxplot: Group by prompt type, color by model
     if prompt_types:
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
         sns.boxplot(
             x="prompt_type", y="Score", hue="Model", data=cosine_df,
-            showfliers=False, width=0.9)
+            showfliers=True, width=0.7, dodge=True
+        )
         plt.xlabel("Prompt Type", fontstyle="italic")
         # plt.title("Cosine Similarity Scores Across Prompt Type")
     
@@ -74,27 +102,31 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
         sns.boxplot(
             x="video_name", y="Score", hue="Model", data=cosine_df,
-            showfliers=False, width=0.9)
+            showfliers=False, width=0.7, dodge=True
+        )
         plt.xticks(rotation=45//2)
         plt.xlabel("Gesture", fontstyle="italic")
         # plt.title("Cosine Similarity Scores Across Gestures")
     
     # Boxplot: Group by metric, color by model
     else:
-        sns.boxplot(
-            x="Metric", y="Score", hue="Model", data=merged_df,
-            showfliers=False, width=0.9)
-        plt.xlabel("Metrics", fontstyle="italic")
+        sns.violinplot(
+            x="Model", y="Score", data=merged_df,
+            width=0.7,
+            palette=colors,
+        )
+        plt.xlabel("Model", fontstyle="italic")
         # plt.title("Similarity Metrics Across Models")
 
     # Configure plot
     plt.ylabel("Score", fontstyle="italic")
     # plt.title(f'Boxplot of Similarity Metrics Across Models (prompt: {include_prompt if include_prompt else "All"})')
-    plt.legend(
-        title="Models", 
-        bbox_to_anchor=(1.05, 0.5), 
-        loc='center left', 
-        title_fontproperties={'weight': 'bold'})
+    # plt.legend(
+    #     title="Models", 
+    #     bbox_to_anchor=(1.01, 0.5), 
+    #     loc='center left', 
+    #     title_fontproperties={'weight': 'bold'})
+    plt.ylim(-0.1, 1.1)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.tight_layout()
 
@@ -212,7 +244,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Define folder containing CSVs
-    metrics_folder = args.metrics_folder or "results/data/metrics"
+    metrics_folder = args.metrics_folder or "results/data/metrics/to_gt"
+    # metrics_folder = args.metrics_folder or "results/data/metrics/to_gt_and_human"
 
     # Plot metrics
     merged_df = plot_metrics(metrics_folder, args.prompt_types, args.gestures)

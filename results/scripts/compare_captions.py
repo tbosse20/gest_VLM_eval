@@ -27,14 +27,14 @@ def process_csv(label_caption_csv, gen_caption_folder):
         raise FileNotFoundError(f"Input CSV file '{label_caption_csv}' not found.")
 
     COLUMNS = ["video_name", "frame_idx", "prompt_type"]
-    METRICS = ["cosine", "jaccard", "bleu", "meteor", "rouge_l", "bert"]
+    METRICS = ["cosine"] #, "jaccard", "bleu", "meteor", "rouge_l", "bert"]
     METRICS.sort()
     
     # Load CSV
     label_df = pd.read_csv(label_caption_csv)
 
     # Ensure necessary columns exist
-    required_columns = {"video_name", "frame_idx", "label"}
+    required_columns = {"video_name", "frame_idx", "caption"}
     if not required_columns.issubset(label_df.columns):
         raise ValueError(f"Input CSV must contain columns: {required_columns}")
     
@@ -53,13 +53,13 @@ def process_csv(label_caption_csv, gen_caption_folder):
         
         ### Exclude or include specific models ### MANUAL
         # Only process this model
-        model_only = "human"
-        if model_only not in gen_caption_csv:
-            continue
-        # # Exclude these models
-        # exclude_models = []
-        # if any([model in gen_caption_csv for model in exclude_models]):
+        # model_only = "human"
+        # if model_only not in gen_caption_csv:
         #     continue
+        # Exclude these models
+        exclude_models = ["human", "proxy"]
+        if any([model in gen_caption_csv for model in exclude_models]):
+            continue
 
         # Get metric csv file (ex.: results/data/METRICS/proxy.csv)
         metric_path = os.path.join(metrics_folder, os.path.basename(gen_caption_csv))
@@ -84,15 +84,21 @@ def process_csv(label_caption_csv, gen_caption_folder):
             # if video_name not in videos_only:
             #     continue
             # Exclude these videos
-            videos_exclude = ["Go forward", "Follow", "Getting a cap"]
-            if video_name in videos_exclude:
-                continue
+            # videos_exclude = [
+            #     "Go forward",
+            #     "Follow",
+            #     "Getting a cap",
+            #     "Go left",
+            #     "Idle"
+            # ]
+            # if video_name in videos_exclude:
+            #     continue
             
             # Retrieve the corresponding ground truth caption
             label_caption = label_df.loc[(
                 (label_df["video_name"] == video_name) &
                 (label_df["frame_idx"] == frame_idx)
-                ), "label"
+                ), "caption"
             ]
             if label_caption.empty or label_caption.values[0] in [None, "empty"]:
                 continue
@@ -118,7 +124,8 @@ def process_csv(label_caption_csv, gen_caption_folder):
             
 # Example Usage
 if __name__ == "__main__":
-    label_caption_csv = "data/labels/firsthand.csv"  # Input CSV file
-    gen_caption_folder = "results/data/captions/"  # Generated captions folder
+    # label_caption_csv = "data/labels/firsthand.csv" # Input CSV file
+    label_caption_csv = "results/data/captions/human.csv" # Input CSV file
+    gen_caption_folder = "results/data/captions/" # Generated captions folder
 
     process_csv(label_caption_csv, gen_caption_folder)

@@ -8,39 +8,39 @@ Idle,154,162,1,8,category,e.
 Idle,162,170,1,8,category,e.
 Idle,170,178,1,8,category,e.
 Idle,178,186,1,8,category,e.
-Stop + pass,51,59,1,8,category,g. Stop
-Stop + pass,59,67,1,8,category,g. Stop
-Stop + pass,67,75,1,8,category,g. Stop
-Stop + pass,75,83,1,8,category,g. Stop
-Stop + pass,83,91,1,8,category,g. Stop
-Stop + pass,91,99,1,8,category,g. Stop
-Stop + pass,99,107,1,8,category,g. Stop
-Go left,89,97,1,8,category,c. Forward
-Go left,97,105,1,8,category,c. Forward
-Go left,105,113,1,8,category,c. Forward
-Go left,113,121,1,8,category,c. Forward
-Go left,121,129,1,8,category,c. Forward
-Go left,129,137,1,8,category,c. Forward
-Go left,137,145,1,8,category,c. Forward
-Go left,145,153,1,8,category,c. Forward
-Go left,153,161,1,8,category,c. Forward
-Go left,161,169,1,8,category,c. Forward
-Go left,169,177,1,8,category,c. Forward
-Go left,177,185,1,8,category,c. Forward
-Go left,185,193,1,8,category,c. Forward
-Go left,193,201,1,8,category,c. Forward
-Go left,201,209,1,8,category,c. Forward
-Stop + drive,87,95,1,8,category,g. Stop
-Stop + drive,95,103,1,8,category,g. Stop
-Stop + drive,103,111,1,8,category,g. Stop
-Stop + drive,111,119,1,8,category,g. Stop
-Stop + drive,119,127,1,8,category,g. Stop
-Stop + drive,127,135,1,8,category,g. Stop
-Stop + drive,135,143,1,8,category,g. Stop
-Stop + drive,143,151,1,8,category,g. Stop
-Stop + drive,151,159,1,8,category,g. Stop
-Stop + drive,159,167,1,8,category,g. Stop
-Stop + drive,167,175,1,8,category,g. Stop
+Stop_pass,51,59,1,8,category,g. Stop
+Stop_pass,59,67,1,8,category,g. Stop
+Stop_pass,67,75,1,8,category,g. Stop
+Stop_pass,75,83,1,8,category,g. Stop
+Stop_pass,83,91,1,8,category,g. Stop
+Stop_pass,91,99,1,8,category,g. Stop
+Stop_pass,99,107,1,8,category,g. Stop
+Left,89,97,1,8,category,c. Forward
+Left,97,105,1,8,category,c. Forward
+Left,105,113,1,8,category,c. Forward
+Left,113,121,1,8,category,c. Forward
+Left,121,129,1,8,category,c. Forward
+Left,129,137,1,8,category,c. Forward
+Left,137,145,1,8,category,c. Forward
+Left,145,153,1,8,category,c. Forward
+Left,153,161,1,8,category,c. Forward
+Left,161,169,1,8,category,c. Forward
+Left,169,177,1,8,category,c. Forward
+Left,177,185,1,8,category,c. Forward
+Left,185,193,1,8,category,c. Forward
+Left,193,201,1,8,category,c. Forward
+Left,201,209,1,8,category,c. Forward
+Stop_drive,87,95,1,8,category,g. Stop
+Stop_drive,95,103,1,8,category,g. Stop
+Stop_drive,103,111,1,8,category,g. Stop
+Stop_drive,111,119,1,8,category,g. Stop
+Stop_drive,119,127,1,8,category,g. Stop
+Stop_drive,127,135,1,8,category,g. Stop
+Stop_drive,135,143,1,8,category,g. Stop
+Stop_drive,143,151,1,8,category,g. Stop
+Stop_drive,151,159,1,8,category,g. Stop
+Stop_drive,159,167,1,8,category,g. Stop
+Stop_drive,167,175,1,8,category,g. Stop
 Follow,36,44,1,8,category,g. Stop
 Follow,44,52,1,8,category,g. Stop
 Follow,52,60,1,8,category,b. Hail
@@ -53,16 +53,16 @@ Reverse,111,119,1,8,category,g. Stop
 Reverse,119,127,1,8,category,g. Stop
 Reverse,127,135,1,8,category,g. Stop
 Reverse,135,143,1,8,category,g. Stop
-Getting a cap,218,226,1,8,category,b. Hail
-Getting a cap,226,234,1,8,category,b. Hail
-Getting a cap,234,242,1,8,category,b.
-Getting a cap,242,250,1,8,category,b. Hail
-Go forward,107,115,1,8,category,c.
-Go forward,115,123,1,8,category,c.
-Go forward,123,131,1,8,category,c. Forward
-Go forward,131,139,1,8,category,b. Hail
-Go forward,139,147,1,8,category,e.
-Go forward,147,155,1,8,category,e.
-Go forward,155,163,1,8,category,b.
-Go forward,163,171,1,8,category,c. Forward
-Go forward,171,179,1,8,category,e.
+Hail,218,226,1,8,category,b. Hail
+Hail,226,234,1,8,category,b. Hail
+Hail,234,242,1,8,category,b.
+Hail,242,250,1,8,category,b. Hail
+Forward,107,115,1,8,category,c.
+Forward,115,123,1,8,category,c.
+Forward,123,131,1,8,category,c. Forward
+Forward,131,139,1,8,category,b. Hail
+Forward,139,147,1,8,category,e.
+Forward,147,155,1,8,category,e.
+Forward,155,163,1,8,category,b.
+Forward,163,171,1,8,category,c. Forward
+Forward,171,179,1,8,category,e.
