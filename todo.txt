@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 ToDo:
 #. Pipeline
     # Add " " to caption output and replace breaks with "\n"
@@ -9,16 +7,12 @@ ToDo:
     # readme (instructions)
     # Rm RMPS, weights, etc
 
->>>>>>> Stashed changes
 1. Dataset
     1. Front-Hand
     1.1. Participant annotation                     <-
 
     2. Real-life
-<<<<<<< Updated upstream
-=======
     1.1. Clean up/sort/cut
->>>>>>> Stashed changes
     1.2. Annotate videos
     1.2. Pre-process videos (frames, pedestrian)    <-
 
