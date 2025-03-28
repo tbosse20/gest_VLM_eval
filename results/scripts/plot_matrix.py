@@ -88,22 +88,34 @@ def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
     accuracy = df["correct"].mean()
     print(f"{model_name} accuracy: {accuracy:.2f}")
     
-    # Plot in a confusion matrix# Generate confusion matrix
-    confusion_matrix = pd.crosstab(df["proc_caption"], df["label"])
+    from sklearn.metrics import classification_report, confusion_matrix
+    
+    print(df[["label", "proc_caption"]])
+ 
+    # Generate classification report
+    print(classification_report(df["label"], df["proc_caption"]))
 
-    # Display the matrix
-    plt.figure(figsize=(10, 6))  # Adjust figure size for better readability
-    sns.heatmap(confusion_matrix, annot=True, fmt='d', cmap="Blues", linewidths=0.5, linecolor='gray')
+    # Get sorted list of unique labels
+    labels = sorted(set(df["label"]).union(set(df["proc_caption"])))
 
-    # Improve readability
-    plt.xlabel("Label", fontsize=12)
-    plt.ylabel("Pred", fontsize=12)
-    plt.title(f"Confusion Matrix Heatmap, {model_name} (acc={accuracy:.2f})", fontsize=14)
-    plt.xticks(rotation=20, ha="right")  # Rotate x-axis labels for better visibility
-    plt.yticks(rotation=0)  # Keep y-axis labels horizontal
+    # Compute confusion matrix
+    cm = confusion_matrix(df["label"], df["proc_caption"], labels=labels)
 
+    # Plot confusion matrix using seaborn
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap="Blues", linewidths=0.5, linecolor='gray',
+                xticklabels=labels, yticklabels=labels)
+
+    # Improve plot readability
+    plt.xlabel("Predicted Label", fontsize=12)
+    plt.ylabel("True Label", fontsize=12)
+    plt.title(f"Confusion Matrix Heatmap: {model_name} (Acc = {accuracy:.2f})", fontsize=14)
+    plt.xticks(rotation=20, ha="right")
+    plt.yticks(rotation=0)
+
+    plt.tight_layout()
     plt.show()
-
+    
 def post_process_csv_folder(metrics_folder):
     
     # Check if the folder exists

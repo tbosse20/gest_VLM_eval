@@ -3,6 +3,9 @@ import os
 import glob
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sys
+sys.path.append(".")
+from config.prompts import prompts
 
 def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     
@@ -29,7 +32,7 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
         # Skip proxy files
         if 'proxy' in file:
             continue
-
+        
         # Load the CSV file
         df = pd.read_csv(file)
         
@@ -56,6 +59,15 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     count = count.unstack().fillna(0).astype(int)
     print(count)
     
+    # Rename specific video names
+    merged_df["video_name"] = merged_df["video_name"].replace({
+        "Go left": "Left",
+        "Stop + pass": "Stop, pass",
+        "Stop + drive": "Stop, go",
+        "Go forward": "Forward",
+        "Getting a cap": "Hail",
+    })
+    
     # --- PLOTTING GROUPED BOX PLOT ---
 
     # Plot
@@ -63,12 +75,15 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     
     # Define colors for each case
     colors = [
-        "#4e79a7",  # Deep Blue
         "#f28e2b",  # Warm Orange
         "#e15759",  # Reddish-Pink
         "#76b7b2",  # Teal
         "#59a14f",  # Green
     ]
+    # Add deep blue for non-human models
+    if "human" not in metrics_folder:
+        colors.insert(0, "#4e79a7")  # Deep Blue
+
     # Only keep cos, Jaccard, Bleu, and meteor
     merged_df = merged_df[merged_df["Metric"].isin([
         "Cosine",
@@ -89,10 +104,18 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     
     # Boxplot: Group by prompt type, color by model
     if prompt_types:
+        
+        # Sort prompt types
+        prompt_types = prompts.keys()
+        merged_df["prompt_type"] = pd.Categorical(merged_df["prompt_type"], prompt_types)
+        merged_df = merged_df.sort_values("prompt_type")
+        
+        # Get cosine scores only
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
+        
         sns.boxplot(
             x="prompt_type", y="Score", hue="Model", data=cosine_df,
-            showfliers=True, width=0.7, dodge=True
+            width=0.7, legend=False, palette=colors,
         )
         plt.xlabel("Prompt Type", fontstyle="italic")
         # plt.title("Cosine Similarity Scores Across Prompt Type")
@@ -102,7 +125,7 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
         sns.boxplot(
             x="video_name", y="Score", hue="Model", data=cosine_df,
-            showfliers=False, width=0.7, dodge=True
+            width=0.7, legend=False, palette=colors,
         )
         plt.xticks(rotation=45//2)
         plt.xlabel("Gesture", fontstyle="italic")
@@ -175,7 +198,13 @@ def prin_latex_table(merged_df, prompt_types=False, gesture=False):
     latex_table = ""
     models = avg_df["Model"].unique()
     metrics = avg_df[focus].unique()
-    metrics = sorted(metrics, key=lambda x: x.lower())
+    
+    if prompt_types:
+        # Sort in the order of config.prompts
+        metrics = sorted(metrics, key=lambda x: list(prompts.keys()).index(x))
+    else:
+        # Sort in alphabetical order
+        metrics = sorted(metrics, key=lambda x: x.lower())
 
     # Convert to pivot format for easier LaTeX conversion
     pivot_df = avg_df.pivot(index="Model", columns=focus, values=["Score", "Difference [%]"])
@@ -244,8 +273,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Define folder containing CSVs
-    metrics_folder = args.metrics_folder or "results/data/metrics/to_gt"
-    # metrics_folder = args.metrics_folder or "results/data/metrics/to_gt_and_human"
+    # metrics_folder = args.metrics_folder or "results/data/metrics/to_gt"
+    metrics_folder = args.metrics_folder or "results/data/metrics/to_gt_and_human"
 
     # Plot metrics
     merged_df = plot_metrics(metrics_folder, args.prompt_types, args.gestures)

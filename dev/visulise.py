@@ -1,10 +1,11 @@
+# %%
+
 import cv2
 import pandas as pd
 import os
 
 import sys
 sys.path.append(".")
-import dev.dev_utils as dev_utils
 
 def vis_results(video_path, csv_path, keyword: str):
 
@@ -62,7 +63,8 @@ def vis_results(video_path, csv_path, keyword: str):
 
 if __name__ == "__main__":
 
-    video_path = "data/videos/video_0153.mp4"
+    # video_path = "data/videos/video_0153.mp4"
+    video_path = "E:/realworldgestures/video_18.mp4"
     # csv_path = "data/sanity/output/pred_actions.csv"
     # csv_path = "data/labels/video_0153.csvs"
     csv_path = ""

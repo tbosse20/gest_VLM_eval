@@ -8,26 +8,26 @@ from results.src.compute_similarity_metrics import compute_similarity_metrics
 
 def validate_metrics():
     ground_truths = [
-        "A pedestrian signals the ego driver to stop by putting their hand towards the ego driver.",
-        "A person signals the driver to stop by raising their hand towards the camera.",
+        "A pedestrian signals the ego driver to stop, by putting their hand towards the ego driver.",
+        "A person signals the driver to stop, by raising their hand towards the camera.",
     ]
 
     # Define test cases and their expected similarity levels
     valid_levels = {
         "Extended": [
-            "A pedestrian raises their hand towards the ego driver hand to stop traffic. They are looking scared and in need of help.",
+            "A pedestrian raises their hand towards the ego driver to stop traffic. They are looking scared and in need of help.",
             "A person puts their hand towards the ego driver to signal 'stop'. They are wearing a red t-shirt and blue pants.",
         ],
         "Equivalent": [
-            "A pedestrian raises their hand towards the ego driver hand to stop traffic.",
+            "A pedestrian raises their hand towards the ego driver to stop traffic.",
             "A person puts their hand towards the ego driver to signal 'stop'.",
         ],
         "Partial": [
-            "A person raises their towards the ego driver.",
+            "A person raises their hand towards the ego driver.",
             "A pedestrian signals the ego driver to stop.",
         ],
         "Slight": [
-            "A human gestures the ego driver.",
+            "A human gestures to the ego driver.",
             "A person puts their hand out to the side.",
             "A pedestrian puts their hand up.",
         ],
@@ -65,7 +65,7 @@ def validate_metrics():
 def plot_data(data):
     
     # Define metric labels
-    metric_labels = ["Consine", "Jaccard", "Bleu", "Meteor", "Rouge_L", "Bert", "Cross"]
+    metric_labels = ["Cosine", "Jaccard", "BLEU", "METEOR", "ROUGE", "BERT\nScore", "STS"]
     # Sort metrics by alphabetical order
     metric_labels.sort()
     
@@ -134,12 +134,11 @@ if __name__ == "__main__":
     if args.plot:
         # Hardcoded true values (to avoid recomputing)
         data = {
-            'Extended': [0.9086198061704636, 0.19185341732200978, 0.7435819804668427, 0.33384615384615385, 0.4139981075491923, 0.3771929824561403],
-            'Equivalent': [0.9291751235723495, 0.29055359236162226, 0.8042532205581665, 0.5026552287581699, 0.6854715981118725, 0.507283903835628],
-            'Partial': [0.9202924966812134, 0.15804108301809655, 0.7440546303987503, 0.3666666666666667, 0.6224947550373215, 0.5643939393939393],
-            'Slight': [0.901681125164032, 0.0387676318991606, 0.5667633761962255, 0.2429874727668845, 0.4691581735485537, 0.37549407114624506],
-            'Unrelated': [0.8713605552911758, 0.018089598634690156, 0.20903201028704643, 0.09510233918128655, 0.16542852906926342, 0.19631469979296065],
-        }
+        'Extended': [0.9148297756910324, 0.2054273528575179, 0.75039142370224, 0.5629934519529343, 0.3082763532763533, 0.4230316873015132, 0.38241888505046395],
+'Equivalent': [0.9383604675531387, 0.30044538214535127, 0.8063625693321228, 0.747789740562439, 0.45833333333333337, 0.7091953269344393, 0.5164835164835165],
+'Partial': [0.9306317269802094, 0.23553086674620854, 0.7659641951322556, 0.6532697975635529, 0.3979166666666667, 0.6595469121936446, 0.5952042160737813],
+'Slight': [0.9089650213718414, 0.03969517740269712, 0.5654146174589793, 0.47863704959551495, 0.2632080610021787, 0.4819230148130227, 0.38497082627517404],
+'Unrelated': [0.8736235350370407, 0.018089598634690156, 0.2107335738837719, 0.07154581230133772, 0.09510233918128655, 0.16542852906926342, 0.19631469979296065],}
         plot_data(data)
     
     
