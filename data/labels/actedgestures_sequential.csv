@@ -1,0 +1,4 @@
+video_name,pedestrian_id,start_frame,end_frame,gesture_label_id
+video_01.MP4,1,19,60,0
+video_01.MP4,1,61,142,2
+video_01.MP4,1,143,150,0

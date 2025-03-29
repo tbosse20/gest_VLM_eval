@@ -6,17 +6,40 @@ import os
 import sys
 sys.path.append(".")
 
-def visualize_results(csv_path, videos_folder):
+def get_updated_csv(videos_folder):
+    """ Get the updated CSV file path based on the video folder name. """
+    
+    OUTPUT_FOLDER = "data/labels/"
+    if not os.path.exists(OUTPUT_FOLDER):
+        raise FileNotFoundError(f"Output folder {OUTPUT_FOLDER} does not exist.")
+    if not os.path.isdir(OUTPUT_FOLDER):
+        raise NotADirectoryError(f"Output folder {OUTPUT_FOLDER} is not a directory.")
+    
+    # Get the base name of the video folder
+    base_name = os.path.basename(videos_folder)
+    
+    # Check for the existence of the CSV file in this order
+    CSV_TYPES = ["stretched", "bbox"]
+    for csv_type in CSV_TYPES:
+        print(f"Checking for {csv_type} CSV file...")
+        csv_file = f"{base_name}_{csv_type}.csv"
+        csv_path = os.path.join(OUTPUT_FOLDER, csv_file)
+        
+        if os.path.exists(csv_path):
+            return csv_path
+    
+    raise FileNotFoundError(f"CSV file for {base_name} not found in {OUTPUT_FOLDER}.")
+
+def visualize_results(videos_folder):
 
     # Check if the video folder and CSV file exist
     if not os.path.exists(videos_folder):
         raise FileNotFoundError(f"Video folder {videos_folder} does not exist.")
     if not os.path.isdir(videos_folder):
         raise NotADirectoryError(f"Video folder {videos_folder} is not a directory.")
-    if not os.path.exists(csv_path):
-        raise FileNotFoundError(f"CSV file {csv_path} does not exist.")
-    if not os.path.isfile(csv_path):
-        raise NotADirectoryError(f"CSV file {csv_path} is not a file.")
+    
+    # Get the updated CSV file path
+    csv_path = get_updated_csv(videos_folder)
 
     # Load the CSV file
     df = pd.read_csv(csv_path, index_col=False) if os.path.exists(csv_path) else None
@@ -35,7 +58,7 @@ def visualize_results(csv_path, videos_folder):
         if not os.path.isfile(video_path):
             print(f"Error: Video file {video_path} is not a file.")
             continue
-        if not video_path.endswith(('.mp4', '.avi', '.mov')):
+        if not video_path.endswith(('.mp4', '.avi', '.mov', '.MP4')):
             print(f"Error: Video file {video_path} is not a valid video format.")
             continue
         
@@ -54,8 +77,10 @@ def control_video_playback(play, frame_id, total_frames):
     
     # Control playback speed and frame navigation
     frame_id += 1 if play           else 0 # Play mode
-    frame_id += 1 if key == 2555904 else 0 # Right arrow
-    frame_id -= 1 if key == 2424832 else 0 # Left arrow
+    RIGHT_ARROW_KEY = 2555904
+    frame_id += 1 if key == RIGHT_ARROW_KEY else 0 # Right arrow
+    LEFT_ARROW_KEY = 2424832
+    frame_id -= 1 if key == LEFT_ARROW_KEY  else 0 # Left arrow
     
     # Keep frame_id within bounds
     frame_id = max(0, min(frame_id, total_frames - 1))
@@ -64,9 +89,12 @@ def control_video_playback(play, frame_id, total_frames):
 
 def draw_bounding_boxes(frame, df_video, frame_id, width, height):
     
+    # Set the color and font for the bounding boxes
+    COLOR = (0, 255, 0)
+    FONT = cv2.FONT_HERSHEY_SIMPLEX
+    
     pedestrian_ids = df_video[df_video["frame_id"] == frame_id]["pedestrian_id"].unique()
     if len(pedestrian_ids) == 0:
-        # print(f"Error: No pedestrian IDs found for frame {frame_id}.")
         return frame
     
     for pedestrian_id in pedestrian_ids:
@@ -76,7 +104,6 @@ def draw_bounding_boxes(frame, df_video, frame_id, width, height):
             (df_video["frame_id"] == frame_id)
         ]
         if df_pedestrian.empty:
-            # print(f"Error: No data found for pedestrian {pedestrian_id} in frame {frame_id}.")
             continue
 
         # Get the bounding box coordinates
@@ -85,8 +112,17 @@ def draw_bounding_boxes(frame, df_video, frame_id, width, height):
         x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
         
         # Draw the bounding box on the frame
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-        cv2.putText(frame, str(pedestrian_id), (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+        cv2.rectangle(frame, (x1, y1), (x2, y2), COLOR, 2)
+        cv2.putText(frame, f"ID: {str(pedestrian_id)}", (x1 + 5, y1 + 25), FONT, 0.7, COLOR, 2)
+        
+        # Draw the gesture ID if available
+        gesture_label_id = (
+            df_pedestrian.iloc[0]["gesture_label_id"]
+            if "gesture_label_id" in df_pedestrian.columns
+            else None
+        )
+        if gesture_label_id is not None:
+            cv2.putText(frame, f"Gesture: {str(gesture_label_id)}", (x1 + 5, y1 + 50), FONT, 0.7, COLOR, 2)
     
     return frame
 
@@ -105,7 +141,6 @@ def visualize_video(video_path, df):
     cap = cv2.VideoCapture(video_path)
     
     # Get the video properties
-    fps = cap.get(cv2.CAP_PROP_FPS)
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -140,7 +175,5 @@ def visualize_video(video_path, df):
 if __name__ == "__main__":
 
     # Specify the paths to the CSV file and video folder
-    csv_path = "data/labels/annotations.csv"
-    videos_folder = "data/videos/"
-
-    visualize_results(csv_path, videos_folder)
+    videos_folder = "C:/Users/Tonko/OneDrive/Dokumenter/School/Merced/actedgestures"
+    visualize_results(videos_folder)
