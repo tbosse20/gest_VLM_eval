@@ -41,8 +41,9 @@ def pose_from_frames(main_folder, sub_folder_name):
                 cv2.imwrite(output_filename, pedestrian_crop)
                 
             pbar.update(1)
-
-# Example usage
-input_folder = "/home/mi3/RPMS_Tonko/RMPS/data/sanity/input/video_0153"  # Change to your video file
-sub_folder_name = "pedestrian"   # Folder to save frames
-pose_from_frames(input_folder, sub_folder_name)
+            
+if __name__ == "__main__":
+    # Example usage
+    input_folder = "/home/mi3/RPMS_Tonko/RMPS/data/sanity/input/video_0153"  # Change to your video file
+    sub_folder_name = "pedestrian"   # Folder to save frames
+    pose_from_frames(input_folder, sub_folder_name)

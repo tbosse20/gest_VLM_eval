@@ -6,8 +6,7 @@ import platform
 
 import sys
 sys.path.append(".")
-import src.vllama2 as vllama2
-import RMPS.prompts as prompts
+# import src.vllama2 as vllama2
 
 # Suppress YOLOv8 logging
 logging.getLogger("ultralytics").setLevel(logging.ERROR)
@@ -51,14 +50,13 @@ def get_crops(frame, results, exclude_pedestrians):
     
     return crops
 
-
-def caption_crops(object_crops):
-    # Analyze each cropped object
-    return [
-        f"{i}. {vllama2.inference(object_crop, prompts.object, 'image')}"
-        # f"{i}. FAKE OBJECT CROP OUTPUT"
-        for i, object_crop in enumerate(object_crops)
-    ]
+# def caption_crops(object_crops):
+#     # Analyze each cropped object
+#     return [
+#         f"{i}. {vllama2.inference(object_crop, prompts.object, 'image')}"
+#         # f"{i}. FAKE OBJECT CROP OUTPUT"
+#         for i, object_crop in enumerate(object_crops)
+#     ]
 
 def main(frame, exclude_pedestrians=True):
 
@@ -69,9 +67,9 @@ def main(frame, exclude_pedestrians=True):
     # Get the cropped region of interest
     object_crops = get_crops(frame, object_result, exclude_pedestrians)
     # Caption each object
-    caption = caption_crops(object_crops)
+    # caption = caption_crops(object_crops)
 
-    return caption
+    # return caption
 
 if __name__ == "__main__":
     

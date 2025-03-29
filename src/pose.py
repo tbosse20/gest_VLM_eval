@@ -7,8 +7,7 @@ import platform
 
 import sys
 sys.path.append(".")
-import src.vllama2 as vllama2
-import RMPS.prompts as prompts
+# import src.vllama2 as vllama2
 
 # Suppress YOLOv8 logging
 logging.getLogger("ultralytics").setLevel(logging.ERROR)
@@ -75,14 +74,14 @@ def get_crops(frame, results):
 
     return crops
 
-def caption_crops(pose_crops, vllama2_package=None):
-    # Analyze each cropped pedestrian w/wo pose
-    vllama2_package = vllama2_package or vllama2.load_model()
-    return [
-        f"Pedestrian {i}. {vllama2.inference(pose_crop, 'What is this pedestrian gesturing?', 'image', vllama2_package)}"
-        # f"{i}. FAKE POSE CROP OUTPUT"
-        for i, pose_crop in enumerate(pose_crops)
-    ]
+# def caption_crops(pose_crops, vllama2_package=None):
+#     # Analyze each cropped pedestrian w/wo pose
+#     vllama2_package = vllama2_package or vllama2.load_model()
+#     return [
+#         f"Pedestrian {i}. {vllama2.inference(pose_crop, 'What is this pedestrian gesturing?', 'image', vllama2_package)}"
+#         # f"{i}. FAKE POSE CROP OUTPUT"
+#         for i, pose_crop in enumerate(pose_crops)
+#     ]
 
 def main(frame, project_pose=True, vllama2_package=None):
 
@@ -93,9 +92,9 @@ def main(frame, project_pose=True, vllama2_package=None):
     # Get the cropped region of interest
     pose_crops = get_crops(frame, pose_result)
     # Caption each pedestrian
-    caption = caption_crops(pose_crops, vllama2_package)
+    # caption = caption_crops(pose_crops, vllama2_package)
 
-    return caption
+    # return caption
 
 if __name__ == "__main__":
     
