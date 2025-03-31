@@ -25,4 +25,5 @@
 3. Construct gesture caption annotation for each pedestrian ID
     - `video_name,start_frame,pedestrian_id,gesture_class,caption`.
     - The gesture classes are found in `config/gesture_classes`.
+    - Note: DO NOT use find-replace (replaces frames too)
 4. *Optional, `scripts/stretch_annotations.py` stretches frame-stamps to each frame, including bboxes.*

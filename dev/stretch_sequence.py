@@ -42,7 +42,7 @@ def stretch_sequence(sequential_csv: str, bbox_csv: str):
         return
 
     # Optional: sort
-    merged_df = merged_df.sort_values(by=["video_name", "gesture_id", "frame_id", "pedestrian_id"])
+    merged_df = merged_df.sort_values(by=["video_name", "gesture_label_id", "frame_id", "pedestrian_id"])
     
     # Save result
     output_csv = sequential_csv.replace("sequential.csv", "stretched.csv")
