@@ -1,15 +1,17 @@
 # %%
-
+import numpy as np
 import cv2
 import pandas as pd
 import os
 import sys
+import random
 sys.path.append(".")
 from config.gesture_classes import Gesture
 
 interval = 1 # Interval for frame extraction (in seconds)
+show_hud = True # Show HUD (Heads-Up Display) with video name and frame number
 
-def get_updated_csv(videos_folder_path):
+def get_updated_csv(videos_folder_path, csv_type: str):
     """ Get the updated CSV file path based on the video folder name. """
     
     OUTPUT_FOLDER = "data/labels/"
@@ -21,19 +23,15 @@ def get_updated_csv(videos_folder_path):
     # Get the base name of the video folder
     videos_folder_name = os.path.basename(os.path.normpath(videos_folder_path))
     # Check for the existence of the CSV file in this order
-    CSV_TYPES = [
-        "stretched",
-        "bboxes"
-    ]
-    for csv_type in CSV_TYPES:
-        print(f"Checking for {csv_type} CSV file...")
-        csv_file = f"{videos_folder_name}_{csv_type}.csv"
-        csv_path = os.path.join(OUTPUT_FOLDER, csv_file)
-
-        if os.path.exists(csv_path):
-            return csv_path
     
-    raise FileNotFoundError(f"CSV file for {videos_folder_name} not found in {OUTPUT_FOLDER}.")
+    csv_file = f"{videos_folder_name}_{csv_type}.csv"
+    csv_path = os.path.join(OUTPUT_FOLDER, csv_file)
+
+    if os.path.exists(csv_path):
+        df = pd.read_csv(csv_path, index_col=False)
+        return df
+    
+    # raise FileNotFoundError(f"CSV file for {videos_folder_name} not found in {OUTPUT_FOLDER}.")
 
 def visualize_results(videos_folder_path):
 
@@ -44,17 +42,15 @@ def visualize_results(videos_folder_path):
         raise NotADirectoryError(f"Video folder {videos_folder_path} is not a directory.")
     
     # Get the updated CSV file path
-    csv_path = get_updated_csv(videos_folder_path)
+    df_bboxes = get_updated_csv(videos_folder_path, 'bboxes')
+    df_labels = get_updated_csv(videos_folder_path, 'sequential')
 
-    # Load the CSV file
-    df = pd.read_csv(csv_path, index_col=False) if os.path.exists(csv_path) else None
-    
     # Get videos by unique video names in the CSV file
-    video_names = df["video_name"].unique() if df is not None else []
+    video_names = df_bboxes["video_name"].unique() if df_bboxes is not None else []
     if len(video_names) == 0:
         print("Error: No video names found in the CSV file.")
         return
-    
+
     for video_name in video_names:
         video_path = os.path.join(videos_folder_path, video_name)
         if not os.path.exists(video_path):
@@ -66,17 +62,24 @@ def visualize_results(videos_folder_path):
         if not video_path.endswith(('.mp4', '.avi', '.mov', '.MP4')):
             print(f"Error: Video file {video_path} is not a valid video format.")
             continue
+
+        df_video_labels = df_labels[df_labels["video_name"] == video_name.lower()]
         
         # Visualize the video with bounding boxes
-        visualize_video(video_path, df)
+        visualize_video(video_path, df_bboxes, df_video_labels)
 
 def control_video_playback(play, frame_id, total_frames):
     """ Control video playback with keyboard input. """
     
     global interval
+    global show_hud
     
     # Get key press
     key = cv2.waitKeyEx(10) if play else cv2.waitKeyEx(0)
+    # print(f"Key pressed: {key}")
+    
+    # Control HUD visibility
+    show_hud = not show_hud if key == 104 else show_hud # 'h' to toggle HUD
     
     # Control playback state
     play = not play if  key == 32   else play # Space to toggle play/pause
@@ -87,6 +90,7 @@ def control_video_playback(play, frame_id, total_frames):
     interval /= 2 if key == 2621440 else 1 # Down arrow
     interval = int(max(1, interval)) # Ensure interval is at least 1
     
+    # Control frame navigation
     frame_id += interval if play           else 0 # Play mode
     frame_id += interval if key == 2555904 else 0 # Right arrow
     frame_id -= interval if key == 2424832 else 0 # Left arrow
@@ -97,11 +101,105 @@ def control_video_playback(play, frame_id, total_frames):
     
     return play, frame_id
 
-def draw_bounding_boxes(frame, df_video, frame_id, width, height):
+def get_pedestrian(df_video, frame_id, pedestrian_id):
+    """ Get the pedestrian ID from the DataFrame. """
+    
+    # Filter the DataFrame for the current pedestrian ID
+    df_pedestrian = df_video[
+        (df_video["pedestrian_id"] == pedestrian_id) & 
+        (df_video["frame_id"] == frame_id)
+    ]
+    
+    # Check if the DataFrame is empty
+    if df_pedestrian.empty:
+        return None
+    
+    return df_pedestrian
+
+def get_bbox_from_id(df_pedestrian, width, height):
+    """ Get the bounding box coordinates for a given pedestrian ID. """
+
+    # Get the bounding box coordinates
+    x1_norm, y1_norm, x2_norm, y2_norm = df_pedestrian.iloc[0][["x1", "y1", "x2", "y2"]].values     
+    x1, y1, x2, y2 = x1_norm * width, y1_norm * height, x2_norm * width, y2_norm * height
+    x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+    
+    return x1, y1, x2, y2
+
+def draw_bbox_id(frame, x1, y1, x2, y2, pedestrian_id):
+    """ Draw the bounding box ID on the frame. """
     
     # Set the color and font for the bounding boxes
-    COLOR = (0, 255, 0)
     FONT = cv2.FONT_HERSHEY_SIMPLEX
+    SIZE = 0.5
+    WIDTH = 1
+    
+    # Set the color and font for the bounding boxes
+    # random.seed(pedestrian_id)
+    # color = tuple(random.randint(0, 200) for _ in range(3))
+    color = (255, 153, 0)
+    
+    # Draw the bounding box on the frame
+    cv2.rectangle(frame, (x1, y1), (x2, y2), color, WIDTH)
+    string = f"ID: {str(pedestrian_id)}"
+    location = (x1, y1 - 10)
+    cv2.putText(frame, string, location, FONT,SIZE, color, WIDTH)
+    
+    return frame
+
+def draw_gesture_labels(frame, df_video_labels, frame_id, x1, y1, pedestrian_id):
+    """ Draw gesture labels on the frame from the DataFrame. """
+    
+    FONT = cv2.FONT_HERSHEY_SIMPLEX
+    SIZE = 0.5
+    WIDTH = 1
+        
+    # Filter for the current pedestrian and frame
+    df_video_labels = df_video_labels[
+        (df_video_labels["pedestrian_id"] == pedestrian_id) &
+        (df_video_labels["start_frame"] <= frame_id) &
+        (df_video_labels["end_frame"] >= frame_id)
+    ]
+    if df_video_labels.empty:
+        return frame
+
+    # Get the first relevant label row
+    row = df_video_labels.iloc[0]
+
+    # Labels we're interested in (only keep ones present)
+    LABEL_KEYS = {"gesture_label_id": "Gesture", "ego_driver_mask": "Ego Driver"}
+    label_values = {
+        value: row[key]
+        for key, value in LABEL_KEYS.items()
+        if key in row
+    }
+
+    # Draw available labels
+    for idx, (label_name, label_value) in enumerate(label_values.items()):
+        if pd.isna(label_value):  # skip NaN values
+            continue
+        
+        # Generic label text and color
+        label_text = f"{label_name}: {label_value}"
+        color = (0, 0, 255) if label_value == 0 else (0, 255, 0)
+        
+        # Specific label handling
+        if label_name == "Gesture":
+            label_text += f" ({Gesture(label_value).name})"
+            color = (
+                Gesture(label_values["Gesture"]).color
+                if "Gesture" in label_values
+                else (255, 153, 0)
+            )
+
+        # Set the position for the label text 
+        label_position = (x1, y1 - 10 - (idx+1) * 25)
+        cv2.putText(frame, label_text, label_position, FONT, SIZE, color, WIDTH)
+    
+    return frame
+
+def draw_pedestrians(frame, df_video, frame_id, width, height, df_video_labels):
+    """ Draw pedestrians and their bounding boxes on the frame. """
     
     # Get the pedestrian IDs for the current frame
     pedestrian_ids = df_video[df_video["frame_id"] == frame_id]["pedestrian_id"]
@@ -113,45 +211,43 @@ def draw_bounding_boxes(frame, df_video, frame_id, width, height):
         location = (width // 2 - 200, height // 2)
         cv2.putText(
             frame, f"Duplicate IDs detected\n{pedestrian_ids}", location,
-            FONT, 1, (0, 0, 255), 2, cv2.LINE_AA
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA
         )
     
-    for pedestrian_id in pedestrian_ids:
-        # Filter the DataFrame for the current pedestrian ID
-        df_pedestrian = df_video[
-            (df_video["pedestrian_id"] == pedestrian_id) & 
-            (df_video["frame_id"] == frame_id)
-        ]
-        if df_pedestrian.empty:
+    for i, pedestrian_id in enumerate(pedestrian_ids):
+        pedestrian = get_pedestrian(df_video, frame_id, pedestrian_id)
+        if pedestrian is None:
             continue
 
-        # Get the bounding box coordinates
-        x1_norm, y1_norm, x2_norm, y2_norm = df_pedestrian.iloc[0][["x1", "y1", "x2", "y2"]].values     
-        x1, y1, x2, y2 = x1_norm * width, y1_norm * height, x2_norm * width, y2_norm * height
-        x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
-        
-        # Draw the bounding box on the frame
-        cv2.rectangle(frame, (x1, y1), (x2, y2), COLOR, 2)
-        string = f"ID: {str(pedestrian_id)}"
-        location = (x1 + 5, y1 + 25)
-        cv2.putText(frame, string, location, FONT, 0.7, COLOR, 2)
-        
-        # Draw the gesture ID if available
-        gesture_label_id = (
-            df_pedestrian.iloc[0]["gesture_label_id"]
-            if "gesture_label_id" in df_pedestrian.columns
-            else None
-        )
-        if gesture_label_id is not None:
-            gesture_name = Gesture.get(gesture_label_id, "NaN")
-            string = f"Gesture: {gesture_name} ({str(gesture_label_id)})"
-            location = (x1 + 5, y1 + 50)
-            cv2.putText(frame, string, location, FONT, 0.7, COLOR, 2)
+        x1, y1, x2, y2 = get_bbox_from_id(pedestrian, width, height)
+        draw_bbox_id(frame, x1, y1, x2, y2, pedestrian_id)
+        draw_gesture_labels(frame, df_video_labels, frame_id, x1, y1, pedestrian_id)
     
     return frame
 
-def visualize_video(video_path, df):
+def draw_info(frame, video_name, frame_id, interval):
+    """ Draw the video name, frame number, and interval on the frame. """
+    
+    info = [
+        f'Video: {video_name}',
+        f'Frame: {frame_id}',
+        f'Interval: {interval}'
+    ]
+    for i, text in enumerate(info):
+        cv2.putText(
+            frame, text, (20, 50 + i * 50),
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA
+        )
+    
+    return frame
+
+def visualize_video(video_path, df, df_video_labels=None):
     global interval
+    
+    # Check if the HUD should be displayed
+    global show_hud
+    if not show_hud:
+        return frame
     
     # Get the video name from the path
     video_name = os.path.basename(video_path)
@@ -183,16 +279,9 @@ def visualize_video(video_path, df):
         if not ret: break
         
         # Draw bounding boxes on the frame
-        frame = draw_bounding_boxes(frame, df_video, frame_id, width, height)
-        cv2.putText(
-            frame, f'Video: {video_name}', (20, 50),
-            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
-        cv2.putText(
-            frame, f'Frame: {frame_id}', (20, 100),
-            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
-        cv2.putText(
-            frame, f'Interval: {interval}', (20, 150),
-            cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2, cv2.LINE_AA)
+        if show_hud:
+            frame = draw_pedestrians(frame, df_video, frame_id, width, height, df_video_labels)
+            frame = draw_info(frame, video_name, frame_id, interval)
         
         # Display the frame
         frame = cv2.resize(frame, (1280, 720))
