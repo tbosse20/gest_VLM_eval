@@ -28,8 +28,8 @@ def inference(
 
     if frames_list is None or len(frames_list) == 0:
         return 'empty'
-    if len(frames_list) > 8:
-        raise ValueError("frames_list contains more than 8 elements")
+    # if len(frames_list) > 8:
+    #     raise ValueError("frames_list contains more than 8 elements")
     
     # Determine modal
     modal = 'image' if len(frames_list) == 1 else 'video'
@@ -122,15 +122,24 @@ def sanity():
 
 if __name__ == "__main__":
 
-    responds = video_inference("Test", "/home/mi3/RPMS_Tonko/actedgestures/Follow.MP4")
-    print(responds)
+    # responds = video_inference("Test", "/home/mi3/RPMS_Tonko/actedgestures/Follow.MP4")
+    # print(responds)
 
     # # Sanity check
     # sanity()
     # exit()
 
-    # args = utils.argparse()
+    args = utils.argparse()
+
+    # Example
+    """
+        python models/archive/vllama2.py \
+        --video_folder 'data/video_frames/man_0153' \
+        --start_frame 85 \
+        --n_frames 4 \
+        --prompt "What is the man gesturing?"
+    """
     
-    # frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
-    # caption = inference(prompt="explain the video", frames_list=frame_list)
-    # print("Caption:", caption)
+    frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
+    caption = inference(prompt=args.prompt, frames_list=frame_list)
+    print("Caption:", caption)

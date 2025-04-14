@@ -32,8 +32,8 @@ def inference(
     model_package = None,
     ):
     
-    if len(frames_list) > 8:
-        raise ValueError
+    # if len(frames_list) > 8:
+    #     raise ValueError
     if len(frames_list) == 0:
         return 'empty'
     
@@ -138,8 +138,18 @@ def video_inference(
     return output_text[0]
 
 if __name__ == "__main__":
+
+    # Example
+    """
+        python models/archive/qwen.py \
+        --video_folder 'data/video_frames/man_0153' \
+        --start_frame 85 \
+        --n_frames 4 \
+        --prompt "What is the man gesturing?"
+    """
+
     args = utils.argparse()
     
     frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
-    caption = inference(prompt="explain the video", frames_list=frame_list)
+    caption = inference(prompt=args.prompt, frames_list=frame_list)
     print("Caption:", caption)
