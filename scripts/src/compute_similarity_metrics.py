@@ -119,3 +119,12 @@ def compute_similarity_metrics(ground_truth: str, predicted: str, metrics_list: 
     metrics = {k: metrics[k] for k in sorted(metrics)}
 
     return pd.DataFrame([metrics])
+
+if __name__ == "__main__":
+    # Example usage
+    gt_caption = "A dog is playing with a ball."
+    pred_caption = "A dog plays with a ball."
+    
+    metrics_df = compute_similarity_metrics(gt_caption, pred_caption)
+    print(metrics_df)
+    

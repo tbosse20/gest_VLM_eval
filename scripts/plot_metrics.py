@@ -317,16 +317,9 @@ def print_latex_table(merged_df, prompt_types=False, gesture=False) -> None:
     print()
 
 if __name__ == "__main__":
-    import sys
-    sys.path.append(".")
-    
-    # Get list of prompt types
-    from config.prompts import prompts
-    prompt_types = prompts.keys()
     
     import argparse
     parser = argparse.ArgumentParser(description="Plot similarity metrics from CSV files.")
-    parser.add_argument("--metrics_folder", type=str, help="Path to the folder containing metrics CSV files.")
     parser.add_argument("--prompt_types",   action="store_true", help="Group by prompt types.")
     parser.add_argument("--gestures",       action="store_true", help="Group by gesture.")
                         

@@ -33,7 +33,7 @@ def validate_metrics() -> dict:
         # Compute similarity scores for each valid caption
         for valid_caption in valid_captions:
             for target in TARGETS:
-                similarity_scores = compute_similarity_metrics(valid_caption, target)
+                similarity_scores = compute_similarity_metrics(valid_caption, target, metric_labels)
                 total_scores += similarity_scores.values[0]
                 count += 1
 
@@ -134,6 +134,8 @@ def plot_metrics(data):
 
 if __name__ == "__main__":
     
+    VALID_CSV_PATH = "results/data/valid_metrics.csv"
+    
     import argparse
     import sys
     
@@ -151,20 +153,18 @@ if __name__ == "__main__":
     if args.compute:
         data = validate_metrics()
         
+        # Save to CSV
+        df = pd.DataFrame(data, index=VALID_LEVELS.keys())
+        df.to_csv(VALID_CSV_PATH, index=True, header=True)
+        
     if args.plot:
-        # Hardcoded true values (to avoid recomputing)
-        data = {
-            'Extended':     [0.9148297756910324, 0.2054273528575179, 0.75039142370224, 0.5629934519529343, 0.3082763532763533, 0.4230316873015132, 0.38241888505046395],
-            'Equivalent':   [0.9383604675531387, 0.30044538214535127, 0.8063625693321228, 0.747789740562439, 0.45833333333333337, 0.7091953269344393, 0.5164835164835165],
-            'Partial':      [0.9306317269802094, 0.23553086674620854, 0.7659641951322556, 0.6532697975635529, 0.3979166666666667, 0.6595469121936446, 0.5952042160737813],
-            'Slight':       [0.9089650213718414, 0.03969517740269712, 0.5654146174589793, 0.47863704959551495, 0.2632080610021787, 0.4819230148130227, 0.38497082627517404],
-            'Unrelated':    [0.8736235350370407, 0.018089598634690156, 0.2107335738837719, 0.07154581230133772, 0.09510233918128655, 0.16542852906926342, 0.19631469979296065]
-        }
+        
+        # Load data
+        df = pd.read_csv(VALID_CSV_PATH, index_col=0)
+        data = df.to_dict(orient="list")
         
     # Add the ideal for each case
     for case in data.keys():
         data[case] = [IDEAL[case]] + data[case]
         
     plot_metrics(data)
-    
-    
