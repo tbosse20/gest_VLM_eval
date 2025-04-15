@@ -71,7 +71,10 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     # --- PLOTTING GROUPED BOX PLOT ---
 
     # Plot
-    plt.figure(figsize=(5, 3))
+    if not gestures and not prompt_types:
+        plt.figure(figsize=(3, 2.5))
+    else:
+        plt.figure(figsize=(7.16, 2.5))
     
     # Define colors for each case
     colors = [
@@ -102,35 +105,76 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     print(f"Min score: {min_score:.2f}")
     print(f"Max score: {max_score:.2f}")
     
+    # Rename vllama
+    merged_df["Model"] = merged_df["Model"].replace({
+        "vllama2": "VLLaMA2",
+        "vllama3": "VLLaMA3",
+        "human": "Expert",
+        "qwen": "Qwen",
+    })
+    
+    
     # Boxplot: Group by prompt type, color by model
-    if prompt_types:
+    if prompt_types or gestures:
         
-        # Sort prompt types
-        prompt_types = prompts.keys()
-        merged_df["prompt_type"] = pd.Categorical(merged_df["prompt_type"], prompt_types)
-        merged_df = merged_df.sort_values("prompt_type")
+        if prompt_types:
+            # Sort prompt types
+            tmp_prompt_types = prompts.keys()
+            merged_df["prompt_type"] = pd.Categorical(merged_df["prompt_type"], tmp_prompt_types)
+            merged_df = merged_df.sort_values("prompt_type")
+        
+        x = "video_name" if gestures else "prompt_type"
+        y = "Score"
+        hue = "Model"
+        xlabel = "Prompt Type" if prompt_types else "Gesture"
         
         # Get cosine scores only
         cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
         
+        # Rename "," to "\n"
+        cosine_df["video_name"] = cosine_df["video_name"].str.replace(",", ",\n")
+          
         sns.boxplot(
-            x="prompt_type", y="Score", hue="Model", data=cosine_df,
-            width=0.7, legend=False, palette=colors,
+            x=x, y=y, hue=hue, data=cosine_df,
+            width=0.6, legend=True, palette=colors,
         )
-        plt.xlabel("Prompt Type", fontstyle="italic")
-        # plt.title("Cosine Similarity Scores Across Prompt Type")
-    
-    # Boxplot: Group by gesture, color by model
-    elif gestures:
-        cosine_df = merged_df[merged_df["Metric"] == "Cosine"]
-        sns.boxplot(
-            x="video_name", y="Score", hue="Model", data=cosine_df,
-            width=0.7, legend=False, palette=colors,
+        
+        plt.xlabel(xlabel, fontstyle="italic")
+        unique_labels = [label for label in cosine_df[x].unique() if pd.notna(label)]
+        plt.xticks(
+            range(len(unique_labels)),
+            [str(label).capitalize() for label in unique_labels]
         )
-        plt.xticks(rotation=45//2)
-        plt.xlabel("Gesture", fontstyle="italic")
-        # plt.title("Cosine Similarity Scores Across Gestures")
-    
+        if gestures:
+            plt.xticks(rotation=45//2)
+            
+        from matplotlib.lines import Line2D
+
+        # Get and deduplicate handles/labels
+        handles, labels = plt.gca().get_legend_handles_labels()
+        by_label = dict(zip(labels, handles))
+
+        # Actual handles/labels
+        model_handles = list(by_label.values())
+        model_labels = list(by_label.keys())
+
+        # Inject bold title at the front (no handle)
+        all_handles = model_handles
+        all_labels = [r"$\bf{Models:}$"] + model_labels
+
+        # Draw the legend
+        plt.legend(
+            [Line2D([], [], linestyle='none')] + all_handles,  # insert blank handle for title
+            all_labels,
+            loc='upper center',
+            # bbox_to_anchor=(0.5, 1.15),
+            ncol=len(all_labels),
+            handlelength=1.0,
+            handletextpad=0.4,
+            borderpad=0.5,
+            frameon=True
+        )
+        
     # Boxplot: Group by metric, color by model
     else:
         sns.violinplot(
@@ -138,19 +182,17 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
             width=0.7,
             palette=colors,
         )
+        plt.xticks(rotation=45//2)
         plt.xlabel("Model", fontstyle="italic")
         # plt.title("Similarity Metrics Across Models")
 
     # Configure plot
     plt.ylabel("Score", fontstyle="italic")
     # plt.title(f'Boxplot of Similarity Metrics Across Models (prompt: {include_prompt if include_prompt else "All"})')
-    # plt.legend(
-    #     title="Models", 
-    #     bbox_to_anchor=(1.01, 0.5), 
-    #     loc='center left', 
-    #     title_fontproperties={'weight': 'bold'})
+    
     plt.ylim(-0.1, 1.1)
     plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.gca().set_axisbelow(True)
     plt.tight_layout()
 
     # Save the plot
@@ -159,7 +201,9 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     boxplot_path = boxplot_path.replace(".png", f"_prompt_types.png") if prompt_types else boxplot_path
     boxplot_path = boxplot_path.replace(".png", f"_gestures.png") if gestures else boxplot_path
     # boxplot_path = boxplot_path.replace(".png", f"_{date_time}.png")
-    plt.savefig(boxplot_path)
+    boxplot_path = boxplot_path.replace(".png", f".pdf")
+    plt.savefig(boxplot_path, format="pdf", dpi=300, bbox_inches='tight')
+
     print(f"Boxplot saved to: {boxplot_path}")
     print()
     
@@ -273,8 +317,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Define folder containing CSVs
-    # metrics_folder = args.metrics_folder or "results/data/metrics/to_gt"
-    metrics_folder = args.metrics_folder or "results/data/metrics/to_gt_and_human"
+    metrics_folder = args.metrics_folder or "results/data/metrics/to_gt"
+    # metrics_folder = args.metrics_folder or "results/data/metrics/to_gt_and_human"
 
     # Plot metrics
     merged_df = plot_metrics(metrics_folder, args.prompt_types, args.gestures)

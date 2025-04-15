@@ -1,8 +1,8 @@
 # VLM traffic gesture evaluation
 
 ## Datasets
-- 
-- 
+- ATG
+- ITGI
 
 ## Content
 - Models in `models/`, Qwen, VideoLLaMA2, VideoLLaMA3
@@ -18,12 +18,3 @@
         - Format: `video_name, frame_idx, label`
 4. Run `results/scripts/plot_metrics.py` to boxplot and print result.
     - Use `--prompt_type` or `--gestures` to compare across.
-
-## Annotation
-1. Extract pedestrian bboxes with `scripts/extract_person_video.py`.
-2. Clean up additional bboxes and ensure ID's match with `dev/visualize_bbox.py`.
-3. Construct gesture caption annotation for each pedestrian ID
-    - `video_name,start_frame,pedestrian_id,gesture_class,caption`.
-    - The gesture classes are found in `config/gesture_classes`.
-    - Note: DO NOT use find-replace (replaces frames too)
-4. *Optional, `scripts/stretch_annotations.py` stretches frame-stamps to each frame, including bboxes.*

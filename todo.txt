@@ -1,32 +1,8 @@
 ToDo:
-#. Pipeline
-    # Add " " to caption output and replace breaks with "\n"
-    # Remove warnings
-#. Clean up
-    # VideoLLaMA2 file (__name__)
-    # readme (instructions)
-    # Rm RMPS, weights, etc
+- Expand Acted with more gestures and distance
 
-1. Dataset
-    1. Front-Hand
-    1.1. Participant annotation                     <-
-
-    2. Real-life
-    1.1. Clean up/sort/cut
-    1.2. Annotate videos
-    1.2. Pre-process videos (frames, pedestrian)    <-
-
-2. Run experiment!
-3. Result analysis
-4. Write paper
-
-#. Pipeline
-    # Add " " to caption output and replace breaks with "\n"
-    # Remove warnings
-    # Make all models work running same script wh OOM
-    # Skips last few frames..
 #. Clean up
     # VideoLLaMA2 file (__name__). Adapt to image, frames, and video
     # readme (instructions)
-    # Rm RMPS, weights, etc. non-used
-# Sanity checks
+
+# Final -> Remove history

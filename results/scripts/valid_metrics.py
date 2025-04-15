@@ -2,11 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-import sys
-sys.path.append(".")
-from results.src.compute_similarity_metrics import compute_similarity_metrics
+import matplotlib.patches as mpatches
 
 def validate_metrics():
+    
+    sys.path.append(".")
+    from results.src.compute_similarity_metrics import compute_similarity_metrics
+
     ground_truths = [
         "A pedestrian signals the ego driver to stop, by putting their hand towards the ego driver.",
         "A person signals the driver to stop, by raising their hand towards the camera.",
@@ -64,16 +66,28 @@ def validate_metrics():
 
 def plot_data(data):
     
+    if len(data) == 0:
+        print("No data to plot")
+        return
+    
     # Define metric labels
     metric_labels = ["Cosine", "Jaccard", "BLEU", "METEOR", "ROUGE", "BERT\nScore", "STS"]
     # Sort metrics by alphabetical order
     metric_labels.sort()
     
+    if len(data["Extended"]) != len(metric_labels):
+        metric_labels = ["Ideal"] + metric_labels
+    
+    if len(data["Extended"]) != len(metric_labels):
+        print("Data length does not match metric labels")
+        return
+    
+    
     # Convert to DataFrame
     df = pd.DataFrame(data, index=metric_labels)
 
     # Plot setup
-    fig, ax = plt.subplots(figsize=(7, 3))
+    fig, ax = plt.subplots(figsize=(7.16, 2.5))
     bar_width = 0.15  # Width of each bar
     x = np.arange(len(metric_labels))  # X-axis positions for metrics
 
@@ -85,33 +99,67 @@ def plot_data(data):
         "#76b7b2",  # Teal
         "#59a14f",  # Green
     ]
-
+    
+    # Store handles for the custom legend
+    legend_handles = []
     # Plot bars for each case
     for i, (case, color) in enumerate(zip(df.columns, colors)):
-        ax.bar(x + i * bar_width, df[case], bar_width, label=case, color=color)
+        for j, metric in enumerate(df.index):
+            tmp_case = case if j == 0 else ""
+            bar_alpha = 0.6 if metric == "Ideal" else 1.0
+            ax.bar(
+                x[j] + i * bar_width,
+                df[case].iloc[j],
+                bar_width,
+                label=tmp_case,
+                color=color,
+                alpha=bar_alpha
+            )
+
+        # Add proxy legend entry (alpha=1.0)
+        legend_handles.append(mpatches.Patch(color=color, label=case, alpha=1.0))
+    
+    ax.axvline(x=0.8, color='grey', linestyle='--', linewidth=0.8, alpha=0.5)
     
     # Labels and formatting
     ax.set_xlabel("Metrics", fontstyle="italic")
     ax.set_ylabel("Score", fontstyle="italic")
-    # ax.set_title("Similarity Metrics Analysis")
-    ax.set_xticks(x + bar_width * (len(df.columns) / 2 - 0.5))
-    ax.set_xticklabels(metric_labels)
+    
     ax.legend(
         title="Similarity", 
-        bbox_to_anchor=(1.05, 0.5), 
+        bbox_to_anchor=(1.01, 0.5), 
         loc='center left', 
-        title_fontproperties={'weight': 'bold'})
-    ax.grid(axis='y', linestyle='--', alpha=0.7)
+        title_fontproperties={'weight': 'bold'},
+        handles=legend_handles
+        )
+    
+    # Cursive the x-label of "Ideal"
+    ax.set_xticks(x + bar_width * (len(df.columns) / 2 - 0.5))
+    ax.set_xticklabels(metric_labels)
+    for label in ax.get_xticklabels():
+        if label.get_text() != "Ideal": continue
+        label.set_fontstyle("italic")
+    
+    ax.set_xlim(-0.3, len(metric_labels) - 1 + bar_width * (len(df.columns) + 1.0))
+    
+    ax.minorticks_on()
+    ax.grid(which='minor', axis='y', linestyle=':', alpha=0.3)
+    ax.grid(which='major', axis='y', linestyle='--', alpha=0.7)    
+    ax.set_axisbelow(True)  # Set grid below bars
+    
     plt.tight_layout()
     # plt.show()
 
     # Save plot to file
-    plt.savefig("results/figures/valid_metrics.png")
+    # plt.savefig("results/figures/valid_metrics.png")
+    plt.savefig("results/figures/valid_metrics.pdf", format="pdf", dpi=300, bbox_inches='tight')  # High-res PDF
+
 
 
 if __name__ == "__main__":
     
     import argparse
+    import sys
     
     # Parse arguments
     parser = argparse.ArgumentParser(description="Plot similarity metrics")
@@ -134,11 +182,24 @@ if __name__ == "__main__":
     if args.plot:
         # Hardcoded true values (to avoid recomputing)
         data = {
-        'Extended': [0.9148297756910324, 0.2054273528575179, 0.75039142370224, 0.5629934519529343, 0.3082763532763533, 0.4230316873015132, 0.38241888505046395],
-'Equivalent': [0.9383604675531387, 0.30044538214535127, 0.8063625693321228, 0.747789740562439, 0.45833333333333337, 0.7091953269344393, 0.5164835164835165],
-'Partial': [0.9306317269802094, 0.23553086674620854, 0.7659641951322556, 0.6532697975635529, 0.3979166666666667, 0.6595469121936446, 0.5952042160737813],
-'Slight': [0.9089650213718414, 0.03969517740269712, 0.5654146174589793, 0.47863704959551495, 0.2632080610021787, 0.4819230148130227, 0.38497082627517404],
-'Unrelated': [0.8736235350370407, 0.018089598634690156, 0.2107335738837719, 0.07154581230133772, 0.09510233918128655, 0.16542852906926342, 0.19631469979296065],}
+            'Extended':     [0.9148297756910324, 0.2054273528575179, 0.75039142370224, 0.5629934519529343, 0.3082763532763533, 0.4230316873015132, 0.38241888505046395],
+            'Equivalent':   [0.9383604675531387, 0.30044538214535127, 0.8063625693321228, 0.747789740562439, 0.45833333333333337, 0.7091953269344393, 0.5164835164835165],
+            'Partial':      [0.9306317269802094, 0.23553086674620854, 0.7659641951322556, 0.6532697975635529, 0.3979166666666667, 0.6595469121936446, 0.5952042160737813],
+            'Slight':       [0.9089650213718414, 0.03969517740269712, 0.5654146174589793, 0.47863704959551495, 0.2632080610021787, 0.4819230148130227, 0.38497082627517404],
+            'Unrelated':    [0.8736235350370407, 0.018089598634690156, 0.2107335738837719, 0.07154581230133772, 0.09510233918128655, 0.16542852906926342, 0.19631469979296065]
+        }
+        
+        ideal = {
+            'Extended':     0.9,
+            'Equivalent':   1.0,
+            'Partial':      0.8,
+            'Slight':       0.3,
+            'Unrelated':    0.0
+        }
+        # Add the ideal for each case
+        for case in data.keys():
+            data[case] = [ideal[case]] + data[case]
+        
         plot_data(data)
     
     

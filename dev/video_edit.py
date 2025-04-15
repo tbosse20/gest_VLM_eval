@@ -167,19 +167,84 @@ def cut_video(input_file: str, start_time: int, end_time: int = None, duration: 
     # Run ffmpeg command
     command = [
         "ffmpeg",
-        "-i",  input_file,      # Input file
-        "-ss", str(start_time), # Start time (in seconds)
-        "-t",  str(duration),   # Duration (in seconds)
-        "-c",  "copy",          # Copy streams without re-encoding
-        output_file             # Output file
+        "-ss", str(start_time),   # Accurate when placed before -i with re-encode
+        "-i", input_file,
+        "-t", str(duration),
+        "-an",                    # Remove audio
+        "-c:v", "libx264",        # Re-encode video
+        "-preset", "fast",        # Speed vs compression tradeoff
+        output_file
     ]
-    subprocess.run(command, check=True)
-cut_video(
-    input_file  = "C:/Users/Tonko/OneDrive/Dokumenter/School/Merced/reconstruction/MVI_0050.MP4",
-    start_time  = 1 * 60 + 30, # Min * 60 + Sec
-    end_time    = 1 * 60 + 40, # Min * 60 + Sec
-)
 
+    subprocess.run(command, check=True)
+    
+    fps = get_fps(input_file)
+    
+    if end_time is not None:
+        print(f"Duration: {duration} seconds")
+        print(f"Frames: {int(duration * fps)} frames")  # Assuming 30 fps
+    else:
+        print(f"End time: {end_time} seconds")
+        print(f"End frame: {int(end_time * fps)} frames")  # Assuming 30 fps
+        
+    
+# cut_video(
+#     input_file  = "C:/Users/Tonko/OneDrive/Dokumenter/School/Merced/reconstruction/MVI_0050.MP4",
+#     start_time  = 1 * 60 + 30, # Min * 60 + Sec
+#     end_time    = 1 * 60 + 40, # Min * 60 + Sec
+# )
+
+def get_fps(video_file: str) -> float:
+    """ Get the frames per second (fps) of a video file using ffprobe.
+    
+    Args:
+        video_file (str): Path to the video file.
+    
+    Returns:
+        float: Frames per second of the video.
+    """
+    cmd = [
+        'ffprobe', '-v', 'error',
+        '-select_streams', 'v:0',
+        '-show_entries', 'stream=r_frame_rate',
+        '-of', 'default=noprint_wrappers=1:nokey=1',
+        video_file
+    ]
+    output = subprocess.check_output(cmd).strip()
+    try:
+        num, denom = map(int, output.decode('utf-8').split('/'))
+        return num / denom
+    except ValueError:
+        raise RuntimeError(f"Could not parse fps from ffprobe output: {output}")
+
+def cut_video_frames(input_file: str, start_frame: int, end_frame: int) -> None:
+    
+    if not os.path.exists(input_file):
+        raise FileNotFoundError(f"Input file '{input_file}' not found.")
+    if not os.path.isfile(input_file):
+        raise NotADirectoryError(f"'{input_file}' is not a file.")
+    
+    if start_frame < 0:
+        raise ValueError(f"Start frame '{start_frame}' cannot be negative.")
+    if end_frame < 0:
+        raise ValueError(f"End frame '{end_frame}' cannot be negative.")
+    if end_frame <= start_frame:
+        raise ValueError(f"End frame '{end_frame}' must be greater than start frame '{start_frame}'.")
+    
+    fps = get_fps(input_file)
+    
+    print(f"FPS: {fps}")
+    
+    start_time = start_frame / fps
+    end_time = end_frame / fps
+    
+    cut_video(input_file, start_time, end_time)
+    
+cut_video_frames(
+    input_file  = "C:/Users/Tonko/OneDrive/Dokumenter/School/Merced/actedgestures_original/video_01.MP4",
+    start_frame = 36,
+    end_frame   = 68 + 8,
+)
 
 # %% 
 
