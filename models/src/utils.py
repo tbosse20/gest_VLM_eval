@@ -50,10 +50,11 @@ def create_video_from_frames(frames: list[np.ndarray], output_video_path):
 
     out.release()
 
-def create_video_from_str(frame_paths: list[str], output_video_path):
+def create_video_from_str(frame_paths: list[str]):
     
-    # Set
-    FRAMES_FOLDER = '/home/mi3/RPMS_Tonko/RMPS'
+    # Set running directory
+    FRAMES_FOLDER = os.path.abspath(__file__)
+    TMP_FILE_PATH = f"_tmp_output.mp4"
 
     # Load frames
     frames = [
@@ -63,7 +64,9 @@ def create_video_from_str(frame_paths: list[str], output_video_path):
     ]
 
     # Create video
-    create_video_from_frames(frames, output_video_path)
+    create_video_from_frames(frames, TMP_FILE_PATH)
+    
+    return TMP_FILE_PATH, True
 
 def unload_model(*args):
     for obj in args:
@@ -71,7 +74,7 @@ def unload_model(*args):
         obj = None
     
     torch.cuda.empty_cache()
-    
+
 def argparse():
     import argparse
     parser = argparse.ArgumentParser(description="Generate video captions using Qwen2VL model.")

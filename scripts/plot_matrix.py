@@ -150,7 +150,6 @@ def post_process_csv_folder(metrics_folder):
         
         # Post-process the caption dataframe
         df = post_process_caption_df(df)
-        # print(df.head())
         
         # Plot the confusion matrix
         plot_confusion_matrix(df, model_name)

@@ -4,7 +4,7 @@ from pathlib import Path
 from tqdm import tqdm
 import sys
 sys.path.append(".")
-from scripts.evaluate_captions.src.compute_similarity_metrics import compute_similarity_metrics
+from scripts.src.compute_similarity_metrics import compute_similarity_metrics
 
 def make_sibling_folder(folder_path: str, sibling_name: str):
     """Create a sibling folder to the input folder."""
@@ -50,16 +50,6 @@ def process_csv(label_caption_csv, gen_caption_folder):
     
     # Loop through generated caption CSVs
     for gen_caption_csv in gen_caption_csvs:
-        
-        ### Exclude or include specific models ### MANUAL
-        # Only process this model
-        # model_only = "human"
-        # if model_only not in gen_caption_csv:
-        #     continue
-        # Exclude these models
-        exclude_models = ["human", "proxy"]
-        if any([model in gen_caption_csv for model in exclude_models]):
-            continue
 
         # Get metric csv file (ex.: results/data/METRICS/proxy.csv)
         metric_path = os.path.join(metrics_folder, os.path.basename(gen_caption_csv))
@@ -77,22 +67,6 @@ def process_csv(label_caption_csv, gen_caption_folder):
         for index, row in tqdm(gen_df.iterrows(), total=gen_df.shape[0], desc=f"Proc. {gen_caption_csv_name}"):
             # Get image name and frame index
             video_name, frame_idx = row["video_name"], row["frame_idx"]
-            
-            #### Exclude or include specific videos ### MANUAL
-            # # Only process these videos
-            # videos_only = ["Stop + pass", "Follow", "Getting a cap", "Go left"]
-            # if video_name not in videos_only:
-            #     continue
-            # Exclude these videos
-            # videos_exclude = [
-            #     "Go forward",
-            #     "Follow",
-            #     "Getting a cap",
-            #     "Go left",
-            #     "Idle"
-            # ]
-            # if video_name in videos_exclude:
-            #     continue
             
             # Retrieve the corresponding ground truth caption
             label_caption = label_df.loc[(

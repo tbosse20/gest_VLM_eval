@@ -7,7 +7,19 @@ import sys
 sys.path.append(".")
 from config.prompts import prompts
 
-def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
+def plot_metrics(metrics_folder, prompt_types=False, gestures=False, baseline=False) -> pd.DataFrame:
+    """ 
+    Plot similarity metrics from CSV files in the specified folder.
+    
+    Args:
+        metrics_folder (str): Path to the folder containing metrics CSV files.
+        prompt_types (bool): If True, group by prompt types.
+        gestures (bool): If True, group by gestures.
+        baseline (bool): If True, include baseline models.
+        
+    Returns:
+        pd.DataFrame: Merged DataFrame containing all metrics data.
+    """
     
     # Check if the folder exists
     if not os.path.exists(metrics_folder):
@@ -28,10 +40,6 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     
     # Loop through each CSV file
     for file in csv_files:
-        
-        # Skip proxy files
-        if 'proxy' in file:
-            continue
         
         # Load the CSV file
         df = pd.read_csv(file)
@@ -112,7 +120,6 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
         "human": "Expert",
         "qwen": "Qwen",
     })
-    
     
     # Boxplot: Group by prompt type, color by model
     if prompt_types or gestures:
@@ -196,12 +203,13 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     plt.tight_layout()
 
     # Save the plot
-    date_time = pd.Timestamp.now().strftime("%Y%m%d_%H%M")
-    boxplot_path = f"results/figures/metrics_boxplot.png"
-    boxplot_path = boxplot_path.replace(".png", f"_prompt_types.png") if prompt_types else boxplot_path
-    boxplot_path = boxplot_path.replace(".png", f"_gestures.png") if gestures else boxplot_path
-    # boxplot_path = boxplot_path.replace(".png", f"_{date_time}.png")
-    boxplot_path = boxplot_path.replace(".png", f".pdf")
+    # date_time = pd.Timestamp.now().strftime("%Y%m%d_%H%M")
+    boxplot_path = f"results/figures/metrics_boxplot.pdf"
+    if prompt_types: name_type = "prompt_types"
+    elif gestures:   name_type = "gestures"
+    elif baseline:   name_type = "expert"
+    else:            name_type = "gt"
+    boxplot_path = boxplot_path.replace(".pdf", f"_{name_type}.pdf")
     plt.savefig(boxplot_path, format="pdf", dpi=300, bbox_inches='tight')
 
     print(f"Boxplot saved to: {boxplot_path}")
@@ -209,14 +217,23 @@ def plot_metrics(metrics_folder, prompt_types=False, gestures=False):
     
     return merged_df
 
-def prin_latex_table(merged_df, prompt_types=False, gesture=False):
+def print_latex_table(merged_df, prompt_types=False, gesture=False) -> None:
+    """ 
+    Print a LaTeX-style formatted table of the average scores including the percentage difference to the highest score.
+    
+    Args:
+        merged_df (pd.DataFrame):   Merged DataFrame containing all metrics data.
+        prompt_types (bool):        If True, group by prompt types.
+        gesture (bool):             If True, group by gestures.
 
-    if prompt_types:
-        focus = "prompt_type"
-    elif gesture:
-        focus = "video_name"
-    else:
-        focus = "Metric"
+    Returns:
+        None (prints the table to terminal).
+    """
+
+    # Determine the focus for grouping
+    if prompt_types:    focus = "prompt_type"
+    elif gesture:       focus = "video_name"
+    else:               focus = "Metric"
     
     # Compute the average scores
     group_cols = ["Model", focus]
@@ -243,26 +260,24 @@ def prin_latex_table(merged_df, prompt_types=False, gesture=False):
     models = avg_df["Model"].unique()
     metrics = avg_df[focus].unique()
     
-    if prompt_types:
-        # Sort in the order of config.prompts
-        metrics = sorted(metrics, key=lambda x: list(prompts.keys()).index(x))
-    else:
-        # Sort in alphabetical order
-        metrics = sorted(metrics, key=lambda x: x.lower())
+    # Sort in the order of config.prompts
+    if prompt_types: metrics = sorted(metrics, key=lambda x: list(prompts.keys()).index(x))
+    # Sort in alphabetical order
+    else: metrics = sorted(metrics, key=lambda x: x.lower()) 
 
     # Convert to pivot format for easier LaTeX conversion
     pivot_df = avg_df.pivot(index="Model", columns=focus, values=["Score", "Difference [%]"])
 
     print("##########################")
     
-    # Print uniqe focus
+    # Print unique focus
     print("\\begin{tabular}{|l", end="")
     for metric in metrics:
         print(f"|c", end="")
     print("|c|} \\hline")
     print()
     
-    print("\\rowcolor{gray!30}")
+    print("\\rowcolor{gray!30}") # Header color
     
     # Print uniqe focus
     for metric in metrics:
@@ -278,21 +293,22 @@ def prin_latex_table(merged_df, prompt_types=False, gesture=False):
         for metric in metrics:
             score = pivot_df.loc[model, ("Score", metric)]
             diff = pivot_df.loc[model, ("Difference [%]", metric)]
-            max_score = max_scores[avg_df[focus] == metric].max()  # Find max for this metric
-            
-            if score == max_score:
-                row_str += f" & \\textbf{{{score:.2f}}}"
-            else:
-                row_str += f" & {score:.2f} ({diff:.0f}\\%)"
+            max_score = max_scores[avg_df[focus] == metric].max()
+            row_str += (
+                f" & \\textbf{{{score:.2f}}}"
+                if score == max_score
+                else f" & {score:.2f} ({diff:.0f}\\%)"
+            )
         
         # Add model average to the row
         avg_score = model_averages[model]
         avg_diff = model_avg_diff[model]
         
-        if avg_score == max_avg_score:
-            row_str += f" & \\textbf{{{avg_score:.2f}}}"
-        else:
-            row_str += f" & {avg_score:.2f} ({avg_diff:.0f}\\%)"
+        row_str += (
+            f" & \\textbf{{{avg_score:.2f}}}"
+            if avg_score == max_avg_score
+            else f" & {avg_score:.2f} ({avg_diff:.0f}\\%)"
+        )
 
         latex_table += row_str + " \\\\ \\hline\n"
 
@@ -316,12 +332,7 @@ if __name__ == "__main__":
                         
     args = parser.parse_args()
 
-    # Define folder containing CSVs
-    metrics_folder = args.metrics_folder or "results/data/metrics/to_gt"
-    # metrics_folder = args.metrics_folder or "results/data/metrics/to_gt_and_human"
-
-    # Plot metrics
-    merged_df = plot_metrics(metrics_folder, args.prompt_types, args.gestures)
-    
-    # Print LaTeX table
-    prin_latex_table(merged_df, args.prompt_types, args.gestures)
+    for metrics_folder in ["results/data/metrics/to_gt", "results/data/metrics/to_gt_and_human"]:
+        baseline = False if "human" in metrics_folder else True
+        merged_df = plot_metrics(metrics_folder, args.prompt_types, args.gestures, baseline)
+        print_latex_table(merged_df, args.prompt_types, args.gestures)

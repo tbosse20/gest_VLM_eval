@@ -3,59 +3,37 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import matplotlib.patches as mpatches
+sys.path.append(".")
+from scripts.src.validation_sentences import VALID_LEVELS, TARGETS, IDEAL
 
-def validate_metrics():
+def validate_metrics() -> dict:
+    """ Validate similarity metrics for single scenario with multiple targets and validations. 
     
-    sys.path.append(".")
-    from scripts.evaluate_captions.src.compute_similarity_metrics import compute_similarity_metrics
-
-    ground_truths = [
-        "A pedestrian signals the ego driver to stop, by putting their hand towards the ego driver.",
-        "A person signals the driver to stop, by raising their hand towards the camera.",
-    ]
-
-    # Define test cases and their expected similarity levels
-    valid_levels = {
-        "Extended": [
-            "A pedestrian raises their hand towards the ego driver to stop traffic. They are looking scared and in need of help.",
-            "A person puts their hand towards the ego driver to signal 'stop'. They are wearing a red t-shirt and blue pants.",
-        ],
-        "Equivalent": [
-            "A pedestrian raises their hand towards the ego driver to stop traffic.",
-            "A person puts their hand towards the ego driver to signal 'stop'.",
-        ],
-        "Partial": [
-            "A person raises their hand towards the ego driver.",
-            "A pedestrian signals the ego driver to stop.",
-        ],
-        "Slight": [
-            "A human gestures to the ego driver.",
-            "A person puts their hand out to the side.",
-            "A pedestrian puts their hand up.",
-        ],
-        "Unrelated": [
-            "The sky is blue and the sun is shining.",
-            "A pedestrian is walking on the sidewalk.",
-        ]
-    }
+    Find the sentences and idea in 'validation_sentences.py'.
+    
+    Returns:
+        data (dict): Dictionary containing similarity scores for each level.
+    """
+    
+    from scripts.src.compute_similarity_metrics import compute_similarity_metrics
 
     # Define similarity metrics labels
-    metric_labels = ["Consine", "Jaccard", "Bleu", "Meteor", "Rouge_L", "Bert", "Cross"]
+    metric_labels = ["Cosine", "Jaccard", "Bleu", "Meteor", "Rouge_L", "Bert", "Cross"]
     metric_labels.sort()
-    level_labels = list(valid_levels.keys())
+    level_labels = list(VALID_LEVELS.keys())
 
     # Initialize dictionary to store similarity scores
     data = {case: [] for case in level_labels}
 
     # Compute similarity scores for each level category
-    for case, valid_captions in tqdm(valid_levels.items(), desc="Valid. levels"):
+    for case, valid_captions in tqdm(VALID_LEVELS.items(), desc="Valid. levels"):
         total_scores = np.zeros(len(metric_labels))
         count = 0
         
         # Compute similarity scores for each valid caption
         for valid_caption in valid_captions:
-            for ground_truth in ground_truths:
-                similarity_scores = compute_similarity_metrics(valid_caption, ground_truth)
+            for target in TARGETS:
+                similarity_scores = compute_similarity_metrics(valid_caption, target)
                 total_scores += similarity_scores.values[0]
                 count += 1
 
@@ -64,53 +42,55 @@ def validate_metrics():
 
     return data
 
-def plot_data(data):
+def plot_metrics(data):
+    """ Plot similarity metrics validation. """
     
     if len(data) == 0:
         print("No data to plot")
         return
     
     # Define metric labels
-    metric_labels = ["Cosine", "Jaccard", "BLEU", "METEOR", "ROUGE", "BERT\nScore", "STS"]
-    # Sort metrics by alphabetical order
-    metric_labels.sort()
-    
-    if len(data["Extended"]) != len(metric_labels):
-        metric_labels = ["Ideal"] + metric_labels
-    
-    if len(data["Extended"]) != len(metric_labels):
-        print("Data length does not match metric labels")
-        return
-    
-    
-    # Convert to DataFrame
-    df = pd.DataFrame(data, index=metric_labels)
-
-    # Plot setup
-    fig, ax = plt.subplots(figsize=(7.16, 2.5))
-    bar_width = 0.15  # Width of each bar
-    x = np.arange(len(metric_labels))  # X-axis positions for metrics
-
+    METRIC_LABELS = ["Cosine", "Jaccard", "BLEU", "METEOR", "ROUGE", "BERT\nScore", "STS"]
     # Define colors for each case
-    colors = [
+    COLORS = [
         "#4e79a7",  # Deep Blue
         "#f28e2b",  # Warm Orange
         "#e15759",  # Reddish-Pink
         "#76b7b2",  # Teal
         "#59a14f",  # Green
     ]
+    BAR_WIDTH = 0.15  # Width of each bar
+    
+    # Sort metrics by alphabetical order
+    METRIC_LABELS.sort()
+    
+    # Add ideal values to the data if not already present
+    if len(data["Extended"]) != len(METRIC_LABELS):
+        METRIC_LABELS = ["Ideal"] + METRIC_LABELS
+    
+    # Check if the data length matches the metric labels
+    if len(data["Extended"]) != len(METRIC_LABELS):
+        print("Data length does not match metric labels")
+        return
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(data, index=METRIC_LABELS)
+
+    # Plot setup
+    fig, ax = plt.subplots(figsize=(7.16, 2.5))
+    x = np.arange(len(METRIC_LABELS))  # X-axis positions for metrics
     
     # Store handles for the custom legend
     legend_handles = []
     # Plot bars for each case
-    for i, (case, color) in enumerate(zip(df.columns, colors)):
+    for i, (case, color) in enumerate(zip(df.columns, COLORS)):
         for j, metric in enumerate(df.index):
             tmp_case = case if j == 0 else ""
             bar_alpha = 0.6 if metric == "Ideal" else 1.0
             ax.bar(
-                x[j] + i * bar_width,
+                x[j] + i * BAR_WIDTH,
                 df[case].iloc[j],
-                bar_width,
+                BAR_WIDTH,
                 label=tmp_case,
                 color=color,
                 alpha=bar_alpha
@@ -119,12 +99,14 @@ def plot_data(data):
         # Add proxy legend entry (alpha=1.0)
         legend_handles.append(mpatches.Patch(color=color, label=case, alpha=1.0))
     
+    # Add ideal line
     ax.axvline(x=0.8, color='grey', linestyle='--', linewidth=0.8, alpha=0.5)
     
     # Labels and formatting
     ax.set_xlabel("Metrics", fontstyle="italic")
     ax.set_ylabel("Score", fontstyle="italic")
     
+    # Set y-axis limits
     ax.legend(
         title="Similarity", 
         bbox_to_anchor=(1.01, 0.5), 
@@ -133,28 +115,22 @@ def plot_data(data):
         handles=legend_handles
         )
     
-    # Cursive the x-label of "Ideal"
-    ax.set_xticks(x + bar_width * (len(df.columns) / 2 - 0.5))
-    ax.set_xticklabels(metric_labels)
+    # Set x-ticks and labels
+    ax.set_xticks(x + BAR_WIDTH * (len(df.columns) / 2 - 0.5))
+    ax.set_xticklabels(METRIC_LABELS)
     for label in ax.get_xticklabels():
         if label.get_text() != "Ideal": continue
         label.set_fontstyle("italic")
+    ax.set_xlim(-0.3, len(METRIC_LABELS) - 1 + BAR_WIDTH * (len(df.columns) + 1.0))
     
-    ax.set_xlim(-0.3, len(metric_labels) - 1 + bar_width * (len(df.columns) + 1.0))
-    
+    # Set grid
     ax.minorticks_on()
     ax.grid(which='minor', axis='y', linestyle=':', alpha=0.3)
     ax.grid(which='major', axis='y', linestyle='--', alpha=0.7)    
-    ax.set_axisbelow(True)  # Set grid below bars
+    ax.set_axisbelow(True)
     
     plt.tight_layout()
-    # plt.show()
-
-    # Save plot to file
-    # plt.savefig("results/figures/valid_metrics.png")
-    plt.savefig("results/figures/valid_metrics.pdf", format="pdf", dpi=300, bbox_inches='tight')  # High-res PDF
-
-
+    plt.savefig("results/figures/valid_metrics.pdf", format="pdf", dpi=300, bbox_inches='tight')
 
 if __name__ == "__main__":
     
@@ -170,15 +146,11 @@ if __name__ == "__main__":
     if not args.compute and not args.plot:
         print("Please specify either --compute or --plot")
         sys.exit(1)
-    
+        
     # Generate similarity metrics
     if args.compute:
         data = validate_metrics()
-        # Print the dictionary
-        for key, value in data.items():
-            print(f"'{key}': {list(value)},")
-        plot_data(data)
-    
+        
     if args.plot:
         # Hardcoded true values (to avoid recomputing)
         data = {
@@ -189,17 +161,10 @@ if __name__ == "__main__":
             'Unrelated':    [0.8736235350370407, 0.018089598634690156, 0.2107335738837719, 0.07154581230133772, 0.09510233918128655, 0.16542852906926342, 0.19631469979296065]
         }
         
-        ideal = {
-            'Extended':     0.9,
-            'Equivalent':   1.0,
-            'Partial':      0.8,
-            'Slight':       0.3,
-            'Unrelated':    0.0
-        }
-        # Add the ideal for each case
-        for case in data.keys():
-            data[case] = [ideal[case]] + data[case]
+    # Add the ideal for each case
+    for case in data.keys():
+        data[case] = [IDEAL[case]] + data[case]
         
-        plot_data(data)
+    plot_metrics(data)
     
     

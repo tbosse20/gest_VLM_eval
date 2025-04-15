@@ -1,7 +1,7 @@
 import unittest
 import sys
 sys.path.append(".")
-from results.scripts.compare_captions import compute_similarity_metrics
+from scripts.src.compute_similarity_metrics import compute_similarity_metrics
 
 class TestSimilarityMetrics(unittest.TestCase):
 
@@ -28,8 +28,6 @@ class TestSimilarityMetrics(unittest.TestCase):
              "", "Edge case: empty predicted caption"),  # Edge case: empty string
         ]
         
-        
-
         for ground_truth, predicted, description in test_cases:
             with self.subTest(msg=description):
                 metrics = compute_similarity_metrics(ground_truth, predicted)
@@ -47,9 +45,5 @@ class TestSimilarityMetrics(unittest.TestCase):
                     for metric in metrics.values():
                         self.assertEqual(metric, 0.0, f"Expected zero for {description}, but got {metric}")
 
-                # Make a bar plot for the metrics
-                
-
-            
 if __name__ == "__main__":
     unittest.main()
