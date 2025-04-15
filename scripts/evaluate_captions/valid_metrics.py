@@ -7,7 +7,7 @@ import matplotlib.patches as mpatches
 def validate_metrics():
     
     sys.path.append(".")
-    from results.src.compute_similarity_metrics import compute_similarity_metrics
+    from scripts.evaluate_captions.src.compute_similarity_metrics import compute_similarity_metrics
 
     ground_truths = [
         "A pedestrian signals the ego driver to stop, by putting their hand towards the ego driver.",

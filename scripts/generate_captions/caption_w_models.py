@@ -2,8 +2,8 @@ import importlib
 import sys
 import os
 sys.path.append(".")
-import scripts.caption_frames as caption_frames 
-import src.utils as utils
+import scripts.generate_captions.caption_frames as caption_frames 
+import models.src.utils as utils
 
 def caption_across_models(data_folder, models_folder, window, interval: int):
 

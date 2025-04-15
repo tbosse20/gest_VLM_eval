@@ -5,7 +5,7 @@ from typing import List
 import os
 import sys
 sys.path.append(".")
-import src.utils as utils
+import models.src.utils as utils
 import config.hyperparameters as hyperparameters
 
 def load_model():

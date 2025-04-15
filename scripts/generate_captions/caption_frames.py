@@ -4,7 +4,7 @@ from tqdm import tqdm
 import sys
 sys.path.append(".")
 from config.prompts import prompts
-import src.utils as utils
+import models.src.utils as utils
 import re
 
 def caption_frames(video_path: str, window: int, interval: int, model_package = None, model_module = None):

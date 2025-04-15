@@ -1,5 +1,0 @@
-video_name,pedestrian_id,start_frame,end_frame,gesture_label_id
-video_01.MP4,1,19,42,0
-video_01.MP4,1,43,79,2
-video_01.MP4,1,80,92,-1
-video_01.MP4,1,93,159,0

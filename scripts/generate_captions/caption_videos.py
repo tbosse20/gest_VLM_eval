@@ -2,7 +2,7 @@ import importlib
 import sys
 import os
 sys.path.append(".")
-import src.utils as utils
+import models.src.utils as utils
 from config.prompts import prompts
 import pandas as pd
 import re

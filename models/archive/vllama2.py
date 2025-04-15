@@ -6,7 +6,7 @@ sys.path.append(".")
 from videollama2 import model_init, mm_infer
 from videollama2.utils import disable_torch_init
 import config.hyperparameters as hyperparameters
-import src.utils as utils
+import models.src.utils as utils
 
 def load_model():
 

@@ -5,7 +5,7 @@ import sys, os
 sys.path.append(".")
 from transformers import AutoProcessor, AutoModelForImageTextToText
 import config.hyperparameters as hyperparameters
-import src.utils as utils
+import models.src.utils as utils
 
 def load_model():
 

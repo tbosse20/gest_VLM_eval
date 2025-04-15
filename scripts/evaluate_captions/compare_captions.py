@@ -4,7 +4,7 @@ from pathlib import Path
 from tqdm import tqdm
 import sys
 sys.path.append(".")
-from results.src.compute_similarity_metrics import compute_similarity_metrics
+from scripts.evaluate_captions.src.compute_similarity_metrics import compute_similarity_metrics
 
 def make_sibling_folder(folder_path: str, sibling_name: str):
     """Create a sibling folder to the input folder."""
