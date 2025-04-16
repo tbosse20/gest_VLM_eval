@@ -145,6 +145,11 @@ if __name__ == "__main__":
     parser.add_argument("--plot",    action="store_true", help="Plot similarity metrics")
     args = parser.parse_args()
     
+    # Example usage:
+    """ 
+    python scripts/valid_metrics.py --compute
+    """
+    
     if not args.compute and not args.plot:
         print("Please specify either --compute or --plot")
         sys.exit(1)
