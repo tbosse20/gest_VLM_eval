@@ -3,10 +3,9 @@ prompts = {
     "determine": "Determine what gesture the pedestrian is making.",
     "body": "Provide a detailed explanation of the pedestrian’s body posture and movements.",
     "context": "You are an autonomous vehicle navigating a road. Determine what gesture the pedestrian is making.",
-    "objective": "You are an autonomous vehicle navigating a road. Determine what gesture the pedestrian is making. Your response will be used by an AI system to make real-time driving decisions."
-}
-
-classification_prompt = """
+    "objective": "You are an autonomous vehicle navigating a road. Determine what gesture the pedestrian is making. Your response will be used by an AI system to make real-time driving decisions.",
+    
+    "category": """
     Analyze the pedestrian's gesture in the given image and determine the action they are requesting from the ego driver.  
     Follow these steps:  
     1. Identify the pedestrian's gesture (e.g., waving hand, pointing, holding out palm).  
@@ -28,4 +27,5 @@ classification_prompt = """
     i. Right - The pedestrian is signaling the driver to turn right.    
 
     Ensure that your response includes only **one** category in the specified format.
-"""
+    """
+}

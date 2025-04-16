@@ -1,8 +1,5 @@
 ToDo:
 - Expand Acted with more gestures and distance
-
-#. Clean up
-    # VideoLLaMA2 file (__name__). Adapt to image, frames, and video
-    # readme (instructions)
+- readme (instructions)
 
 # Final -> Remove history
