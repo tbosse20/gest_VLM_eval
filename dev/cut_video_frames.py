@@ -2,7 +2,7 @@ import os
 import sys
 
 sys.path.append(".")
-from video_edit import cut_video_time, get_fps
+from dev.cut_video_time import cut_video_time, get_fps
 
 
 def cut_video_frames(input_file: str, start_frame: int, end_frame: int) -> None:
