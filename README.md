@@ -7,8 +7,9 @@ Reconstruction has its own folder.
 
 ## Datasets
 Link: <LINK>
-- ATG
-- ITGI
+- Acted Traffic Gestures (ATG)
+- Instructive Traffic Gestures In-The-Wild (ITGI)
+- Conflicting Authorities and Navigation Gestures (CANG)
 
 ## Content
 The system generates captions across each of these elements for each video interval:
