@@ -189,7 +189,7 @@ if __name__ == "__main__":
     from sklearn.model_selection import train_test_split
 
     # ─── Paths ───
-    BASE_DIR      = "./enhance/HaGRID"
+    BASE_DIR      = "../data/HaGRID"
     TRAIN_VAL_DIR = os.path.join(BASE_DIR, "ann_train_val")
     TEST_DIR      = os.path.join(BASE_DIR, "ann_test")
 
