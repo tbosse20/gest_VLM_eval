@@ -6,8 +6,8 @@ import sys
 from tqdm import tqdm
 
 sys.path.append(".")
-from enhance.body_description.body_description import desc_person, draw_desc
-import enhance.util as util
+from enhance.body_description.body_description import desc_person, write_desc
+import enhance.video_pipeline as video_pipeline
 
 # Suppress ULtralytics logging
 import logging
@@ -19,6 +19,7 @@ logging.getLogger("mediapipe").setLevel(logging.ERROR)
 yolo = YOLO("weights/yolov8n-pose.pt")
 mp_holistic = mp.solutions.holistic
 mp_drawing = mp.solutions.drawing_utils
+mp_hands = mp.solutions.hands
 mp_styles = mp.solutions.drawing_styles
 
 # Instantiate MediaPipe Holistic
@@ -30,6 +31,7 @@ holistic = mp_holistic.Holistic(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5,
 )
+
 
 def draw_face_landmarks(landmark_list, overlay, roi_coordinates):
     """
@@ -105,7 +107,26 @@ def draw_hand_landmarks(landmark_list, overlay, roi_coordinates, left=True):
     return overlay
 
 
-def draw_landmarks(frame):
+def draw_landmarks(res, overlay, roi_coords):
+
+    # draw body & hands
+    draw_face_landmarks(res.face_landmarks, overlay, roi_coords)
+    draw_pose_landmarks(res.pose_landmarks, overlay, roi_coords)
+    draw_hand_landmarks(res.left_hand_landmarks, overlay, roi_coords, left=True)
+    draw_hand_landmarks(res.right_hand_landmarks, overlay, roi_coords, left=False)
+
+
+def get_roi_coords(box, W, H, pad=0.1):
+    x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
+    pad = int(0.1 * max(x2 - x1, y2 - y1))
+    x1, y1 = max(0, x1 - pad), max(0, y1 - pad)
+    x2, y2 = min(W, x2 + pad), min(H, y2 + pad)
+    roi_coords = (x1, y1, x2, y2)
+
+    return roi_coords
+
+
+def process_frame(frame, draw: int = 0) -> tuple:
     """
     Given a YOLO result yres and frame, crop each person, run holistic,
     and draw pose (filtered) + both hands onto a semi-transparent overlay.
@@ -117,36 +138,30 @@ def draw_landmarks(frame):
     yres = yolo(frame)[0]
 
     for box in yres.boxes[yres.boxes.cls == 0]:
-        x1, y1, x2, y2 = box.xyxy[0].cpu().numpy().astype(int)
-        pad = int(0.1 * max(x2 - x1, y2 - y1))
-        x1, y1 = max(0, x1 - pad), max(0, y1 - pad)
-        x2, y2 = min(W, x2 + pad), min(H, y2 + pad)
-        roi_coords = (x1, y1, x2, y2)
 
+        roi_coords = get_roi_coords(box, W, H)
+        x1, y1, x2, y2 = roi_coords
+
+        # Process the cropped region of interest (ROI) with Holistic
         roi = frame[y1:y2, x1:x2]
         rgb = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
         res = holistic.process(rgb)
 
-        # draw body & hands
-        draw_face_landmarks(res.face_landmarks, overlay, roi_coords)
-        draw_pose_landmarks(res.pose_landmarks, overlay, roi_coords)
-        draw_hand_landmarks(res.left_hand_landmarks, overlay, roi_coords, left=True)
-        draw_hand_landmarks(res.right_hand_landmarks, overlay, roi_coords, left=False)
+        # Draw landmarks on the overlay
+        draw_landmarks(res, overlay, roi_coords)
+
+        # Describe the person
+        hands_list = [
+            (res.left_hand_landmarks, "Left"),
+            (res.right_hand_landmarks, "Right"),
+        ]
+        description = desc_person(res.face_landmarks, hands_list)
+        write_desc(overlay, description, pos=(x1, y1)) if draw >= 2 else None
 
     return overlay
 
 
-
-
-def main(original_frame, draw=0):
-    frame = draw_landmarks(original_frame) if draw >= 1 else original_frame.copy()
-    description, _ = desc_person(original_frame)
-    frame = draw_desc(frame, description) if draw >= 2 else frame
-
-    return frame
-
-
 if __name__ == "__main__":
 
-    util.main(main)
+    video_pipeline.main(process_frame)
     holistic.close()

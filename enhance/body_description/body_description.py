@@ -5,33 +5,15 @@ import sys
 
 sys.path.append(".")
 from enhance.body_description.finger_cls_GNN import est_fingers, FINGER_NAMES
-import enhance.util as util
-
-# Initialize MediaPipe Face Mesh and Hands.
-mp_face = mp.solutions.face_mesh
-mp_hands = mp.solutions.hands
-mp_drawing = mp.solutions.drawing_utils
-
-face_mesh = mp_face.FaceMesh(
-    static_image_mode=False,
-    max_num_faces=1,
-    min_detection_confidence=0.5,
-    min_tracking_confidence=0.5,
-)
-hands = mp_hands.Hands(
-    static_image_mode=False,
-    max_num_hands=2,
-    min_detection_confidence=0.5,
-    min_tracking_confidence=0.5,
-)
 
 # Thresholds for classification (tunable):
-SIDE_X_OFFSET = 0.15
-ABOVE_Y_OFFSET = 0.2
-FAR_ABOVE_Y_OFFSET = 0.4
-DEPTH_FRONT_TH = -0.05
-DEPTH_BACK_TH = 0.05
+SIDE_X_OFFSET       = 0.15
+ABOVE_Y_OFFSET      = 0.2
+FAR_ABOVE_Y_OFFSET  = 0.4
+DEPTH_FRONT_TH      = -0.05
+DEPTH_BACK_TH       = 0.05
 
+mp_hands = mp.solutions.hands
 
 def desc_hand_depth(hand_bbox, face_bbox, rel_threshold=0.2):
     """
@@ -95,13 +77,17 @@ def desc_hand_vertical(hand_center, upper_face, lower_face):
 
 
 def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
-    wrist = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST]
-    idx_mcp = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
-    pinky_mcp = hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_MCP]
+    wrist    = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST]
+    idx_mcp  = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
+    pinky_mcp= hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_MCP]
 
-    v1 = np.array([idx_mcp.x - wrist.x, idx_mcp.y - wrist.y, idx_mcp.z - wrist.z])
-    v2 = np.array([pinky_mcp.x - wrist.x, pinky_mcp.y - wrist.y, pinky_mcp.z - wrist.z])
-
+    v1 = np.array([idx_mcp.x - wrist.x,
+                   idx_mcp.y - wrist.y,
+                   idx_mcp.z - wrist.z])
+    v2 = np.array([pinky_mcp.x - wrist.x,
+                   pinky_mcp.y - wrist.y,
+                   pinky_mcp.z - wrist.z])
+    
     normal = np.cross(v2, v1)
     norm = np.linalg.norm(normal)
     if norm == 0:
@@ -184,43 +170,35 @@ def desc_face_orientation(face_landmarks, threshold=0.3):
 
 def describe_relative_hand(face_bbox, hand_landmarks):
 
-    if face_bbox is None:
+    if face_bbox is None or hand_landmarks is None:
         return None
 
-    wrist = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST]
-    xmin, ymin, xmax, ymax = face_bbox
-
-    # 1) compute hand bbox from all landmarks
     xs = [lm.x for lm in hand_landmarks.landmark]
     ys = [lm.y for lm in hand_landmarks.landmark]
     hand_bbox = (min(xs), min(ys), max(xs), max(ys))
-
-    # Get center of hand x and y coordinates
     hx0, hy0, hx1, hy1 = hand_bbox
     hand_center = ((hx0 + hx1) / 2, (hy0 + hy1) / 2)
-
-    # 2) depth via bbox‐area comparison
-    hand_horiz = desc_hand_horizontal(hand_center, xmin, xmax)
-    hand_vert = desc_hand_vertical(hand_center, ymin, ymax)
-    hand_depth = desc_hand_depth(hand_bbox, face_bbox)
+    
+    xmin, ymin, xmax, ymax = face_bbox
+    hand_horiz  = desc_hand_horizontal(hand_center, xmin, xmax)
+    hand_vert   = desc_hand_vertical(hand_center, ymin, ymax)
+    hand_depth  = desc_hand_depth(hand_bbox, face_bbox)
     hand_position_desc = f"{hand_horiz}, {hand_vert}, and {hand_depth} their face"
 
     return hand_position_desc
 
 
-def process_face(face_res):
+def get_face_bbox(face_lms):
 
-    # If face detected
-    if not face_res.multi_face_landmarks:
-        return None, None
+    if not face_lms:
+        return None
 
-    face_lms = face_res.multi_face_landmarks[0]
+    # Get the bounding box of the face landmarks x, y coordinates
     xs = [lm.x for lm in face_lms.landmark]
     ys = [lm.y for lm in face_lms.landmark]
-    zs = [lm.z for lm in face_lms.landmark if abs(lm.x - 0.5) < 0.1]
     face_bbox = (min(xs), min(ys), max(xs), max(ys))
 
-    return face_lms, face_bbox
+    return face_bbox
 
 
 def formulate_desc(relative_hand_desc, palm_desc, hand_label):
@@ -239,18 +217,16 @@ def formulate_desc(relative_hand_desc, palm_desc, hand_label):
     return f"{Hand_label} hand " + f"is {relative_hand_desc}. " + f"The {palm_desc}."
 
 
-def desc_hands(hands_res, face_bbox):
+def desc_hands(hands_list, face_bbox):
 
-    # Describe each hand relative to that face
-    if not hands_res.multi_hand_landmarks:
+    if not face_bbox or not hands_list:
         return None
 
     hands_desc = []
-
-    for hand_lms, hand_h in zip(
-        hands_res.multi_hand_landmarks, hands_res.multi_handedness
-    ):
-        hand_label = hand_h.classification[0].label
+    for hand_lms, hand_label in hands_list:
+        
+        if hand_lms is None:
+            continue
 
         relative_hand_desc = describe_relative_hand(face_bbox, hand_lms)
         palm_desc = desc_palm_dir(hand_lms, hand_label.lower())
@@ -286,41 +262,7 @@ def desc_fingers(hand_lms):
     return desc
 
 
-def draw_face(frame, face_lms):
-
-    if not face_lms:
-        return
-
-    mp_drawing.draw_landmarks(
-        frame,
-        face_lms,
-        mp_face.FACEMESH_TESSELATION,
-        landmark_drawing_spec=None,
-        connection_drawing_spec=mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=1),
-    )
-
-
-def draw_hands(frame, hands_res) -> None:
-    if not hands_res.multi_hand_landmarks:
-        return
-
-    for hand_lms in hands_res.multi_hand_landmarks:
-        mp_drawing.draw_landmarks(
-            frame,
-            hand_lms,
-            mp_hands.HAND_CONNECTIONS,
-            landmark_drawing_spec=mp_drawing.DrawingSpec(
-                color=(0, 255, 0), thickness=1
-            ),
-        )
-
-
-def draw_landmarks(frame, face_lms, hands_res) -> None:
-    draw_face(frame, face_lms)
-    draw_hands(frame, hands_res)
-
-
-def draw_desc(frame, descriptions, pos=(10, 30), font_scale=0.5, color=(255, 255, 255)):
+def write_desc(frame, descriptions, pos=(10, 30), font_scale=0.5, color=(255, 255, 255)):
     """Draw text on the frame."""
     if not descriptions:
         return frame
@@ -340,48 +282,27 @@ def draw_desc(frame, descriptions, pos=(10, 30), font_scale=0.5, color=(255, 255
     return frame
 
 
-def desc_person(frame, draw: int = 0) -> tuple:
+def desc_person(face_res, hands_list) -> tuple:
     """Process a frame and describe the face and hands.
 
     Args:
-        frame: The input video frame.
-        face_mesh: The MediaPipe FaceMesh object.
-        hands: The MediaPipe Hands object.
-        draw: The drawing level (0: no drawing, 1: draw landmarks, 2: draw text).
+        face_res: The MediaPipe FaceMesh object.
+        hands_list: The MediaPipe Hands object.
 
     Returns:
-        A tuple containing the descriptions and the processed frame.
+        A list of descriptions for the face and hands.
     """
-
-    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-    # Process face and hands
-    face_res = face_mesh.process(rgb)
-    hands_res = hands.process(rgb)
-
-    face_lms, face_bbox = process_face(face_res)
-    draw_landmarks(frame, face_lms, hands_res) if draw > 0 else None
-
     descriptions = []
+
+    face_bbox = get_face_bbox(face_res)
+
     # Describe face
-    face_dir = desc_face_orientation(face_lms)
+    face_dir = desc_face_orientation(face_res)
     descriptions.append(f"Face is {face_dir}.")
 
     # Describe hands
-    hand_desc = desc_hands(hands_res, face_bbox)
+    hand_desc = desc_hands(hands_list, face_bbox)
     descriptions += hand_desc if hand_desc else ["No hands detected."]
-    draw_desc(frame, descriptions) if draw > 1 else None
 
-    return descriptions, frame
+    return descriptions
 
-
-def main(frame, draw: bool = False) -> None:
-    """Main function to process video and describe body parts."""
-
-    _, frame = desc_person(frame, draw=draw)
-
-    return frame
-
-
-if __name__ == "__main__":
-    util.main(main)
