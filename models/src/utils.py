@@ -84,8 +84,19 @@ def argparse():
     parser.add_argument("--interval",     type=int, help="The interval between frames.",                default=1)
     parser.add_argument("--end_frame",    type=int, help="The ending frame number.",                    default=None)
     parser.add_argument("--n_frames",     type=int, help="The number of frames to process.",            default=None)
+    args = parser.parse_args()
     
-    return parser.parse_args()
+    if args.start_frame != 0 and (args.n_frames is not None or args.end_frame is not None) and args.interval != 1:
+        frame_list = generate_frame_list(
+            args.video_folder,
+            args.start_frame,
+            args.interval,
+            end_frame   = args.end_frame,
+            n_frames    = args.n_frames
+        )
+        return args.prompt, frame_list
+    
+    return args.prompt, args.video_folder
 
 if __name__ == "__main__":
     

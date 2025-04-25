@@ -89,9 +89,7 @@ if __name__ == "__main__":
     # # Sanity check
     # sanity()
     # exit()
-
-    args = utils.argparse()
-
+    
     # Example
     """
         python models/archive/vllama2.py \
@@ -101,6 +99,6 @@ if __name__ == "__main__":
         --prompt "What is the man gesturing?"
     """
     
-    frame_list = utils.generate_frame_list(args.video_folder, args.start_frame, args.interval, end_frame=args.end_frame, n_frames=args.n_frames)
-    caption = inference(prompt=args.prompt, input_path=frame_list)
+    prompt, input = utils.argparse()
+    caption = inference(prompt=prompt, input_path=input)
     print("Caption:", caption)
