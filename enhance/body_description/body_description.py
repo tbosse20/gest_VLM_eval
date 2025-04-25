@@ -305,4 +305,3 @@ def desc_person(face_res, hands_list) -> tuple:
     descriptions += hand_desc if hand_desc else ["No hands detected."]
 
     return descriptions
-

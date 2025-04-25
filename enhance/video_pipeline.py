@@ -46,7 +46,7 @@ def from_video(method, video_path: str, draw: int = 0):
         original_frame = cv2.flip(original_frame, 1) if video_path == 0 else original_frame
 
         # Run the selected method on the frame
-        frame = method(original_frame, draw=draw)
+        descriptions, frame = method(original_frame, draw=draw)
 
         if out:
             out.write(frame)
@@ -58,6 +58,8 @@ def from_video(method, video_path: str, draw: int = 0):
     cap.release()
     out.release() if out else None
     cv2.destroyAllWindows()
+    
+    return descriptions
 
 
 def from_dir(method, videos_dir: str, extension: str = "augmented", draw: int = 0):

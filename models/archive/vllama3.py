@@ -22,26 +22,7 @@ def load_model():
 
     return model, processor
 
-def inference(
-    prompt: str,
-    input_path: str | list[str] = None,
-    model_package = None,
-    content_setting: str = "You are a helpful assistant.",
-    ):
-    
-    # Check if frames_list is empty
-    if len(input_path) == 0:
-        return 'empty'
-    
-    # Determine modal
-    modal = 'image' if len(input_path) == 1 else 'video'
-    
-    # Create temporary output file as video or image
-    if (isinstance(input_path, list) and len(input_path) > 1):
-        input_path, tmp_file = utils.create_video_from_str(input_path)
-    
-    # Load model
-    model, processor = load_model() if model_package is None else model_package
+def build_conversation(content_setting: str, input_path: str, prompt: str, modal: str):
     
     conversation = [{
             "role": "system",
@@ -60,6 +41,32 @@ def inference(
                 "text":prompt
             }]
     }]
+    
+    return conversation
+
+def inference(
+    input_path: str | list[str],
+    prompt: str = "",
+    model_package = None,
+    content_setting: str = "You are a helpful assistant.",
+    conversation: dict = None,
+    ):
+    
+    # Check if frames_list is empty
+    if len(input_path) == 0:
+        return 'empty'
+    
+    # Determine modal
+    modal = 'image' if len(input_path) == 1 else 'video'
+    
+    # Create temporary output file as video or image
+    if (isinstance(input_path, list) and len(input_path) > 1):
+        input_path, tmp_file = utils.create_video_from_str(input_path)
+    
+    # Load model
+    model, processor = load_model() if model_package is None else model_package
+    
+    conversation = build_conversation(content_setting, input_path, prompt, modal) if conversation is None else conversation
 
     inputs = processor(
         conversation=conversation,

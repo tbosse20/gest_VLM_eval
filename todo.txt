@@ -3,3 +3,6 @@ ToDo:
 - readme (instructions)
 
 # Final -> Remove history
+
+Enhance:
+- Run VideoLLaMA with max_frames higher than 180....

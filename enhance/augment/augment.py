@@ -136,7 +136,8 @@ def process_frame(frame, draw: int = 0) -> tuple:
     H, W, _ = frame.shape
 
     yres = yolo(frame)[0]
-
+    
+    descriptions = []
     for box in yres.boxes[yres.boxes.cls == 0]:
 
         roi_coords = get_roi_coords(box, W, H)
@@ -158,7 +159,49 @@ def process_frame(frame, draw: int = 0) -> tuple:
         description = desc_person(res.face_landmarks, hands_list)
         write_desc(overlay, description, pos=(x1, y1)) if draw >= 2 else None
 
-    return overlay
+        descriptions.append(description)
+    return overlay, descriptions
+
+
+def build_conversation(content_setting, input_path, prompt, modal):
+    
+    # Initialize conversation with system message
+    conversation = [
+        {"role": "system", "content": "You are a helpful assistant."},
+    ]
+    
+    content = []
+    for idx, tmp_input_path in enumerate(input_path):
+        
+        # Add video frame to conversation
+        content.append({
+            "type": "image",
+            "image": {
+                "image_path": tmp_input_path
+            }
+        })
+
+        # Add text description of the frame
+        frame = cv2.imread(tmp_input_path)
+        frame_text = process_frame(frame)
+        content.append({
+            "type": "text",
+            "text": f"[Frame {idx}] {frame_text}"
+        })
+    
+    # Add the prompt to the conversation
+    content.append({
+        "type": "text",
+        "text": prompt
+    })
+    
+    # Add the content to the conversation
+    conversation.append({
+        "role": "user",
+        "content": content
+    })
+    
+    return conversation
 
 
 if __name__ == "__main__":
