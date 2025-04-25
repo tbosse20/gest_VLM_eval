@@ -60,7 +60,7 @@ def inference(
     modal = 'image' if len(input_path) == 1 else 'video'
     
     # Create temporary output file as video or image
-    if (isinstance(input_path, list) and len(input_path) > 1):
+    if conversation is None and (isinstance(input_path, list) and len(input_path) > 1):
         input_path, tmp_file = utils.create_video_from_str(input_path)
     
     # Load model

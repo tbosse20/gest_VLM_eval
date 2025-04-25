@@ -85,15 +85,20 @@ def argparse():
     parser.add_argument("--end_frame",    type=int, help="The ending frame number.",                    default=None)
     parser.add_argument("--n_frames",     type=int, help="The number of frames to process.",            default=None)
     args = parser.parse_args()
-    
-    if args.start_frame != 0 and (args.n_frames is not None or args.end_frame is not None) and args.interval != 1:
+
+    if not os.path.exists(args.video_folder):
+        raise ("Input does not exist.")
+
+    if os.path.isdir(args.video_folder):
         frame_list = generate_frame_list(
             args.video_folder,
             args.start_frame,
             args.interval,
-            end_frame   = args.end_frame,
-            n_frames    = args.n_frames
+            args.end_frame,
+            args.n_frames
         )
+        if len(frame_list) == 0:
+            raise (f"Ensure start frame '{args.start_frame}' exists.")
         return args.prompt, frame_list
     
     return args.prompt, args.video_folder

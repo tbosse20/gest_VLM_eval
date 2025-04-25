@@ -15,7 +15,7 @@ def inference(
     ):
     
     conversation = augment.build_conversation(
-        input_path  = input_path,
+        frame_list  = input_path,
         prompt      = prompt,
     )
     
@@ -31,5 +31,6 @@ def inference(
 
 if __name__ == "__main__":
     prompt, input = utils.argparse()
+    print(input)
     caption = inference(prompt=prompt, input_path=input)
     print("Caption:", caption)

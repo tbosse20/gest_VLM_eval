@@ -132,6 +132,9 @@ def process_frame(frame, draw: int = 0) -> tuple:
     and draw pose (filtered) + both hands onto a semi-transparent overlay.
     """
 
+    if isinstance(frame, str):
+        frame = cv2.imread(frame)
+
     overlay = frame.copy()
     H, W, _ = frame.shape
 
@@ -160,41 +163,43 @@ def process_frame(frame, draw: int = 0) -> tuple:
         write_desc(overlay, description, pos=(x1, y1)) if draw >= 2 else None
 
         descriptions.append(description)
+
+    flattened = [item for sublist in descriptions for item in sublist]
+    descriptions = " ".join(flattened)
+
     return overlay, descriptions
 
 
-def build_conversation(content_setting, input_path, prompt, modal):
-    
-    # Initialize conversation with system message
-    conversation = [
-        {"role": "system", "content": "You are a helpful assistant."},
-    ]
+def build_conversation(frame_list, prompt):
     
     content = []
-    for idx, tmp_input_path in enumerate(input_path):
+    for idx, frame_path in enumerate(frame_list):
         
         # Add video frame to conversation
         content.append({
             "type": "image",
             "image": {
-                "image_path": tmp_input_path
+                "image_path": frame_path
             }
         })
 
         # Add text description of the frame
-        frame = cv2.imread(tmp_input_path)
-        frame_text = process_frame(frame)
+        _, frame_text = process_frame(frame_path)
         content.append({
             "type": "text",
             "text": f"[Frame {idx}] {frame_text}"
         })
-    
+
     # Add the prompt to the conversation
     content.append({
         "type": "text",
         "text": prompt
     })
     
+    # Initialize conversation with system message
+    conversation = [
+        {"role": "system", "content": "You are an autonomous vehicle."},
+    ]
     # Add the content to the conversation
     conversation.append({
         "role": "user",
