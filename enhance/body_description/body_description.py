@@ -1,16 +1,29 @@
 import cv2
 import mediapipe as mp
-import os
 import numpy as np
 import sys
 
 sys.path.append(".")
 from enhance.body_description.finger_cls_GNN import est_fingers, FINGER_NAMES
+import enhance.util as util
 
 # Initialize MediaPipe Face Mesh and Hands.
 mp_face = mp.solutions.face_mesh
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
+
+face_mesh = mp_face.FaceMesh(
+    static_image_mode=False,
+    max_num_faces=1,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5,
+)
+hands = mp_hands.Hands(
+    static_image_mode=False,
+    max_num_hands=2,
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5,
+)
 
 # Thresholds for classification (tunable):
 SIDE_X_OFFSET = 0.15
@@ -195,7 +208,7 @@ def describe_relative_hand(face_bbox, hand_landmarks):
     return hand_position_desc
 
 
-def process_face(frame, face_res):
+def process_face(face_res):
 
     # If face detected
     if not face_res.multi_face_landmarks:
@@ -206,14 +219,6 @@ def process_face(frame, face_res):
     ys = [lm.y for lm in face_lms.landmark]
     zs = [lm.z for lm in face_lms.landmark if abs(lm.x - 0.5) < 0.1]
     face_bbox = (min(xs), min(ys), max(xs), max(ys))
-
-    mp_drawing.draw_landmarks(
-        frame,
-        face_lms,
-        mp_face.FACEMESH_TESSELATION,
-        landmark_drawing_spec=None,
-        connection_drawing_spec=mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=1),
-    )
 
     return face_lms, face_bbox
 
@@ -234,18 +239,17 @@ def formulate_desc(relative_hand_desc, palm_desc, hand_label):
     return f"{Hand_label} hand " + f"is {relative_hand_desc}. " + f"The {palm_desc}."
 
 
-def desc_hands(frame, hands_res, face_bbox):
+def desc_hands(hands_res, face_bbox):
 
     # Describe each hand relative to that face
     if not hands_res.multi_hand_landmarks:
         return None
 
-    desc = []
+    hands_desc = []
 
     for hand_lms, hand_h in zip(
         hands_res.multi_hand_landmarks, hands_res.multi_handedness
     ):
-        mp_drawing.draw_landmarks(frame, hand_lms, mp_hands.HAND_CONNECTIONS)
         hand_label = hand_h.classification[0].label
 
         relative_hand_desc = describe_relative_hand(face_bbox, hand_lms)
@@ -255,13 +259,16 @@ def desc_hands(frame, hands_res, face_bbox):
         if relative_hand_desc is None and palm_desc is None:
             continue
 
-        current_desc = formulate_desc(relative_hand_desc, palm_desc, hand_label)
-        desc.append(current_desc)
-
+        hand_desc = formulate_desc(relative_hand_desc, palm_desc, hand_label)
         fingers_desc = desc_fingers(hand_lms.landmark)
-        desc.append(fingers_desc)
+        full_hand_desc = f"{hand_desc} {fingers_desc}" if fingers_desc else hand_desc
+        hands_desc.append(full_hand_desc)
 
-    return desc
+        # Separate hand descriptions
+        # hands_desc.append(hand_desc)
+        # hands_desc.append(fingers_desc)
+
+    return hands_desc
 
 
 def desc_fingers(hand_lms):
@@ -279,96 +286,102 @@ def desc_fingers(hand_lms):
     return desc
 
 
-def process_and_desc_person(frame, face_mesh, hands):
+def draw_face(frame, face_lms):
 
-    frame = cv2.flip(frame, 1)
+    if not face_lms:
+        return
+
+    mp_drawing.draw_landmarks(
+        frame,
+        face_lms,
+        mp_face.FACEMESH_TESSELATION,
+        landmark_drawing_spec=None,
+        connection_drawing_spec=mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=1),
+    )
+
+
+def draw_hands(frame, hands_res) -> None:
+    if not hands_res.multi_hand_landmarks:
+        return
+
+    for hand_lms in hands_res.multi_hand_landmarks:
+        mp_drawing.draw_landmarks(
+            frame,
+            hand_lms,
+            mp_hands.HAND_CONNECTIONS,
+            landmark_drawing_spec=mp_drawing.DrawingSpec(
+                color=(0, 255, 0), thickness=1
+            ),
+        )
+
+
+def draw_landmarks(frame, face_lms, hands_res) -> None:
+    draw_face(frame, face_lms)
+    draw_hands(frame, hands_res)
+
+
+def draw_desc(frame, descriptions, pos=(10, 30), font_scale=0.5, color=(255, 255, 255)):
+    """Draw text on the frame."""
+    if not descriptions:
+        return frame
+
+    # Overlay text
+    for i, d in enumerate(descriptions):
+        cv2.putText(
+            frame,
+            d,
+            (pos[0], pos[1] + i * 20),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            font_scale,
+            color,
+            1,
+            cv2.LINE_AA,
+        )
+    return frame
+
+
+def desc_person(frame, draw: int = 0) -> tuple:
+    """Process a frame and describe the face and hands.
+
+    Args:
+        frame: The input video frame.
+        face_mesh: The MediaPipe FaceMesh object.
+        hands: The MediaPipe Hands object.
+        draw: The drawing level (0: no drawing, 1: draw landmarks, 2: draw text).
+
+    Returns:
+        A tuple containing the descriptions and the processed frame.
+    """
+
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     # Process face and hands
     face_res = face_mesh.process(rgb)
     hands_res = hands.process(rgb)
 
-    descriptions = []
+    face_lms, face_bbox = process_face(face_res)
+    draw_landmarks(frame, face_lms, hands_res) if draw > 0 else None
 
+    descriptions = []
     # Describe face
-    face_lms, face_bbox = process_face(frame, face_res)
     face_dir = desc_face_orientation(face_lms)
     descriptions.append(f"Face is {face_dir}.")
 
     # Describe hands
-    hand_desc = desc_hands(frame, hands_res, face_bbox)
+    hand_desc = desc_hands(hands_res, face_bbox)
     descriptions += hand_desc if hand_desc else ["No hands detected."]
+    draw_desc(frame, descriptions) if draw > 1 else None
 
-    return descriptions
+    return descriptions, frame
 
 
-def main(video_path):
-    if video_path:
-        if not video_path.endswith((".mp4", ".avi", ".mov", ".MP4")):
-            raise ValueError("Video path must end with .mp4")
-        if not os.path.isfile(video_path):
-            raise FileNotFoundError(f"Video file {video_path} not found")
-    else:
-        video_path = 0
-    cap = cv2.VideoCapture(video_path)
+def main(frame, draw: bool = False) -> None:
+    """Main function to process video and describe body parts."""
 
-    if video_path != 0:
-        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-        fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
-        W = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-        H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        video_name = os.path.basename(video_path)
-        out = cv2.VideoWriter(video_name, fourcc, fps, (W, H))
+    _, frame = desc_person(frame, draw=draw)
 
-    with mp_face.FaceMesh(
-        min_detection_confidence=0.5, min_tracking_confidence=0.5
-    ) as face_mesh, mp_hands.Hands(
-        min_detection_confidence=0.5, min_tracking_confidence=0.5, max_num_hands=2
-    ) as hands:
-
-        while cap.isOpened():
-            success, frame = cap.read()
-            if not success:
-                break
-
-            #
-            descriptions = process_and_desc_person(frame, face_mesh, hands)
-            if not descriptions is None:
-                # Overlay text
-                for i, d in enumerate(descriptions):
-                    cv2.putText(
-                        frame,
-                        d,
-                        (10, 30 + i * 30),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.5,
-                        (255, 255, 255),
-                        1,
-                    )
-
-            if video_path != 0:
-                out.write(frame)
-            else:
-                cv2.imshow("Pose Description", frame)
-                if cv2.waitKey(5) & 0xFF == 27:
-                    break
-
-    cap.release()
-    out.release() if video_path != 0 else None
-    cv2.destroyAllWindows()
+    return frame
 
 
 if __name__ == "__main__":
-
-    import argparse
-
-    parser = argparse.ArgumentParser(description="MediaPipe Pose Description")
-    parser.add_argument(
-        "video_path",
-        nargs="?",  # allow 0 or 1 values
-        default=None,  # default to None if omitted
-        help="Path to video file (default: webcam)",
-    )
-    args = parser.parse_args()
-
-    main(args.video_path)
+    util.main(main)

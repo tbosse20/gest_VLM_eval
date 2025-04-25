@@ -1,39 +1,13 @@
 import os, sys
-
-# 1) Tell glog (used by MediaPipe C++) to only show FATAL messages
-os.environ["GLOG_minloglevel"] = "3"  # 0=INFO,1=WARNING,2=ERROR,3=FATAL only
-os.environ["GLOG_logtostderr"] = "1"  # redirect to stderr so minloglevel applies
-
-# 2) (Optional) If you also use TF, silence its logs below ERROR
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
-# 3) Silence Abseil‐side Python logs (MediaPipe wrapper uses absl)
-from absl import logging as _absl_logging
-
-_absl_logging.set_verbosity(_absl_logging.FATAL)
-_absl_logging.set_stderrthreshold(_absl_logging.FATAL)
-
-# 4) Temporarily divert stderr to null while we import MediaPipe
-_old_stderr = sys.stderr
-sys.stderr = open(os.devnull, "w")
-
-# 5) Now import the native‐backed modules
 import mediapipe as mp
 import cv2
 from ultralytics import YOLO
-
-# …any other native imports…
-
-# 6) Restore stderr so your own prints still show
-sys.stderr.close()
-sys.stderr = _old_stderr
-
+import sys
 from tqdm import tqdm
 
-# at top‐level, once:
-mp_holistic = mp.solutions.holistic
-mp_drawing = mp.solutions.drawing_utils
-mp_drawing_styles = mp.solutions.drawing_styles
+sys.path.append(".")
+from enhance.body_description.body_description import desc_person, draw_desc
+import enhance.util as util
 
 # Suppress ULtralytics logging
 import logging
@@ -41,6 +15,21 @@ import logging
 logging.getLogger("ultralytics").setLevel(logging.ERROR)
 logging.getLogger("mediapipe").setLevel(logging.ERROR)
 
+# ——— Models (load once) ———
+yolo = YOLO("weights/yolov8n-pose.pt")
+mp_holistic = mp.solutions.holistic
+mp_drawing = mp.solutions.drawing_utils
+mp_styles = mp.solutions.drawing_styles
+
+# Instantiate MediaPipe Holistic
+holistic = mp_holistic.Holistic(
+    static_image_mode=False,  # video mode
+    model_complexity=2,  # highest accuracy
+    smooth_landmarks=True,  # temporal smoothing
+    refine_face_landmarks=True,  # improved face/hand detail
+    min_detection_confidence=0.5,
+    min_tracking_confidence=0.5,
+)
 
 def draw_face_landmarks(landmark_list, overlay, roi_coordinates):
     """
@@ -61,7 +50,7 @@ def draw_face_landmarks(landmark_list, overlay, roi_coordinates):
         landmark_list,
         mp_holistic.FACEMESH_TESSELATION,
         landmark_drawing_spec=None,
-        connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_tesselation_style(),
+        connection_drawing_spec=mp_styles.get_default_face_mesh_tesselation_style(),
     )
 
     return overlay
@@ -85,7 +74,7 @@ def draw_pose_landmarks(landmark_list, overlay, roi_coordinates):
         overlay[y1:y2, x1:x2],
         landmark_list,
         mp_holistic.POSE_CONNECTIONS,
-        landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style(),
+        landmark_drawing_spec=mp_styles.get_default_pose_landmarks_style(),
     )
 
     return overlay
@@ -147,105 +136,17 @@ def draw_landmarks(frame):
     return overlay
 
 
-# ——— Models (load once) ———
-yolo = YOLO("weights/yolov8n-pose.pt")
-mp_holistic = mp.solutions.holistic
-mp_drawing = mp.solutions.drawing_utils
-mp_styles = mp.solutions.drawing_styles
-
-# Instantiate MediaPipe Holistic
-holistic = mp_holistic.Holistic(
-    static_image_mode=False,  # video mode
-    model_complexity=2,  # highest accuracy
-    smooth_landmarks=True,  # temporal smoothing
-    refine_face_landmarks=True,  # improved face/hand detail
-    min_detection_confidence=0.5,
-    min_tracking_confidence=0.5,
-)
 
 
-def pose_from_video(video_path: str, video_output: str):
+def main(original_frame, draw=0):
+    frame = draw_landmarks(original_frame) if draw >= 1 else original_frame.copy()
+    description, _ = desc_person(original_frame)
+    frame = draw_desc(frame, description) if draw >= 2 else frame
 
-    if not os.path.isfile(video_path):
-        raise FileNotFoundError(f"{video_path} not found")
-    if not video_path.endswith((".mp4", ".avi", ".mov", ".MP4")):
-        raise ValueError(f"{video_path} is not a video file")
-
-    # Check if the video file is a valid video file
-    os.makedirs(os.path.dirname(video_output), exist_ok=True)
-
-    cap = cv2.VideoCapture(video_path)
-    W = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fps = cap.get(cv2.CAP_PROP_FPS)
-
-    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-    out = cv2.VideoWriter(video_output, fourcc, fps, (W, H))
-
-    video_name = os.path.basename(video_path)
-    for _ in tqdm(range(int(cap.get(cv2.CAP_PROP_FRAME_COUNT))), desc=video_name):
-        ret, frame = cap.read()
-        if not ret:
-            break
-
-        frame = draw_landmarks(frame)
-        out.write(frame)
-
-    cap.release()
-    out.release()
-    print(f"Done → {video_output}")
-
-
-def pose_dir(videos_dir: str, extension: str = "augmented"):
-
-    # Check if the main folder exists
-    if not os.path.isdir(videos_dir):
-        raise FileNotFoundError(f"{videos_dir} not found")
-
-    # Make sibling folder to videos_dir
-    parent_dir = os.path.dirname(videos_dir)
-    output_dir = os.path.join(parent_dir, extension)
-    os.makedirs(output_dir, exist_ok=True)
-
-    for video in tqdm(os.listdir(videos_dir), desc="Processing"):
-
-        # Get the full path to the video file and output path
-        video_path = os.path.join(videos_dir, video)
-        video_output = os.path.join(output_dir, video)
-
-        # Check if the video file exists and is a valid video file
-        if not os.path.isfile(video_path):
-            print(f"{video_path} not found")
-            continue
-        if not video_path.endswith((".mp4", ".avi", ".mov", ".MP4")):
-            print(f"{video_path} is not a video file")
-            continue
-
-        # Process the video
-        pose_from_video(video_path, video_output)
-        break
+    return frame
 
 
 if __name__ == "__main__":
 
-    import argparse
-
-    parser = argparse.ArgumentParser(description="Pose estimation from video")
-    parser.add_argument(
-        "input", type=str, help="Path to the input video folder or video file."
-    )
-    args = parser.parse_args()
-
-    # Example usage:
-    """ 
-        python enhance/augment.py /path/to/videos_dir
-    """
-
-    if os.path.isdir(args.input):
-        pose_dir(args.input)
-    elif os.path.isfile(args.input):
-        output_dir = os.path.join(os.path.dirname(args.input), "augmented")
-        pose_from_video(args.input, output_dir)
-    else:
-        raise FileNotFoundError(f"{args.input} not found")
+    util.main(main)
     holistic.close()

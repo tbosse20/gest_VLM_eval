@@ -16,7 +16,7 @@ FINGER_NAMES = ["Thumb","Index","Middle","Ring","Pinky"]
 # Device and model setup
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = HandGNN(in_channels=4).to(device)
-model.load_state_dict(torch.load("hand_gnn.pth", map_location=device))
+model.load_state_dict(torch.load("enhance/body_description/hand_gnn.pth", map_location=device))
 model.eval()
 
 # MediaPipe Hands initialization
