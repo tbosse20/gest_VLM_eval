@@ -170,45 +170,6 @@ def process_frame(frame, draw: int = 0) -> tuple:
     return overlay, descriptions
 
 
-def build_conversation(frame_list, prompt):
-    
-    content = []
-    for idx, frame_path in enumerate(frame_list):
-        
-        # Add video frame to conversation
-        content.append({
-            "type": "image",
-            "image": {
-                "image_path": frame_path
-            }
-        })
-
-        # Add text description of the frame
-        _, frame_text = process_frame(frame_path)
-        content.append({
-            "type": "text",
-            "text": f"[Frame {idx}] {frame_text}"
-        })
-
-    # Add the prompt to the conversation
-    content.append({
-        "type": "text",
-        "text": prompt
-    })
-    
-    # Initialize conversation with system message
-    conversation = [
-        {"role": "system", "content": "You are an autonomous vehicle."},
-    ]
-    # Add the content to the conversation
-    conversation.append({
-        "role": "user",
-        "content": content
-    })
-    
-    return conversation
-
-
 if __name__ == "__main__":
 
     video_pipeline.main(process_frame)

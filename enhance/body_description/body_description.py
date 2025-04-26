@@ -94,7 +94,7 @@ def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
         return "orientation undetermined"
     normal /= norm
     # flip normal to point out of the hand
-    normal *= -1 if hand_label == "left" else 1
+    # normal *= -1 if hand_label == "left" else 1
 
     abs_n = np.abs(normal)
     axis = np.argmax(abs_n)
@@ -103,9 +103,9 @@ def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
 
     # Matrix: axis → [negative direction, positive direction]
     lookup = [
-        ["palm is facing left", "palm is facing right"],  # X axis
-        ["palm is facing up", "palm is facing down"],  # Y axis
-        ["palm is facing the camera", "back is facing the camera"],  # Z axis
+        ["palm facing left",       "palm facing right"],      # X axis
+        ["palm facing up",         "palm facing down"],       # Y axis
+        ["palm facing the camera", "back facing the camera"], # Z axis
     ]
 
     sign = int(normal[axis] > 0)
@@ -160,9 +160,9 @@ def desc_face_orientation(face_landmarks, threshold=0.3):
     # lookup matrix: [axis][sign]
     # sign = 0 if normal[axis] < 0, else 1
     lookup = [
-        ("turned left", "turned right"),  # X axis
-        ("tilted up", "tilted down"),  # Y axis
-        ("facing camera", "turned away"),  # Z axis
+        ("turned left",       "turned right"), # X axis
+        ("tilted up",         "tilted down"),  # Y axis
+        ("facing the camera", "turned away"),  # Z axis
     ]
     sign = int(normal[axis] > 0)
     return lookup[axis][sign]
@@ -214,7 +214,7 @@ def formulate_desc(relative_hand_desc, palm_desc, hand_label):
     if palm_desc is None:
         return f"{Hand_label} hand {relative_hand_desc}."
 
-    return f"{Hand_label} hand " + f"is {relative_hand_desc}. " + f"The {palm_desc}."
+    return f"{Hand_label} hand " + f"is {relative_hand_desc} with the {palm_desc}."
 
 
 def desc_hands(hands_list, face_bbox):
@@ -226,6 +226,7 @@ def desc_hands(hands_list, face_bbox):
     for hand_lms, hand_label in hands_list:
         
         if hand_lms is None:
+            hands_desc.append(f"{hand_label.capitalize()} hand isn't visible.")
             continue
 
         relative_hand_desc = describe_relative_hand(face_bbox, hand_lms)
@@ -257,7 +258,7 @@ def desc_fingers(hand_lms):
     if len(raised) == 0:
         return "Fist"
 
-    desc = "Raised fingers: " + ", ".join(raised) + ". "
+    desc = "Raised fingers are " + ", ".join(raised) + ". "
 
     return desc
 
@@ -298,7 +299,7 @@ def desc_person(face_res, hands_list) -> tuple:
 
     # Describe face
     face_dir = desc_face_orientation(face_res)
-    descriptions.append(f"Face is {face_dir}.")
+    descriptions.append(f"They're {face_dir}.")
 
     # Describe hands
     hand_desc = desc_hands(hands_list, face_bbox)

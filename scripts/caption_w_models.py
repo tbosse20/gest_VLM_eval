@@ -8,6 +8,7 @@ import os
 sys.path.append(".")
 import models.src.utils as utils
 from config.prompts import prompts
+import config.directories as directories
 
 
 def caption_models(data_folder: str, window: int, interval: int):
@@ -63,17 +64,16 @@ def caption_folder(
     for sub_path in sub_folders:
         caption_input(sub_path, window, interval, model_package, model_module)
 
-
 def prep_csv_output(model_module):
 
-    # Create csv file path
-    OUTPUT_FOLDER_PATH = "results/data/captions"
-    if not os.path.exists(OUTPUT_FOLDER_PATH):
-        os.makedirs(OUTPUT_FOLDER_PATH)
+    output_folder_path = directories.OUTPUT_FOLDER_PATH
+
+    if not os.path.exists(output_folder_path):
+        os.makedirs(output_folder_path)
 
     # Get model name
     module_name = model_module.__name__.split(".")[-1]
-    csv_path = f"{OUTPUT_FOLDER_PATH}/{module_name}.csv"
+    csv_path = f"{output_folder_path}/{module_name}.csv"
 
     # Generate csv file if not exists
     columns = [

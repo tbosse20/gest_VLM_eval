@@ -21,7 +21,7 @@ def setup_writer(video_path: str, cap) -> cv2.VideoWriter:
     H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     # Make sibling to video_path for output
-    sibling_dir = os.path.join(os.path.dirname(video_path), "body_desc")
+    sibling_dir = os.path.join(os.path.dirname(video_path), "enhance")
     os.makedirs(sibling_dir, exist_ok=True)
     video_name = os.path.basename(video_path)
     video_output = os.path.join(sibling_dir, video_name)
@@ -38,6 +38,7 @@ def from_video(method, video_path: str, draw: int = 0):
     video_path = get_video_path(video_path) if video_path else 0
     cap = cv2.VideoCapture(video_path)
     out = setup_writer(video_path, cap) if video_path != 0 else None
+    frame_count = 0
 
     while True:
         ret, original_frame = cap.read()
@@ -46,14 +47,19 @@ def from_video(method, video_path: str, draw: int = 0):
         original_frame = cv2.flip(original_frame, 1) if video_path == 0 else original_frame
 
         # Run the selected method on the frame
-        descriptions, frame = method(original_frame, draw=draw)
+        frame, descriptions = method(original_frame, draw=draw)
+        frame_count += 1
 
+        # if frame_count % 8 == 0:
+        #     print(f"[Frame {frame_count}] {descriptions}")
+        
         if out:
             out.write(frame)
         else:
             cv2.imshow("Pose Description", frame)
             if cv2.waitKey(5) & 0xFF in [27, ord("q")]:
                 break
+        
 
     cap.release()
     out.release() if out else None
