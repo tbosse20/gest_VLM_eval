@@ -16,7 +16,7 @@ def from_n_frame(video_folder, start_frame, interval, n_frames):
         if os.path.exists(f"{video_folder}/frame_{start_frame + frame_count:04d}.png")
     ]
 
-def generate_frame_list(video_folder, start_frame=0, interval=1, end_frame=None, n_frames=None):
+def generate_frame_list(video_folder, start_frame=None, interval=1, end_frame=None, n_frames=None):
     
     # Validate video folder
     if not os.path.exists(video_folder):
@@ -24,16 +24,31 @@ def generate_frame_list(video_folder, start_frame=0, interval=1, end_frame=None,
     if not os.path.isdir(video_folder):
         raise NotADirectoryError(f"Video folder {video_folder} is not a folder")
     
-    # Get the highest frame number, if no end- or n-frames are provided
-    if end_frame is None and n_frames is None:
-        highest_frame = max([int(frame.split("_")[-1].split(".")[0]) for frame in os.listdir(video_folder)])
-        end_frame = highest_frame + 1
+    # Automatically get lowest and/or highest frame as start- and end frame
+    if not start_frame or (not end_frame and not n_frames):
+        frame_indices = [
+            int(frame.split("_")[-1].split(".")[0])
+            for frame in os.listdir(video_folder)
+        ]
+        
+        # Get lowest frame index, at the start frame
+        if not start_frame:
+            start_frame = min(frame_indices)
+        
+        # Get the highest frame index, if no end- or n-frames are provided
+        if not end_frame and not n_frames:
+            highest_frame = max(frame_indices)
+            end_frame = highest_frame + 1
     
     # Generate the frame list
-    if end_frame is not None: 
-        return from_end_frame(video_folder, start_frame, interval, end_frame)
-    if n_frames is not None: 
-        return from_n_frame(video_folder, start_frame, interval, n_frames)
+    from_method = from_end_frame if end_frame else from_n_frame
+    frame_args = end_frame if end_frame else n_frames
+    frame_list = from_method(video_folder, start_frame, interval, frame_args)
+
+    if len(frame_list) == 0:
+        raise (f"Frames are empty.")
+    
+    return frame_list
 
 # Function to create a video from images
 def create_video_from_frames(frames: list[np.ndarray], output_video_path):
@@ -58,7 +73,7 @@ def create_video_from_str(frame_paths: list[str]):
 
     # Load frames
     frames = [
-        cv2.imread(f'{FRAMES_FOLDER}/{frame_path}')
+        cv2.imread(frame_path)
         for frame_path in frame_paths
         if os.path.exists(frame_path)
     ]
@@ -66,7 +81,7 @@ def create_video_from_str(frame_paths: list[str]):
     # Create video
     create_video_from_frames(frames, TMP_FILE_PATH)
     
-    return TMP_FILE_PATH, True
+    return TMP_FILE_PATH
 
 def unload_model(*args):
     for obj in args:
@@ -77,7 +92,8 @@ def unload_model(*args):
 
 def argparse():
     import argparse
-    parser = argparse.ArgumentParser(description="Generate video captions using Qwen2VL model.")
+
+    parser = argparse.ArgumentParser(description="Generate video captions using selected VLM.")
     parser.add_argument("--video_folder", type=str, help="Path to the video folder containing frames.", required=True)
     parser.add_argument("--prompt",       type=str, help="The prompt to generate captions.",            default='')
     parser.add_argument("--start_frame",  type=int, help="The starting frame number.",                  default=0)
@@ -97,8 +113,6 @@ def argparse():
             args.end_frame,
             args.n_frames
         )
-        if len(frame_list) == 0:
-            raise (f"Ensure start frame '{args.start_frame}' exists.")
         return args.prompt, frame_list
     
     return args.prompt, args.video_folder

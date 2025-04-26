@@ -58,10 +58,13 @@ def inference(
     
     # Determine modal
     modal = 'image' if len(input_path) == 1 else 'video'
-    
+
     # Create temporary output file as video or image
     if conversation is None and (isinstance(input_path, list) and len(input_path) > 1):
-        input_path, tmp_file = utils.create_video_from_str(input_path)
+        input_path = utils.create_video_from_str(input_path)
+        tmp_file = True
+        if not input_path:
+            return 'empty'
     
     # Load model
     model, processor = load_model() if model_package is None else model_package
@@ -92,6 +95,16 @@ def inference(
     return response
 
 if __name__ == "__main__":
+
+    # Example
+    """
+    python models/archive/vllama3.py \
+        --video_folder "../video_frames/Follow" \
+        --prompt "Explain what the person is during in details, for an LLM to interpret the gesture." \
+        --n_frames 8 \
+        --start_frame 36
+    """
+
     prompt, input = utils.argparse()
     caption = inference(prompt=prompt, input_path=input)
     print("Caption:", caption)
