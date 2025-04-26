@@ -30,7 +30,17 @@ def inference(
     return response
 
 if __name__ == "__main__":
+
+    # Example
+    """
+    python models/archive/vllama3_describe.py \
+        --video_folder "../video_frames/Follow" \
+        --prompt "Explain what the person is during in details, for an LLM to interpret the gesture." \
+        --n_frames 8 \
+        --start_frame 36
+    """
+
     prompt, input = utils.argparse()
-    print(input)
+    print(f"---> Input: Video of {len(input)} frames")
     caption = inference(prompt=prompt, input_path=input)
     print("Caption:", caption)
