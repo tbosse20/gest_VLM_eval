@@ -7,7 +7,12 @@ import numpy as np
 import re
 import warnings
 import pandas as pd
-
+import sys
+sys.path.append(".")
+import config.directories as directories
+import warnings
+from sklearn.exceptions import UndefinedMetricWarning
+warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 warnings.simplefilter(action="ignore", category=pd.errors.SettingWithCopyWarning)
 
 classes = {
@@ -58,10 +63,10 @@ def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
     """Post-process the caption dataframe to get the class and processed caption"""
 
     # Only keep the necessary columns
-    df = df[["caption", "label"]]
+    df = df[["caption", "gt_class"]]
 
     # Extract the letter and word from the caption
-    df[["class", "proc_caption"]] = df["caption"].apply(
+    df[["pred_class", "proc_caption"]] = df["caption"].apply(
         lambda x: pd.Series(extract_letter_and_word(x))
     )
 
@@ -70,7 +75,7 @@ def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
         lambda x: (
             np.nan
             if pd.isna(x["proc_caption"])
-            else classes.get(x["class"], None) == x["proc_caption"]
+            else classes.get(x["pred_class"], None) == x["proc_caption"]
         ),
         axis=1,
     )
@@ -79,33 +84,35 @@ def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
 
     # Set the processed caption to the class using the letter
     df["proc_caption"] = df.apply(
-        lambda x: (classes.get(x["class"], np.nan).lower()), axis=1
+        lambda x: (classes.get(x["pred_class"], np.nan).lower()), axis=1
     )
 
     # Correct using the label
-    df["correct"] = df.apply(lambda x: x["label"].lower() == x["proc_caption"], axis=1)
+    df["correct"] = df.apply(lambda x: x["gt_class"].lower() == x["proc_caption"], axis=1)
 
     return df
 
 
 def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
 
+    print(f"{'#'*10} {model_name.upper()} {'#'*10}")
+
     # Compute the accuracy
     accuracy = df["correct"].mean()
-    print(f"{model_name} accuracy: {accuracy:.2f}")
+    print(f"Accuracy: {accuracy:.2f}", "\n")
 
     from sklearn.metrics import classification_report, confusion_matrix
 
-    print(df[["label", "proc_caption"]])
+    print(df[["gt_class", "proc_caption"]], "\n")
 
     # Generate classification report
-    print(classification_report(df["label"], df["proc_caption"]))
+    print(classification_report(df["gt_class"], df["proc_caption"]), "\n")
 
     # Get sorted list of unique labels
-    labels = sorted(set(df["label"]).union(set(df["proc_caption"])))
+    labels = sorted(set(df["gt_class"]).union(set(df["proc_caption"])))
 
     # Compute confusion matrix
-    cm = confusion_matrix(df["label"], df["proc_caption"], labels=labels)
+    cm = confusion_matrix(df["gt_class"], df["proc_caption"], labels=labels)
 
     # Plot confusion matrix using seaborn
     plt.figure(figsize=(10, 6))
@@ -133,6 +140,7 @@ def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
     plt.show()
 
 
+
 def post_process_csv_folder(metrics_folder):
 
     # Check if the folder exists
@@ -150,7 +158,9 @@ def post_process_csv_folder(metrics_folder):
         exit()
 
     # Load gt
-    gt = pd.read_csv("data/labels/firsthand_category.csv")
+    labels_csv = directories.LABELS_CSV
+    labels = pd.read_csv(labels_csv)
+    gt = labels.groupby('video_name')['gt_class'].agg(lambda x: x.mode()[0])
 
     # Loop through each CSV file
     for file in csv_files:
@@ -164,7 +174,8 @@ def post_process_csv_folder(metrics_folder):
         # Load the CSV file
         df = pd.read_csv(file)
         # Merge with gt on video_name and frame_idx
-        df = pd.merge(df, gt, on=["video_name", "frame_idx"])
+        # df = pd.merge(df, gt, on=["video_name", "frame_idx"])
+        df = pd.merge(df, gt, on=["video_name"])
 
         # Post-process the caption dataframe
         df = post_process_caption_df(df)
@@ -183,7 +194,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--metrics_folder",
         type=str,
-        default="results/data/captions/category",
+        default=directories.OUTPUT_FOLDER_PATH,
         help="Path to the folder containing classification CSVs.",
     )
     args = parser.parse_args()

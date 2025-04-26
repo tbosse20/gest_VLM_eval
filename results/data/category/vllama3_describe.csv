@@ -1,0 +1,9 @@
+video_name,prompt_type,caption,frame_idx,end_frame,interval,window_size
+video_05,category,g,79,150,1,71
+video_00,category,g,36,76,1,40
+video_03,category,c. Forward,89,217,1,128
+video_07,category,g,51,110,1,59
+video_01,category,b,218,258,1,40
+video_04,category,e.,114,190,1,76
+video_06,category,g,87,181,1,94
+video_02,category,e.,11,182,1,171

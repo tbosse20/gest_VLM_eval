@@ -8,6 +8,7 @@ Enhance/advance
 - Can "body description" enhancement method be used on full video?
 - Classifiy across whole video
 - Write about which models uses what. And methods. Full video, path, frame_list, etc.
+- Update prompt categories to category2
 
 - Look into:
 python models/archive/vllama3.py 

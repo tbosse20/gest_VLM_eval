@@ -23,13 +23,17 @@ The system generates captions across each of these elements for each video inter
 1. Activate conda env. `conda activate my_env`.
 
 2. Run `scripts/caption_w_models.py` to generate captions across:
+    - `--data_folder` manual or found in `config.directories.DATA_FOLDER`. !!!1!!!TODO!!!!!!!
     - Models in the folder `models/` *(note: might crash if not reboot between models. Use `archive`)*.
     - Prompt types in `config/prompts`.
 
 3. Run `scripts/compare_captions.py` to compare with the ground truth.
     - Ground truth captions in `../actedgestures/labels/`.
     - CSV format: `video_name, frame_idx, label`
-    
+
+1. For categories, run `scripts/plot_matrix.py`
+    - `--metrics_folder` path to csv results. Manual or found in `config.directories.OUTPUT_FOLDER_PATH`.
+
 4. Run `scripts/plot_metrics.py` to plot and print result to `results/figures`.
     - Use `--prompt_type` or `--gestures` to compare across.
 

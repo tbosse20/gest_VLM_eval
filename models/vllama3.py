@@ -34,11 +34,10 @@ def build_conversation(content_setting: str, input_path: str, prompt: str, modal
                 "video": {
                     "video_path": input_path,
                     "fps": 1,
-                    "max_frames": 180
                 }
             }, {
                 "type": "text",
-                "text":prompt
+                "text": prompt
             }]
     }]
     
@@ -60,7 +59,7 @@ def inference(
     modal = 'image' if len(input_path) == 1 else 'video'
 
     # Create temporary output file as video or image
-    if conversation is None and (isinstance(input_path, list) and len(input_path) > 1):
+    if not conversation and (isinstance(input_path, list) and len(input_path) > 0):
         input_path = utils.create_video_from_str(input_path)
         tmp_file = True
         if not input_path:

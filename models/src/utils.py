@@ -10,11 +10,21 @@ def from_end_frame(video_folder, start_frame, interval, end_frame):
     ]
 
 def from_n_frame(video_folder, start_frame, interval, n_frames):
+    # Ensure we only generate frames based on the interval and n_frames
     return [
-        f"{video_folder}/frame_{start_frame + frame_count:04d}.png"
-        for frame_count in range(0, n_frames * interval, interval)
-        if os.path.exists(f"{video_folder}/frame_{start_frame + frame_count:04d}.png")
+        f"{video_folder}/frame_{start_frame + frame_count * interval:04d}.png"
+        for frame_count in range(n_frames)
+        if os.path.exists(f"{video_folder}/frame_{start_frame + frame_count * interval:04d}.png")
     ]
+
+def get_start_n_end_frames(video_path):
+        
+    # Get highest and lowest 0000 value in folder
+    frame_indices = [
+        int(frame.split("_")[-1].split(".")[0])
+        for frame in os.listdir(video_path)
+    ]
+    return min(frame_indices), max(frame_indices)
 
 def generate_frame_list(video_folder, start_frame=None, interval=1, end_frame=None, n_frames=None):
     
@@ -26,19 +36,13 @@ def generate_frame_list(video_folder, start_frame=None, interval=1, end_frame=No
     
     # Automatically get lowest and/or highest frame as start- and end frame
     if not start_frame or (not end_frame and not n_frames):
-        frame_indices = [
-            int(frame.split("_")[-1].split(".")[0])
-            for frame in os.listdir(video_folder)
-        ]
+        min_frame, max_frame = get_start_n_end_frames(video_folder)
         
         # Get lowest frame index, at the start frame
-        if not start_frame:
-            start_frame = min(frame_indices)
+        start_frame = start_frame or min_frame
         
         # Get the highest frame index, if no end- or n-frames are provided
-        if not end_frame and not n_frames:
-            highest_frame = max(frame_indices)
-            end_frame = highest_frame + 1
+        end_frame = end_frame or (n_frames or max_frame + 1)
     
     # Generate the frame list
     from_method = from_end_frame if end_frame else from_n_frame
