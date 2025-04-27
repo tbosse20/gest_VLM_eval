@@ -137,7 +137,7 @@ def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
     plt.yticks(rotation=0)
 
     plt.tight_layout()
-    plt.show()
+    # plt.show()
 
 
 

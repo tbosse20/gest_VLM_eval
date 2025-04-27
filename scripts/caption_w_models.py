@@ -76,7 +76,7 @@ def prep_csv_output(model_module):
 
     # Get model name
     module_name = model_module.__name__.split(".")[-1]
-    csv_path = f"{output_folder_path}/{module_name}.csv"
+    csv_path = f"{output_folder_path}/{module_name}_aug.csv"
 
     # Generate csv file if not exists
     columns = [

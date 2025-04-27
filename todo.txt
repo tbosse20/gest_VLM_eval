@@ -1,14 +1,12 @@
 ToDo:
-- Expand Acted with more gestures and distance
+- Expand Acted with more gestures and distance <----
 - readme (instructions)
 
 # Final -> Remove history
 
 Enhance/advance
-- Can "body description" enhancement method be used on full video?
-- Classifiy across whole video
 - Write about which models uses what. And methods. Full video, path, frame_list, etc.
-- Update prompt categories to category2
+- Update prompt categories to category2, and classes `advance`
 
 - Look into:
 python models/archive/vllama3.py 

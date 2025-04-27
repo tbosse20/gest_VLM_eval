@@ -27,5 +27,7 @@ prompts = {
     i. Right - The pedestrian is signaling the driver to turn right.    
 
     Ensure that your response includes only **one** category in the specified format.
+
+    The pose is projected upon the person, to help understand their pose.
     """
 }

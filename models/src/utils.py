@@ -2,6 +2,9 @@ import os
 import cv2
 import torch
 import numpy as np
+import sys
+sys.path.append(".")
+import enhance.augment.augment as augment
 
 def from_end_frame(video_folder, start_frame, interval, end_frame):
     return [
@@ -62,9 +65,10 @@ def create_video_from_frames(frames: list[np.ndarray], output_video_path):
     size = (width, height)
 
     # Create video writer
-    out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), 1, size)
+    out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), 30, size)
 
     for img in frames:
+        img, _ = augment.process_frame(img, draw=1)
         out.write(img)
 
     out.release()

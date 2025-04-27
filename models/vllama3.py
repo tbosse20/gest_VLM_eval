@@ -33,7 +33,7 @@ def build_conversation(content_setting: str, input_path: str, prompt: str, modal
                 "type": modal,
                 "video": {
                     "video_path": input_path,
-                    "fps": 1,
+                    "fps": 30,
                 }
             }, {
                 "type": "text",
