@@ -32,7 +32,7 @@ def build_conversation(frame_list, prompt):
     # Add the prompt to the conversation
     content.append({
         "type": "text",
-        "text": prompt
+        "text": prompt + "Each frame has supplementary information about the pose."
     })
     
     # Initialize conversation with system message

@@ -1,15 +1,9 @@
 ToDo:
+- Implement `flag` for projection.
+- Write about which models uses what. And methods. Full video, path, frame_list, etc.
+- Update prompt categories to category2, and classes `advance`
 - Expand Acted with more gestures and distance <----
 - readme (instructions)
 
-# Final -> Remove history
-
-Enhance/advance
-- Write about which models uses what. And methods. Full video, path, frame_list, etc.
-- Update prompt categories to category2, and classes `advance`
-
-- Look into:
-python models/archive/vllama3.py 
---video_folder "../actedgestures/Follow.MP4" 
---prompt "Explain what the person is during in details, for an LLM to interpret the gesture. Each frame has supplementary information about the pose"
-Caption: The person is standing in front of a white wall, wearing glasses and a black long-sleeved shirt. Initially facing the camera with his arms at his sides, he raises his right hand to wave before lowering it again. He then turns slightly to his left while maintaining eye contact with the viewer. After turning back towards the center, his head moves down as if looking at something on the ground or adjusting his posture. Finally, the video ends abruptly without showing any further actions from him.
+# Final
+- Remove history

@@ -34,7 +34,7 @@ def get_fps(video_file: str) -> float:
 
 
 def cut_video_time(
-    input_file: str, start_time: int, end_time: int = None, duration: int = None
+    input_file: str, start_time: int, end_time: int = None, duration: int = None, output_file: str = None
 ) -> None:
     """Cut a video file using ffmpeg with start time and end time or duration.
 
@@ -66,9 +66,10 @@ def cut_video_time(
         raise ValueError("Only one of 'end_time' or 'duration' can be provided.")
 
     # Make output folder as sibling of input files parent folder
-    output_folder = os.path.dirname(input_file) + "_cut"
-    output_file = os.path.join(output_folder, os.path.basename(input_file))
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    if not output_file:
+        output_folder = os.path.dirname(input_file) + "_cut"
+        output_file = os.path.join(output_folder, os.path.basename(input_file))
+        os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
     # Check if output file already exists
     if os.path.exists(output_file):
@@ -80,17 +81,13 @@ def cut_video_time(
     # Run ffmpeg command
     command = [
         "ffmpeg",
-        "-ss",
-        str(start_time),  # Accurate when placed before -i with re-encode
-        "-i",
-        input_file,
-        "-t",
-        str(duration),
-        "-an",  # Remove audio
-        "-c:v",
-        "libx264",  # Re-encode video
-        "-preset",
-        "fast",  # Speed vs compression tradeoff
+        "-loglevel", "error",   # Suppress unnecessary libx264 info
+        "-ss", str(start_time),
+        "-i", input_file,
+        "-t", str(duration),
+        "-an",                  # Remove audio
+        "-c:v", "libx264",      # Re-encode video
+        "-preset", "fast",      # Speed vs compression tradeoff
         output_file,
     ]
     subprocess.run(command, check=True)

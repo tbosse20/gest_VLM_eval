@@ -9,6 +9,7 @@ sys.path.append(".")
 import models.src.utils as utils
 from config.prompts import prompts
 import config.directories as directories
+import config.flags as flags
 
 
 def caption_models(data_folder: str, window: int, interval: int):
@@ -76,7 +77,8 @@ def prep_csv_output(model_module):
 
     # Get model name
     module_name = model_module.__name__.split(".")[-1]
-    csv_path = f"{output_folder_path}/{module_name}_aug.csv"
+    csv_path = f"{output_folder_path}/{module_name}.csv"
+    csv_path = csv_path.replace(".csv", f"_projection.csv") if flags.projection_enhancement else csv_path
 
     # Generate csv file if not exists
     columns = [

@@ -5,6 +5,7 @@ import numpy as np
 import sys
 sys.path.append(".")
 import enhance.augment.augment as augment
+import config.flags as flags
 
 def from_end_frame(video_folder, start_frame, interval, end_frame):
     return [
@@ -68,7 +69,7 @@ def create_video_from_frames(frames: list[np.ndarray], output_video_path):
     out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), 30, size)
 
     for img in frames:
-        img, _ = augment.process_frame(img, draw=1)
+        img, _ = augment.process_frame(img, draw=1) if flags.projection_enhancement else (img, None)
         out.write(img)
 
     out.release()

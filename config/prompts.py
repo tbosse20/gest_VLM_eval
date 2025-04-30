@@ -1,3 +1,7 @@
+import sys
+sys.path.append(".")
+import config.flags as flags
+
 prompts = {
     # "blank": "",
     # "determine": "Determine what gesture the pedestrian is making.",
@@ -27,7 +31,7 @@ prompts = {
     i. Right - The pedestrian is signaling the driver to turn right.    
 
     Ensure that your response includes only **one** category in the specified format.
-
-    The pose is projected upon the person, to help understand their pose.
-    """
+    """ + 
+    "The pose is projected upon the person, to help understand their pose." if flags.projection_enhancement else "",
+    
 }
