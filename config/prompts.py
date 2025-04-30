@@ -21,7 +21,6 @@ prompts = {
 
     **Options:**  
      0. Idle       - No movement or gestures.  
-     1. Transition - Initial or ascending gesture.  
      2. Stop       - Stopping in any manner.  
      3. Advance    - Drive forward in any manner.  
      4. Return     - Backup by reverse or turn the vehicle.  
