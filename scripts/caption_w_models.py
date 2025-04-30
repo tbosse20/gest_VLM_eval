@@ -17,6 +17,8 @@ def caption_models(data_folder: str, window: int, interval: int):
     # Validate folder path
     if not os.path.exists(data_folder):
         raise FileNotFoundError(f"Data folder {data_folder} not found")
+    if not os.path.isdir(data_folder):
+        raise NotADirectoryError(f"Data folder {data_folder} is not a folder")
 
     # Load all models modules
     models_folder = directories.MODELS_FOLDER
@@ -49,19 +51,19 @@ def caption_models(data_folder: str, window: int, interval: int):
 
 
 def caption_folder(
-    data_folder: str, window: int, interval: int, model_package, model_module
+    frame_folder: str, window: int, interval: int, model_package, model_module
 ):
 
     # Validate folder path
-    if not os.path.exists(data_folder):
-        raise FileNotFoundError(f"Data folder {data_folder} not found")
-    if not os.path.isdir(data_folder):
-        raise NotADirectoryError(f"Data folder {data_folder} is not a folder")
+    if not os.path.exists(frame_folder):
+        raise FileNotFoundError(f"Data folder {frame_folder} not found")
+    if not os.path.isdir(frame_folder):
+        raise NotADirectoryError(f"Data folder {frame_folder} is not a folder")
 
     # Sub-folders
     sub_folders = [
         f.path
-        for f in os.scandir(data_folder)
+        for f in os.scandir(frame_folder)
         if f.is_dir()
     ]
 
@@ -248,15 +250,26 @@ def save_to_csv(
 if __name__ == "__main__":
 
     import argparse
+    import config.hyperparameters as hyperparameters
 
     parser = argparse.ArgumentParser(description="Caption frames")
     parser.add_argument(
-        "--data_folder", type=str, help="Data folder path", required=True
+        "--data_folder",
+        type=str,
+        help="Data folder path",
+        default=directories.VIDEO_FRAMES_FOLDER,
     )
     parser.add_argument(
-        "--window", type=int, help="Window size", default=0)
+        "--window",
+        type=int,
+        help="Window size",
+        default=hyperparameters.window,
+    )
     parser.add_argument(
-        "--interval", type=int, help="Interval between frames", default=1
+        "--interval",
+        type=int,
+        help="Interval between frames",
+        default=hyperparameters.interval,
     )
     args = parser.parse_args()
 
