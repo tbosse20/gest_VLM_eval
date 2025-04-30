@@ -1,0 +1,92 @@
+video_name,prompt_type,caption,frame_idx,end_frame,interval,window_size
+video_00,category,8. Pass,0,59,1,59
+video_01,category,14.,0,59,1,59
+video_02,category,3. Advance,0,59,1,59
+video_03,category,10.,0,59,1,59
+video_04,category,1. Transition,0,89,1,89
+video_05,category,14.,0,59,1,59
+video_06,category,8. Pass,0,59,1,59
+video_07,category,8. Pass,0,59,1,59
+video_08,category,14.,0,59,1,59
+video_09,category,0,0,89,1,89
+video_10,category,0.,0,89,1,89
+video_11,category,8. Pass,0,59,1,59
+video_12,category,8. Pass,0,59,1,59
+video_13,category,2,0,59,1,59
+video_14,category,8. Pass,0,29,1,29
+video_15,category,8. Pass,0,59,1,59
+video_16,category,8. Pass,0,59,1,59
+video_17,category,1. Transition,0,59,1,59
+video_18,category,8. Pass,0,59,1,59
+video_19,category,1. Transition,0,89,1,89
+video_20,category,14.,0,89,1,89
+video_21,category,1.,0,89,1,89
+video_22,category,14.,0,59,1,59
+video_23,category,8. Pass,0,59,1,59
+video_24,category,1. Transition,0,89,1,89
+video_25,category,3. Advance,0,59,1,59
+video_26,category,8. Pass,0,59,1,59
+video_27,category,3. Advance,0,59,1,59
+video_28,category,3. Advance,0,59,1,59
+video_29,category,14.,0,89,1,89
+video_30,category,2. Stop,0,59,1,59
+video_31,category,8. Pass,0,89,1,89
+video_32,category,8. Pass,0,59,1,59
+video_33,category,8. Pass,0,59,1,59
+video_34,category,3. Advance,0,59,1,59
+video_35,category,8. Pass,0,59,1,59
+video_36,category,3,0,89,1,89
+video_37,category,8. Pass,0,59,1,59
+video_38,category,8. Pass,0,59,1,59
+video_39,category,8. Pass,0,59,1,59
+video_40,category,8. Pass,0,89,1,89
+video_41,category,8. Pass,0,59,1,59
+video_42,category,8. Pass,0,29,1,29
+video_43,category,0,0,59,1,59
+video_44,category,0,0,29,1,29
+video_45,category,8. Pass,0,59,1,59
+video_46,category,8. Pass,0,59,1,59
+video_47,category,3. Advance,0,59,1,59
+video_48,category,1,0,29,1,29
+video_49,category,14.,0,59,1,59
+video_50,category,3,0,59,1,59
+video_51,category,8. Pass,0,59,1,59
+video_52,category,3. Advance,0,59,1,59
+video_53,category,3. Advance,0,89,1,89
+video_54,category,8. Pass,0,89,1,89
+video_55,category,8. Pass,0,59,1,59
+video_56,category,1. Transition,0,59,1,59
+video_57,category,3.,0,89,1,89
+video_58,category,8. Pass,0,59,1,59
+video_59,category,3. Advance,0,179,1,179
+video_60,category,3. Advance,0,149,1,149
+video_61,category,1. Transition,0,179,1,179
+video_62,category,8. Pass,0,89,1,89
+video_63,category,3,0,29,1,29
+video_64,category,0,0,59,1,59
+video_65,category,0,0,59,1,59
+video_66,category,8. Pass,0,29,1,29
+video_67,category,1.,0,59,1,59
+video_68,category,8. Pass,0,59,1,59
+video_69,category,14.,0,59,1,59
+video_70,category,0,0,29,1,29
+video_71,category,1. Transition,0,59,1,59
+video_72,category,14.,0,29,1,29
+video_73,category,0,0,29,1,29
+video_74,category,3. Advance,0,179,1,179
+video_75,category,3. Advance,0,179,1,179
+video_76,category,1. Transition,0,149,1,149
+video_77,category,10.,0,149,1,149
+video_78,category,8. Pass,0,89,1,89
+video_79,category,3.,0,89,1,89
+video_80,category,2. Stop,0,59,1,59
+video_81,category,1. Transition,0,89,1,89
+video_82,category,1. Transition,0,59,1,59
+video_83,category,14.,0,59,1,59
+video_84,category,0,0,89,1,89
+video_85,category,8. Pass,0,59,1,59
+video_86,category,0. Idle,0,29,1,29
+video_87,category,14.,0,59,1,59
+video_88,category,8. Pass,0,59,1,59
+video_89,category,14.,0,89,1,89
+video_90,category,8. Pass,0,89,1,89

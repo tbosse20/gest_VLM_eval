@@ -13,7 +13,7 @@ def get_video_path(video_path: str) -> str:
     return video_path
 
 
-def setup_writer(video_path: str, cap) -> cv2.VideoWriter:
+def setup_writer(video_path: str, cap, video_output: str = None) -> cv2.VideoWriter:
     """Setup video writer for output video."""
     fourcc = cv2.VideoWriter_fourcc(*"mp4v")
     fps = 30.0
@@ -21,23 +21,25 @@ def setup_writer(video_path: str, cap) -> cv2.VideoWriter:
     H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     # Make sibling to video_path for output
-    sibling_dir = os.path.join(os.path.dirname(video_path), "enhance")
-    os.makedirs(sibling_dir, exist_ok=True)
-    video_name = os.path.basename(video_path)
-    video_output = os.path.join(sibling_dir, video_name)
+    if not video_output:
+        sibling_dir = os.path.join(os.path.dirname(video_path), "enhance")
+        os.makedirs(sibling_dir, exist_ok=True)
+        video_name = os.path.basename(video_path)
+        video_output = os.path.join(sibling_dir, video_name)
+
     out = cv2.VideoWriter(video_output, fourcc, fps, (W, H))
 
     return out
 
 
-def from_video(method, video_path: str, draw: int = 0):
+def from_video(method, video_path: str, video_output: str = None, draw: int = 0):
     """
     Process a video file and save the output to a specified directory.
     If no output directory is specified, the video will be saved in the same directory as the input video.
     """
     video_path = get_video_path(video_path) if video_path else 0
     cap = cv2.VideoCapture(video_path)
-    out = setup_writer(video_path, cap) if video_path != 0 else None
+    out = setup_writer(video_path, cap, video_output) if video_path != 0 else None
     frame_count = 0
 
     while True:
@@ -59,7 +61,6 @@ def from_video(method, video_path: str, draw: int = 0):
             cv2.imshow("Pose Description", frame)
             if cv2.waitKey(5) & 0xFF in [27, ord("q")]:
                 break
-        
 
     cap.release()
     out.release() if out else None

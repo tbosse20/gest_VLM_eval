@@ -20,7 +20,7 @@ prompts = {
     "<selected_option>"
 
     **Options:**  
-     0. Idle       - No movement or gestures.  
+     0. Idle       - No gestures.  
      2. Stop       - Stopping in any manner.  
      3. Advance    - Drive forward in any manner.  
      4. Return     - Backup by reverse or turn the vehicle.  

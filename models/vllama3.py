@@ -64,7 +64,7 @@ def inference(
         tmp_file = True
         if not input_path:
             return 'empty'
-    
+
     # Load model
     model, processor = load_model() if model_package is None else model_package
     

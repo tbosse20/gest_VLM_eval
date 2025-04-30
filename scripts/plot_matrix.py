@@ -15,80 +15,77 @@ from sklearn.exceptions import UndefinedMetricWarning
 warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 warnings.simplefilter(action="ignore", category=pd.errors.SettingWithCopyWarning)
 
-classes = {
-    "a": "follow",
-    "b": "hail",
-    "c": "forward",
-    "d": "left",
-    "e": "idle",
-    "f": "reverse",
-    "g": "stop",
-    "h": "other",
-    "i": "right",
-}
+# classes = {
+#     "a": "follow",
+#     "b": "hail",
+#     "c": "forward",
+#     "d": "left",
+#     "e": "idle",
+#     "f": "reverse",
+#     "g": "stop",
+#     "h": "other",
+#     "i": "right",
+# }
 
+import re
+import pandas as pd
+import numpy as np
 
-def extract_letter_and_word(text):
+def extract_number_and_word(text):
     """
-    Extracts the letter and the word following it if available.
-    Handles formats like '(b) Hail', 'b', 'e.', and 'e. Stop'.
+    Extracts the number and the word following it if available.
+    Handles formats like '(0) Hail', '0', '0.', and '0. Stop'.
     """
     if pd.isna(text):  # Handle NaN values
         return None, None
 
-    # Updated regex pattern to capture all variations, including missing "Answer:"
     match = re.search(
-        r"(?:Answer:\s*)?(?:\((\w)\)\s*(\w+)?)|"  # (A) Apple
-        r'(?:Answer:\s*)?"([a-zA-Z])"|'  # "a" or "A"
-        r"(?:Answer:\s*)?([a-zA-Z])|"  # a or A
-        r"(?:Answer:\s*)?([a-zA-Z])\.(\s*\w+)?",  # A. Apple
-        text,
+        r"(?:Answer:\s*)?"                         # Optional "Answer: "
+        r"(?:\((\d+)\)\s*(\w+)?)|"                 # (0) Hail
+        r"(?:Answer:\s*)?\"?(\d+)\"?|"             # "0" or 0
+        r"(?:Answer:\s*)?(\d+)\.?\s*(\w+)?",       # 0. Stop or 0.
+        text
     )
 
     if match:
-        letter = (
-            match.group(1) or match.group(3) or match.group(4)
-        )  # Extract letter from different formats
+        number = match.group(1) or match.group(3) or match.group(4)
         word = (
             match.group(2)
             if match.group(2)
             else (match.group(5).strip() if match.group(5) else None)
         )
         word = np.nan if word == "" else word
-        return letter, word.lower() if word else None
-    return None, None  # Return None if no match is found
+        return int(number), word.lower() if word else None
+
+    return None, None
+
 
 
 def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
     """Post-process the caption dataframe to get the class and processed caption"""
 
     # Only keep the necessary columns
-    df = df[["caption", "gt_class"]]
+    df = df[["caption", "gt_id"]]
 
     # Extract the letter and word from the caption
-    df[["pred_class", "proc_caption"]] = df["caption"].apply(
-        lambda x: pd.Series(extract_letter_and_word(x))
+    df[["pred_id", "proc_caption"]] = df["caption"].apply(
+        lambda x: pd.Series(extract_number_and_word(x))
     )
-
+    df["pred_id"] = df["pred_id"].astype(int)
+    
     # Ensure the proc_caption and class is the same using classes
     df["confirm"] = df.apply(
         lambda x: (
             np.nan
             if pd.isna(x["proc_caption"])
-            else classes.get(x["pred_class"], None) == x["proc_caption"]
-        ),
-        axis=1,
+            else x["pred_id"] == x["proc_caption"]
+        ), axis=1,
     )
     # Ensure theres no False in 'confirm'
     assert not df["confirm"].eq(False).any(), f"Error:\n{df[df['confirm'] == False]}"
 
-    # Set the processed caption to the class using the letter
-    df["proc_caption"] = df.apply(
-        lambda x: (classes.get(x["pred_class"], np.nan).lower()), axis=1
-    )
-
     # Correct using the label
-    df["correct"] = df.apply(lambda x: x["gt_class"].lower() == x["proc_caption"], axis=1)
+    df["correct"] = df.apply(lambda x: x["gt_id"] == x["pred_id"], axis=1)
 
     return df
 
@@ -103,16 +100,14 @@ def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
 
     from sklearn.metrics import classification_report, confusion_matrix
 
-    print(df[["gt_class", "proc_caption"]], "\n")
-
     # Generate classification report
-    print(classification_report(df["gt_class"], df["proc_caption"]), "\n")
+    print(classification_report(df["gt_id"], df["pred_id"]), "\n")
 
     # Get sorted list of unique labels
-    labels = sorted(set(df["gt_class"]).union(set(df["proc_caption"])))
+    labels = sorted(set(df["gt_id"]).union(set(df["pred_id"])))
 
     # Compute confusion matrix
-    cm = confusion_matrix(df["gt_class"], df["proc_caption"], labels=labels)
+    cm = confusion_matrix(df["gt_id"], df["pred_id"], labels=labels)
 
     # Plot confusion matrix using seaborn
     plt.figure(figsize=(10, 6))
@@ -159,8 +154,7 @@ def post_process_csv_folder(metrics_folder):
 
     # Load gt
     labels_csv = directories.LABELS_CSV
-    labels = pd.read_csv(labels_csv)
-    gt = labels.groupby('video_name')['gt_class'].agg(lambda x: x.mode()[0])
+    gt = pd.read_csv(labels_csv)
 
     # Loop through each CSV file
     for file in csv_files:

@@ -67,6 +67,9 @@ def caption_folder(
         if f.is_dir()
     ]
 
+    # Sort subfolders numerically by the number after 'video_'
+    sub_folders.sort(key=lambda x: int(os.path.basename(x).split('_')[-1]))
+
     # Caption each sub-folder
     for sub_path in sub_folders:
         caption_input(sub_path, window, interval, model_package, model_module)

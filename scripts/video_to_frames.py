@@ -57,13 +57,14 @@ def save_video_frames(video_path, output_folder, interval: int = 1) -> None:
     cap.release()
 
 
-def save_video_frames_folder(videos_folder: str, interval: int) -> None:
+def save_video_frames_folder(videos_folder: str, interval: int, suffix: str = "_frames") -> None:
     """
     Save frames from all videos in a new folder with "_frames" suffix.
 
     Args:
         videos_folder (str): Path to the folder containing videos.
-        interval (int):      Interval for saving frames (fps / interval => new_fps).
+        interval (int):      Interval for saving frames (fps / interval -> new_fps).
+        suffix (str):        Suffix of sibling folder with frames. (default="_frames")
 
     Input Structure:        Output Structure:
         folder/                 folder_frames/
@@ -86,15 +87,16 @@ def save_video_frames_folder(videos_folder: str, interval: int) -> None:
         raise NotADirectoryError(f"Input folder '{videos_folder}' is not a directory")
 
     # Create output folder if it doesn't exist
-    output_folder = videos_folder + "_frames"
+    output_folder = videos_folder + suffix
     if not os.path.exists(output_folder):
         os.makedirs(output_folder, exist_ok=True)
 
     # Loop through all video names in the folder
-    video_names = os.listdir(videos_folder)
+    video_names = sorted(os.listdir(videos_folder))
     for video_name in video_names:
+
         # Skip non-video files
-        if not video_name.endswith(".mp4"):
+        if not video_name.endswith((".mp4", ".MP4")):
             continue
 
         # Get video path
@@ -110,12 +112,15 @@ def save_video_frames_folder(videos_folder: str, interval: int) -> None:
 if __name__ == "__main__":
 
     import argparse
+    import sys
+    sys.path.append(".")
+    import config.directories as directories
 
     parser = argparse.ArgumentParser(description="Extract frames from videos")
     parser.add_argument(
         "--videos_folder",
         type=str,
-        default="../realworldgestures",
+        default=directories.VIDEO_FOLDER,
         help="Folder containing videos",
     )
     parser.add_argument(

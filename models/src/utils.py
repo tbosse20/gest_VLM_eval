@@ -5,6 +5,7 @@ import numpy as np
 import sys
 sys.path.append(".")
 import enhance.augment.augment as augment
+import enhance.video_pipeline as video_pipeline
 import config.flags as flags
 
 def from_end_frame(video_folder, start_frame, interval, end_frame):
@@ -65,14 +66,25 @@ def create_video_from_frames(frames: list[np.ndarray], output_video_path):
     height, width, _ = frames[0].shape
     size = (width, height)
 
-    # Create video writer
-    out = cv2.VideoWriter(output_video_path, cv2.VideoWriter_fourcc(*'mp4v'), 30, size)
+    temp_path = output_video_path.replace(".mp4", "_temp.mp4")
 
+    # Write raw frames to a temp file
+    out = cv2.VideoWriter(temp_path, cv2.VideoWriter_fourcc(*'mp4v'), 30, size)
     for img in frames:
-        img, _ = augment.process_frame(img, draw=1) if flags.projection_enhancement else (img, None)
         out.write(img)
-
     out.release()
+
+    # If enhancement is needed, process and overwrite output_video_path
+    if flags.projection_enhancement:
+        video_pipeline.from_video(
+            method=augment.process_frame,
+            video_path=temp_path,
+            video_output=output_video_path,
+            draw=1
+        )
+        os.remove(temp_path)  # Clean up the temp file
+    else:
+        os.replace(temp_path, output_video_path)  # Rename to final if no processing
 
 def create_video_from_str(frame_paths: list[str]):
     

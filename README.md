@@ -17,7 +17,10 @@ The system generates captions across each of these elements for each video inter
 - Prompts in `config/prompts.py` "Blank", "Determine", "Body", "Context", "Objective",
 
 ## Run - VLM generate captions and compare with ground truth.
+1. Set path to data folder `DATA_FOLDER_PATH` in `config.directories`.
+
 1. Run `scripts/video_to_frames.py` to convert videos to frames.
+    - Uses `config.directories.VIDEO_FOLDER` or input.
     - Makes sibling folder for frames with "`_frames`".
 
 1. Activate conda env. `conda activate my_env`.
@@ -27,15 +30,21 @@ The system generates captions across each of these elements for each video inter
     - Models in the folder `models/` *(note: might crash if not reboot between models. Use `archive`)*.
     - Prompt types in `config/prompts`.
 
-3. Run `scripts/compare_captions.py` to compare with the ground truth.
-    - Ground truth captions in `../actedgestures/labels/`.
-    - CSV format: `video_name, frame_idx, label`
+3. Results
 
-1. For categories, run `scripts/plot_matrix.py`
-    - `--metrics_folder` path to csv results. Manual or found in `config.directories.OUTPUT_FOLDER_PATH`.
+    - **Captions Evaluation**
+        1. Run `scripts/compare_captions.py` to compare predictions with ground truth.
+            - Ground truth captions are located in `../actedgestures/labels/`
+            - CSV format: `video_name, frame_idx, label`
 
-4. Run `scripts/plot_metrics.py` to plot and print result to `results/figures`.
-    - Use `--prompt_type` or `--gestures` to compare across.
+        1. Run `scripts/plot_metrics.py` to generate plots and print results to `results/figures/`.
+            - Use `--prompt_type` or `--gestures` to customize comparisons.
+
+    - **Category Evaluation**
+        1. Run `scripts/plot_matrix.py` for confusion matrix or class-wise accuracy.
+            - Use `--metrics_folder` to specify the path to CSV results.
+              (This can be manual or found via `config.directories.OUTPUT_FOLDER_PATH`)
+
 
 ## TODO
 - Change metrics validation to boxplot
