@@ -20,15 +20,20 @@ prompts = {
     "<selected_option>"
 
     **Options:**  
-    a. Follow - The pedestrian is signaling the driver to follow them.  
-    b. Hail - The pedestrian is trying to get the driver’s attention (e.g., waving).  
-    c. Forward - The pedestrian is motioning the driver to move forward.  
-    d. Left - The pedestrian is signaling the driver to turn left.  
-    e. Idle - The pedestrian is not making any clear gesture; the driver should wait.  
-    f. Reverse - The pedestrian is requesting the driver to move backward.  
-    g. Stop - The pedestrian is signaling the driver to stop (e.g., raised hand, palm facing forward).  
-    h. Other - The gesture does not match any of the above categories.
-    i. Right - The pedestrian is signaling the driver to turn right.    
+     0. Idle       - No movement or gestures.  
+     1. Transition - Initial or ascending gesture.  
+     2. Stop       - Stopping in any manner.  
+     3. Advance    - Drive forward in any manner.  
+     4. Return     - Backup by reverse or turn the vehicle.  
+     5. Accelerate - Increase current speed.  
+     6. Decelerate - Decrease current speed.  
+     7. Left       - Turn to the left lane.  
+     8. Right      - Turn to the right lane.  
+     9. Hail       - Hail for a ride.  
+    10. Point      - Pointing in any manner.  
+    11. Attention  - Seeking awareness.  
+    12. Other      - Non‑navigation gesture.  
+    13. Unclear    - Unknown or unclear.  
 
     Ensure that your response includes only **one** category in the specified format.
     """ + 
