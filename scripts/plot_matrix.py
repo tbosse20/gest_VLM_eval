@@ -14,19 +14,7 @@ import warnings
 from sklearn.exceptions import UndefinedMetricWarning
 warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 warnings.simplefilter(action="ignore", category=pd.errors.SettingWithCopyWarning)
-
-# classes = {
-#     "a": "follow",
-#     "b": "hail",
-#     "c": "forward",
-#     "d": "left",
-#     "e": "idle",
-#     "f": "reverse",
-#     "g": "stop",
-#     "h": "other",
-#     "i": "right",
-# }
-
+from sklearn.metrics import classification_report, confusion_matrix
 import re
 import pandas as pd
 import numpy as np
@@ -44,7 +32,7 @@ def extract_number_and_word(text):
         r"(?:\((\d+)\)\s*(\w+)?)|"                 # (0) Hail
         r"(?:Answer:\s*)?\"?(\d+)\"?|"             # "0" or 0
         r"(?:Answer:\s*)?(\d+)\.?\s*(\w+)?",       # 0. Stop or 0.
-        text
+        str(text)
     )
 
     if match:
@@ -71,7 +59,7 @@ def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
     df[["pred_id", "proc_caption"]] = df["caption"].apply(
         lambda x: pd.Series(extract_number_and_word(x))
     )
-    df["pred_id"] = df["pred_id"].astype(int)
+    df["pred_id"] = df["pred_id"].fillna(-1).astype(int)
     
     # Ensure the proc_caption and class is the same using classes
     df["confirm"] = df.apply(
@@ -94,11 +82,6 @@ def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
 
     print(f"{'#'*10} {model_name.upper()} {'#'*10}")
 
-    # Compute the accuracy
-    accuracy = df["correct"].mean()
-    print(f"Accuracy: {accuracy:.2f}", "\n")
-
-    from sklearn.metrics import classification_report, confusion_matrix
 
     # Generate classification report
     print(classification_report(df["gt_id"], df["pred_id"]), "\n")
@@ -126,7 +109,7 @@ def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
     plt.xlabel("Predicted Label", fontsize=12)
     plt.ylabel("True Label", fontsize=12)
     plt.title(
-        f"Confusion Matrix Heatmap: {model_name} (Acc = {accuracy:.2f})", fontsize=14
+        f"Confusion Matrix Heatmap: {model_name}", fontsize=14
     )
     plt.xticks(rotation=20, ha="right")
     plt.yticks(rotation=0)
