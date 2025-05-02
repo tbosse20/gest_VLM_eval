@@ -19,54 +19,72 @@ import re
 import pandas as pd
 import numpy as np
 
+classes = {
+     0: "Idle",
+     2: "Stop",
+     3: "Advance",
+     4: "Return",
+     5: "Accelerate",
+     6: "Decelerate",
+     7: "Left",
+     8: "Right",
+     9: "Hail",
+    10: "Attention",
+    12: "Other",   
+}
+reverse_classes = {v: k for k, v in classes.items()}
+
 def extract_number_and_word(text):
     """
     Extracts the number and the word following it if available.
-    Handles formats like '(0) Hail', '0', '0.', and '0. Stop'.
+    Handles formats like '(0) Hail', '0', '0.', '0. Stop', and 'Stop'.
     """
     if pd.isna(text):  # Handle NaN values
         return None, None
 
     match = re.search(
-        r"(?:Answer:\s*)?"                         # Optional "Answer: "
-        r"(?:\((\d+)\)\s*(\w+)?)|"                 # (0) Hail
-        r"(?:Answer:\s*)?\"?(\d+)\"?|"             # "0" or 0
-        r"(?:Answer:\s*)?(\d+)\.?\s*(\w+)?",       # 0. Stop or 0.
+        r"(?:Answer:\s*)?"
+        r"(?:\((\d+)\)\s*(\w+)?|" 
+        r"\"?(\d+)\"?|" 
+        r"(\d+)\.?\s*(\w+)?)",  # Only one closing parenthesis here
         str(text)
     )
-
     if match:
         number = match.group(1) or match.group(3) or match.group(4)
-        word = (
-            match.group(2)
-            if match.group(2)
-            else (match.group(5).strip() if match.group(5) else None)
-        )
+        word = match.group(2) or match.group(5)
         word = np.nan if word == "" else word
-        return int(number), word.lower() if word else None
+        return int(number), word
+
+    # Try matching standalone word (e.g., "Stop") using classes dict
+    match = re.search(r"^(\w+)$", str(text))
+    if match and classes:
+        label = match.group(1)
+        number = reverse_classes.get(label, None)
+        if number is None:
+            raise ValueError(f"Unknown class name: '{label}'")
+        return int(number), label
 
     return None, None
-
-
-
+    
 def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
     """Post-process the caption dataframe to get the class and processed caption"""
-
+    
     # Only keep the necessary columns
     df = df[["caption", "gt_id"]]
-
+    
     # Extract the letter and word from the caption
     df[["pred_id", "proc_caption"]] = df["caption"].apply(
         lambda x: pd.Series(extract_number_and_word(x))
     )
-    df["pred_id"] = df["pred_id"].fillna(-1).astype(int)
+    df["pred_id"] = pd.to_numeric(df["pred_id"], errors="coerce").fillna(-1)
+    df["pred_id"] = df["pred_id"].astype(int)
     
     # Ensure the proc_caption and class is the same using classes
     df["confirm"] = df.apply(
         lambda x: (
             np.nan
             if pd.isna(x["proc_caption"])
-            else x["pred_id"] == x["proc_caption"]
+            else classes.get(x["pred_id"], None) == x["proc_caption"]
         ), axis=1,
     )
     # Ensure theres no False in 'confirm'
