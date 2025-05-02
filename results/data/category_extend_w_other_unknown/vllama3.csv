@@ -1,0 +1,16 @@
+video_name,prompt_type,caption,frame_idx,end_frame,interval,window_size
+video_00,category,12. Other,0,59,1,59
+video_01,category,12. Other,0,59,1,59
+video_02,category,12. Other,0,59,1,59
+video_03,category,10.,0,59,1,59
+video_04,category,12. Other,0,89,1,89
+video_05,category,12. Other,0,59,1,59
+video_06,category,10. Point,0,59,1,59
+video_07,category,12. Other,0,59,1,59
+video_08,category,12. Other,0,59,1,59
+video_09,category,0,0,89,1,89
+video_10,category,12. Other,0,89,1,89
+video_11,category,12. Other,0,59,1,59
+video_12,category,12. Other,0,59,1,59
+video_13,category,12. Other,0,59,1,59
+video_14,category,12. Other,0,29,1,29

@@ -24,9 +24,9 @@ mp_styles = mp.solutions.drawing_styles
 
 # Instantiate MediaPipe Holistic
 holistic = mp_holistic.Holistic(
-    static_image_mode=False,  # video mode
-    model_complexity=2,  # highest accuracy
-    smooth_landmarks=True,  # temporal smoothing
+    static_image_mode=False,     # video mode
+    model_complexity=2,          # highest accuracy
+    smooth_landmarks=True,       # temporal smoothing
     refine_face_landmarks=True,  # improved face/hand detail
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5,

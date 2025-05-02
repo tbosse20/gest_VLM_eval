@@ -1,8 +1,5 @@
 ToDo:
-- Implement `flag` for projection.
 - Write about which models uses what. And methods. Full video, path, frame_list, etc.
-- Update prompt categories to category2, and classes `advance`
-- Expand Acted with more gestures and distance <----
 - readme (instructions)
 
 # Final

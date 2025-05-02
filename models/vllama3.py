@@ -4,6 +4,8 @@ import sys, os
 sys.path.append(".")
 import config.hyperparameters as hyperparameters
 import models.src.utils as utils
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 def load_model():
     torch.cuda.empty_cache()
@@ -67,7 +69,7 @@ def inference(
 
     # Load model
     model, processor = load_model() if model_package is None else model_package
-    
+
     conversation = build_conversation(content_setting, input_path, prompt, modal) if conversation is None else conversation
 
     inputs = processor(
