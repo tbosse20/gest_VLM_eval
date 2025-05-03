@@ -1,14 +1,14 @@
 # %%
 import sys
 sys.path.append(".")
-import scripts.plot_matrix as plot_matrix
+import analysis.plot_matrix as plot_matrix
 import config.directories as directories
 
 metrics_folder=directories.OUTPUT_FOLDER_PATH
 data = plot_matrix.post_process_csv_folder(metrics_folder)
 
 # %%
-def count_pred_class(data, correct):
+def sample_correctness(data, correct):
     for df in data:
         
         model_name = df["model_name"].unique()[0]
@@ -26,7 +26,7 @@ def count_pred_class(data, correct):
         print(df)
         print()
         
-# sample_correctness(data, correct=True)
+sample_correctness(data, correct=True)
 
 # %%
 from collections import defaultdict
@@ -87,4 +87,4 @@ def count_pred_class(data):
         print(f"Total: {class_counts.sum()}")
         print()
         
-# count_pred_class(data)
+count_pred_class(data)

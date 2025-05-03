@@ -6,7 +6,7 @@ import sys
 # Add project root or config path
 sys.path.append(".")
 import config.directories as directories
-import scripts.plot_matrix as plot_matrix
+import analysis.plot_matrix as plot_matrix
 
 # === Config ===
 model_names = {
