@@ -2,7 +2,7 @@ import sys
 sys.path.append(".")
 import models.src.utils as utils
 import enhance.augment.augment as augment
-import models.archive.vllama3 as vllama3
+import models.vllama3 as vllama3
 
 def load_model():
     return vllama3.load_model()
