@@ -70,7 +70,7 @@ def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
     """Post-process the caption dataframe to get the class and processed caption"""
     
     # Only keep the necessary columns
-    df = df[["caption", "gt_id"]]
+    df = df[["caption", "gt_id", "video_name", "frame_idx"]].copy()
     
     # Extract the letter and word from the caption
     df[["pred_id", "proc_caption"]] = df["caption"].apply(
@@ -96,10 +96,12 @@ def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
+def plot_confusion_matrix(df: pd.DataFrame) -> None:
+    """Plot the confusion matrix for the given dataframe."""
+
+    model_name = df["model_name"].iloc[0]
 
     print(f"{'#'*10} {model_name.upper()} {'#'*10}")
-
 
     # Generate classification report
     print(classification_report(df["gt_id"], df["pred_id"]), "\n")
@@ -133,7 +135,7 @@ def plot_confusion_matrix(df: pd.DataFrame, model_name: str):
     plt.yticks(rotation=0)
 
     plt.tight_layout()
-    # plt.show()
+    plt.show()
 
 
 
@@ -157,6 +159,7 @@ def post_process_csv_folder(metrics_folder):
     labels_csv = directories.LABELS_CSV
     gt = pd.read_csv(labels_csv)
 
+    data = []
     # Loop through each CSV file
     for file in csv_files:
 
@@ -174,9 +177,14 @@ def post_process_csv_folder(metrics_folder):
 
         # Post-process the caption dataframe
         df = post_process_caption_df(df)
-
-        # Plot the confusion matrix
-        plot_confusion_matrix(df, model_name)
+        
+        # Add model name to the dataframe
+        df["model_name"] = model_name
+        
+        # Append the dataframe to the list
+        data.append(df)
+        
+    return data
 
 
 if __name__ == "__main__":
@@ -201,4 +209,7 @@ if __name__ == "__main__":
     """
 
     # Plot metrics
-    merged_df = post_process_csv_folder(args.metrics_folder)
+    data = post_process_csv_folder(args.metrics_folder)
+    for df in data:
+        # Plot the confusion matrix
+        plot_confusion_matrix(df)

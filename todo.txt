@@ -1,6 +1,11 @@
 ToDo:
+- Rerun Description and Proj. + Desc.
+- Result analysis
 - Write about which models uses what. And methods. Full video, path, frame_list, etc.
-- readme (instructions)
+- Readme (instructions)
+
+# Nice to have:
+- Additional classification to compare
 
 # Final
 - Remove history

@@ -39,10 +39,11 @@ def desc_hand_depth(hand_bbox, face_bbox, rel_threshold=0.2):
         return "depth undetermined"
 
     ratio = hand_area / face_area
-
-    if ratio > 1 + rel_threshold:
+    print(ratio)
+    
+    if ratio > 0.5 + rel_threshold:
         return "in front of"
-    elif ratio < 1 - rel_threshold:
+    elif ratio < 0.5 - rel_threshold:
         return "behind"
     else:
         return "beside"
@@ -94,7 +95,7 @@ def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
         return "orientation undetermined"
     normal /= norm
     # flip normal to point out of the hand
-    # normal *= -1 if hand_label == "left" else 1
+    normal *= -1 if hand_label == "left" else 1
 
     abs_n = np.abs(normal)
     axis = np.argmax(abs_n)
@@ -108,7 +109,7 @@ def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
         ["palm facing the camera", "back facing the camera"], # Z axis
     ]
 
-    sign = int(normal[axis] > 0)
+    sign = int(normal[axis] <= 0)
     return lookup[axis][sign]
 
 
@@ -160,9 +161,9 @@ def desc_face_orientation(face_landmarks, threshold=0.3):
     # lookup matrix: [axis][sign]
     # sign = 0 if normal[axis] < 0, else 1
     lookup = [
-        ("turned left",       "turned right"), # X axis
-        ("tilted up",         "tilted down"),  # Y axis
-        ("facing the camera", "turned away"),  # Z axis
+        ("face's turned left", "face's turned right"), # X axis
+        ("face's tilted up",   "face's tilted down"),  # Y axis
+        ("facing the camera",  "face's turned away"),  # Z axis
     ]
     sign = int(normal[axis] > 0)
     return lookup[axis][sign]
@@ -182,8 +183,9 @@ def describe_relative_hand(face_bbox, hand_landmarks):
     xmin, ymin, xmax, ymax = face_bbox
     hand_horiz  = desc_hand_horizontal(hand_center, xmin, xmax)
     hand_vert   = desc_hand_vertical(hand_center, ymin, ymax)
-    hand_depth  = desc_hand_depth(hand_bbox, face_bbox)
-    hand_position_desc = f"{hand_horiz}, {hand_vert}, and {hand_depth} their face"
+    # hand_depth  = desc_hand_depth(hand_bbox, face_bbox)
+    # hand_position_desc = f"{hand_horiz}, {hand_vert}, and {hand_depth} their face"
+    hand_position_desc = f"{hand_horiz} and {hand_vert} their face"
 
     return hand_position_desc
 
@@ -256,9 +258,9 @@ def desc_fingers(hand_lms):
     # Describe which fingers are raised
     raised = [name for i, name in enumerate(FINGER_NAMES) if pred_fingers[i]]
     if len(raised) == 0:
-        return "Fist"
+        return "Making a fist."
 
-    desc = "Raised fingers are " + ", ".join(raised) + ". "
+    desc = "Raised fingers are: " + ", ".join(raised) + "."
 
     return desc
 
