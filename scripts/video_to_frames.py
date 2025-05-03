@@ -18,7 +18,8 @@ def save_video_frames(video_path, output_folder, interval: int = 1) -> None:
 
     # Create output folder if it doesn't exist
     if os.path.exists(output_folder):
-        print(f"'{output_folder}' already exists, skipping.")
+        base_name = os.path.basename(output_folder)
+        print(f"'{base_name}' exists, skipping.")
         return
     else:
         os.makedirs(output_folder, exist_ok=True)

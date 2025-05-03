@@ -130,7 +130,7 @@ def caption_input(
     computed_video_names = pd.read_csv(csv_path, index_col=False)["video_name"].values
     video_name = os.path.basename(input_path)
     if video_name in computed_video_names:
-        print(f"'{video_name}' already captioned, skip..")
+        print(f"'{video_name}' captioned, skip..")
         return
 
     # Caption frames
@@ -211,18 +211,29 @@ def caption_prompts(
 
     # Iterate over prompts
     for prompt_type, prompt in prompts.items():
-
-        # Get model response and append to dictionary
-        respond = model_module.inference(
-            prompt        = prompt,
-            input_path    = frames_list,
-            model_package = model_package
-        )
-        respond = re.sub(r" {2,}", "\\\\s", respond.replace("\n", "\\\\n").strip())
-
-        # Save to csv
         video_name = os.path.basename(video_path)
-        save_to_csv(video_name, prompt_type, respond, csv_path, start_frame, window, interval)
+
+        try:
+            # Get model response and append to dictionary
+            respond = model_module.inference(
+                prompt        = prompt,
+                input_path    = frames_list,
+                model_package = model_package
+            )
+            respond = re.sub(r" {2,}", "\\\\s", respond.replace("\n", "\\\\n").strip())
+
+            # Save to csv
+            save_to_csv(video_name, prompt_type, respond, csv_path, start_frame, window, interval)
+
+        except Exception as e:            
+            # Unload model
+            utils.unload_model(*model_package)
+            # Delete model from system
+            del model_module
+            
+            print(f"Error during inference: {e}")
+            print(f'Skip, {video_name}')
+
 
 
 def save_to_csv(
