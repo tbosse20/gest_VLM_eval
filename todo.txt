@@ -1,5 +1,6 @@
 ToDo:
-- Rerun Description and Proj. + Desc.
+- (Run on pre-dataset & run validation)
+- (Rerun using another pose-estimator)
 - Result analysis
 - Write about which models uses what. And methods. Full video, path, frame_list, etc.
 - Readme (instructions)

@@ -42,7 +42,7 @@ def from_image(method, image_path: str, draw: int = 0):
     original_frame = cv2.imread(image_path)
     
     # Run the selected method on the frame
-    frame, descriptions = method(original_frame, draw=draw)
+    frame, descriptions, _ = method(original_frame, draw=draw)
     
     return frame, descriptions
 
@@ -52,15 +52,18 @@ def from_video(method, video_path: str, video_output: str = None, draw: int = 0)
     If no output directory is specified, the video will be saved in the same directory as the input video.
     """
     
-    if not os.path.isfile(video_path):
-        raise FileNotFoundError(f"Video file {video_path} not found")
-    if not video_path.endswith((".mp4", ".avi", ".mov", ".MP4")):
-        raise ValueError("Video path must end with .mp4, .avi, .mov, or .MP4")
-    
     video_path = get_video_path(video_path) if video_path else 0
     cap = cv2.VideoCapture(video_path)
     out = setup_writer(video_path, cap, video_output) if video_path != 0 else None
-    frame_count = 0
+    
+    # Manual
+    counts = {
+        "frame":      0,
+        "person":     0,
+        "face":       0,
+        "left_hand":  0,
+        "right_hand": 0,
+    }
 
     while True:
         ret, original_frame = cap.read()
@@ -69,8 +72,15 @@ def from_video(method, video_path: str, video_output: str = None, draw: int = 0)
         original_frame = cv2.flip(original_frame, 1) if video_path == 0 else original_frame
 
         # Run the selected method on the frame
-        frame, descriptions = method(original_frame, draw=draw)
-        frame_count += 1
+        
+        # original_frame = cv2.resize(original_frame, (1280, 720))
+        
+        frame, descriptions, package = method(original_frame, draw=draw)
+        
+        for key in counts.keys():
+            if key in package and package[key]:
+                counts[key] += 1
+        counts["frame"] += 1
 
         # if frame_count % 8 == 0:
         #     print(f"[Frame {frame_count}] {descriptions}")
@@ -86,10 +96,12 @@ def from_video(method, video_path: str, video_output: str = None, draw: int = 0)
     out.release() if out else None
     cv2.destroyAllWindows()
     
-    return descriptions
+    # print(package)
+    
+    return descriptions, counts
 
 
-def from_dir(method, videos_dir: str, extension: str = "augmented", draw: int = 0):
+def from_dir(method, videos_dir: str, extension: str = "projected", draw: int = 0):
     """
     Process all videos in a directory and save the output to a sibling directory.
     """
@@ -102,12 +114,29 @@ def from_dir(method, videos_dir: str, extension: str = "augmented", draw: int = 
     parent_dir = os.path.dirname(videos_dir)
     output_dir = os.path.join(parent_dir, extension)
     os.makedirs(output_dir, exist_ok=True)
+    
+    video_files = [
+        f
+        for f in os.listdir(videos_dir)
+        if f.endswith((".mp4", ".avi", ".mov", ".MP4"))
+        if os.path.isfile(os.path.join(videos_dir, f)) # Check if file exists
+        if int(f.split("_")[-1].split(".")[0]) <= 117 # Filter out complex videos
+    ]
+    video_files.sort(key=lambda x: int(x.split("_")[-1].split(".")[0]))
+    
+    counts = {
+        "frame":      0,
+        "person":     0,
+        "face":       0,
+        "left_hand":  0,
+        "right_hand": 0,
+    }
 
-    for video in tqdm(os.listdir(videos_dir), desc="Processing"):
+    for video_file in tqdm(video_files, desc="Processing"):
 
         # Get the full path to the video file and output path
-        video_path = os.path.join(videos_dir, video)
-        video_output = os.path.join(output_dir, video)
+        video_path = os.path.join(videos_dir, video_file)
+        video_output = os.path.join(output_dir, video_file)
 
         # Check if the video file exists and is a valid video file
         if not os.path.isfile(video_path):
@@ -118,10 +147,19 @@ def from_dir(method, videos_dir: str, extension: str = "augmented", draw: int = 
             continue
 
         # Process the video
-        from_video(method, video_path, video_output, draw=draw)
+        _, package = from_video(method, video_path, video_output, draw=draw)
+        
+        for key, value in package.items():
+            counts[key] += value
+            
         break
-
-
+    
+    print(f"Processed {counts['frame']} frames in total.")
+    for key, value in counts.items():
+        if key == "frame": continue
+        percentage = value / counts["frame"] * 100 if counts["frame"] > 0 else 0
+        print(f"{key}: {percentage:.2f}% ({value} frames)")
+        
 def main(method):
     import argparse
 
@@ -148,10 +186,9 @@ def main(method):
         python enhance/augment.py /path/to/input --draw 1
     """
     
-
     if not args.input or os.path.isfile(args.input):
         
-        if args.input.endswith((".jpg", ".png", ".jpeg")):
+        if args.input and args.input.endswith((".jpg", ".png", ".jpeg")):
             frame, descriptions = from_image(method, args.input, draw=args.draw)
             # Save the processed image
             file_name = os.path.basename(args.input)

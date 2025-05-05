@@ -21,6 +21,7 @@ mp_holistic = mp.solutions.holistic
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 mp_styles = mp.solutions.drawing_styles
+mp_pose = mp.solutions.pose
 
 # Instantiate MediaPipe Holistic
 holistic = mp_holistic.Holistic(
@@ -140,6 +141,13 @@ def process_frame(frame, draw: int = 0) -> tuple:
 
     yres = yolo(frame)[0]
     
+    package = {
+        "pose":       False,
+        "face":       False,
+        "left_hand":  False,
+        "right_hand": False,
+    }
+    
     descriptions = []
     for box in yres.boxes[yres.boxes.cls == 0]:
 
@@ -151,23 +159,29 @@ def process_frame(frame, draw: int = 0) -> tuple:
         rgb = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
         res = holistic.process(rgb)
 
+        if not res:
+            continue
+        
         # Draw landmarks on the overlay
         draw_landmarks(res, overlay, roi_coords)
 
         # Describe the person
-        hands_list = [
-            (res.left_hand_landmarks, "Left"),
-            (res.right_hand_landmarks, "Right"),
-        ]
-        description = desc_person(res.face_landmarks, hands_list)
+        description = desc_person(res)
         write_desc(overlay, description, pos=(x1, y1)) if draw >= 2 else None
+        
+        package = {
+            "person":     True if res.pose_landmarks       else False,
+            "face":       True if res.face_landmarks       else False,
+            "left_hand":  True if res.left_hand_landmarks  else False,
+            "right_hand": True if res.right_hand_landmarks else False,
+        }
 
         descriptions.append(description)
 
     flattened = [item for sublist in descriptions for item in sublist]
     descriptions = " ".join(flattened)
 
-    return overlay, descriptions
+    return overlay, descriptions, package
 
 
 if __name__ == "__main__":

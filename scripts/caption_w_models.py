@@ -84,6 +84,7 @@ def prep_csv_output(model_module):
     module_name = model_module.__name__.split(".")[-1]
     csv_path = f"{output_folder_path}/{module_name}.csv"
     csv_path = csv_path.replace(".csv", f"_projection.csv") if flags.projection_enhancement else csv_path
+    csv_path = csv_path.replace(".csv", f"_hands.csv") if flags.describe_hands else csv_path
 
     # Generate csv file if not exists
     columns = [

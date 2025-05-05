@@ -5,6 +5,7 @@ import sys
 
 sys.path.append(".")
 from enhance.body_description.finger_cls_GNN import est_fingers, FINGER_NAMES
+import config.flags as flags
 
 # Thresholds for classification (tunable):
 SIDE_X_OFFSET       = 0.15
@@ -14,6 +15,7 @@ DEPTH_FRONT_TH      = -0.05
 DEPTH_BACK_TH       = 0.05
 
 mp_hands = mp.solutions.hands
+mp_pose = mp.solutions.pose
 
 def desc_hand_depth(hand_bbox, face_bbox, rel_threshold=0.2):
     """
@@ -49,35 +51,42 @@ def desc_hand_depth(hand_bbox, face_bbox, rel_threshold=0.2):
         return "beside"
 
 
-def desc_hand_horizontal(hand_center, left_face, right_face):
+def desc_hand_horizontal(hand_center, center_face, threshold=0.3):
     x, _ = hand_center
-    left = left_face
-    right = right_face
 
-    if x < left:
+    if x < center_face:
         return "left"
-    elif x > right:
+    elif x > center_face:
         return "right"
-    elif left_face < x < right_face:
+    elif center_face + threshold < x < center_face - threshold:
         return "vertical"
     else:
         return "horizontal position undetermined"
 
 
-def desc_hand_vertical(hand_center, upper_face, lower_face):
+def desc_hand_vertical(hand_center, center_face, threshold=0.3):
     _, y = hand_center
-
-    if y < upper_face:
+    
+    if y < center_face:
         return "above"
-    elif y > lower_face:
+    elif y > center_face:
         return "below"
-    elif upper_face < y < lower_face:
+    elif center_face + threshold < y < center_face - threshold:
         return "horizontal"
     else:
         return "vertical position undetermined"
 
 
-def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
+def desc_palm_dir(res, hand_label, threshold=0.3):
+    
+    hand_landmarks = (
+        res.left_hand_landmarks
+        if hand_label.lower() == "right"
+        else res.right_hand_landmarks
+    )
+    if not hand_landmarks:
+        return None
+    
     wrist    = hand_landmarks.landmark[mp_hands.HandLandmark.WRIST]
     idx_mcp  = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_MCP]
     pinky_mcp= hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_MCP]
@@ -91,17 +100,17 @@ def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
     
     normal = np.cross(v2, v1)
     norm = np.linalg.norm(normal)
+    
     if norm == 0:
-        return "orientation undetermined"
-    normal /= norm
-    # flip normal to point out of the hand
-    normal *= -1 if hand_label == "left" else 1
+        return None
+    
+    normal /= norm # normalize
 
     abs_n = np.abs(normal)
     axis = np.argmax(abs_n)
     if abs_n[axis] < threshold:
-        return "orientation unclear"
-
+        return None
+    
     # Matrix: axis → [negative direction, positive direction]
     lookup = [
         ["palm facing left",       "palm facing right"],      # X axis
@@ -109,16 +118,16 @@ def desc_palm_dir(hand_landmarks, hand_label, threshold=0.3):
         ["palm facing the camera", "back facing the camera"], # Z axis
     ]
 
-    sign = int(normal[axis] <= 0)
+    sign = int(normal[axis] > 0)
     return lookup[axis][sign]
 
 
 def desc_face_orientation(face_landmarks, threshold=0.3):
     """
     Estimate which way the face is oriented, using a lookup matrix:
-      axis 0 (x): (“turned left”,     “turned right”)
-      axis 1 (y): (“tilted up”,       “tilted down”)
-      axis 2 (z): (“facing camera”,   “turned away”)
+      axis 0 (x): (“turned left”,   “turned right”)
+      axis 1 (y): (“tilted up”,     “tilted down”)
+      axis 2 (z): (“facing camera”, “turned away”)
 
     Args:
       face_landmarks: a MediaPipe FaceMesh LandmarkList
@@ -126,7 +135,7 @@ def desc_face_orientation(face_landmarks, threshold=0.3):
 
     Returns:
       One of: "facing camera", "turned away", "tilted up", "tilted down",
-              "turned left", "turned right", or "orientation undetermined"
+              "turned left", "turned right", or None
     """
 
     if not face_landmarks:
@@ -147,7 +156,8 @@ def desc_face_orientation(face_landmarks, threshold=0.3):
     normal = np.cross(v1, v2)
     norm = np.linalg.norm(normal)
     if norm == 0:
-        return "orientation undetermined"
+        return None
+    
     normal /= norm
     # flip normal to point out of the face
     normal *= -1
@@ -156,7 +166,7 @@ def desc_face_orientation(face_landmarks, threshold=0.3):
     abs_n = np.abs(normal)
     axis = int(np.argmax(abs_n))  # 0=X, 1=Y, 2=Z
     if abs_n[axis] < threshold:
-        return "orientation unclear"
+        return None
 
     # lookup matrix: [axis][sign]
     # sign = 0 if normal[axis] < 0, else 1
@@ -165,24 +175,26 @@ def desc_face_orientation(face_landmarks, threshold=0.3):
         ("face's tilted up",   "face's tilted down"),  # Y axis
         ("facing the camera",  "face's turned away"),  # Z axis
     ]
+    
     sign = int(normal[axis] > 0)
     return lookup[axis][sign]
 
 
-def describe_relative_hand(face_bbox, hand_landmarks):
+def describe_relative_hand(face_center, hand_landmarks):
 
-    if face_bbox is None or hand_landmarks is None:
+    if face_center is None or hand_landmarks is None:
         return None
 
-    xs = [lm.x for lm in hand_landmarks.landmark]
-    ys = [lm.y for lm in hand_landmarks.landmark]
-    hand_bbox = (min(xs), min(ys), max(xs), max(ys))
-    hx0, hy0, hx1, hy1 = hand_bbox
-    hand_center = ((hx0 + hx1) / 2, (hy0 + hy1) / 2)
+    # xs = [lm.x for lm in hand_landmarks]
+    # ys = [lm.y for lm in hand_landmarks]
+    # hand_bbox = (min(xs), min(ys), max(xs), max(ys))
+    # hx0, hy0, hx1, hy1 = hand_bbox
+    # hand_center = ((hx0 + hx1) / 2, (hy0 + hy1) / 2)
+    hand_center = (hand_landmarks.x, hand_landmarks.y)
     
-    xmin, ymin, xmax, ymax = face_bbox
-    hand_horiz  = desc_hand_horizontal(hand_center, xmin, xmax)
-    hand_vert   = desc_hand_vertical(hand_center, ymin, ymax)
+    x, y = face_center
+    hand_horiz  = desc_hand_horizontal(hand_center, x,)
+    hand_vert   = desc_hand_vertical(hand_center, y)
     # hand_depth  = desc_hand_depth(hand_bbox, face_bbox)
     # hand_position_desc = f"{hand_horiz}, {hand_vert}, and {hand_depth} their face"
     hand_position_desc = f"{hand_horiz} and {hand_vert} their face"
@@ -205,46 +217,61 @@ def get_face_bbox(face_lms):
 
 def formulate_desc(relative_hand_desc, palm_desc, hand_label):
 
-    Hand_label = hand_label.capitalize()
+    hand_label = hand_label.capitalize()
 
     if relative_hand_desc is None and palm_desc is None:
         return None
 
     if relative_hand_desc is None:
-        return f"{Hand_label} hand's {palm_desc}."
+        return f"{hand_label} hand's {palm_desc}."
 
     if palm_desc is None:
-        return f"{Hand_label} hand {relative_hand_desc}."
+        return f"{hand_label} hand is {relative_hand_desc}."
 
-    return f"{Hand_label} hand " + f"is {relative_hand_desc} with the {palm_desc}."
+    return f"{hand_label} hand is {relative_hand_desc} with the {palm_desc}."
 
 
-def desc_hands(hands_list, face_bbox):
+def desc_hands(res):
 
-    if not face_bbox or not hands_list:
+    if not res.pose_landmarks:
         return None
+    face_pose = res.pose_landmarks.landmark[mp_pose.PoseLandmark.NOSE]
+    if not face_pose:
+        return None
+    
+    face_center = (face_pose.x, face_pose.y)
+    
+    if not res:
+        return None
+    
+    hands_list = ["Left", "Right"]
 
     hands_desc = []
-    for hand_lms, hand_label in hands_list:
+    for hand_label in hands_list:
         
-        if hand_lms is None:
+        wrist = res.pose_landmarks.landmark[(
+            mp_pose.PoseLandmark.LEFT_WRIST
+            if hand_label.lower() == "right"
+            else mp_pose.PoseLandmark.RIGHT_WRIST
+        )]
+        if wrist is None:
             hands_desc.append(f"{hand_label.capitalize()} hand isn't visible.")
             continue
-
-        relative_hand_desc = describe_relative_hand(face_bbox, hand_lms)
-        palm_desc = desc_palm_dir(hand_lms, hand_label.lower())
-
+        relative_hand_desc = describe_relative_hand(face_center, wrist)
+        
+        palm_desc = desc_palm_dir(res, hand_label.lower()) if flags.describe_hands else None
         # skip if no palm direction and no relative hand description
         if relative_hand_desc is None and palm_desc is None:
             continue
 
         hand_desc = formulate_desc(relative_hand_desc, palm_desc, hand_label)
-        fingers_desc = desc_fingers(hand_lms.landmark)
-        full_hand_desc = f"{hand_desc} {fingers_desc}" if fingers_desc else hand_desc
-        hands_desc.append(full_hand_desc)
+        
+        # fingers_desc = desc_fingers(hand_lms.landmark)
+        # full_hand_desc = f"{hand_desc} {fingers_desc}" if fingers_desc else hand_desc
+        # hands_desc.append(full_hand_desc)
 
         # Separate hand descriptions
-        # hands_desc.append(hand_desc)
+        hands_desc.append(hand_desc)
         # hands_desc.append(fingers_desc)
 
     return hands_desc
@@ -285,26 +312,28 @@ def write_desc(frame, descriptions, pos=(10, 30), font_scale=0.5, color=(255, 25
     return frame
 
 
-def desc_person(face_res, hands_list) -> tuple:
+def desc_person(res) -> tuple:
     """Process a frame and describe the face and hands.
 
     Args:
-        face_res: The MediaPipe FaceMesh object.
-        hands_list: The MediaPipe Hands object.
+        res: The MediaPipe Holistic object containing pose and hand landmarks.
 
     Returns:
         A list of descriptions for the face and hands.
     """
     descriptions = []
+    
+    if not res:
+        return ["No person detected."]
 
-    face_bbox = get_face_bbox(face_res)
+    # face_bbox = get_face_bbox(face_pose)
 
     # Describe face
-    face_dir = desc_face_orientation(face_res)
-    descriptions.append(f"They're {face_dir}.")
+    face_dir = desc_face_orientation(res.face_landmarks)
+    descriptions.append(f"They're {face_dir}.") if face_dir else None
 
     # Describe hands
-    hand_desc = desc_hands(hands_list, face_bbox)
+    hand_desc = desc_hands(res)
     descriptions += hand_desc if hand_desc else ["No hands detected."]
 
     return descriptions
