@@ -1,7 +1,7 @@
 import sys
 sys.path.append(".")
 import models.src.utils as utils
-import enhance.augment.augment as augment
+import enhance.projection.projection as projection
 import models.vllama3 as vllama3
 
 def load_model():
@@ -21,7 +21,7 @@ def build_conversation(frame_list, prompt):
         })
 
         # Add text description of the frame
-        _, frame_text, _ = augment.process_frame(frame_path)
+        _, frame_text, _ = projection.process_frame(frame_path)
         content.append({
             "type": "text",
             "text": f"[Frame {idx}] {frame_text}"

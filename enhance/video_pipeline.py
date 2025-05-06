@@ -183,7 +183,7 @@ def main(method):
 
     # Example usage:
     """ 
-        python enhance/augment.py /path/to/input --draw 1
+        python enhance/projection.py /path/to/input --draw 1
     """
     
     if not args.input or os.path.isfile(args.input):

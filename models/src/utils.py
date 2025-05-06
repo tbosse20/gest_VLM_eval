@@ -4,7 +4,7 @@ import torch
 import numpy as np
 import sys
 sys.path.append(".")
-import enhance.augment.augment as augment
+import enhance.projection.projection as projection
 import enhance.video_pipeline as video_pipeline
 import config.flags as flags
 
@@ -77,7 +77,7 @@ def create_video_from_frames(frames: list[np.ndarray], output_video_path):
     # If enhancement is needed, process and overwrite output_video_path
     if flags.projection_enhancement:
         video_pipeline.from_video(
-            method=augment.process_frame,
+            method=projection.process_frame,
             video_path=temp_path,
             video_output=output_video_path,
             draw=1

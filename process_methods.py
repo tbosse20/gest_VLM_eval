@@ -1,7 +1,7 @@
 import os
 import sys
 sys.path.append(".")
-from enhance.augment.augment import pose_from_video
+from enhance.projection.projection import pose_from_video
 
 def video_process(video, method):
     pass
