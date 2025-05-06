@@ -1,12 +1,6 @@
 ToDo:
-- (Run on pre-dataset & run validation)
-- (Rerun using another pose-estimator)
-- Result analysis
 - Write about which models uses what. And methods. Full video, path, frame_list, etc.
 - Readme (instructions)
-
-# Nice to have:
-- Additional classification to compare
 
 # Final
 - Remove history
