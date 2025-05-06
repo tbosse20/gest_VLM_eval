@@ -95,9 +95,8 @@ def post_process_caption_df(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
-
-def plot_confusion_matrix(df: pd.DataFrame) -> None:
-    """Plot the confusion matrix for the given dataframe."""
+def print_classification_report(df: pd.DataFrame) -> None:
+    """Print the classification report for the given dataframe."""
 
     model_name = df["model_name"].iloc[0]
 
@@ -105,6 +104,11 @@ def plot_confusion_matrix(df: pd.DataFrame) -> None:
 
     # Generate classification report
     print(classification_report(df["gt_id"], df["pred_id"]), "\n")
+
+def plot_confusion_matrix(df: pd.DataFrame) -> None:
+    """Plot the confusion matrix for the given dataframe."""
+
+    model_name = df["model_name"].iloc[0]
 
     # Get sorted list of unique labels
     labels = sorted(set(df["gt_id"]).union(set(df["pred_id"])))
@@ -211,5 +215,5 @@ if __name__ == "__main__":
     # Plot metrics
     data = post_process_csv_folder(args.metrics_folder)
     for df in data:
-        # Plot the confusion matrix
-        plot_confusion_matrix(df)
+        print_classification_report(df)
+        # plot_confusion_matrix(df)

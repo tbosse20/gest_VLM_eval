@@ -6,23 +6,25 @@ import sys
 # Add project root or config path
 sys.path.append(".")
 import config.directories as directories
-import analysis.plot_matrix as plot_matrix
+import scripts.class_analysis.plot_matrix as plot_matrix
 
 # === Config ===
 model_names = {
     'vllama3.csv': 'Plain',
     'vllama3_projection.csv': 'Project',
     'vllama3_describe.csv': 'Describe',
-    'vllama3_describe_projection.csv': 'Proj. + Desc.',
+    'vllama3_describe_hands.csv': 'Desc.+Hand',
+    'vllama3_describe_projection.csv': 'Proj.+Desc.+Hand',
     os.path.basename(directories.LABELS_CSV): 'Ground Truth',
 }
-model_order = ['Plain', 'Project', 'Describe', 'Proj. + Desc.', 'Ground Truth']
+model_order = ['Plain', 'Project', 'Describe', 'Desc.+Hand', 'Proj.+Desc.+Hand', 'Ground Truth']
 color_map = {
     'Ground Truth':  'green',
     'Plain':         'blue',
     'Project':       'orange',
     'Describe':      'purple',
-    'Proj. + Desc.': 'red',
+    'Desc.+Hand':  'pink',
+    'Proj.+Desc.+Hand': 'red',
 }
 caption_map = {
     0: 'Idle', 2: 'Stop', 3: 'Advance', 4: 'Return', 5: 'Accelerate',
@@ -102,7 +104,7 @@ legend = ax.legend(
 for label in legend.get_texts():
     if label.get_text() == 'Ground Truth':
         label.set_fontstyle('italic')
-        label.set_color('gray')
+        label.set_color('darkgray')
 
 ax.set_xticklabels(ax.get_xticklabels(), rotation=20, ha='right', fontsize=9)
 ax.set_xlabel('Gesture Class')
