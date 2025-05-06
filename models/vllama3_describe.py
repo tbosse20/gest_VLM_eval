@@ -21,7 +21,7 @@ def build_conversation(frame_list, prompt):
         })
 
         # Add text description of the frame
-        _, frame_text = augment.process_frame(frame_path)
+        _, frame_text, _ = augment.process_frame(frame_path)
         content.append({
             "type": "text",
             "text": f"[Frame {idx}] {frame_text}"

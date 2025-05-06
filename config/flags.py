@@ -1,2 +1,2 @@
-projection_enhancement = True
-describe_hands = True
+projection_enhancement = False
+describe_hands = False
