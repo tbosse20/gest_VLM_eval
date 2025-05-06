@@ -11,20 +11,20 @@ import scripts.class_analysis.plot_matrix as plot_matrix
 # === Config ===
 model_names = {
     'vllama3.csv': 'Plain',
-    'vllama3_projection.csv': 'Project',
-    'vllama3_describe.csv': 'Describe',
-    'vllama3_describe_hands.csv': 'Desc.+Hand',
-    'vllama3_describe_projection.csv': 'Proj.+Desc.+Hand',
+    'vllama3_projection.csv': 'Projection',
+    'vllama3_describe.csv': 'SBD',
+    'vllama3_describe_hands.csv': 'SBD+Hand',
+    'vllama3_describe_projection.csv': 'Proj.+SBD+Hand',
     os.path.basename(directories.LABELS_CSV): 'Ground Truth',
 }
-model_order = ['Plain', 'Project', 'Describe', 'Desc.+Hand', 'Proj.+Desc.+Hand', 'Ground Truth']
+model_order = ['Plain', 'Projection', 'SBD', 'SBD+Hand', 'Proj.+SBD+Hand', 'Ground Truth']
 color_map = {
-    'Ground Truth':  'green',
-    'Plain':         'blue',
-    'Project':       'orange',
-    'Describe':      'purple',
-    'Desc.+Hand':  'pink',
-    'Proj.+Desc.+Hand': 'red',
+    'Ground Truth':   'green',
+    'Plain':          'blue',
+    'Projection':     'orange',
+    'SBD':            'purple',
+    'SBD+Hand':       'pink',
+    'Proj.+SBD+Hand': 'red',
 }
 caption_map = {
     0: 'Idle', 2: 'Stop', 3: 'Advance', 4: 'Return', 5: 'Accelerate',
